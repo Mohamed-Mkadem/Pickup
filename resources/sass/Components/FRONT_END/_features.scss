@@ -1,0 +1,39 @@
+@use "../../Abstracts/" as *;
+
+.features-wrapper {
+  padding-block: 1em;
+  @include grid(300px, 1fr, 0, 0, 2rem);
+  gap: 3rem;
+  .feature {
+    text-align: center;
+    header {
+      gap: 0.875em;
+      font-size: 25px;
+      margin-bottom: 0.5em;
+      color: #344d67;
+      justify-content: center;
+      i {
+      }
+      h3 {
+      }
+    }
+    p {
+      color: var(--clr-navy-100);
+      line-height: 1.7;
+      letter-spacing: 1px;
+    }
+  }
+
+  @include min-width(medium) {
+    .feature {
+      text-align: left;
+      header {
+        justify-content: flex-start;
+      }
+    }
+  }
+  @include min-width("xxLarge") {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+  }
+}

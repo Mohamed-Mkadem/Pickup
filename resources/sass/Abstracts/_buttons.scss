@@ -1,0 +1,159 @@
+@use "variables" as *;
+%submitBtn {
+  color: var(--clr-white-1000);
+  padding: 8px 25px;
+  border-radius: $radius5;
+  transition: $bgTransition;
+  font-weight: bold;
+  letter-spacing: 1px;
+  // @extend %submitBtn;
+}
+button {
+  background: none;
+  border: transparent;
+  cursor: pointer;
+}
+.icon-btn {
+  font-size: 30px;
+}
+.lang-btn {
+  $radius: 3px;
+  width: 40px;
+  border-radius: $radius;
+  img {
+    border-radius: $radius;
+  }
+}
+
+.header-btn {
+  min-width: 170px;
+  text-align: center;
+  height: 45px;
+  // line-height: 2.4;
+  padding-inline: 10px;
+  border-radius: $radius5;
+  // padding: 0.5em 1.5em;
+  border: 2px solid currentColor;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.cta-btn {
+  padding: 0.875em 3em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.outlined-btn {
+  border: 2px solid currentColor;
+}
+
+.top-bar-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--clr-navy-900);
+    color: var(--clr-navy-300);
+  }
+}
+
+.penEditBtn {
+  border: 1px solid currentColor;
+  color: var(--clr-blueGray-900);
+  border-radius: 5px;
+  padding: 5px 12px;
+  line-height: 1.4;
+  width: 42px;
+  height: 34px;
+  display: block;
+
+  transition: $bgTransition;
+  &:hover {
+    background-color: var(--clr-blueGray-100);
+  }
+}
+.activate-button {
+  background-color: var(--clr-green-500);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: $bgTransition;
+  &:hover {
+    background-color: var(--clr-green-600);
+  }
+}
+.visited-button {
+  background-color: var(--clr-blueGray-500);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: $bgTransition;
+  &:hover {
+    background-color: var(--clr-blueGray-400);
+  }
+}
+.delete-button {
+  background-color: var(--clr-red-600);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: $bgTransition;
+  i {
+    pointer-events: none;
+  }
+  &:hover {
+    background-color: var(--clr-red-700);
+  }
+}
+.check-btn {
+  background-color: var(--clr-blueGray-500);
+  color: var(--clr-white-1000);
+  border-color: var(--clr-blueGray-700);
+  transition: $bgTransition;
+  &:hover {
+    background-color: var(--clr-blueGray-400);
+  }
+}
+
+.reject-btn {
+  background-color: var(--clr-red-600);
+  @extend %submitBtn;
+  &:hover {
+    background-color: var(--clr-red-700);
+  }
+}
+.approve-btn {
+  background-color: var(--clr-green-500);
+  @extend %submitBtn;
+  &:hover {
+    background-color: var(--clr-green-600);
+  }
+}
+.submitBtn {
+  background-color: var(--clr-teal-200);
+  @extend %submitBtn;
+  &:hover {
+    background-color: var(--clr-teal-300);
+  }
+}
+.updateBtn {
+  background-color: var(--clr-blueGray-600);
+  @extend %submitBtn;
+  &:hover {
+    background-color: var(--clr-blueGray-500);
+  }
+}
+.resetBtn {
+  background-color: var(--clr-white-600);
+  @extend %submitBtn;
+  &:hover {
+    background-color: var(--clr-white-500);
+  }
+}

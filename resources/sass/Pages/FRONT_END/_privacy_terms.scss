@@ -1,0 +1,48 @@
+@use "../../Abstracts/" as *;
+
+.terms-privacy {
+  .tp-wrapper {
+    width: min(100%, 750px);
+    margin-inline: auto;
+
+    header {
+      background-color: var(--clr-teal-400);
+      text-align: center;
+      color: var(--clr-white-1000);
+      padding: 1.5em;
+      border-radius: 0 0 40% 40%;
+      h1 {
+        //   font-size: 45px; // medium and +
+        font-size: 30px;
+      }
+      p {
+        font-size: 14px; // 16 in medium +
+      }
+    }
+    .content {
+      margin-top: 2em;
+      padding: 1em 1em 2em;
+      h2 {
+        color: var(--clr-navy-400);
+        span {
+          color: var(--clr-navy-200);
+        }
+      }
+      p {
+        color: var(--clr-navy-200);
+        line-height: 1.7;
+        margin-block: 15px;
+      }
+    }
+    @include min-width(medium) {
+      header {
+        h1 {
+          font-size: 45px;
+        }
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

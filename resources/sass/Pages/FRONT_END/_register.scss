@@ -1,0 +1,274 @@
+@use "../../abstracts" as *;
+
+$bgColor: var(--clr-green-900);
+%common {
+    height: 50px;
+    padding: 0.8em;
+    border-radius: 5px;
+    border: 2px solid $bgColor;
+    outline: none;
+    background-color: $bgColor;
+    margin-block: 0.5em 0.2em;
+    &:focus,
+    &:focus-within {
+        border-color: var(--clr-teal-400);
+    }
+}
+.register {
+    height: 100vh;
+    .register-wrapper {
+        height: 100vh;
+        > * {
+            flex-basis: 100%;
+            height: 100%;
+        }
+        .col {
+            &.form-col {
+                flex: 1;
+                padding-block: 2em;
+                background-color: var(--clr-turquoise-900);
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                scrollbar-width: none;
+
+                a.logo {
+                    font-size: 45px;
+                }
+                form {
+                    .steps-wrapper {
+                        position: relative;
+                        .step {
+                            position: absolute;
+                            display: none;
+                            width: 100%;
+                            padding-bottom: 5em;
+                            &[aria-current="true"] {
+                                display: block;
+                            }
+                            header {
+                                text-align: center;
+                                margin-block: 1em;
+                                h2 {
+                                    color: var(--clr-teal-300);
+                                    letter-spacing: 2px;
+                                    margin-bottom: 5px;
+                                    font-size: 25px;
+                                }
+                                p {
+                                    color: var(--clr-teal-200);
+                                    letter-spacing: 1px;
+                                }
+                            }
+                            .inputs {
+                                .row {
+                                    &.row2x {
+                                        gap: 1em;
+                                        // display: none;
+                                        @include max-width("small") {
+                                            flex-direction: column;
+                                            gap: 0;
+                                        }
+                                    }
+                                    .form-control {
+                                        width: 100%;
+                                        margin-block: 1em;
+                                        > * {
+                                            width: 100%;
+                                        }
+                                        label {
+                                            color: var(--clr-teal-300);
+                                            font-size: 18px;
+                                            width: max-content;
+                                        }
+                                        input {
+                                            &[type="date"] {
+                                                position: relative;
+                                                cursor: pointer;
+                                                &::before {
+                                                    background: var(
+                                                        --clr-green-800
+                                                    );
+                                                    display: block;
+                                                    font-family: "Font Awesome 6 Pro";
+                                                    content: "\f073";
+                                                    width: 50px;
+                                                    height: 100%;
+                                                    position: absolute;
+                                                    right: 0;
+                                                    color: var(--clr-green-300);
+                                                    top: 0;
+
+                                                    line-height: 1;
+                                                    @include flex(
+                                                        row,
+                                                        center,
+                                                        center
+                                                    );
+                                                    z-index: 2;
+                                                    pointer-events: none;
+                                                }
+                                                &::-webkit-inner-spin-button,
+                                                &::-webkit-calendar-picker-indicator {
+                                                    cursor: pointer;
+                                                    color: transparent;
+                                                    background: none;
+
+                                                    z-index: 1;
+                                                }
+                                            }
+                                            color: var(--clr-teal-200);
+                                            @extend %common;
+                                        }
+                                        p.error-message {
+                                            color: var(--clr-red-600);
+                                            font-style: italic;
+                                            margin-top: 5px;
+                                            display: none;
+                                            &.show {
+                                                display: block;
+                                            }
+                                        }
+                                        .gender-wrapper {
+                                            gap: 1em;
+                                            > * {
+                                                flex: 1;
+                                                align-items: center;
+                                            }
+                                            .choice {
+                                                position: relative;
+                                                @include flex(
+                                                    row,
+                                                    center,
+                                                    center
+                                                );
+                                                @extend %common;
+                                                border: none !important;
+                                                p {
+                                                    letter-spacing: 1px;
+                                                    color: var(--clr-teal-100);
+                                                }
+                                                input[type="radio"] {
+                                                    position: absolute;
+                                                    inset: 0;
+                                                    appearance: none;
+                                                    margin-block: 0;
+                                                    background-color: transparent;
+                                                    cursor: pointer;
+                                                    content: "";
+                                                    margin: 0;
+                                                    &:checked {
+                                                        border: 2px solid
+                                                            var(--clr-teal-400);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .select-box {
+                                            position: relative;
+                                            margin-block: 0.5em 0.2em;
+
+                                            &::before {
+                                                position: absolute;
+                                                content: "\f078";
+                                                font-family: "Font Awesome 6 Pro";
+                                                width: 50px;
+                                                height: 100%;
+                                                height: 46px;
+                                                right: 2px;
+                                                top: 2px;
+                                                background-color: var(
+                                                    --clr-green-800
+                                                );
+                                                pointer-events: none;
+                                                border-radius: 0 5px 5px 0;
+                                                @include flex(
+                                                    "row",
+                                                    center,
+                                                    center
+                                                );
+                                                color: var(--clr-teal-400);
+                                            }
+                                            select {
+                                                @extend %common;
+                                                margin: 0;
+                                                appearance: none;
+                                                width: 100%;
+                                                cursor: pointer;
+                                                option {
+                                                    text-transform: capitalize;
+                                                    &:hover {
+                                                        background-color: red;
+                                                    }
+                                                    &:checked {
+                                                        text-transform: capitalize;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .buttons-wrapper {
+                                margin-block: 1em;
+                                gap: 10px;
+                                button {
+                                    width: 150px;
+                                    height: 50px;
+                                    border-radius: 5px;
+                                    letter-spacing: 2px;
+                                    font-weight: bold;
+                                    transition: background-color 0.3s ease-in;
+                                    &:hover {
+                                        background-color: var(
+                                            --clr-turquoise-800
+                                        );
+                                    }
+                                    &.back-btn,
+                                    &.next-btn {
+                                        color: var(--clr-teal-200);
+                                        border: 2px solid currentColor;
+                                    }
+                                    &.submit-btn {
+                                        background-color: var(--clr-teal-400);
+                                        color: var(--clr-white-1000);
+                                        &:hover {
+                                            background-color: var(
+                                                --clr-teal-200
+                                            );
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.img-col {
+                display: none;
+                background-color: var(--clr-green-800);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: auto;
+                background-image: url("../Assets/account-illustration.svg");
+            }
+        }
+    }
+    @include min-width("large") {
+        .register-wrapper {
+            .col {
+                &.form-col {
+                    flex-basis: 40%;
+                }
+                &.img-col {
+                    display: block;
+                    flex-basis: 60%;
+                    img {
+                        // display: block;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,575 @@
+.resetBtn, .updateBtn, .submitBtn, .approve-btn, .reject-btn {
+  color: var(--clr-white-1000);
+  padding: 8px 25px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+button {
+  background: none;
+  border: transparent;
+  cursor: pointer;
+}
+
+.icon-btn {
+  font-size: 30px;
+}
+
+.lang-btn {
+  width: 40px;
+  border-radius: 3px;
+}
+.lang-btn img {
+  border-radius: 3px;
+}
+
+.header-btn {
+  min-width: 170px;
+  text-align: center;
+  height: 45px;
+  padding-inline: 10px;
+  border-radius: 5px;
+  border: 2px solid currentColor;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.cta-btn {
+  padding: 0.875em 3em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.outlined-btn {
+  border: 2px solid currentColor;
+}
+
+.top-bar-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+.top-bar-btn:hover {
+  background-color: var(--clr-navy-900);
+  color: var(--clr-navy-300);
+}
+
+.penEditBtn {
+  border: 1px solid currentColor;
+  color: var(--clr-blueGray-900);
+  border-radius: 5px;
+  padding: 5px 12px;
+  line-height: 1.4;
+  width: 42px;
+  height: 34px;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+.penEditBtn:hover {
+  background-color: var(--clr-blueGray-100);
+}
+
+.activate-button {
+  background-color: var(--clr-green-500);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.activate-button:hover {
+  background-color: var(--clr-green-600);
+}
+
+.visited-button {
+  background-color: var(--clr-blueGray-500);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.visited-button:hover {
+  background-color: var(--clr-blueGray-400);
+}
+
+.delete-button {
+  background-color: var(--clr-red-600);
+  color: var(--clr-white-1000);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.delete-button i {
+  pointer-events: none;
+}
+.delete-button:hover {
+  background-color: var(--clr-red-700);
+}
+
+.check-btn {
+  background-color: var(--clr-blueGray-500);
+  color: var(--clr-white-1000);
+  border-color: var(--clr-blueGray-700);
+  transition: background-color 0.3s ease;
+}
+.check-btn:hover {
+  background-color: var(--clr-blueGray-400);
+}
+
+.reject-btn {
+  background-color: var(--clr-red-600);
+}
+.reject-btn:hover {
+  background-color: var(--clr-red-700);
+}
+
+.approve-btn {
+  background-color: var(--clr-green-500);
+}
+.approve-btn:hover {
+  background-color: var(--clr-green-600);
+}
+
+.submitBtn {
+  background-color: var(--clr-teal-200);
+}
+.submitBtn:hover {
+  background-color: var(--clr-teal-300);
+}
+
+.updateBtn {
+  background-color: var(--clr-blueGray-600);
+}
+.updateBtn:hover {
+  background-color: var(--clr-blueGray-500);
+}
+
+.resetBtn {
+  background-color: var(--clr-white-600);
+}
+.resetBtn:hover {
+  background-color: var(--clr-white-500);
+}
+
+.p-span {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.p-span span {
+  font-weight: 400;
+}
+
+.dark {
+  background-color: var(--clr-black-50);
+}
+.dark .sale-wrapper,
+.dark .main-store-header .main-info-holder .img-holder,
+.dark .main-wrapper,
+.dark #store-main-content,
+.dark #main-content {
+  background-color: var(--clr-black-50);
+}
+.dark .sale-wrapper .sale-cart,
+.dark .sale-wrapper .sale-cart .cart-holder,
+.dark .ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body,
+.dark .form-grid > *:not(.holder, .light, .filters-holder),
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table thead,
+.dark #header,
+.dark #aside,
+.dark .ticket-holder .attachements-holder .attachements-grid .attachement,
+.dark .form-grid .form-sidebar .filter-column .filter-holder,
+.dark .show-header .info-holder .details .info-grid .info {
+  background-color: var(--clr-black-100);
+}
+.dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper .sale-category,
+.dark .alert.alert-light,
+.dark .show-holder > .holder,
+.dark .card.voucher-result,
+.dark form .choices-btns-wrapper .choice-btn:has(> input[type=radio]:hover),
+.dark form .choices-btns-wrapper .choice-btn:has(> input[type=checkbox]:hover),
+.dark .form-grid .form-sidebar .form-control .vertical-statuses-wrapper .status:has(> input[type=radio]:hover),
+.dark .filters-holder .filters-wrapper form .filter-row .filter-box .status-wrapper .status:has(> input[type=checkbox]:hover),
+.dark .not-found-holder,
+.dark .main-holder,
+.dark .holder,
+.dark .filters-holder,
+.dark .modal-holder .modal,
+.dark .pop-up-holder .pop-up,
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table tbody tr:nth-child(odd),
+.dark .quick-stats-holder .stat-item,
+.dark #starter-header a.action-btn:hover,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu,
+.dark .show-header .info-holder .details .info-grid .info .info-title i,
+.dark #aside ul.nav-links li .nav-sub-dropdown {
+  background-color: var(--clr-black-150) !important;
+}
+.dark .main-holder.light,
+.dark .penEditBtn:hover,
+.dark .ck,
+.dark form .form-element,
+.dark form .form-control .drop-zone,
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table tbody tr:nth-child(even),
+.dark #header .dropdowns-holder .dropdown-holder button#profile-handler,
+.dark .table-responsive table tbody tr:nth-child(even),
+.dark .product-row .product-info .cart-actions .quantity-holder input,
+.dark .navigation-menu-holder nav ul li a:hover,
+.dark .card-holder .card-title {
+  background-color: var(--clr-black-200) !important;
+}
+.dark .product-details .product-detail .top-header h3,
+.dark .product-details .product-detail .top-header button.tabBtn,
+.dark .bank-info .info .info-title i,
+.dark .ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body,
+.dark .notifications-holder ul.notifications-wrapper li.notification,
+.dark .table-responsive table tbody tr:nth-child(odd),
+.dark .quick-stats-holder .stat-item:hover,
+.dark .documents-grid .document .document-img .document-overlay,
+.dark .info-sidebar .info-sidebar-body .info h4.grid-title.opening-hours-holder > button:hover,
+.dark .resetBtn,
+.dark .product .actions form,
+.dark .product .actions a,
+.dark .navigation-menu-holder nav ul li a.active,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification.unread {
+  background-color: var(--clr-black-250) !important;
+}
+.dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper .sale-category:has(input[type=radio]:checked),
+.dark .plan:has(input[type=radio]:checked),
+.dark a.editBtn,
+.dark .product-details .product-detail .top-header button.tabBtn:hover,
+.dark .product-details .product-detail .top-header button.tabBtn.active,
+.dark .product-row .product-info .cart-actions form > button,
+.dark .product-row .product-info .cart-actions .quantity-holder > button,
+.dark .product .actions form:hover,
+.dark .product .actions a:hover,
+.dark .resetBtn:hover,
+.dark .form-grid .form-sidebar .filter-column .filter-holder .filter-header button.filter-holder-btn:focus,
+.dark .form-grid .form-sidebar .filter-column .filter-holder .filter-header button.filter-holder-btn:hover,
+.dark .filters-holder .filters-header button:focus,
+.dark .filters-holder .filters-header button:hover,
+.dark .info-sidebar .info-sidebar-header button:focus,
+.dark .info-sidebar .info-sidebar-header button:hover {
+  background-color: var(--clr-black-350) !important;
+}
+.dark a.editBtn:hover,
+.dark .product-row .product-info .cart-actions form > button:hover,
+.dark .product-row .product-info .cart-actions .quantity-holder > button:hover {
+  background-color: var(--clr-black-400) !important;
+}
+.dark .card.sector,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification:hover,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.profile-dropdown li:hover,
+.dark #header .dropdowns-holder .dropdown-holder button#profile-handler:hover,
+.dark #header .dropdowns-holder .dropdown-holder button:hover,
+.dark #header .dropdowns-holder #mode-switcher:hover {
+  background-color: var(--clr-olive-100);
+}
+.dark .order-holder > header,
+.dark .card.sector .info {
+  background-color: var(--clr-sand-100);
+}
+.dark form .choices-btns-wrapper .choice-btn:has(> input[type=radio]:checked),
+.dark form .choices-btns-wrapper .choice-btn:has(> input[type=checkbox]:checked),
+.dark .main-store-header .main-info-holder .additional-info #un-follow-btn:hover,
+.dark .main-store-header .main-info-holder .additional-info a.preview-btn:hover,
+.dark .card.review,
+.dark .notifications-holder form .statuses-holder .status:has(> input[type=radio]:checked),
+.dark .notifications-holder form .statuses-holder .status:hover,
+.dark .notifications-holder ul.notifications-wrapper li.notification:hover,
+.dark .card.fee,
+.dark .form-grid .form-sidebar .form-control .vertical-statuses-wrapper .status:has(> input[type=radio]:checked),
+.dark .filters-holder .filters-wrapper form .filter-row .filter-box .status-wrapper .status:has(> input[type=checkbox]:checked),
+.dark .form-grid .form-sidebar .form-control .drop-zone:hover,
+.dark form .form-control .drop-zone:hover,
+.dark .results-holder.brands-categories .card,
+.dark .card.single-info-card,
+.dark .card.seller,
+.dark .card.client,
+.dark .order-holder .results-holder .card-holder.review {
+  background-color: var(--clr-blueGray-600) !important;
+}
+.dark .navigation-menu-holder ul.actions-holder > li:hover,
+.dark .main-store-header .main-info-holder .additional-info #un-follow-btn,
+.dark .main-store-header .main-info-holder .additional-info a.preview-btn,
+.dark .card.simple header .actions-holder > li:hover,
+.dark .card.simple header > button:hover,
+.dark .tables-holder .table-row .table-card .table-header {
+  background-color: var(--clr-blueGray-700);
+}
+.dark .navigation-menu-holder ul.actions-holder,
+.dark .card.simple header .actions-holder,
+.dark .results-holder.brands-categories .card .info {
+  background-color: var(--clr-blueGray-900);
+}
+.dark .review .btn-wrapper > button:hover,
+.dark .card.store,
+.dark .order-holder .results-holder .card:not(.review),
+.dark .ticket-holder header,
+.dark .results-holder.vouchers-categories .card,
+.dark .results-holder.brands .card {
+  background-color: var(--clr-teal-100);
+}
+.dark .card.voucher {
+  background: linear-gradient(45deg, var(--clr-blueGray-800), var(--clr-blueGray-700));
+}
+.dark .sale-holder > header {
+  background-color: var(--clr-sand-100);
+}
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.profile-dropdown li form button {
+  background: none;
+}
+.dark .card.fee .top-header p.price {
+  color: var(--clr-blueGray-0);
+}
+.dark .product .store-name,
+.dark .modal-holder .confirm-form p,
+.dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper .sale-category h4,
+.dark .main-holder.light,
+.dark form .form-row .form-col,
+.dark .results .results-holder.subscription-plans + .buttons .modal-holder .modal p,
+.dark .product-details .product-detail .top-header h3,
+.dark .product-details .product-detail .top-header button.tabBtn,
+.dark .show-holder > header .info-holder .header-details .detail a:hover,
+.dark .show-holder header .info-holder p.header-title,
+.dark .notifications-holder h1,
+.dark .notifications-holder ul.notifications-wrapper li.notification .details p.notification-body,
+.dark .card.fee .top-header h3,
+.dark .card.voucher-result .header p.value,
+.dark .card.voucher .header p.value,
+.dark .card.sector .modal-holder .modal.voucher-details .used-by-holder h3,
+.dark .modal-holder .modal.voucher-details p.voucher-number,
+.dark .modal-holder form.confirm-form p,
+.dark .ck,
+.dark .not-found-holder .wrapper p,
+.dark .modal-holder .modal .modal-header h2,
+.dark .card.simple header .actions-holder > li > a,
+.dark .card.simple header .actions-holder > li > button,
+.dark .results-holder .card header,
+.dark form .form-control .upload-area,
+.dark form .form-element,
+.dark .pop-up-holder .pop-up .pop-up-header h2,
+.dark .quick-stats-holder .stat-item .top-info .title-value-box,
+.dark #starter-header h1,
+.dark #starter-header a.action-btn,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.profile-dropdown li form button,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.profile-dropdown li a,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown h4,
+.dark #aside ul.nav-links li a.nav-link,
+.dark #header .dropdowns-holder #mode-switcher,
+.dark #header .dropdowns-holder .dropdown-holder button,
+.dark .message-holder .wrapper p,
+.dark .card.voucher-result p.voucher-number,
+.dark .card.voucher-result .used-by-holder h3,
+.dark .card-holder .card-title h3,
+.dark .order-holder .results-holder.order-info .notes .notes-holder .note .note-header .note-info,
+.dark .order-holder .results-holder.order-info .order-history ul.statuses li .row .info,
+.dark #header #layout-toggle,
+.dark .info-card .card-info .info .info-label,
+.dark .validation-box h3.decision,
+.dark .documents-grid .document .document-header h3,
+.dark .navigation-menu-holder > button,
+.dark .navigation-menu-holder ul.actions-holder > li > a,
+.dark .navigation-menu-holder ul.actions-holder > li > button,
+.dark .navigation-menu-holder nav ul button#close-main-navigation,
+.dark .card-holder .card-title a,
+.dark .navigation-menu-holder nav ul li a,
+.dark .navigation-menu-holder > p.rate,
+.dark p.rate,
+.dark .review,
+.dark .store-top-header,
+.dark .review-criteria .criterion {
+  color: var(--clr-blueGray-100) !important;
+}
+.dark .show-holder h2,
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table thead th {
+  color: var(--clr-blueGray-200);
+}
+.dark .show-holder header .info-holder p.header-title span.header-id {
+  color: var(--clr-blueGray-300);
+}
+.dark .validation-box a:hover,
+.dark .order-holder .results-holder .card-holder.review .card.review .rate-value {
+  color: var(--clr-mustard-500);
+}
+.dark .product .store-name a:hover,
+.dark .validation-box a {
+  color: var(--clr-mustard-600);
+}
+.dark .product .info-holder h3 a:hover,
+.dark .plan p.plan-duration,
+.dark .review-box p.review-body span.order-id a:hover,
+.dark .card-holder .card-title a:hover,
+.dark .main-store-header .main-info-holder .basic-info h1.store-name,
+.dark .order-holder .results-holder.order-info > * .info-title,
+.dark .notifications-holder ul.notifications-wrapper li.notification:hover .details p.notification-body,
+.dark .results > h2 {
+  color: var(--clr-mustard-700) !important;
+}
+.dark .opening-hours-content h2,
+.dark .hours-wrapper h2,
+.dark .form-grid .form-sidebar .filter-column .filter-holder .filter-header button.filter-holder-btn,
+.dark .description-holder header h2,
+.dark .filters-holder .filters-header button,
+.dark .filters-holder .filters-header h2,
+.dark .info-sidebar .info-sidebar-header button,
+.dark h3.store-secondary-title,
+.dark #header #layout-toggle:hover {
+  color: var(--clr-mustard-800);
+}
+.dark .product-row .product-info p.price-unit small,
+.dark .product-row .product-info p.price-unit span,
+.dark .quick-stats-holder .stat-item .bottom-info.tickets-list p.standard {
+  color: var(--clr-black-550);
+}
+.dark .info-sidebar .info-sidebar-body .info h4.grid-title.opening-hours-holder > button p.opening-hours,
+.dark .info-sidebar .info-sidebar-body .info h4.grid-title.opening-hours-holder > button p.status i,
+.dark .bank-info .info .info-title,
+.dark .bank-info .info .info-title i,
+.dark .show-header .info-holder .details .info-grid .info .info-title i,
+.dark .show-header .info-holder .details .info-grid .info .info-title h3,
+.dark .ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder h3 small {
+  color: var(--clr-black-650);
+}
+.dark .product .product-quantity-holder,
+.dark .product .actions form,
+.dark .product .actions a,
+.dark .product .info-holder p,
+.dark .modal-holder .modal.opening-hours-modal .modal-body .day .hours-holder p.hour,
+.dark .main-store-header .main-info-holder .basic-info p,
+.dark .main-store-header .main-info-holder .additional-info p.followers-count,
+.dark .show-holder header .info-holder .header-details .detail,
+.dark .card.voucher-result .used-by-holder,
+.dark .modal-holder .modal.voucher-details .used-by-holder h3 {
+  color: var(--clr-black-700);
+}
+.dark form .form-row .form-col p.col-body,
+.dark .product-row .product-info p,
+.dark .info-sidebar,
+.dark .modal-holder .modal.opening-hours-modal .modal-body .day h3,
+.dark .card.voucher-result .details,
+.dark .modal-holder .modal.voucher-details .details {
+  color: var(--clr-black-800);
+}
+.dark .order-holder .results-holder.order-info .order-history ul.statuses li .row .info p,
+.dark .order-holder .results-holder.order-info .notes .notes-holder .note .note-header .note-info p,
+.dark .quick-stats-holder .stat-item .bottom-info a.action-link,
+.dark .modal-holder .modal.voucher-details .used-by-holder p {
+  color: var(--clr-white-600);
+}
+.dark .product-details .product-detail .detail-body p,
+.dark .product-details .product-detail .detail-body.about-brand .brand-header h4,
+.dark .review .review-body p,
+.dark .review-box p.review-body,
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table tbody tr td,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification .details p {
+  color: var(--clr-white-700);
+}
+.dark #starter-header p.today-stats,
+.dark .product .product-header p.state-city,
+.dark a.editBtn,
+.dark .form-grid .form-sidebar .filter-column .filter-holder .filter-wrapper .choices .choice label,
+.dark .info-card .card-info .info .info-value p,
+.dark .order-holder .results-holder.order-info .notes .notes-holder .note .note-body,
+.dark .ticket-holder .attachements-holder .attachements-grid .attachement,
+.dark .ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder h3,
+.dark .ticket-holder .ticket-details-holder .detail p:not(.error-message, .form-label > p),
+.dark .notifications-holder ul.notifications-wrapper li.notification .details p.notification-time,
+.dark .table-responsive table tbody tr td,
+.dark .show-header .info-holder .details p,
+.dark .form-limiters,
+.dark .quick-stats-holder .stat-item .top-info .progression-box p,
+.dark .show-header .info-holder .top-header ul.horizontal-actions-holder li p,
+.dark .bank-info .info .info-value {
+  color: var(--clr-white-800);
+}
+.dark .product-details .product-detail .detail-body:hover p:not(.modal p),
+.dark .alert.alert-light,
+.dark .validation-box,
+.dark .card.fee ul.features li,
+.dark .description-holder .description-body,
+.dark .show-header .info-holder .top-header h2,
+.dark .penEditBtn,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification .details p.notification-body a {
+  color: var(--clr-white-900);
+}
+.dark .quick-stats-holder .stat-item .bottom-info a.action-link:hover,
+.dark #aside ul.nav-links li .nav-sub-dropdown li a:hover {
+  color: var(--clr-yellow-700);
+}
+.dark .card.voucher-result .result-header > h2,
+.dark form .form-label {
+  color: var(--clr-turquoise-900);
+}
+.dark .ticket-holder .ticket-details-holder .detail p:not(.error-message, .form-label > p, .file-name, .file-size) a:hover {
+  color: var(--clr-teal-700);
+}
+.dark p.cart-total,
+.dark .plan h3.plan-price,
+.dark .alert.alert-light a:hover,
+.dark h2.form-holder-title,
+.dark .product-row .product-info .cart-actions .quantity-holder input,
+.dark .product-row .product-info p.price-unit,
+.dark .product-row .product-info h1.product-name,
+.dark .card.single-info-card > p.main-value {
+  color: var(--clr-olive-700);
+}
+.dark .review .btn-wrapper > button,
+.dark .opening-hours-content .day h3,
+.dark .hours-wrapper .day h3,
+.dark .product .info-holder h3,
+.dark .card.single-info-card .details .detail {
+  color: var(--clr-olive-800);
+}
+.dark .product-row .product-info p.category-name {
+  color: var(--clr-olive-900);
+}
+.dark .review-criteria .criterion .points .point {
+  border-color: var(--clr-black-100);
+}
+.dark .show-header .info-holder .details .info-grid .info .info-value {
+  border-color: var(--clr-black-200);
+}
+.dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper,
+.dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper > * {
+  border-color: var(--clr-black-300);
+}
+.dark .product-row .product-info .cart-actions .quantity-holder input,
+.dark .card-holder .card-title,
+.dark .table-responsive table tbody tr,
+.dark .tables-holder .table-row .table-card .table-responsive table.quick-stats-table tr {
+  border-color: var(--clr-black-450);
+}
+.dark form .form-element:focus,
+.dark form .form-element:focus-within,
+.dark .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable),
+.dark form .form-control .drop-zone,
+.dark .pop-up-holder .pop-up .pop-up-body form .form-control input:focus-within,
+.dark .pop-up-holder .pop-up .pop-up-body form .form-control input:focus {
+  border-color: var(--clr-blueGray-100) !important;
+}
+.dark .modal-holder .modal.opening-hours-modal .modal-body .day .hours-holder p.hour {
+  border-color: currentColor;
+}
+.dark .navigation-menu-holder nav ul li a.active {
+  border: unset;
+}
+.dark .navigation-menu-holder nav ul li a.active {
+  border-radius: 10px;
+}
+@media (max-width: 768px) {
+  .dark .navigation-menu-holder nav {
+    background-color: var(--clr-teal-200);
+  }
+  .dark .navigation-menu-holder nav ul li a.active {
+    background-color: unset !important;
+    border-bottom: 3px solid currentColor;
+    border-radius: unset;
+  }
+}

@@ -1,0 +1,88 @@
+@use "../../Abstracts/" as *;
+
+.pop-up-holder {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
+  inset: 0;
+  display: none;
+  z-index: 9999;
+  &.show {
+    @include flex(row, center, center);
+  }
+  .pop-up {
+    margin-block: 50px;
+    width: min(450px, 90%);
+    background-color: var(--clr-white-1000);
+    z-index: 9999999999;
+    border-radius: $radius5;
+    padding: 1em;
+    box-shadow: $boxShadow2;
+
+    // max-height: 500px;
+    max-height: 90vh;
+    overflow-y: scroll;
+    &.lg {
+      width: min(800px, 90%);
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+    .pop-up-header {
+      margin-bottom: 2em;
+      h2 {
+        color: var(--clr-teal-300);
+      }
+      button {
+        $size: 25px;
+        background-color: var(--clr-red-600);
+        color: var(--clr-white-1000);
+        font-weight: bold;
+        width: $size;
+        height: $size;
+        border-radius: 5px;
+        &:hover {
+          background-color: var(--clr-red-700);
+        }
+        i {
+        }
+      }
+    }
+    .pop-up-body {
+      // Form
+      form {
+        .form-control {
+          label {
+          }
+          input {
+            // background-color: var(--clr-blueGray-100);
+            // &:focus-within,
+            // &:focus {
+            //   border-color: var(--clr-blueGray-800);
+            // }
+            &[type="file"] {
+              background-color: var(--clr-red-600);
+            }
+          }
+          p.error-message {
+          }
+          button {
+            background: var(--clr-teal-200);
+            color: var(--clr-white-1000);
+            padding: 8px 25px;
+            border-radius: $radius5;
+            transition: $bgTransition;
+            &:hover {
+              background-color: var(--clr-teal-300);
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-height: 400px) {
+    .pop-up {
+      height: 250px;
+    }
+  }
+}

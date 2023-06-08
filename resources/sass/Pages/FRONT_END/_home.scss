@@ -1,0 +1,199 @@
+@use "../../Abstracts/" as *;
+
+.home {
+  .what-is-wrapper {
+    // flex-direction: column;
+    gap: 3rem;
+    > * {
+      flex-basis: 100%;
+    }
+    .info {
+      text-align: center;
+      h2 {
+      }
+      p {
+        line-height: 1.7;
+        letter-spacing: 1px;
+        margin-block: 1rem 2.5rem;
+        color: var(--clr-navy-100);
+      }
+      a {
+        background-color: var(--clr-teal-400);
+        color: var(--clr-white-1000);
+        border: 2px solid transparent;
+        &:hover {
+          background-color: var(--clr-white-1000);
+          color: var(--clr-teal-400);
+          border-color: var(--clr-teal-400);
+        }
+      }
+    }
+    .img-holder {
+      img {
+      }
+    }
+    @include min-width(medium) {
+      // flex-direction: row;
+      > * {
+        flex-basis: 45%;
+      }
+      .info {
+        text-align: left;
+      }
+    }
+  }
+
+  .vendors-wrapper {
+    $radius: 10px;
+    .vendor {
+      padding-top: 1em;
+      background-color: var(--clr-turquoise-900);
+      box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+        rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+      border-radius: $radius;
+      @include flex(column, space-between, normal);
+      gap: 8rem;
+      header {
+        @include flex(row, space-between, center);
+        font-size: 1.5em;
+        padding-inline: 0.5em;
+
+        p {
+          $color: var(--clr-white-400);
+          color: $color;
+
+          font-weight: bold;
+          &.rank {
+            span {
+              color: var(--clr-white-700);
+            }
+            @include rankTitle(var(--clr-white-700), $color, 1em);
+          }
+          &.rate {
+            i {
+              color: var(--clr-yellow-500);
+            }
+          }
+        }
+      }
+      .info {
+        min-height: 200px;
+        padding: 5em 1em 1em;
+        text-align: center;
+        background-color: var(--clr-teal-200);
+        color: white;
+        position: relative;
+        border-radius: $radius;
+        img {
+          width: 150px;
+          border-radius: 50%;
+          position: absolute;
+          top: -35%;
+          left: 50%;
+          translate: -50%;
+        }
+        h3 {
+          margin-top: 1rem;
+        }
+        p {
+        }
+      }
+    }
+
+    @include grid(min(100%, 350px), 1fr, 0, 0, 2rem);
+  }
+
+  .how-it-works {
+    a.btn {
+      margin-inline: auto;
+      background-color: var(--clr-teal-400);
+      color: var(--clr-white-1000);
+      letter-spacing: 2px;
+      border: 2px solid var(--clr-navy-400);
+      &:hover {
+        background: transparent;
+        color: var(--clr-teal-400);
+        border: 2px solid currentColor;
+      }
+    }
+
+    .steps-wrapper {
+      .steps-col {
+        .step {
+          text-align: center;
+          &.logo-holder {
+            padding: 0;
+            margin-bottom: 0;
+            a.logo {
+              display: none;
+            }
+          }
+          padding: 1em;
+
+          margin-bottom: 1em;
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+          h3 {
+            margin-bottom: 0.5em;
+
+            @include numberedTitle(
+              var(--clr-navy-400),
+              1.5em,
+              var(--clr-navy-200)
+            );
+            span {
+              margin-right: 10px;
+            }
+          }
+          p {
+            color: var(--clr-navy-100);
+            line-height: 1.7;
+          }
+        }
+      }
+
+      @include min-width(medium) {
+        @include flex(row, center, flex-start);
+        > * {
+          flex-basis: 33%;
+        }
+        gap: 10px;
+        .steps-col {
+          &:nth-child(2) {
+            margin-top: 100px;
+            min-height: 300px;
+            gap: 5rem;
+          }
+          .step {
+            &.logo-holder {
+              margin-bottom: 1em;
+              padding: 1em;
+              text-align: center;
+              a.logo {
+                display: block;
+                font-size: 49px;
+              }
+            }
+          }
+        }
+      }
+      @include min-width("xlarge") {
+        .steps-col {
+          .step {
+            &.logo-holder {
+              a.logo {
+                font-size: 60px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// Make the dropdowns dynamic
+// Change the content of features and what is pickup
+// later think about buttons to make them dynamic
+// Make some tweaks for the colors => Almost done
+// Make the colors more dynamic and easy to replace => Done

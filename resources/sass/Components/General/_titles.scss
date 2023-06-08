@@ -1,0 +1,42 @@
+@use "../../Abstracts/" as *;
+
+.title {
+  font-family: "Caveat Brush", "Roboto";
+  &.h1-title {
+    font-size: clamp(58px, 59px, 63px);
+    color: var(--clr-teal-400);
+    @include min-width(medium) {
+      font-size: 86px;
+      line-height: 1.2;
+    }
+  }
+  &.main-title {
+    font-size: 40px;
+    margin-bottom: 1rem;
+    color: var(--clr-teal-400);
+    + .wrapper {
+      margin-block: 3rem;
+    }
+    @include min-width(medium) {
+      font-size: 55px;
+    }
+  }
+  &.page-title {
+    font-size: 50px;
+    color: var(--clr-teal-400);
+  }
+  &.sm-line-h-1 {
+    @include max-width(medium) {
+      line-height: 1;
+    }
+    // @media screen and (max-width: 768px) {
+    //   line-height: 1;
+    //   color: red;
+    // }
+  }
+}
+.store-secondary-title {
+  color: var(--clr-teal-400);
+  font-size: 20px;
+  letter-spacing: 1px;
+}

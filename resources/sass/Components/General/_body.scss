@@ -1,0 +1,7 @@
+body {
+  position: relative;
+  transition: overflow 0.3s ease;
+  &.no-scroll {
+    overflow: hidden;
+  }
+}

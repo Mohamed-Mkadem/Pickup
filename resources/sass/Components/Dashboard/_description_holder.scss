@@ -1,0 +1,43 @@
+@use "../../Abstracts/" as *;
+
+.description-holder {
+  header {
+    h2 {
+      color: var(--clr-teal-400);
+      letter-spacing: 1px;
+      font-size: 20px;
+    }
+    button {
+      font-size: 22px;
+      border-radius: 50%;
+      transition: $bgTransition;
+      color: var(--clr-blueGray-800);
+      i {
+        rotate: 180deg;
+      }
+      &:focus,
+      &:hover {
+        background-color: var(--clr-blueGray-100);
+      }
+    }
+    &:has(+ .description-body.hidden) {
+      i {
+        rotate: none;
+      }
+    }
+  }
+
+  .description-body {
+    padding: 1em 0;
+    line-height: 1.8;
+    color: var(--clr-blueGray-800);
+    letter-spacing: 1px;
+    &.hidden {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+    p {
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use "../../Abstracts/" as *;
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @include min-width(medium) {
+    grid-template-columns: min(250px, 100%) 1fr;
+    align-items: start;
+    .info-sidebar {
+      max-height: 100vh;
+      overflow: auto;
+      position: sticky;
+      top: 0;
+      left: 0;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      scrollbar-width: none;
+    }
+  }
+}

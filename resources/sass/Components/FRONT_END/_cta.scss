@@ -1,0 +1,24 @@
+@use "../../Abstracts/" as *;
+.cta-wrapper {
+  p {
+    color: var(--clr-navy-200);
+    letter-spacing: 1px;
+    line-height: 1.8;
+    font-size: 1.2em;
+  }
+  h3 {
+    margin-block: 1rem 2rem;
+    font-size: 2rem;
+    color: var(--clr-navy-200);
+    text-transform: capitalize;
+    font-style: italic;
+  }
+  a {
+    background-color: transparent;
+    color: var(--clr-navy-200);
+    border: 2px solid currentColor;
+    &:hover {
+      background-color: var(--clr-yellow-600);
+    }
+  }
+}

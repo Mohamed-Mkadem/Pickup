@@ -1,0 +1,52 @@
+@use "../../Abstracts/" as *;
+
+.notification-modal {
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  translate: -50%;
+  width: min(350px, 90%);
+  background-color: var(--clr-mustard-700);
+  border-radius: $radius10;
+  box-shadow: $boxShadow1;
+  transition: $bgTransition;
+  cursor: pointer;
+  display: none;
+  &.show {
+    display: block;
+  }
+  z-index: 5000;
+  &:hover {
+    background-color: var(--clr-mustard-800);
+  }
+  .notification-modal-wrapper {
+    position: relative;
+    .notification-modal-img {
+      width: 50px;
+      border-radius: 50%;
+    }
+    .notification-modal-body {
+      color: var(--clr-blueGray-800);
+      letter-spacing: 1px;
+      $numberOfLines: 4;
+
+      -webkit-line-clamp: $numberOfLines; /* number of lines to show */
+      line-clamp: $numberOfLines;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+    a.notification-modal-link {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+  }
+  @include min-width(medium) {
+    bottom: 5%;
+    right: 5%;
+    translate: unset;
+    top: unset;
+    left: unset;
+  }
+}

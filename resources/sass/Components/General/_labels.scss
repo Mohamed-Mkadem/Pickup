@@ -1,0 +1,17 @@
+@use "../../Abstracts/" as *;
+label {
+  width: max-content !important;
+  &.required {
+    position: relative;
+    &::after {
+      content: "*";
+      position: absolute;
+      color: var(--clr-red-600);
+      // font-family: "Font Awesome 6 Pro";
+      left: calc(100% + 5px);
+      top: 50%;
+      font-size: 20px;
+      translate: 0 -50%;
+    }
+  }
+}

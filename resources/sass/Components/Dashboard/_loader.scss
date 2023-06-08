@@ -1,0 +1,50 @@
+@use "../../Abstracts/" as *;
+
+#loader {
+  position: fixed;
+  background-color: var(--clr-white-1000);
+  inset: 0;
+  z-index: 9999999999999;
+  display: none;
+  &.show {
+    @include flex(column, center, center);
+    gap: 1em;
+  }
+  .loader-spinner {
+    $size: 150px;
+    width: $size;
+    height: $size;
+    border: 10px solid var(--clr-teal-400);
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    @include flex(row, center, center);
+    animation: rotation 1s linear infinite;
+    .inner-spinner {
+      $size: 120px;
+      width: $size;
+      height: $size;
+      border: 10px solid var(--clr-teal-400);
+      border-radius: 50%;
+      border-top-color: transparent;
+    }
+  }
+  h2.loader-title {
+    font-size: 30px;
+    color: var(--clr-teal-400);
+    letter-spacing: 1px;
+  }
+  p.loader-message {
+    color: var(--clr-blueGray-800);
+    letter-spacing: 1px;
+    font-size: 18px;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}

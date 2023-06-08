@@ -1,0 +1,30 @@
+@use "../../Abstracts/" as *;
+
+.grid {
+  display: grid;
+  &.covers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 1rem;
+    .grid-item {
+      position: relative;
+      border-radius: $radius10;
+
+      &:has(input[type="radio"]:checked) {
+      }
+      input[type="radio"] {
+        position: absolute;
+        inset: 0;
+        appearance: none;
+        cursor: pointer;
+        margin: 0;
+        height: 100%;
+        // background-color: red;
+        transition: $bgTransition;
+        &:checked {
+          opacity: 0.5;
+          background-color: var(--clr-blueGray-100);
+        }
+      }
+    }
+  }
+}

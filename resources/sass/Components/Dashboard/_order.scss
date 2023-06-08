@@ -1,0 +1,134 @@
+@use "../../Abstracts/" as *;
+
+.order-holder {
+  > header {
+    background-color: var(--clr-turquoise-800);
+  }
+
+  .results-holder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+    gap: 2rem;
+    &.order-info {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-block: 2em 1em;
+      > * {
+        padding: 0 2em 1em;
+        margin: 0;
+        .info-title {
+          padding-block: 1em;
+          color: var(--clr-teal-400);
+          letter-spacing: 1px;
+          font-size: 18px;
+
+          h3 {
+          }
+        }
+      }
+      .notes {
+        .notes-holder {
+          .note {
+            margin-bottom: 1em;
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+            .note-header {
+              img {
+                width: 50px;
+                border-radius: 50%;
+                flex-shrink: 0;
+              }
+              .note-info {
+                color: var(--clr-blueGray-800);
+                h3 {
+                  letter-spacing: 1px;
+                }
+                p {
+                  font-size: 14px;
+                }
+              }
+            }
+            .note-body {
+              margin-block: 1em;
+              letter-spacing: 1px;
+              color: var(--clr-blueGray-900);
+              &:last-of-type {
+                margin-block: 1em 0;
+              }
+            }
+          }
+        }
+      }
+      .order-history {
+        ul.statuses {
+          li {
+            .row {
+              &:last-of-type {
+                margin-bottom: 0;
+              }
+              .icon-holder {
+                i {
+                  background: var(--clr-blueGray-500);
+                  padding: 10px;
+                  border-radius: 50%;
+                  color: var(--clr-white-1000);
+                }
+              }
+              .info {
+                color: var(--clr-blueGray-900);
+                letter-spacing: 1px;
+                margin-bottom: 1em;
+                h4 {
+                }
+                p {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    align-items: stretch;
+    .card:not(.review) {
+      background-color: var(--clr-mustard-700);
+      .info {
+        img {
+          border-radius: $radius10;
+        }
+      }
+    }
+    .card-holder {
+      border-radius: $radius5;
+      &.review {
+        background-color: var(--clr-turquoise-900);
+        box-shadow: $boxShadow1;
+        .card.review {
+          box-shadow: none;
+          .rate-value {
+            font-size: 30px;
+            margin-inline: auto;
+            font-weight: bold;
+            border: 10px solid currentColor;
+            color: var(--clr-blueGray-600);
+            padding: 1em;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            @include flex(row, center, center);
+            position: relative;
+            span {
+            }
+          }
+        }
+      }
+    }
+  }
+  @include min-width("large") {
+    .results-holder {
+      &.order-info {
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      }
+    }
+  }
+}

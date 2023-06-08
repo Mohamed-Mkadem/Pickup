@@ -1,0 +1,169 @@
+@use "../../Abstracts/" as *;
+
+%iconStyles {
+  $size: 35px;
+  width: $size;
+  height: $size;
+  line-height: 1;
+  color: var(--clr-white-1000);
+  font-weight: bold;
+  border-radius: $radius5;
+  @include flex(row, center, center);
+  &.payment,
+  &.accepted,
+  &.success {
+    background-color: var(--clr-green-600);
+  }
+  &.validation,
+  &.today,
+  &.paid,
+  &.visited,
+  &.picked,
+  &.primary {
+    background-color: var(--clr-navy-700);
+  }
+  &.verification,
+  &.month,
+  &.pending,
+  &.info {
+    background-color: var(--clr-orange-600);
+  }
+  &.placed,
+  &.transfers,
+  &.week,
+  &.alert {
+    background-color: var(--clr-olive-400);
+  }
+  &.new {
+    background-color: var(--clr-yellow-700);
+    color: var(--clr-orange-600);
+  }
+
+  &.year,
+  &.closed {
+    background-color: var(--clr-blueGray-200);
+    color: var(--clr-blueGray-700);
+  }
+  &.ready,
+  &.in-progress {
+    background-color: var(--clr-navy-800);
+    color: var(--clr-navy-400);
+  }
+
+  &.all {
+    background-color: var(--clr-olive-500);
+    color: var(--clr-olive-200);
+  }
+  &.rejected {
+    background-color: var(--clr-red-600);
+    color: var(--clr-red-900);
+  }
+}
+%progressionStyles {
+  color: var(--clr-black-400);
+  position: relative;
+  &::before {
+    position: absolute;
+    content: "-";
+    font-family: "Font Awesome 6 Pro";
+    top: 50%;
+    translate: 0 -50%;
+    left: -20px;
+  }
+  &.success {
+    color: var(--clr-green-600) !important;
+    &::before {
+      content: "\f062";
+      rotate: 45deg;
+    }
+  }
+  &.danger {
+    color: var(--clr-red-600) !important;
+    &::before {
+      content: "\f062";
+      rotate: 135deg;
+    }
+  }
+}
+.quick-stats-holder {
+  //   display: none;
+
+  margin-bottom: 3rem;
+  @include grid(250px, 1fr, 0, 0, 1em);
+  &.orders {
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  }
+  .stat-item {
+    cursor: pointer;
+    background-color: var(--clr-white-1000);
+    padding: 0.5em 1em;
+    border-radius: $radius5;
+    box-shadow: $boxShadow1;
+    transition: $bgTransition;
+    &:hover {
+      background-color: var(--clr-turquoise-900);
+    }
+    .top-info {
+      margin-bottom: 15px;
+      .title-value-box {
+        color: var(--clr-navy-300);
+        p.box-title {
+          font-size: 20px;
+          letter-spacing: 1px;
+          margin-bottom: 10px;
+        }
+        p.box-value {
+          font-weight: bold;
+          &.light {
+            font-weight: 400;
+            font-size: 16px;
+          }
+          font-size: 22px;
+          // color: var(--clr-navy-300);
+        }
+      }
+      .progression-box {
+        p {
+          @extend %progressionStyles;
+        }
+      }
+      .icon-holder {
+        i {
+          @extend %iconStyles;
+        }
+      }
+    }
+    .bottom-info {
+      &.tickets-list {
+        gap: 10px;
+        .progression-box {
+          padding-left: 20px;
+          p.progression-value {
+            @extend %progressionStyles;
+            span {
+            }
+          }
+        }
+        p.standard {
+          color: var(--clr-blueGray-600);
+          font-size: 13px;
+        }
+      }
+      a.action-link {
+        letter-spacing: 2px;
+        text-decoration: underline;
+        color: var(--clr-blueGray-500);
+        transition: $colorTransition;
+        &:hover {
+          color: var(--clr-teal-400);
+        }
+      }
+      i {
+        @extend %iconStyles;
+      }
+    }
+  }
+  @include min-width(medium) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

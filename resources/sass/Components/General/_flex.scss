@@ -1,0 +1,143 @@
+@use "../../abstracts" as *;
+.d-flex {
+  display: flex;
+  &.j-center {
+    justify-content: center;
+  }
+  &.j-sp-between {
+    justify-content: space-between;
+  }
+
+  &.j-sp-evenly {
+    justify-content: space-evenly;
+  }
+  &.j-start {
+    justify-content: flex-start;
+  }
+  &.j-end {
+    justify-content: flex-end;
+  }
+  &.a-center {
+    align-items: center;
+  }
+  &.a-end {
+    align-items: end;
+  }
+  &.a-start {
+    align-items: flex-start;
+  }
+  &.col {
+    flex-direction: column;
+  }
+  &.row {
+    flex-direction: row;
+  }
+  &.sm-row {
+    @include min-width(small) {
+      flex-direction: row;
+      > * {
+        flex-basis: 50%;
+      }
+    }
+  }
+  &.md-row {
+    @include min-width(medium) {
+      flex-direction: row;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.lg-row {
+    @include min-width("large") {
+      flex-direction: row;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.xlg-row {
+    @include min-width("xlarge") {
+      flex-direction: row;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.xxlg-row {
+    @include min-width("xxlarge") {
+      flex-direction: row;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.md-row-reverse {
+    @include min-width(medium) {
+      flex-direction: row-reverse;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.lg-row-reverse {
+    @include min-width("large") {
+      flex-direction: row-reverse;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.xlg-row-reverse {
+    @include min-width("xlarge") {
+      flex-direction: row-reverse;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.xxlg-row-reverse {
+    @include min-width("xxlarge") {
+      flex-direction: row-reverse;
+      > * {
+        flex-basis: 48%;
+      }
+    }
+  }
+  &.md-col {
+    @include min-width(medium) {
+      flex-direction: column;
+    }
+  }
+  &.lg-col {
+    @include min-width("large") {
+      flex-direction: column;
+    }
+  }
+  &.xlg-col {
+    @include min-width("xlarge") {
+      flex-direction: column;
+    }
+  }
+  &.xxlg-col {
+    @include min-width("xxlarge") {
+      flex-direction: column;
+    }
+  }
+}
+// .flex-2-cols {
+//   flex-direction: column;
+// }
+
+.wrap {
+  flex-wrap: wrap;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.gap-1 {
+  gap: 1em;
+}
+.gap-0-5 {
+  gap: 0.5em;
+}

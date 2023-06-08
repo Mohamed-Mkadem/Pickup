@@ -1,0 +1,42 @@
+@use "../../Abstracts/" as *;
+
+.validation-box {
+  color: var(--clr-blueGray-900);
+  h3.decision {
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+    color: var(--clr-blueGray-600);
+    &.success {
+      color: var(--clr-teal-400);
+    }
+    &.rejected {
+      color: var(--clr-red-600);
+    }
+  }
+  p {
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  a {
+    text-decoration: underline;
+    color: var(--clr-teal-300);
+    transition: $colorTransition;
+    &:hover {
+      color: var(--clr-teal-400);
+    }
+  }
+  ul.notes {
+    margin-block: 1em;
+    padding-left: 1em;
+
+    li {
+      margin-bottom: 5px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

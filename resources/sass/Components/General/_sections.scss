@@ -1,0 +1,27 @@
+section {
+  &.section {
+    padding-block: 3rem;
+  }
+  &.top-vendors {
+    // background-color: var(--clr-navy-900);
+  }
+  &.cta {
+    background-color: var(--clr-yellow-500);
+    box-shadow: rgba(0, 0, 0, 1) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  }
+  &.start-selling--sectors,
+  &.team,
+  &.how-it-works {
+    background-color: var(--clr-navy-900);
+  }
+  // &.fees {
+  //   background: var(--clr-teal-100);
+  // }
+  &#content {
+    padding-block: 2em 6em;
+  }
+  &#store-holder {
+    padding-block: 2em 6em;
+    // background-color: var();
+  }
+}

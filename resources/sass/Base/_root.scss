@@ -1,0 +1,11 @@
+@use "../Abstracts/" as *;
+
+:root {
+  @each $color, $shades in $colors {
+    @each $shade, $value in $shades {
+      --clr-#{$color}-#{$shade}: #{$value};
+    }
+  }
+  --clr-green-1000: hsl(149, 56%, 53%);
+  --clr-blueGray-1000: hsla(198, 22%, 36%, 40%);
+}

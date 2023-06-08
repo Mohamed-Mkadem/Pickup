@@ -1,0 +1,24 @@
+@use "../../Abstracts/" as *;
+
+.logo {
+  font-family: "Caveat Brush", cursive;
+  font-size: 30px;
+  color: var(--clr-teal-400);
+  letter-spacing: 1px;
+  span {
+    display: none;
+  }
+  &.light {
+    color: var(--clr-white-1000) !important;
+  }
+  &.visible {
+    span {
+      display: inline;
+    }
+  }
+  @include min-width(medium) {
+    span {
+      display: inline;
+    }
+  }
+}

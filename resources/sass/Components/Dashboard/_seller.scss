@@ -1,0 +1,53 @@
+@use "../../Abstracts/" as *;
+
+.seller-show {
+  //   @include flex(row, space-between, flex-start);
+  //   //   gap: 2%;
+  //   flex-wrap: wrap;
+  //   > :nth-child(1) {
+  //     flex-basis: 75%;
+  //   }
+  //   > :nth-child(2) {
+  //     flex-basis: 22%;
+  //   }
+  // display: grid;
+  // //   grid-template-columns: repeat(auto-fit, 100px);
+  // grid-template-columns: 73% 25%;
+  // justify-content: space-between;
+  // > :nth-child(1) {
+  //   .card-info {
+  //     display: grid;
+  //     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  //   }
+  // }
+}
+.bank-info {
+  .info {
+    .info-title {
+      font-size: 18px;
+      color: var(--clr-blueGray-700);
+      letter-spacing: 1px;
+      gap: 0.5em;
+      i {
+        $size: 30px;
+        background-color: var(--clr-blueGray-100);
+        height: $size;
+        width: $size;
+        @include flex(row, center, center);
+        color: var(--clr-blueGray-500);
+        border-radius: $radius5;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 16px;
+      }
+    }
+    .info-value {
+      color: var(--clr-blueGray-600);
+      letter-spacing: 1px;
+      margin-top: 10px;
+      p {
+      }
+    }
+  }
+}

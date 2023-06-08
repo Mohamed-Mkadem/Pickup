@@ -1,0 +1,36 @@
+@use "../../Abstracts/" as *;
+
+
+.plan {
+  position: relative;
+  text-align: center;
+  letter-spacing: 1px;
+  &:has(input[type="radio"]:checked) {
+    background-color: var(--clr-blueGray-100);
+  }
+  h3.plan-price {
+    color: var(--clr-teal-300);
+    font-size: 40px;
+    small {
+      font-size: 0.7em;
+    }
+  }
+  p.plan-duration {
+    color: var(--clr-teal-200);
+    font-size: 18px;
+  }
+  input[type="radio"] {
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    height: auto;
+    margin: 0;
+    opacity: 0.2;
+    transition: $bgTransition;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--clr-blueGray-100);
+    }
+  }
+}

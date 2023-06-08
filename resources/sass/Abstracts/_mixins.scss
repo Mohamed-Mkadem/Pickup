@@ -1,0 +1,195 @@
+@use "breakPoints" as *;
+@use "variables" as *;
+
+// Flex
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin grid($colMin, $colMax, $rGap: 0, $cGap: 0, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($colMin, $colMax));
+  @if ($rGap) {
+    row-gap: $rGap;
+  }
+  @if ($cGap) {
+    column-gap: $cGap;
+  }
+  @if $gap {
+    gap: $gap;
+  }
+}
+@mixin detailledGrid($cols, $rGap: 0, $cGap: 0, $gap: 0) {
+  display: grid;
+  grid-template-columns: $cols;
+}
+
+// Min-width
+@mixin min-width($breakpoint) {
+  @if ($breakpoint == xsmall) {
+    @media (min-width: $xSmall) {
+      @content;
+    }
+  } @else if ($breakpoint == small) {
+    @media (min-width: $small) {
+      @content;
+    }
+  } @else if ($breakpoint == msmall) {
+    @media (min-width: $mSmall) {
+      @content;
+    }
+  } @else if ($breakpoint == medium) {
+    @media (min-width: $medium) {
+      @content;
+    }
+  } @else if ($breakpoint == large) {
+    @media (min-width: $large) {
+      @content;
+    }
+  } @else if ($breakpoint == xlarge) {
+    @media (min-width: $xLarge) {
+      @content;
+    }
+  } @else if ($breakpoint == xmlarge) {
+    @media (min-width: $xmLarge) {
+      @content;
+    }
+  } @else if ($breakpoint == xxLarge) {
+    @media (min-width: $xxLarge) {
+      @content;
+    }
+  }
+}
+// Min-width
+@mixin max-width($breakpoint) {
+  @if ($breakpoint == xsmall) {
+    @media (max-width: $xsmall) {
+      @content;
+    }
+  } @else if ($breakpoint == small) {
+    @media (max-width: $small) {
+      @content;
+    }
+  } @else if ($breakpoint == msmall) {
+    @media (max-width: $mSmall) {
+      @content;
+    }
+  } @else if ($breakpoint == medium) {
+    @media (max-width: $medium) {
+      @content;
+    }
+  } @else if ($breakpoint == large) {
+    @media (max-width: $large) {
+      @content;
+    }
+  } @else if ($breakpoint == xlarge) {
+    @media (max-width: $xLarge) {
+      @content;
+    }
+  } @else if ($breakpoint == xmlarge) {
+    @media (max-width: $xmLarge) {
+      @content;
+    }
+  } @else if ($breakpoint == xxLarge) {
+    @media (min-width: $xxLarge) {
+      @content;
+    }
+  }
+}
+// Media Interval
+@mixin mediaInterval($minW, $maxW, $minH, $maxH) {
+  @media (min-width: $minW) and (max-width: $maxW) and (min-height: $minH) and (max-height: $maxH) {
+    @content;
+  }
+}
+
+// Dropdown
+
+@mixin dropDown($width, $bgColor, $right, $top, $boxShadow: $popUpShadow) {
+  position: absolute;
+  z-index: 1000;
+  padding: 0.5em 1em;
+  border-radius: $radius5;
+  width: $width;
+  right: $right;
+  top: $top;
+  background-color: $bgColor;
+  box-shadow: $boxShadow;
+  display: none;
+}
+@mixin dashDropDown($width, $bgColor, $right, $top, $boxShadow: $popUpShadow) {
+  position: absolute;
+  z-index: 1000;
+  border-radius: $radius5;
+  width: $width;
+  right: $right;
+  top: $top;
+  background-color: $bgColor;
+  box-shadow: $boxShadow;
+  display: none;
+}
+
+// Rank
+
+@mixin rankTitle($spanColor, $color, $fontSize) {
+  font-size: $fontSize;
+  color: $color;
+  span {
+    color: $spanColor;
+  }
+}
+// Numbered Title
+@mixin numberedTitle($color, $Fsize, $spanColor) {
+  color: $color;
+  font-size: $Fsize;
+  span {
+    color: $spanColor;
+  }
+}
+
+// Table Grid
+
+@mixin tableGrid($cols, $colMin, $colMax) {
+  display: grid;
+  grid-template-columns: repeat($cols, minmax($colMin, $colMax));
+  align-items: center;
+}
+
+// Table Thead
+
+@mixin tableThead($bgColor, $color) {
+  background-color: $bgColor;
+  color: $color;
+}
+
+// Table Tr(odd/even) bg colors
+
+@mixin trOddEven($oddBg, $evenBg) {
+  &:nth-child(even) {
+    background-color: $oddBg;
+  }
+  &:nth-child(odd) {
+    background-color: $evenBg;
+  }
+}
+
+// Center Vertically
+@mixin centerVertically() {
+  top: 50%;
+  translate: 0 -50%;
+}
+// Center Horizontally
+@mixin centerHorizontally() {
+  left: 50%;
+  translate: -50% 0;
+}
+
+// Center
+@mixin center() {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}

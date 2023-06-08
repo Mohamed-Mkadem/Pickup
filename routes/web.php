@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +15,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// FrontEnd
+Route::get('/', [FrontEndController::class, 'home'])->name('homePage');
+Route::get('/about', [FrontEndController::class, 'about'])->name('aboutPage');
+Route::get('/faqs', [FrontEndController::class, 'faqs'])->name('faqsPage');
+Route::get('/contact', [FrontEndController::class, 'contact'])->name('contactPage');
+Route::get('/track-order', [FrontEndController::class, 'trackOrder'])->name('trackOrderPage');
+Route::get('/privacy', [FrontEndController::class, 'privacy'])->name('privacyPage');
+Route::get('/terms', [FrontEndController::class, 'terms'])->name('termsPage');
+Route::get('/start-selling', [FrontEndController::class, 'startSelling'])->name('startSellingPage');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,3 +37,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');

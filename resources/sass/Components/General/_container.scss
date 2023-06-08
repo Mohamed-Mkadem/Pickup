@@ -1,0 +1,14 @@
+@use "../../Abstracts/" as *;
+.container {
+  width: 85%;
+  max-width: 1400px;
+  margin: auto;
+  &.fluid {
+    width: 90%;
+  }
+  @include min-width("large") {
+    &.fluid {
+      width: 95%;
+    }
+  }
+}

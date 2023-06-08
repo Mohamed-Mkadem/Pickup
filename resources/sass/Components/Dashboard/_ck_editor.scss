@@ -1,0 +1,49 @@
+.ck.ck-toolbar.ck-toolbar_grouping > .ck-toolbar__items {
+  flex-wrap: wrap !important;
+}
+
+.editor-holder {
+  &.pop-up-editor {
+    .ck-editor__editable {
+      min-height: 188px !important;
+      max-height: 188px !important;
+      overflow-y: scroll;
+    }
+  }
+}
+.ck.ck-editor__main > .ck-editor__editable {
+  min-height: 150px;
+  max-height: 600px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--clr-blueGray-300);
+  }
+  scrollbar-width: thin;
+  @supports (scrollbar-color: red blue) {
+    scrollbar-color: var(--clr-blueGray-300) var(--clr-white-1000);
+  }
+}
+
+// .ck-sticky-panel {
+//   background-color: red;
+// }
+.ck-reset_all :not(.ck-reset_all-excluded *),
+.ck.ck-reset_all {
+  background-color: var(--clr-white-1000) !important;
+}
+
+.ck {
+  ul,
+  ol {
+    list-style-type: disc !important;
+    padding-inline-start: 2em;
+  }
+  background-color: var(--clr-blueGray-0) !important;
+}
+.ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+  border: 2px solid var(--clr-blueGray-500) !important;
+  // border-color: red !important;
+}

@@ -1,0 +1,68 @@
+@use "../../Abstracts/" as *;
+
+.light-box {
+  position: fixed;
+  inset: 0;
+  //   background-color: var(--clr-blueGray-1000);
+  background-color: rgba(0, 0, 0, 70%);
+  display: none;
+  padding: 10px;
+  z-index: 10000;
+  height: 100vh;
+  &.show {
+    @include flex(row, center, center);
+  }
+  .main-image {
+    position: relative;
+    width: min(400px, 100%);
+    #close-light-box {
+      color: var(--clr-white-1000);
+      position: absolute;
+      font-size: 40px;
+      right: 0;
+      top: -60px;
+    }
+    .arrow-btn {
+      position: absolute;
+      font-size: 40px;
+      color: var(--clr-white-1000);
+      bottom: -70px;
+
+      $positionX: 0;
+      transition: $colorTransition;
+      &:hover {
+        color: var(--clr-mustard-700);
+      }
+      &#prev-btn {
+        left: $positionX;
+      }
+      &#next-btn {
+        right: $positionX;
+      }
+    }
+    img {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 1;
+    }
+  }
+  @include min-width(medium) {
+    .main-image {
+      #close-light-box {
+        right: -20%;
+      }
+      .arrow-btn {
+        top: 50%;
+        bottom: unset;
+        translate: 0 -50%;
+        $positionX: 30%;
+        &#prev-btn {
+          left: -$positionX;
+        }
+        &#next-btn {
+          right: -$positionX;
+        }
+      }
+    }
+  }
+}

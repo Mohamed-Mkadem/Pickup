@@ -1,0 +1,176 @@
+@use "../../Abstracts/" as *;
+
+// Fix the blob image
+%shadow {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.start-selling {
+  .guidelines-holder {
+    text-align: center;
+    margin-top: -0.5em;
+    p {
+      color: var(--clr-navy-200);
+      line-height: 1.7;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+    }
+    a {
+      background-color: var(--clr-yellow-600);
+      color: var(--clr-navy-200);
+      letter-spacing: 1px;
+      &:hover {
+        background-color: var(--clr-yellow-700);
+      }
+    }
+  }
+
+  .fees-wrapper {
+    // gap: 2rem;
+    @include flex(row, center, center);
+
+    .col {
+      @extend %shadow;
+      width: min(300px, 100%);
+      padding: 2em 1em;
+      text-align: center;
+      border-radius: 10px;
+      header {
+        h3 {
+          color: var(--clr-teal-200);
+          font-size: 20px;
+          letter-spacing: 1px;
+        }
+        p.price {
+          font-size: 45px;
+          margin-block: 0.5em;
+          color: var(--clr-teal-300);
+          font-weight: bold;
+          letter-spacing: 1px;
+          small {
+            font-size: 0.5em;
+            font-weight: normal;
+          }
+        }
+      }
+      ul.features {
+        li {
+          list-style-position: inside;
+          list-style-type: disc;
+          margin-block: 0.3em;
+          color: var(--clr-teal-300);
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+  .steps {
+    p.info {
+      color: var(--clr-white-400);
+      margin-top: -10px;
+    }
+    .a11y-slider-dots {
+      @include flex(row, center, center);
+      gap: 1em;
+      li {
+        padding: 5px;
+        button {
+          &.active {
+            background-color: var(--clr-navy-200);
+          }
+          $size: 34px;
+          background: var(--clr-navy-800);
+          color: var(--clr-white-1000);
+          border-radius: 5px;
+          width: $size;
+          height: $size;
+        }
+      }
+    }
+    .slides-wrapper {
+      &.slider {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: flex;
+        margin-block: 2em;
+        .slide {
+          width: 100%;
+          flex: 0 0 auto;
+          > * {
+            width: 50%;
+          }
+          .img-holder {
+            display: none;
+            img {
+              height: 100%;
+            }
+          }
+          .info {
+            text-align: center;
+            padding: 3em;
+            background: var(--clr-turquoise-900);
+            position: relative;
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            > span {
+              position: absolute;
+              right: 10px;
+              top: 0;
+              font-size: 145px;
+              opacity: 0.1;
+            }
+            h3 {
+              color: var(--clr-teal-300);
+              font-size: 30px;
+              letter-spacing: 1px;
+              margin-bottom: 0.5em;
+            }
+            p {
+              color: var(--clr-teal-200);
+              letter-spacing: 1px;
+              line-height: 1.7;
+              span {
+                color: var(--clr-teal-100);
+                font-weight: bold;
+                letter-spacing: 1px;
+              }
+            }
+          }
+
+          @include min-width("xlarge") {
+            .img-holder {
+              display: block;
+              width: 450px;
+              background-color: var(--clr-green-800);
+            }
+            .info {
+              text-align: left;
+            }
+          }
+          @include min-width("xmlarge") {
+            .info {
+              p {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @include min-width(medium) {
+      .guidelines-holder {
+        p {
+          width: min(450px, 100%);
+          margin-inline: auto;
+        }
+      }
+      p.info {
+        display: none;
+      }
+    }
+  }
+}

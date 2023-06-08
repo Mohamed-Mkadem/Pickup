@@ -1,0 +1,10 @@
+@use "variables" as *;
+
+.p-span {
+  font-weight: 500;
+
+  letter-spacing: 1px;
+  span {
+    font-weight: 400;
+  }
+}

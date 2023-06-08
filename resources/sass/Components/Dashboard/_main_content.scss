@@ -1,0 +1,21 @@
+@use "../../Abstracts/" as *;
+.sale-wrapper,
+#store-main-content,
+#main-content {
+  // background-color: var(--clr-blueGray-0);
+  background-color: var(--clr-black-900);
+  min-height: 100vh;
+  margin-left: 0;
+  transition: margin 0.3s ease;
+}
+
+@include min-width(medium) {
+  #main-content {
+    margin-left: 250px;
+  }
+  .full-width {
+    #main-content {
+      margin-left: 70px;
+    }
+  }
+}

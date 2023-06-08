@@ -1,0 +1,122 @@
+@use "../../Abstracts/" as *;
+
+%errorStyle {
+    color: var(--clr-red-600);
+    display: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-style: italic;
+    transition: display 0.3s ease;
+    &.show {
+        display: block;
+    }
+}
+
+.login {
+    min-height: 100vh;
+    @include flex(column, center, center);
+    &.client {
+        background-image: url("../Assets/login-bg.jpg");
+    }
+    &.seller {
+        background-image: url("../Assets/s-login-bg.jpg");
+    }
+    &.admin {
+        background-image: url("../Assets/a-login-bg.jpg");
+    }
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+    isolation: isolate;
+    padding: 2em 0;
+    &::after {
+        $color: rgba(0, 157, 189, 35%);
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: rgba(0, 157, 189, 35%);
+        @supports (backdrop-filter: blur(5px)) {
+            backdrop-filter: blur(5px);
+        }
+    }
+    .login-wrapper {
+        background-color: var(--clr-teal-200);
+        width: min(95%, 400px);
+        padding: 3em 2em 1em 2em;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        a.logo {
+            width: max-content;
+            font-size: 50px;
+        }
+        form {
+            margin-block: 2em;
+            .form-control {
+                margin-bottom: 1.5em;
+                input {
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 15px;
+                    padding: 0 1em;
+                    background: var(--clr-teal-100);
+                    border: none;
+                    outline: none;
+                    color: var(--clr-teal-800);
+                    &::placeholder {
+                        color: var(--clr-yellow-900);
+
+                        opacity: 0.5;
+                    }
+                    &:focus,
+                    &:focus-within {
+                        border: 2px solid var(--clr-teal-800);
+                    }
+                }
+                p {
+                    margin-block: 0.2em 1em;
+                    &.error-message {
+                        @extend %errorStyle;
+                        text-align: left;
+                        margin-left: 13px;
+                    }
+                    color: var(--clr-white-700);
+                    text-align: center;
+                    a {
+                        color: var(--clr-teal-900);
+                    }
+                }
+                a {
+                    margin-block: 0.2em 1em;
+                    color: var(--clr-white-800);
+                    margin-inline: 0.2em;
+                    letter-spacing: 1px;
+                    transition: color 0.3s ease;
+                    &:hover {
+                        color: var(--clr-teal-800);
+                    }
+                }
+                button {
+                    background-color: var(--clr-white-900);
+                    width: 100%;
+                    height: 50px;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    font-size: 20px;
+                    color: var(--clr-teal-100);
+                    border-radius: 15px;
+                    transition: background-color 0.3s ease;
+                    &:hover {
+                        background-color: var(--clr-teal-800);
+                    }
+                }
+            }
+        }
+        > p {
+            @extend %errorStyle;
+
+            margin-block: 1em 1.3em;
+        }
+    }
+}

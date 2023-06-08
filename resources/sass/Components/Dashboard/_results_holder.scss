@@ -1,0 +1,206 @@
+@use "../../Abstracts/" as *;
+.results {
+  // display: none;
+  > h2 {
+    &.t-left {
+      text-align: left;
+    }
+    color: var(--clr-blueGray-800);
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-top: 1em;
+  }
+  .results-holder {
+    border-radius: $radius10;
+    display: grid;
+
+    &.brands-categories {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+      .card {
+        background-color: var(--clr-blueGray-100);
+        header {
+          // color: var(--clr-blueGray-800);
+        }
+        .info {
+          background-color: var(--clr-blueGray-600);
+        }
+      }
+    }
+    &.brands {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+      // grid-template-columns: 300px;
+      .card {
+        // gap: 0;
+        header {
+          // color: var(--clr-blueGray-800);
+          // background-color: var(--clr-blueGray-600);
+        }
+        // .img-holder {
+        //   img {
+        //     width: 100%;
+        //     height: 100%;
+        //   }
+        // }
+        .info {
+          // padding: 1em;
+          img {
+            border-radius: 10%;
+          }
+        }
+      }
+    }
+    &.vouchers-categories {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+      .card {
+        .info {
+          padding: 5em 0 0;
+        }
+      }
+    }
+    &.vouchers {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+    }
+    &.sectors {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+    }
+    &.fees {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+    }
+    &.clients,
+    &.sellers {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 2rem;
+    }
+    &.client-seller-show {
+      margin-block: 3rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.bank-info {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.minimal {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 350px));
+      gap: 1rem;
+    }
+    &.Validation-show {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.documents-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.seller-edit-forms {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.stores-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1rem;
+
+      margin-block: 3em 2em;
+      .card {
+        .info {
+          padding: 5em 0 0;
+        }
+      }
+    }
+    &.home-content-cards {
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1rem;
+      // align-items: start;
+      .card {
+        &.seller {
+          gap: 7rem;
+          .info {
+            min-height: 100px;
+            padding: 4em 1em 1em;
+            img {
+              width: 100px;
+              top: -25%;
+            }
+          }
+        }
+        &.single-info-card {
+          height: calc(100% - 49px);
+          &.balance-card {
+            .details {
+              margin-top: 1.5em;
+            }
+          }
+        }
+      }
+    }
+    &.reviews {
+      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.products-grid,
+    &.products-holder {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.product-row {
+      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.product-details {
+      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+      gap: 1rem;
+    }
+    &.subscription-plans {
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: 1rem;
+      & + .buttons {
+        .modal-holder {
+          .modal {
+            width: min(400px, 90%);
+            p {
+              color: var(--clr-blueGray-800);
+              letter-spacing: 1px;
+            }
+            i {
+              font-size: 25px;
+              padding: 0.5em;
+              border-radius: 50%;
+              color: var(--clr-red-600);
+              border: 1px solid currentColor;
+              width: max-content;
+              margin-inline: auto;
+            }
+          }
+        }
+      }
+    }
+    // @include min-width(medium) {
+    //   &.products-holder {
+    //     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    //   }
+    // }
+  }
+}
+
+.full-width {
+  .results {
+    .results-holder {
+      // &.vouchers,
+      &.sellers,
+      &.clients,
+      &.sectors,
+      &.vouchers-categories,
+      &.brands,
+      &.brands-categories {
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      }
+    }
+  }
+}
