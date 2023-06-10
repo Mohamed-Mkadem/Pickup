@@ -27,7 +27,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('developer'),
             'email_verified_at' => '2023-06-09 16:26:02',
             'phone' => '56927726',
-            'photo' => 'dist/Assets/profiles_photos/default.jpg'
+            'photo' => 'profiles_photos/default.jpg'
         ]);
     }
 }

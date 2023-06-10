@@ -5,7 +5,7 @@
         "Gouvernorat": "Tunis"
     },
     {
-        "Délégations": "Ariana Ville - Soukra - Raouède - Kalâat Andalous - Sidi Thabet - Cité Attadhamon - M’nihla",
+        "Délégations": "Ariana Ville - Soukra - Raouède - Kalâat Andalous - Sidi Thabet - Cité Attadhamon - Mnihla",
         "Nbre": "7",
         "Gouvernorat": "Ariana"
     },
@@ -15,7 +15,7 @@
         "Gouvernorat": "Manouba"
     },
     {
-        "Délégations": "Ben Arous - Nouvelle Médina - Mourouj - Hammam Lif - Hammam Chatt - Boumhel Bassatine - Ezzahra - Radès - Megrine - M’hamdia - Fouchana - Mornag",
+        "Délégations": "Ben Arous - Nouvelle Médina - Mourouj - Hammam Lif - Hammam Chatt - Boumhel Bassatine - Ezzahra - Radès - Megrine - Mhamdia - Fouchana - Mornag",
         "Nbre": "12",
         "Gouvernorat": "Ben Arous"
     },
@@ -50,7 +50,7 @@
         "Gouvernorat": "Mahdia"
     },
     {
-        "Délégations": "Sfax Ville - Sfax Ouest - Sakiet Ezzit - Sakiet Eddaier - Sfax sud - Tina - Agareb - Jebeniana -El Amra - El Hencha -Menzel chaker - Ghraiba - Bir Ali Ben Khelifa - Sekhira - Mahrès - Kerkennah",
+        "Délégations": "Sfax Ville - Sfax Ouest - Sakiet Ezzit - Sakiet Eddaier - Sfax sud - Tina - Agareb - Jebeniana -El Amra - El Hencha - Menzel chaker - Ghraiba - Bir Ali Ben Khelifa - Sekhira - Mahrès - Kerkennah",
         "Nbre": "16",
         "Gouvernorat": "Sfax"
     },
@@ -70,12 +70,12 @@
         "Gouvernorat": "Kef"
     },
     {
-        "Délégations": "Siliana nord - Siliana sud - Bouarada -Gâafour - El Aroussa - Le Krib - Bourouis - Makther - Rouhia - Kesra - Bargou",
+        "Délégations": "Siliana nord - Siliana sud - Bouarada - Gâafour - El Aroussa - Le Krib - Bourouis - Makther - Rouhia - Kesra - Bargou",
         "Nbre": "11",
         "Gouvernorat": "Siliana"
     },
     {
-        "Délégations": "Kairouan Nord -Kairouan Sud - Chebika - Sebikha - Oueslatia - Haffouz - El Ala - Hajeb El Ayoun - Nasrallah - Cherarda - Bouhajla",
+        "Délégations": "Kairouan Nord - Kairouan Sud - Chebika - Sebikha - Oueslatia - Haffouz - El Ala - Hajeb El Ayoun - Nasrallah - Cherarda - Bouhajla",
         "Nbre": "11",
         "Gouvernorat": "Kairouan"
     },

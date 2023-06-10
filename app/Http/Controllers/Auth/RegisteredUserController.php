@@ -127,8 +127,8 @@ class RegisteredUserController extends Controller
                 ],
                 'address' => ['required'],
                 'gender' => ['required', 'in:Male,Female'],
-                'bank' => ['required'],
-                'account_name' => ['required'],
+                'bank' => ['required', 'string'],
+                'account_name' => ['required', 'string'],
                 'rib' => ['required', 'digits:20', 'unique:sellers'],
                 'nid' => ['required', 'digits:8', 'unique:sellers'],
             ], [], $customAttributes);
@@ -141,8 +141,8 @@ class RegisteredUserController extends Controller
                 // Validation passed
                 // Proceed with storing the user
                 $user = User::create([
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => $request->first_name ,
+                    'last_name' => $request->last_name ,
                     'address' => $request->address,
                     'state_id' => $request->state_id,
                     'city_id' => $request->city_id,

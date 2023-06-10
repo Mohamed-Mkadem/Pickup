@@ -215,13 +215,14 @@
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" seller-client  dropdown-toggle" aria-pressed="false">
                             <div class="name-holder d-flex  a-center">
-                                <img src="{{ asset(Auth::user()->photo) }}" alt="">
+                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="">
                                 <span>{{ Auth::user()->first_name }}</span>
                             </div>
                             <p class="balance-value"> {{ Auth::user()->client->balance }} DT</p>
                         </button>
                         <ul class="dropdown-menu profile-dropdown  ">
-                            <li><a href="client_profile.html"><i class="fa-light fa-circle-user"></i> Profile</a></li>
+                            <li><a href="{{ route('client.profile') }}"><i class="fa-light fa-circle-user"></i>
+                                    Profile</a></li>
                             <li><a href="client_balance.html"><i class="fa-light fa-dollar-sign"></i> Balance</a></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="post">
@@ -237,27 +238,15 @@
             </header>
 
             <div class="container fluid">
-                <section class="content" id="content">
-                    <!-- Start Starter Header -->
-                    <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
-                        <h1>Hello {{ Auth::user()->first_name }}</h1>
-                        <!-- Start Link  -->
-                        <a href="shopping.html" class="header-btn d-block add-btn">
-                            <i class="fa-light fa-plus"></i>
-                            <span>Shop Now</span>
-                        </a>
-                        <!-- End Link  -->
-                    </div>
-                    <!-- End Starter Header -->
 
 
-                </section>
+                @yield('content')
             </div>
         </main>
     </div>
 
 
-
+    @stack('scripts')
     <script src="../../dist/js/app.js"></script>
 </body>
 

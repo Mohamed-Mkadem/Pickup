@@ -1,9 +1,8 @@
-@extends('layouts.Admin')
+@extends('layouts.Client')
 
 @push('title')
     <title>Pickup | Profile</title>
 @endpush
-
 
 @section('content')
     <section class="content" id="content">
@@ -14,23 +13,64 @@
             </div>
             <div class="info-holder">
                 <div class="top-header d-flex col j-center a-center">
-                    <h2>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} </h2>
+                    <h2> {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h2>
                     <ul class="horizontal-actions-holder d-flex j-center a-center">
-                        <li>
-
-                            <a href="{{ route('profile.edit') }}" class="editBtn"> <i class="fa-light fa-pen"></i>
-                                Edit</a>
-                        </li>
+                        <a href="{{ route('profile.edit') }}" class="editBtn"> <i class="fa-light fa-pen"></i>
+                            Edit</a>
                     </ul>
                 </div>
-                <div class="details t-center">
-                    <p>{{ Auth::user()->city->state->name }} - {{ Auth::user()->city->name }}</p>
-
+                <div class="details ">
+                    <p>{{ Auth::user()->city->state->name . ' - ' . Auth::user()->city->name }}</p>
+                    <div class="info-grid">
+                        <!-- Start Info -->
+                        <div class="info">
+                            <div class="info-title">
+                                <i class="fa-light fa-dollar"></i>
+                                <h3>Balance </h3>
+                            </div>
+                            <div class="info-value">
+                                <p>{{ Auth::user()->client->balance }} <span>DT</span></p>
+                            </div>
+                        </div>
+                        <!-- End Info -->
+                        <!-- Start Info -->
+                        <div class="info">
+                            <div class="info-title">
+                                <i class="fa-light fa-shop"></i>
+                                <h3>Following</h3>
+                            </div>
+                            <div class="info-value">
+                                <p>1</p>
+                            </div>
+                        </div>
+                        <!-- End Info -->
+                        <!-- Start Info -->
+                        <div class="info">
+                            <div class="info-title">
+                                <i class="fa-light fa-cart-arrow-down"></i>
+                                <h3>Orders </h3>
+                            </div>
+                            <div class="info-value">
+                                <p>24</p>
+                            </div>
+                        </div>
+                        <!-- End Info -->
+                        <!-- Start Info -->
+                        <div class="info">
+                            <div class="info-title">
+                                <i class="fa-light fa-user-headset"></i>
+                                <h3>Tickets</h3>
+                            </div>
+                            <div class="info-value">
+                                <p>8 </p>
+                            </div>
+                        </div>
+                        <!-- End Info -->
+                    </div>
                 </div>
             </div>
         </div>
         <!-- End Show Header -->
-
         <div class="results">
             <h2 class="t-left mb-0-5 ">General Info</h2>
             <div class=" results-holder mt-0 client-seller-show ">
@@ -74,7 +114,6 @@
                             </div>
                             <div class="info-value">
                                 <p>
-
                                     {{ \Carbon\Carbon::parse(Auth::user()->d_o_b)->format('d-m-Y') }}
 
                                 </p>
@@ -133,7 +172,6 @@
                             <div class="info-value">
                                 <p>
                                     {{ \Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}
-
                                 </p>
                             </div>
                         </div>
@@ -146,5 +184,7 @@
 
             </div>
         </div>
+
+
     </section>
 @endsection

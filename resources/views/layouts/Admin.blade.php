@@ -281,8 +281,9 @@
                     </div>
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" d-flex  a-center dropdown-toggle" aria-pressed="false">
-                            {{-- <img src="{{ asset(Auth::user()->photo) }}" alt=""> --}}
-                            <img src="storage/{{ Auth::user()->photo }}" alt="">
+
+                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="">
+
 
                             <span>{{ Auth::user()->first_name }}</span>
                         </button>

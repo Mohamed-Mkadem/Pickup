@@ -9,4 +9,7 @@ class ClientController extends Controller
     public function home(){
         return view('Client.home');
     }
+    public function profile(){
+        return view('Client.profile');
+    }
 }

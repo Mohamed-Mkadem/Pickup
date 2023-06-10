@@ -10,4 +10,7 @@ class SellerController extends Controller
     public function home(){
         return view('Seller.home');
     }
+    public function profile(){
+        return view('seller.profile');
+    }
 }

@@ -1,9 +1,8 @@
-@extends('layouts.Admin')
+@extends('layouts.Client')
 
 @push('title')
     <title>Pickup | Edit Profile</title>
 @endpush
-
 
 @section('content')
     <section class="content" id="content">
@@ -13,6 +12,7 @@
             <h1>Edit Profile</h1>
         </div>
         <!-- End Starter Header -->
+
         @if ($errors->any())
             <ul class="alert alert-error mb-1">
                 @foreach ($errors->all() as $error)
@@ -31,7 +31,7 @@
             <div class="alert alert-success mb-1">{{ session()->get('status') }}</div>
         @endif
 
-        @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+        {{-- @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
             <form id="send-verification" method="post" action="{{ route('verification.send') }}">
                 @csrf
                 <div class="mb-2 holder radius-10 p-1" style="width:min(500px, 90%);">
@@ -50,16 +50,13 @@
                     @endif
                 </div>
             </form>
-        @endif
-
-        <form action="{{ route('admin.profile.update') }}" method="post" id="general-info-form"
+        @endif --}}
+        <form action="{{ route('client.profile.update') }}" method="post" id="general-info-form"
             enctype="multipart/form-data">
-
             @csrf
             @method('PATCH')
 
-
-            <div class="holder radius-10 p-1 mb-2">
+            <div class=" holder radius-10 p-1 mb-2">
                 <div class="form-control">
                     <label for="" class="form-label ">Avatar </label>
                     <div class="drop-zone form-element">
@@ -83,49 +80,25 @@
                     </div>
                 </div>
             </div>
-            <div class="holder radius-10 p-1 mb-2">
-                <div class="form-row">
-                    <div class="form-control">
-                        <label for="" class="form-label">First Name</label>
-                        <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-element"
-                            id="f-name-input" placeholder="eg: Mohamed" value="Mohamed">
-                        <p class="error-message">This Field Is Required</p>
-                    </div>
-                    <div class="form-control">
-                        <label for="" class="form-label">Last Name</label>
-                        <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-element"
-                            id="l-name-input" placeholder="eg: Mkadem" value="Mkadem">
-                        <p class="error-message">This Field Is Required</p>
-                    </div>
 
-                </div>
+
+            <div class="holder radius-10 p-1 mb-2">
+
                 <div class="form-row">
                     <div class="form-control">
                         <label for="" class="form-label">Email</label>
-                        <input type="email" name="email" value="{{ $user->email }}" class="form-element"
-                            id="email-input" placeholder="eg: Mohamed@gmail.com" value="mkadem@gmail.com">
+                        <input type="email" name="email" class="form-element" id="email-input"
+                            placeholder="eg: Mohamed@gmail.com" value="{{ $user->email }}">
                         <p class="error-message">This Field Is Required</p>
                     </div>
                     <div class="form-control">
                         <label for="" class="form-label">Phone</label>
-                        <input type="number" name="phone" value="{{ $user->phone }}" class="form-element"
-                            id="phone-input" placeholder="eg: 25412145" value="25410254" maxlength="8" inputmode="numeric">
+                        <input type="number" name="phone" class="form-element" id="phone-input"
+                            placeholder="eg: 25412145" value="{{ $user->phone }}" maxlength="8" inputmode="numeric">
 
                         <p class="error-message">This Field Is Required</p>
                     </div>
-                    <div class="form-control">
-                        <label class="form-label">Gender :</label>
-                        <div class="select-box">
-                            <select name="gender" id="gender-select" class="form-element">
-                                <option value="Male" {{ $user->gender == 'Male' ? 'selected' : '' }}>
-                                    Male
-                                </option>
-                                <option value="Female" {{ $user->gender == 'Female' ? 'selected' : '' }}>
-                                    Female</option>
-                            </select>
-                        </div>
-                        <p class="error-message">This Field Is Required</p>
-                    </div>
+
                 </div>
             </div>
             <div class="holder radius-10 p-1 mb-2">
@@ -139,7 +112,7 @@
 
                                 @foreach ($states as $state)
                                     <option value="{{ $state->id }}"
-                                        {{ $user->state_id == $state->id ? 'selected' : '' }}>
+                                        {{ old('state_id', $user->state_id) == $state->id ? 'selected' : '' }}>
                                         {{ $state->name }}
                                     </option>
                                 @endforeach
@@ -151,35 +124,40 @@
                         <label class="form-label">City :</label>
                         <div class="select-box">
                             <select name="city_id" id="city-select" class="form-element">
-
-                                @foreach ($user->city->state->cities as $city)
-                                    <option value="{{ $city->id }}" @if ($city->id == $user->city_id) selected @endif>
-                                        {{ $city->name }}
-                                    </option>
-                                @endforeach
-
-
+                                @if (old('state_id'))
+                                    @foreach ($states as $state)
+                                        @if ($state->id == old('state_id'))
+                                            @foreach ($state->cities as $city)
+                                                <option value="{{ $city->id }}"
+                                                    @if (old('city_id') == $city->id) selected @endif>
+                                                    {{ $city->name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @else{
+                                    @foreach ($user->city->state->cities as $city)
+                                        <option value="{{ $city->id }}"
+                                            @if ($city->id == $user->city_id) selected @endif>
+                                            {{ $city->name }}
+                                        </option>
+                                    @endforeach
+                                    }
+                                @endif
                             </select>
                         </div>
                         <p class="error-message">This Field Is Required</p>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-control">
                         <label for="" class="form-label">Address</label>
-                        <input type="text" name="address" value="{{ $user->address }}" class="form-element"
-                            id="address-input" placeholder="eg: 25 Awesome Street Name" value="25 Awesome Street Name">
-                        <p class="error-message">This Field Is Required</p>
-                    </div>
-                    <div class="form-control">
-                        <label class=" form-label">Date Of Birth :</label>
-                        <input type="date" name="d_o_b" value="{{ $user->d_o_b }}" id="dob-input"
-                            class="form-element blue">
+                        <input type="text" name="address" class="form-element" id="address-input"
+                            placeholder="eg: 25 Awesome Street Name" value="{{ $user->address }}">
                         <p class="error-message">This Field Is Required</p>
                     </div>
                 </div>
+
                 <div class="buttons d-flex j-end gap-1 wrap mt-1">
-                    <button type="reset" class="resetBtn">Reset</button>
+                    <button type="reset" class="resetBtn generalFormResetBtn">Reset</button>
                     <button type="submit" class="submitBtn">Save</button>
 
                 </div>
@@ -188,6 +166,7 @@
 
 
         </form>
+
         <form action="{{ route('password.update') }}" method="post" id="password-form">
             @csrf
             @method('PUT')
@@ -233,33 +212,41 @@
                 </div>
             </div>
         </form>
+
     </section>
 @endsection
 
-
 @push('scripts')
     <script>
+        const errorMessages = document.querySelectorAll('.error-message')
+
+        function hideErrorMessages() {
+
+            errorMessages.forEach((msg) => {
+                msg.textContent = ''
+                msg.classList.remove('show')
+            })
+        }
         const generalInfoForm = document.getElementById('general-info-form')
         const avatarInput = document.getElementById('avatar-image')
         const avatarInputErrorMessage = document.getElementById('avatar-error-message')
-        const fNameInput = document.getElementById('f-name-input')
-        const lNameInput = document.getElementById('l-name-input')
+
         const emailInput = document.getElementById('email-input')
         const phoneInput = document.getElementById('phone-input')
         const stateSelect = document.getElementById('state-select')
         const citySelect = document.getElementById('city-select')
-        const genderSelect = document.getElementById('gender-select')
-        const dobInput = document.getElementById('dob-input')
+
         const addressInput = document.getElementById('address-input')
+
+
         generalInfoForm.addEventListener('submit', (e) => {
             e.preventDefault()
             let errors = 0
-            errors += validateField(fNameInput, fNameInput.nextElementSibling)
-            errors += validateField(lNameInput, lNameInput.nextElementSibling)
+
+
             errors += validateField(emailInput, emailInput.nextElementSibling)
             errors += validatePhone(phoneInput)
             errors += validateField(addressInput, addressInput.nextElementSibling)
-            errors += validateField(genderSelect, genderSelect.parentElement.nextElementSibling)
             errors += validateField(stateSelect, stateSelect.parentElement.nextElementSibling)
             errors += validateField(citySelect, citySelect.parentElement.nextElementSibling)
             if (!errors) {
@@ -342,13 +329,16 @@
             errorMessage.classList.add('show')
         }
 
-
-
-
-
-
-
-
+        const generalFormResetBtn = document.querySelector('.generalFormResetBtn')
+        generalFormResetBtn.addEventListener('click', () => {
+            hideErrorMessages()
+            let area = document.querySelector('.upload-area')
+            let fileName = area.querySelector('.file-name')
+            let fileSize = area.querySelector('.file-size')
+            fileName.textContent = ''
+            fileSize.textContent = ''
+            area.classList.remove('show')
+        })
 
 
         const passwordFrom = document.getElementById('password-form')

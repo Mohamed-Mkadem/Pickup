@@ -35,9 +35,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/admin/profile', [ProfileController::class, 'updateAdmin'])->name('admin.profile.update');
+    Route::patch('/client/profile', [ProfileController::class, 'updateClient'])->name('client.profile.update');
+    Route::patch('/seller/profile', [ProfileController::class, 'updateSeller'])->name('seller.profile.update');
+    Route::patch('/seller/bank', [ProfileController::class, 'updateBankInfo'])->name('seller.bank.update');
+
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -47,8 +51,10 @@ require __DIR__.'/auth.php';
 Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');
 Route::get('/api/cities/{stateId}', [CityController::class,'getCities']);
 
-Route::middleware(['auth', 'verified'])->prefix('client')->name('client.')->group(function (){
+Route::middleware(['auth'])->prefix('client')->name('client.')->group(function (){
     Route::get('home', [ClientController::class, 'home'])->name('home');
+    Route::get('profile', [ClientController::class, 'profile'])
+    ->name('profile');
     // Route::get('shopping', ClientController::class, 'shopping')->name('shopping');
     // Route::get('orders', ClientController::class, 'orders')->name('orders');
     // Route::get('stores', ClientController::class, 'stores')->name('stores');
@@ -56,11 +62,13 @@ Route::middleware(['auth', 'verified'])->prefix('client')->name('client.')->grou
     // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
     // Route::get('profile', ClientController::class, 'profile')->name('profile');
 });
-Route::middleware(['auth', 'verified'])->prefix('seller')->name('seller.')->group(function (){
+Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (){
     Route::get('home',[SellerController::class, 'home'])->name('home');
+    Route::get('profile', [SellerController::class, 'profile'])
+    ->name('profile');
 
 });
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function (){
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function (){
     Route::get('home', [AdminController::class, 'home'])->name('home');
     Route::get('profile', [AdminController::class, 'profile'])
     ->name('profile');
