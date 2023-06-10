@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->float('balance')->default(0);
-            $table->float('suspended_balance')->default(0);
             $table->timestamps();
         });
     }

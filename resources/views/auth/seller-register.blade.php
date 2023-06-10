@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pickup | Sign UP</title>
+    <title>Pickup | Seller Register</title>
     <link rel="shortcut icon" href="{{ asset('dist/Assets/favicon.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,13 +18,14 @@
     <link rel="stylesheet" href="{{ asset('/dist/CSS/fe.css') }}  ">
     <link rel="stylesheet" href="{{ asset('dist/CSS/utilities.css') }}  ">
     <link rel="stylesheet" href="{{ asset('dist/CSS/fe_Dark.css') }}  ">
+
     <link href="https://cdn.jsdelivr.net/gh/duyplus/fontawesome-pro/css/all.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
 
-    <main class="register">
+    <main class=" register">
 
         <div class="register-wrapper d-flex col lg-row">
             <div class="form-col col">
@@ -41,9 +42,9 @@
                             @endforeach
                         </ul>
                     @endif
-                    <form action="{{ route('registerUser') }}" method="POST" id="form">
+                    <form action="{{ route('registerUser') }}" id="form" method="POST">
                         @csrf
-                        <input type="hidden" name="type" value="client">
+                        <input type="hidden" name="type" value="seller">
                         <div class="steps-wrapper">
                             <!-- Start Step 1 -->
                             <div class="step " aria-current="true" data-index="0">
@@ -55,39 +56,41 @@
                                     <div class="row2x row d-flex">
                                         <div class="form-control">
                                             <label class="d-block required" for="">First Name : </label>
-                                            <input type="text" id="first-name" name="first_name" class="form-element"
-                                                placeholder="eg: Mohamed" value="{{ old('first_name') }}">
+                                            <input type="text" id="first-name" value="{{ old('first_name') }}"
+                                                name="first_name" class="form-element" placeholder="eg: Mohamed">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                         <div class="form-control">
                                             <label class="d-block required" for="">Last Name : </label>
-                                            <input type="text" name="last_name" id="last-name" class="form-element"
-                                                placeholder="eg: Mkadem" value="{{ old('last_name') }}">
+                                            <input type="text" name="last_name"
+                                                value="{{ old('last_name') }}"id="last-name" class="form-element"
+                                                placeholder="eg: Mkadem">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
                                     <div class=" row d-flex">
                                         <div class="form-control">
                                             <label class="d-block required" for="">Email : </label>
-                                            <input type="email" name="email" id="email" class="form-element"
-                                                placeholder="eg: mohamed@email.com" value="{{ old('email') }}">
+                                            <input type="email" name="email" value="{{ old('email') }}"
+                                                id="email" class="form-element" placeholder="eg: mohamed@email.com">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
                                     <div class=" row d-flex">
                                         <div class="form-control">
                                             <label class="d-block required" for="">Password : </label>
-                                            <input type="password" id="password" name="password" class="form-element"
-                                                placeholder="At least 8 Characters" value="{{ old('password') }}">
+                                            <input type="password" value="{{ old('password') }}" id="password"
+                                                name="password" class="form-element"
+                                                placeholder="At least 8 Characters">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
                                     <div class=" row d-flex">
                                         <div class="form-control">
                                             <label class="d-block required" for="">Confirm Password : </label>
-                                            <input type="password" name="password_confirmation" id="confirm-password"
-                                                class="form-element" placeholder="Repeat The same password"
-                                                value="{{ old('password_confirmation') }}">
+                                            <input type="password" value="{{ old('password_confirmation') }}"
+                                                name="password_confirmation" id="confirm-password" class="form-element"
+                                                placeholder="Repeat The same password">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
@@ -133,9 +136,9 @@
                                         </div>
                                         <div class="form-control">
                                             <label class="d-block required">Phone Number :</label>
-                                            <input type="number" name="phone" value="25412012" id="phone"
-                                                placeholder="eg: 20111222" maxlength="8" inputmode="numeric"
-                                                value="{{ old('phone') }}">
+                                            <input type="number" value="{{ old('phone') }}" name="phone"
+                                                id="phone" value="25412012" maxlength="8" inputmode="numeric"
+                                                placeholder="eg: 20111222">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
@@ -143,8 +146,8 @@
                                         <div class="form-control">
                                             <label class="d-block required">State :</label>
                                             <div class="select-box">
-                                                <select name="state_id" id="state-select" onchange="getCities()">
 
+                                                <select name="state_id" id="state-select" onchange="getCities()">
 
 
                                                     @foreach ($states as $state)
@@ -163,7 +166,14 @@
                                         <div class="form-control">
                                             <label class="d-block required">City :</label>
                                             <div class="select-box">
-                                                <select name="city_id" id="city-select">
+                                                <select name="city_id" value="{{ old('city_id') }}"
+                                                    id="city-select">
+
+                                                    {{-- <option value="Mnihla" aria-checked="true" checked>Mnihla</option>
+                                                    <option value="Haffouz" aria-checked="false">Haffouz</option>
+                                                    <option value="Sijoumi" aria-checked="false">sijoumi</option>
+                                                    <option value="Hammamet" aria-checked="false">Hammamet</option>
+                                                    <option value="Sokra" aria-checked="false">Sokra</option> --}}
 
                                                     @if (old('state_id'))
                                                         @foreach ($states as $state)
@@ -194,8 +204,118 @@
                                         <div class="form-control">
                                             <label class="d-block required">Full Address :</label>
                                             <input type="text" name="address" id="address"
-                                                placeholder="eg: 69 Awesome Street City - State"
-                                                value="{{ old('address') }}">
+                                                value="{{ old('address') }}"
+                                                placeholder="eg: 69 Awesome Street City - State">
+                                            <p class="error-message">This Field Is Required</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="buttons-wrapper d-flex row j-sp-between a-center">
+                                    <button class="back-btn form-btn" data-role="previous button">Back</button>
+                                    <button class="next-btn form-btn" data-role="next button">Next</button>
+
+                                </div>
+                            </div>
+                            <!-- End Step 2 -->
+                            <!-- Start Step 3 -->
+                            <div class="step" aria-current="false" data-index="2">
+                                <header>
+                                    <h2>One More Step</h2>
+                                    <p>We're Almost Done</p>
+                                </header>
+                                <div class="inputs">
+                                    <div class=" row d-flex">
+                                        <div class="form-control">
+                                            <label class="d-block required">N.I.D :</label>
+                                            <input required type="text" placeholder="NID" id="nid"
+                                                value="{{ old('nid') }}" pattern="^\d{8}$" maxlength="8"
+                                                inputmode="numeric" name="nid" value="{{ old('nid') }}" />
+
+                                            <p class="error-message">This Field Is Required</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class=" row d-flex">
+                                        <div class="form-control">
+                                            <label class="d-block required">Bank :</label>
+                                            <div class="select-box">
+                                                <select name="bank" id="bank-select">
+
+                                                    <option value="BEITTNTT">Al Baraka Bank</option>
+
+
+
+                                                    <option value="CFCTTNTT">Amen Bank</option>
+
+
+
+
+                                                    <option value="BSTUTNTT">Attijari Bank</option>
+
+
+
+                                                    <option value="BIATTNTT">Banque Internationale Arabe de Tunisie
+                                                    </option>
+
+                                                    <option value="BNTETNTT">Banque Nationale Agricole</option>
+
+                                                    <option value="TUSOTNT1">Banque Tunisienne de Solidarité</option>
+
+                                                    <option value="BTKOTNTT">Banque Tuniso Koweitienne</option>
+
+
+
+                                                    <option value="BZITTNTT">Banque Zitouna</option>
+
+
+
+                                                    <option value="BTBKTNTT">Banque de Tunisie</option>
+
+                                                    <option value="BTEXTNTT">Banque de Tunisie et des Emirats</option>
+
+                                                    <option value="BHBKTNTT">Banque de l'Habitat</option>
+
+                                                    <option value="CITITNTX">Citi Bank</option>
+
+                                                    <option value="LPTNTNTT">La Poste Tunisienne</option>
+
+                                                    <option value="BTQITNTT">Qatar National Bank</option>
+
+                                                    <option value="STBKTNTT">Société Tunisienne de Banque</option>
+
+                                                    <option value="TSIDTNTT">Tunisian Saudi Bank</option>
+
+
+
+                                                    <option value="UIBKTNTT">Union Internationale de Banque</option>
+                                                </select>
+                                                <p class="error-message">This Field Is Required</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class=" row d-flex">
+                                        <div class="form-control">
+                                            <label class="d-block required">Account Name :</label>
+                                            <input required type="text" value="{{ old('account_name') }}"
+                                                placeholder="eg: Mohamed Mkadem" id="account-name"
+                                                name="account_name" />
+
+                                            <p class="error-message">This Field Is Required</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class=" row d-flex">
+                                        <div class="form-control">
+                                            <label class="d-block required">Account Number :</label>
+                                            <input required type="text" value="{{ old('rib') }}"
+                                                name="rib" placeholder="RIB" id="rib"
+                                                pattern="^\d{20,20}$" maxlength="20" inputmode="numeric" />
+
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
 
@@ -207,13 +327,13 @@
                                     <button class="submit-btn form-btn" data-role="submit button">Submit</button>
                                 </div>
                             </div>
-                            <!-- End Step 2 -->
+                            <!-- End Step 3 -->
 
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="img-col col client">
+            <div class="img-col col seller">
 
             </div>
         </div>
@@ -247,6 +367,10 @@
         const stateField = document.getElementById('state-select')
         const cityField = document.getElementById('city-select')
         const addressField = document.getElementById('address')
+        const nIDField = document.getElementById('nid')
+        const bankField = document.getElementById('bank-select')
+        const accountNameField = document.getElementById('account-name')
+        const accountNumberField = document.getElementById('rib')
 
         function validateGender() {
             let errors = 0
@@ -339,8 +463,19 @@
 
         function validateFields() {
             errors = 0;
-            errors += validateStep1()
-            errors += validateStep2()
+            // errors += validateStep1()
+            // errors += validateStep2()
+            // errors += validateStep3()
+            return errors
+        }
+
+        function validateStep3() {
+            errors = 0;
+            // errors += validateField(bankField)
+            // errors += validateField(accountNameField)
+            // errors += validateRIB()
+            // errors += validateNID()
+
             return errors
         }
 
@@ -386,7 +521,7 @@
         }
 
         function validateDOB() {
-            // 8 Years In milleseconds
+            // 18 Years In milleseconds
             const minimumAge = 568024668000
             const currentDate = new Date()
             const currentParsed = Date.parse(currentDate)
@@ -414,6 +549,48 @@
             }
             return errors
         }
+
+        function validateNID() {
+            let errors = 0
+            let errorMessage = nIDField.nextElementSibling
+            if (!nIDField.value) {
+                errorMessage.textContent = 'This Field Is Required'
+                errorMessage.classList.add('show')
+                errors = 1
+            } else if (!nIDField.value.match(/^[0-9]{8}$/g)) {
+                errorMessage.textContent = 'Enter A Valid ID Number (8 Digits)'
+                errorMessage.classList.add('show')
+                errors = 1
+
+            } else {
+                errorMessage.textContent = ''
+                errorMessage.classList.remove('show')
+                errors = 0
+
+            }
+            return errors
+        }
+
+        function validateRIB() {
+            let errors = 0
+            let errorMessage = accountNumberField.nextElementSibling
+            if (!accountNumberField.value) {
+                errorMessage.textContent = 'This Field Is Required'
+                errorMessage.classList.add('show')
+                errors = 1
+            } else if (!accountNumberField.value.match(/^[0-9]{20}$/g)) {
+                errorMessage.textContent = 'Enter A Valid Bank Account Number (20 Digits)'
+                errorMessage.classList.add('show')
+                errors = 1
+
+            } else {
+                errorMessage.textContent = ''
+                errorMessage.classList.remove('show')
+                errors = 0
+
+            }
+            return errors
+        }
         const formBtns = document.querySelectorAll('.form-btn');
         formBtns.forEach((btn) => {
             btn.addEventListener('click', (e) => {
@@ -424,8 +601,18 @@
                     currentStep = document.querySelector('.step[aria-current=true]')
                     currentStepIndex = currentStep.dataset.index
                     targetStep = steps[currentStepIndex].nextElementSibling;
-                    if (!validateStep1()) {
-                        moveToStep(steps, currentStep, targetStep)
+                    console.log(currentStepIndex);
+                    console.log(currentStep);
+                    if (currentStepIndex == 0) {
+
+                        if (!validateStep1()) {
+                            moveToStep(steps, currentStep, targetStep)
+                        }
+                    } else {
+                        if (!validateStep2()) {
+                            moveToStep(steps, currentStep, targetStep)
+                        }
+
                     }
 
                 } else if (role == 'previous button') {
@@ -440,12 +627,12 @@
                         form.submit()
                     }
 
+
                 }
             })
         })
 
         function moveToStep(stepsArray, currentStep, targetStep) {
-            // Make a condition here to check if this is the last step or create a function and add it to an event listener to the submit button
             stepsArray.forEach((step) => {
                 step.setAttribute('aria-current', 'false');
             })
@@ -483,7 +670,6 @@
             xhr.send();
         }
     </script>
-    {{-- <script src="../../dist/js/fe.js"></script> --}}
 </body>
 
 </html>

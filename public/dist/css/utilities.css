@@ -1592,6 +1592,7 @@ a.editBtn i {
 .alert li {
   list-style-type: disc;
   list-style-position: inside;
+  text-transform: capitalize;
 }
 .alert h3 {
   font-size: 18px;

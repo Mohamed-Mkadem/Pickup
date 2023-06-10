@@ -15,9 +15,16 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('auth.login');
+        if( $request->is('seller/login') ){
+            return view('Seller.login')  ;
+        } elseif($request->is('admin/login')){
+            return view('Admin.login')  ;
+
+        }else{
+            return view('Client.login');
+        }
     }
 
     /**
@@ -28,8 +35,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+    
+        if(Auth()->user()->type == 'Client'){
+          
+            return redirect()->intended(RouteServiceProvider::CLIENT_HOME);
+        }
+        elseif(Auth()->user()->type == 'Seller'){
+            return redirect()->intended(RouteServiceProvider::SELLER_HOME);
+        }
+        if(Auth()->user()->type == 'Admin'){
+            return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
+        }
     }
 
     /**

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('bank');
             $table->string('account_name');
             $table->string('rib');
             $table->float('balance')->default(0);
-            $table->float('suspended_balance')->default(0);
-            $table->string('phone');
+           
+            
             $table->string('nid');
             $table->enum('verification',['Verified', 'Unverified'])->default('Unverified');
             $table->timestamps();

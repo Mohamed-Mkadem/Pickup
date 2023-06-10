@@ -20,8 +20,10 @@ return new class extends Migration
             $table->date('d_o_b');
             $table->enum('status',['Active','Banned'])->default('Active');
             $table->enum('gender',['Male','Female']);
-            $table->string('phone');
-            $table->string('photo')->default('dist/Assets/profiles_photos/default.jpeg');           
+            $table->string('phone')->unique();
+            $table->foreignId('state_id')->constrained('states');
+            $table->foreignId('city_id')->constrained('cities');
+            $table->string('photo')->default('dist/Assets/profiles_photos/default.jpg');           
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

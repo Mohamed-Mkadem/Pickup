@@ -12,25 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('state_id')->references('id')->on('states');
-            $table->timestamps();
+           
         });
         $filePath = base_path('public/data.json');
         $states = json_decode(file_get_contents($filePath), true);
+
         foreach ($states as $state) {
-            $cities = explode(' - ', $state['Délégations']);
-    
-            $stateId = DB::table('states')->where('name', $state['Gouvernorat'])->value('id');
-    
-            foreach ($cities as $city) {
-                DB::table('cities')->insert([
-                    'name' => $city,
-                    'state_id' => $stateId,
-                ]);
-            }
+            DB::table('states')->insert([
+                'name' => $state['Gouvernorat'],
+            ]);
         }
     }
 
@@ -39,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('states');
     }
 };
