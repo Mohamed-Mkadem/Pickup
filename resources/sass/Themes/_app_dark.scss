@@ -1,667 +1,675 @@
 @use "../Abstracts/" as *;
 
 .dark {
-  background-color: var(--clr-black-50);
-  // Backgrounds
-  .sale-wrapper,
-  .main-store-header .main-info-holder .img-holder,
-  .main-wrapper,
-  #store-main-content,
-  #main-content {
     background-color: var(--clr-black-50);
-  }
-  .sale-wrapper .sale-cart,
-  .sale-wrapper .sale-cart .cart-holder,
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    .responses-wrapper
-    .response.admin
-    .info-holder
-    .response-body,
-  .form-grid > *:not(.holder, .light, .filters-holder),
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    thead,
-  #header,
-  #aside,
-  .ticket-holder .attachements-holder .attachements-grid .attachement,
-  .form-grid .form-sidebar .filter-column .filter-holder,
-  .show-header .info-holder .details .info-grid .info {
-    background-color: var(--clr-black-100);
-  }
-  .sale-wrapper
-    .sale-products
-    .sale-products-holder
-    .categories-wrapper
-    .sale-category,
-  .alert.alert-light,
-  .show-holder > .holder,
-  .card.voucher-result,
-  form .choices-btns-wrapper .choice-btn:has(> input[type="radio"]:hover),
-  form .choices-btns-wrapper .choice-btn:has(> input[type="checkbox"]:hover),
-  .form-grid
-    .form-sidebar
-    .form-control
-    .vertical-statuses-wrapper
-    .status:has(> input[type="radio"]:hover),
-  .filters-holder
-    .filters-wrapper
+    // Backgrounds
+    .sale-wrapper,
+    .main-store-header .main-info-holder .img-holder,
+    .main-wrapper,
+    #store-main-content,
+    #main-content {
+        background-color: var(--clr-black-50);
+    }
+    .sale-wrapper .sale-cart,
+    .sale-wrapper .sale-cart .cart-holder,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response.admin
+        .info-holder
+        .response-body,
+    .form-grid > *:not(.holder, .light, .filters-holder),
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        thead,
+    #header,
+    #aside,
+    .ticket-holder .attachements-holder .attachements-grid .attachement,
+    .form-grid .form-sidebar .filter-column .filter-holder,
+    .show-header .info-holder .details .info-grid .info {
+        background-color: var(--clr-black-100);
+    }
+    .sale-wrapper
+        .sale-products
+        .sale-products-holder
+        .categories-wrapper
+        .sale-category,
+    .alert.alert-light,
+    .show-holder > .holder,
+    .card.voucher-result,
+    form .choices-btns-wrapper .choice-btn:has(> input[type="radio"]:hover),
+    form .choices-btns-wrapper .choice-btn:has(> input[type="checkbox"]:hover),
+    .form-grid
+        .form-sidebar
+        .form-control
+        .vertical-statuses-wrapper
+        .status:has(> input[type="radio"]:hover),
+    .filters-holder
+        .filters-wrapper
+        form
+        .filter-row
+        .filter-box
+        .status-wrapper
+        .status:has(> input[type="checkbox"]:hover),
+    .not-found-holder,
+    .main-holder,
+    .holder,
+    .filters-holder,
+    .modal-holder .modal,
+    .pop-up-holder .pop-up,
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        tbody
+        tr:nth-child(odd),
+    .quick-stats-holder .stat-item,
+    #starter-header a.action-btn:hover,
+    #header .dropdowns-holder .dropdown-holder .dropdown-menu,
+    .show-header .info-holder .details .info-grid .info .info-title i,
+    #aside ul.nav-links li .nav-sub-dropdown {
+        background-color: var(--clr-black-150) !important;
+    }
+    .main-holder.light,
+    .penEditBtn:hover,
+    .ck,
+    form .form-element,
+    form .form-control .drop-zone,
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        tbody
+        tr:nth-child(even),
+    #header .dropdowns-holder .dropdown-holder button#profile-handler,
+    .table-responsive table tbody tr:nth-child(even),
+    .product-row .product-info .cart-actions .quantity-holder input,
+    .navigation-menu-holder nav ul li a:hover,
+    .card-holder .card-title {
+        background-color: var(--clr-black-200) !important;
+    }
+    .product-details .product-detail .top-header h3,
+    .product-details .product-detail .top-header button.tabBtn,
+    .bank-info .info .info-title i,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body,
+    .notifications-holder ul.notifications-wrapper li.notification,
+    .table-responsive table tbody tr:nth-child(odd),
+    .quick-stats-holder .stat-item:hover,
+    .documents-grid .document .document-img .document-overlay,
+    .info-sidebar
+        .info-sidebar-body
+        .info
+        h4.grid-title.opening-hours-holder
+        > button:hover,
+    .resetBtn,
+    .product .actions form,
+    .product .actions a,
+    .navigation-menu-holder nav ul li a.active,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        li.notification.unread {
+        background-color: var(--clr-black-250) !important;
+    }
+    .sale-wrapper
+        .sale-products
+        .sale-products-holder
+        .categories-wrapper
+        .sale-category:has(input[type="radio"]:checked),
+    .plan:has(input[type="radio"]:checked),
+    a.editBtn,
+    .product-details .product-detail .top-header button.tabBtn:hover,
+    .product-details .product-detail .top-header button.tabBtn.active,
+    .product-row .product-info .cart-actions form > button,
+    .product-row .product-info .cart-actions .quantity-holder > button,
+    .product .actions form:hover,
+    .product .actions a:hover,
+    .resetBtn:hover,
+    .form-grid
+        .form-sidebar
+        .filter-column
+        .filter-holder
+        .filter-header
+        button.filter-holder-btn:focus,
+    .form-grid
+        .form-sidebar
+        .filter-column
+        .filter-holder
+        .filter-header
+        button.filter-holder-btn:hover,
+    .filters-holder .filters-header button:focus,
+    .filters-holder .filters-header button:hover,
+    .info-sidebar .info-sidebar-header button:focus,
+    .info-sidebar .info-sidebar-header button:hover {
+        background-color: var(--clr-black-350) !important;
+    }
+    a.editBtn:hover,
+    .product-row .product-info .cart-actions form > button:hover,
+    .product-row .product-info .cart-actions .quantity-holder > button:hover {
+        background-color: var(--clr-black-400) !important;
+    }
+    .card.sector,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        li.notification:hover,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.profile-dropdown
+        li:hover,
+    #header .dropdowns-holder .dropdown-holder button#profile-handler:hover,
+    #header .dropdowns-holder .dropdown-holder button:hover,
+    #header .dropdowns-holder #mode-switcher:hover {
+        background-color: var(--clr-olive-100);
+    }
+
+    .order-holder > header,
+    .card.sector .info {
+        background-color: var(--clr-sand-100);
+    }
+    form .choices-btns-wrapper .choice-btn:has(> input[type="radio"]:checked),
     form
-    .filter-row
-    .filter-box
-    .status-wrapper
-    .status:has(> input[type="checkbox"]:hover),
-  .not-found-holder,
-  .main-holder,
-  .holder,
-  .filters-holder,
-  .modal-holder .modal,
-  .pop-up-holder .pop-up,
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    tbody
-    tr:nth-child(odd),
-  .quick-stats-holder .stat-item,
-  #starter-header a.action-btn:hover,
-  #header .dropdowns-holder .dropdown-holder .dropdown-menu,
-  .show-header .info-holder .details .info-grid .info .info-title i,
-  #aside ul.nav-links li .nav-sub-dropdown {
-    background-color: var(--clr-black-150) !important;
-  }
-  .main-holder.light,
-  .penEditBtn:hover,
-  .ck,
-  form .form-element,
-  form .form-control .drop-zone,
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    tbody
-    tr:nth-child(even),
-  #header .dropdowns-holder .dropdown-holder button#profile-handler,
-  .table-responsive table tbody tr:nth-child(even),
-  .product-row .product-info .cart-actions .quantity-holder input,
-  .navigation-menu-holder nav ul li a:hover,
-  .card-holder .card-title {
-    background-color: var(--clr-black-200) !important;
-  }
-  .product-details .product-detail .top-header h3,
-  .product-details .product-detail .top-header button.tabBtn,
-  .bank-info .info .info-title i,
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    .responses-wrapper
-    .response
-    .info-holder
-    .response-body,
-  .notifications-holder ul.notifications-wrapper li.notification,
-  .table-responsive table tbody tr:nth-child(odd),
-  .quick-stats-holder .stat-item:hover,
-  .documents-grid .document .document-img .document-overlay,
-  .info-sidebar
-    .info-sidebar-body
-    .info
-    h4.grid-title.opening-hours-holder
-    > button:hover,
-  .resetBtn,
-  .product .actions form,
-  .product .actions a,
-  .navigation-menu-holder nav ul li a.active,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.notifications-dropdown
-    ul.notifications-wrapper
-    li.notification.unread {
-    background-color: var(--clr-black-250) !important;
-  }
-  .sale-wrapper
-    .sale-products
-    .sale-products-holder
-    .categories-wrapper
-    .sale-category:has(input[type="radio"]:checked),
-  .plan:has(input[type="radio"]:checked),
-  a.editBtn,
-  .product-details .product-detail .top-header button.tabBtn:hover,
-  .product-details .product-detail .top-header button.tabBtn.active,
-  .product-row .product-info .cart-actions form > button,
-  .product-row .product-info .cart-actions .quantity-holder > button,
-  .product .actions form:hover,
-  .product .actions a:hover,
-  .resetBtn:hover,
-  .form-grid
-    .form-sidebar
-    .filter-column
-    .filter-holder
-    .filter-header
-    button.filter-holder-btn:focus,
-  .form-grid
-    .form-sidebar
-    .filter-column
-    .filter-holder
-    .filter-header
-    button.filter-holder-btn:hover,
-  .filters-holder .filters-header button:focus,
-  .filters-holder .filters-header button:hover,
-  .info-sidebar .info-sidebar-header button:focus,
-  .info-sidebar .info-sidebar-header button:hover {
-    background-color: var(--clr-black-350) !important;
-  }
-  a.editBtn:hover,
-  .product-row .product-info .cart-actions form > button:hover,
-  .product-row .product-info .cart-actions .quantity-holder > button:hover {
-    background-color: var(--clr-black-400) !important;
-  }
-  .card.sector,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.notifications-dropdown
-    ul.notifications-wrapper
-    li.notification:hover,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.profile-dropdown
-    li:hover,
-  #header .dropdowns-holder .dropdown-holder button#profile-handler:hover,
-  #header .dropdowns-holder .dropdown-holder button:hover,
-  #header .dropdowns-holder #mode-switcher:hover {
-    background-color: var(--clr-olive-100);
-  }
+        .choices-btns-wrapper
+        .choice-btn:has(> input[type="checkbox"]:checked),
+    .main-store-header .main-info-holder .additional-info #un-follow-btn:hover,
+    .main-store-header .main-info-holder .additional-info a.preview-btn:hover,
+    .card.review,
+    .notifications-holder
+        form
+        .statuses-holder
+        .status:has(> input[type="radio"]:checked),
+    .notifications-holder form .statuses-holder .status:hover,
+    .notifications-holder ul.notifications-wrapper li.notification:hover,
+    .card.fee,
+    .form-grid
+        .form-sidebar
+        .form-control
+        .vertical-statuses-wrapper
+        .status:has(> input[type="radio"]:checked),
+    .filters-holder
+        .filters-wrapper
+        form
+        .filter-row
+        .filter-box
+        .status-wrapper
+        .status:has(> input[type="checkbox"]:checked),
+    .form-grid .form-sidebar .form-control .drop-zone:hover,
+    form .form-control .drop-zone:hover,
+    .results-holder.brands-categories .card,
+    .card.single-info-card,
+    .card.seller,
+    .card.client,
+    .order-holder .results-holder .card-holder.review {
+        background-color: var(--clr-blueGray-600) !important;
+    }
+    .navigation-menu-holder ul.actions-holder > li:hover,
+    .main-store-header .main-info-holder .additional-info #un-follow-btn,
+    .main-store-header .main-info-holder .additional-info a.preview-btn,
+    .card.simple header .actions-holder > li:hover,
+    .card.simple header > button:hover,
+    .tables-holder .table-row .table-card .table-header {
+        background-color: var(--clr-blueGray-700);
+    }
+    .navigation-menu-holder ul.actions-holder,
+    .card.simple header .actions-holder,
+    .results-holder.brands-categories .card .info {
+        background-color: var(--clr-blueGray-900);
+    }
+    .review .btn-wrapper > button:hover,
+    .card.store,
+    .order-holder .results-holder .card:not(.review),
+    .ticket-holder header,
+    .results-holder.vouchers-categories .card,
+    .results-holder.brands .card {
+        background-color: var(--clr-teal-100);
+    }
 
-  .order-holder > header,
-  .card.sector .info {
-    background-color: var(--clr-sand-100);
-  }
-  form .choices-btns-wrapper .choice-btn:has(> input[type="radio"]:checked),
-  form .choices-btns-wrapper .choice-btn:has(> input[type="checkbox"]:checked),
-  .main-store-header .main-info-holder .additional-info #un-follow-btn:hover,
-  .main-store-header .main-info-holder .additional-info a.preview-btn:hover,
-  .card.review,
-  .notifications-holder
-    form
-    .statuses-holder
-    .status:has(> input[type="radio"]:checked),
-  .notifications-holder form .statuses-holder .status:hover,
-  .notifications-holder ul.notifications-wrapper li.notification:hover,
-  .card.fee,
-  .form-grid
-    .form-sidebar
-    .form-control
-    .vertical-statuses-wrapper
-    .status:has(> input[type="radio"]:checked),
-  .filters-holder
-    .filters-wrapper
-    form
-    .filter-row
-    .filter-box
-    .status-wrapper
-    .status:has(> input[type="checkbox"]:checked),
-  .form-grid .form-sidebar .form-control .drop-zone:hover,
-  form .form-control .drop-zone:hover,
-  .results-holder.brands-categories .card,
-  .card.single-info-card,
-  .card.seller,
-  .card.client,
-  .order-holder .results-holder .card-holder.review {
-    background-color: var(--clr-blueGray-600) !important;
-  }
-  .navigation-menu-holder ul.actions-holder > li:hover,
-  .main-store-header .main-info-holder .additional-info #un-follow-btn,
-  .main-store-header .main-info-holder .additional-info a.preview-btn,
-  .card.simple header .actions-holder > li:hover,
-  .card.simple header > button:hover,
-  .tables-holder .table-row .table-card .table-header {
-    background-color: var(--clr-blueGray-700);
-  }
-  .navigation-menu-holder ul.actions-holder,
-  .card.simple header .actions-holder,
-  .results-holder.brands-categories .card .info {
-    background-color: var(--clr-blueGray-900);
-  }
-  .review .btn-wrapper > button:hover,
-  .card.store,
-  .order-holder .results-holder .card:not(.review),
-  .ticket-holder header,
-  .results-holder.vouchers-categories .card,
-  .results-holder.brands .card {
-    background-color: var(--clr-teal-100);
-  }
+    .card.voucher {
+        background: linear-gradient(
+            45deg,
+            var(--clr-blueGray-800),
+            var(--clr-blueGray-700)
+        );
+    }
+    .sale-holder > header {
+        background-color: var(--clr-sand-100);
+    }
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.profile-dropdown
+        li
+        form
+        button {
+        background: none;
+    }
+    // Colors
 
-  .card.voucher {
-    background: linear-gradient(
-      45deg,
-      var(--clr-blueGray-800),
-      var(--clr-blueGray-700)
-    );
-  }
-  .sale-holder > header {
-    background-color: var(--clr-sand-100);
-  }
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.profile-dropdown
-    li
-    form
-    button {
-    background: none;
-  }
-  // Colors
+    .card.fee .top-header p.price {
+        color: var(--clr-blueGray-0);
+    }
+    .product .store-name,
+    .modal-holder .confirm-form p,
+    .sale-wrapper
+        .sale-products
+        .sale-products-holder
+        .categories-wrapper
+        .sale-category
+        h4,
+    .main-holder.light,
+    form .form-row .form-col,
+    .results
+        .results-holder.subscription-plans
+        + .buttons
+        .modal-holder
+        .modal
+        p,
+    .product-details .product-detail .top-header h3,
+    .product-details .product-detail .top-header button.tabBtn,
+    .show-holder > header .info-holder .header-details .detail a:hover,
+    .show-holder header .info-holder p.header-title,
+    .notifications-holder h1,
+    .notifications-holder
+        ul.notifications-wrapper
+        li.notification
+        .details
+        p.notification-body,
+    .card.fee .top-header h3,
+    .card.voucher-result .header p.value,
+    .card.voucher .header p.value,
+    .card.sector .modal-holder .modal.voucher-details .used-by-holder h3,
+    .modal-holder .modal.voucher-details p.voucher-number,
+    .modal-holder form.confirm-form p,
+    .ck,
+    .not-found-holder .wrapper p,
+    .modal-holder .modal .modal-header h2,
+    .card.simple header .actions-holder > li > a,
+    .card.simple header .actions-holder > li > button,
+    .results-holder .card header,
+    form .form-control .upload-area,
+    form .form-element,
+    .pop-up-holder .pop-up .pop-up-header h2,
+    .quick-stats-holder .stat-item .top-info .title-value-box,
+    #starter-header h1,
+    #starter-header a.action-btn,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.profile-dropdown
+        li
+        form
+        button,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.profile-dropdown
+        li
+        a,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        h4,
+    #aside ul.nav-links li a.nav-link,
+    #header .dropdowns-holder #mode-switcher,
+    #header .dropdowns-holder .dropdown-holder button,
+    .message-holder .wrapper p,
+    .card.voucher-result p.voucher-number,
+    .card.voucher-result .used-by-holder h3,
+    .card-holder .card-title h3,
+    .order-holder
+        .results-holder.order-info
+        .notes
+        .notes-holder
+        .note
+        .note-header
+        .note-info,
+    .order-holder
+        .results-holder.order-info
+        .order-history
+        ul.statuses
+        li
+        .row
+        .info,
+    #header #layout-toggle,
+    .info-card .card-info .info .info-label,
+    .validation-box h3.decision,
+    .documents-grid .document .document-header h3,
+    .navigation-menu-holder > button,
+    .navigation-menu-holder ul.actions-holder > li > a,
+    .navigation-menu-holder ul.actions-holder > li > button,
+    .navigation-menu-holder nav ul button#close-main-navigation,
+    .card-holder .card-title a,
+    .navigation-menu-holder nav ul li a,
+    .navigation-menu-holder > p.rate,
+    p.rate,
+    .review,
+    .store-top-header,
+    .review-criteria .criterion {
+        color: var(--clr-blueGray-100) !important;
+    }
 
-  .card.fee .top-header p.price {
-    color: var(--clr-blueGray-0);
-  }
-  .product .store-name,
-  .modal-holder .confirm-form p,
-  .sale-wrapper
-    .sale-products
-    .sale-products-holder
-    .categories-wrapper
-    .sale-category
-    h4,
-  .main-holder.light,
-  form .form-row .form-col,
-  .results .results-holder.subscription-plans + .buttons .modal-holder .modal p,
-  .product-details .product-detail .top-header h3,
-  .product-details .product-detail .top-header button.tabBtn,
-  .show-holder > header .info-holder .header-details .detail a:hover,
-  .show-holder header .info-holder p.header-title,
-  .notifications-holder h1,
-  .notifications-holder
-    ul.notifications-wrapper
-    li.notification
-    .details
-    p.notification-body,
-  .card.fee .top-header h3,
-  .card.voucher-result .header p.value,
-  .card.voucher .header p.value,
-  .card.sector .modal-holder .modal.voucher-details .used-by-holder h3,
-  .modal-holder .modal.voucher-details p.voucher-number,
-  .modal-holder form.confirm-form p,
-  .ck,
-  .not-found-holder .wrapper p,
-  .modal-holder .modal .modal-header h2,
-  .card.simple header .actions-holder > li > a,
-  .card.simple header .actions-holder > li > button,
-  .results-holder .card header,
-  form .form-control .upload-area,
-  form .form-element,
-  .pop-up-holder .pop-up .pop-up-header h2,
-  .quick-stats-holder .stat-item .top-info .title-value-box,
-  #starter-header h1,
-  #starter-header a.action-btn,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.profile-dropdown
-    li
-    form
-    button,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.profile-dropdown
-    li
-    a,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.notifications-dropdown
-    h4,
-  #aside ul.nav-links li a.nav-link,
-  #header .dropdowns-holder #mode-switcher,
-  #header .dropdowns-holder .dropdown-holder button,
-  .message-holder .wrapper p,
-  .card.voucher-result p.voucher-number,
-  .card.voucher-result .used-by-holder h3,
-  .card-holder .card-title h3,
-  .order-holder
-    .results-holder.order-info
-    .notes
-    .notes-holder
-    .note
-    .note-header
-    .note-info,
-  .order-holder
-    .results-holder.order-info
-    .order-history
-    ul.statuses
-    li
-    .row
-    .info,
-  #header #layout-toggle,
-  .info-card .card-info .info .info-label,
-  .validation-box h3.decision,
-  .documents-grid .document .document-header h3,
-  .navigation-menu-holder > button,
-  .navigation-menu-holder ul.actions-holder > li > a,
-  .navigation-menu-holder ul.actions-holder > li > button,
-  .navigation-menu-holder nav ul button#close-main-navigation,
-  .card-holder .card-title a,
-  .navigation-menu-holder nav ul li a,
-  .navigation-menu-holder > p.rate,
-  p.rate,
-  .review,
-  .store-top-header,
-  .review-criteria .criterion {
-    color: var(--clr-blueGray-100) !important;
-  }
+    .show-holder h2,
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        thead
+        th {
+        color: var(--clr-blueGray-200);
+    }
+    .show-holder header .info-holder p.header-title span.header-id {
+        color: var(--clr-blueGray-300);
+    }
+    .validation-box a:hover,
+    .order-holder .results-holder .card-holder.review .card.review .rate-value {
+        color: var(--clr-mustard-500);
+    }
+    .product .store-name a:hover,
+    .validation-box a {
+        color: var(--clr-mustard-600);
+    }
+    .product .info-holder h3 a:hover,
+    .plan p.plan-duration,
+    .review-box p.review-body span.order-id a:hover,
+    .card-holder .card-title a:hover,
+    .main-store-header .main-info-holder .basic-info h1.store-name,
+    .order-holder .results-holder.order-info > * .info-title,
+    .notifications-holder
+        ul.notifications-wrapper
+        li.notification:hover
+        .details
+        p.notification-body,
+    .results > h2 {
+        color: var(--clr-mustard-700) !important;
+    }
+    .opening-hours-content h2,
+    .hours-wrapper h2,
+    .form-grid
+        .form-sidebar
+        .filter-column
+        .filter-holder
+        .filter-header
+        button.filter-holder-btn,
+    .description-holder header h2,
+    .filters-holder .filters-header button,
+    .filters-holder .filters-header h2,
+    .info-sidebar .info-sidebar-header button,
+    h3.store-secondary-title,
+    #header #layout-toggle:hover {
+        color: var(--clr-mustard-800);
+    }
+    .product-row .product-info p.price-unit small,
+    .product-row .product-info p.price-unit span,
+    .quick-stats-holder .stat-item .bottom-info.tickets-list p.standard {
+        color: var(--clr-black-550);
+    }
+    .info-sidebar
+        .info-sidebar-body
+        .info
+        h4.grid-title.opening-hours-holder
+        > button
+        p.opening-hours,
+    .info-sidebar
+        .info-sidebar-body
+        .info
+        h4.grid-title.opening-hours-holder
+        > button
+        p.status
+        i,
+    .bank-info .info .info-title,
+    .bank-info .info .info-title i,
+    .show-header .info-holder .details .info-grid .info .info-title i,
+    .show-header .info-holder .details .info-grid .info .info-title h3,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        h3
+        small {
+        color: var(--clr-black-650);
+    }
+    .product .product-quantity-holder,
+    .product .actions form,
+    .product .actions a,
+    .product .info-holder p,
+    .modal-holder
+        .modal.opening-hours-modal
+        .modal-body
+        .day
+        .hours-holder
+        p.hour,
+    .main-store-header .main-info-holder .basic-info p,
+    .main-store-header .main-info-holder .additional-info p.followers-count,
+    .show-holder header .info-holder .header-details .detail,
+    .card.voucher-result .used-by-holder,
+    .modal-holder .modal.voucher-details .used-by-holder h3 {
+        color: var(--clr-black-700);
+    }
+    form .form-row .form-col p.col-body,
+    .product-row .product-info p,
+    .info-sidebar,
+    .modal-holder .modal.opening-hours-modal .modal-body .day h3,
+    .card.voucher-result .details,
+    .modal-holder .modal.voucher-details .details {
+        color: var(--clr-black-800);
+    }
+    .order-holder
+        .results-holder.order-info
+        .order-history
+        ul.statuses
+        li
+        .row
+        .info
+        p,
+    .order-holder
+        .results-holder.order-info
+        .notes
+        .notes-holder
+        .note
+        .note-header
+        .note-info
+        p,
+    .quick-stats-holder .stat-item .bottom-info a.action-link,
+    .modal-holder .modal.voucher-details .used-by-holder p {
+        color: var(--clr-white-600);
+    }
+    form .field-instructions,
+    .product-details .product-detail .detail-body p,
+    .product-details .product-detail .detail-body.about-brand .brand-header h4,
+    .review .review-body p,
+    .review-box p.review-body,
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        tbody
+        tr
+        td,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        li.notification
+        .details
+        p {
+        color: var(--clr-white-700);
+    }
+    #starter-header p.today-stats,
+    .product .product-header p.state-city,
+    a.editBtn,
+    .form-grid
+        .form-sidebar
+        .filter-column
+        .filter-holder
+        .filter-wrapper
+        .choices
+        .choice
+        label,
+    .info-card .card-info .info .info-value p,
+    .order-holder
+        .results-holder.order-info
+        .notes
+        .notes-holder
+        .note
+        .note-body,
+    .ticket-holder .attachements-holder .attachements-grid .attachement,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        h3,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        p:not(.error-message, .form-label > p),
+    .notifications-holder
+        ul.notifications-wrapper
+        li.notification
+        .details
+        p.notification-time,
+    .table-responsive table tbody tr td,
+    .show-header .info-holder .details p,
+    .form-limiters,
+    .quick-stats-holder .stat-item .top-info .progression-box p,
+    .show-header .info-holder .top-header ul.horizontal-actions-holder li p,
+    .bank-info .info .info-value {
+        color: var(--clr-white-800);
+    }
+    .product-details .product-detail .detail-body:hover p:not(.modal p),
+    .alert.alert-light,
+    .validation-box,
+    .card.fee ul.features li,
+    .description-holder .description-body,
+    .show-header .info-holder .top-header h2,
+    .penEditBtn,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        li.notification
+        .details
+        p.notification-body
+        a {
+        color: var(--clr-white-900);
+    }
+    .quick-stats-holder .stat-item .bottom-info a.action-link:hover,
+    #aside ul.nav-links li .nav-sub-dropdown li a:hover {
+        color: var(--clr-yellow-700);
+    }
+    .card.voucher-result .result-header > h2,
+    form .form-label {
+        color: var(--clr-turquoise-900);
+    }
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        p:not(.error-message, .form-label > p, .file-name, .file-size)
+        a:hover {
+        color: var(--clr-teal-700);
+    }
+    p.cart-total,
+    .plan h3.plan-price,
+    .alert.alert-light a:hover,
+    h2.form-holder-title,
+    .product-row .product-info .cart-actions .quantity-holder input,
+    .product-row .product-info p.price-unit,
+    .product-row .product-info h1.product-name,
+    .card.single-info-card > p.main-value {
+        color: var(--clr-olive-700);
+    }
+    .review .btn-wrapper > button,
+    .opening-hours-content .day h3,
+    .hours-wrapper .day h3,
+    .product .info-holder h3,
+    .card.single-info-card .details .detail {
+        color: var(--clr-olive-800);
+    }
+    .product-row .product-info p.category-name {
+        color: var(--clr-olive-900);
+    }
+    // Borders
 
-  .show-holder h2,
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    thead
-    th {
-    color: var(--clr-blueGray-200);
-  }
-  .show-holder header .info-holder p.header-title span.header-id {
-    color: var(--clr-blueGray-300);
-  }
-  .validation-box a:hover,
-  .order-holder .results-holder .card-holder.review .card.review .rate-value {
-    color: var(--clr-mustard-500);
-  }
-  .product .store-name a:hover,
-  .validation-box a {
-    color: var(--clr-mustard-600);
-  }
-  .product .info-holder h3 a:hover,
-  .plan p.plan-duration,
-  .review-box p.review-body span.order-id a:hover,
-  .card-holder .card-title a:hover,
-  .main-store-header .main-info-holder .basic-info h1.store-name,
-  .order-holder .results-holder.order-info > * .info-title,
-  .notifications-holder
-    ul.notifications-wrapper
-    li.notification:hover
-    .details
-    p.notification-body,
-  .results > h2 {
-    color: var(--clr-mustard-700) !important;
-  }
-  .opening-hours-content h2,
-  .hours-wrapper h2,
-  .form-grid
-    .form-sidebar
-    .filter-column
-    .filter-holder
-    .filter-header
-    button.filter-holder-btn,
-  .description-holder header h2,
-  .filters-holder .filters-header button,
-  .filters-holder .filters-header h2,
-  .info-sidebar .info-sidebar-header button,
-  h3.store-secondary-title,
-  #header #layout-toggle:hover {
-    color: var(--clr-mustard-800);
-  }
-  .product-row .product-info p.price-unit small,
-  .product-row .product-info p.price-unit span,
-  .quick-stats-holder .stat-item .bottom-info.tickets-list p.standard {
-    color: var(--clr-black-550);
-  }
-  .info-sidebar
-    .info-sidebar-body
-    .info
-    h4.grid-title.opening-hours-holder
-    > button
-    p.opening-hours,
-  .info-sidebar
-    .info-sidebar-body
-    .info
-    h4.grid-title.opening-hours-holder
-    > button
-    p.status
-    i,
-  .bank-info .info .info-title,
-  .bank-info .info .info-title i,
-  .show-header .info-holder .details .info-grid .info .info-title i,
-  .show-header .info-holder .details .info-grid .info .info-title h3,
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    .responses-wrapper
-    .response
-    .info-holder
-    h3
-    small {
-    color: var(--clr-black-650);
-  }
-  .product .product-quantity-holder,
-  .product .actions form,
-  .product .actions a,
-  .product .info-holder p,
-  .modal-holder
-    .modal.opening-hours-modal
-    .modal-body
-    .day
-    .hours-holder
-    p.hour,
-  .main-store-header .main-info-holder .basic-info p,
-  .main-store-header .main-info-holder .additional-info p.followers-count,
-  .show-holder header .info-holder .header-details .detail,
-  .card.voucher-result .used-by-holder,
-  .modal-holder .modal.voucher-details .used-by-holder h3 {
-    color: var(--clr-black-700);
-  }
-  form .form-row .form-col p.col-body,
-  .product-row .product-info p,
-  .info-sidebar,
-  .modal-holder .modal.opening-hours-modal .modal-body .day h3,
-  .card.voucher-result .details,
-  .modal-holder .modal.voucher-details .details {
-    color: var(--clr-black-800);
-  }
-  .order-holder
-    .results-holder.order-info
-    .order-history
-    ul.statuses
-    li
-    .row
-    .info
-    p,
-  .order-holder
-    .results-holder.order-info
-    .notes
-    .notes-holder
-    .note
-    .note-header
-    .note-info
-    p,
-  .quick-stats-holder .stat-item .bottom-info a.action-link,
-  .modal-holder .modal.voucher-details .used-by-holder p {
-    color: var(--clr-white-600);
-  }
-  .product-details .product-detail .detail-body p,
-  .product-details .product-detail .detail-body.about-brand .brand-header h4,
-  .review .review-body p,
-  .review-box p.review-body,
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    tbody
-    tr
-    td,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.notifications-dropdown
-    ul.notifications-wrapper
-    li.notification
-    .details
-    p {
-    color: var(--clr-white-700);
-  }
-  #starter-header p.today-stats,
-  .product .product-header p.state-city,
-  a.editBtn,
-  .form-grid
-    .form-sidebar
-    .filter-column
-    .filter-holder
-    .filter-wrapper
-    .choices
-    .choice
-    label,
-  .info-card .card-info .info .info-value p,
-  .order-holder
-    .results-holder.order-info
-    .notes
-    .notes-holder
-    .note
-    .note-body,
-  .ticket-holder .attachements-holder .attachements-grid .attachement,
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    .responses-wrapper
-    .response
-    .info-holder
-    h3,
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    p:not(.error-message, .form-label > p),
-  .notifications-holder
-    ul.notifications-wrapper
-    li.notification
-    .details
-    p.notification-time,
-  .table-responsive table tbody tr td,
-  .show-header .info-holder .details p,
-  .form-limiters,
-  .quick-stats-holder .stat-item .top-info .progression-box p,
-  .show-header .info-holder .top-header ul.horizontal-actions-holder li p,
-  .bank-info .info .info-value {
-    color: var(--clr-white-800);
-  }
-  .product-details .product-detail .detail-body:hover p:not(.modal p),
-  .alert.alert-light,
-  .validation-box,
-  .card.fee ul.features li,
-  .description-holder .description-body,
-  .show-header .info-holder .top-header h2,
-  .penEditBtn,
-  #header
-    .dropdowns-holder
-    .dropdown-holder
-    .dropdown-menu.notifications-dropdown
-    ul.notifications-wrapper
-    li.notification
-    .details
-    p.notification-body
-    a {
-    color: var(--clr-white-900);
-  }
-  .quick-stats-holder .stat-item .bottom-info a.action-link:hover,
-  #aside ul.nav-links li .nav-sub-dropdown li a:hover {
-    color: var(--clr-yellow-700);
-  }
-  .card.voucher-result .result-header > h2,
-  form .form-label {
-    color: var(--clr-turquoise-900);
-  }
-  .ticket-holder
-    .ticket-details-holder
-    .detail
-    p:not(.error-message, .form-label > p, .file-name, .file-size)
-    a:hover {
-    color: var(--clr-teal-700);
-  }
-  p.cart-total,
-  .plan h3.plan-price,
-  .alert.alert-light a:hover,
-  h2.form-holder-title,
-  .product-row .product-info .cart-actions .quantity-holder input,
-  .product-row .product-info p.price-unit,
-  .product-row .product-info h1.product-name,
-  .card.single-info-card > p.main-value {
-    color: var(--clr-olive-700);
-  }
-  .review .btn-wrapper > button,
-  .opening-hours-content .day h3,
-  .hours-wrapper .day h3,
-  .product .info-holder h3,
-  .card.single-info-card .details .detail {
-    color: var(--clr-olive-800);
-  }
-  .product-row .product-info p.category-name {
-    color: var(--clr-olive-900);
-  }
-  // Borders
-
-  .review-criteria .criterion .points .point {
-    border-color: var(--clr-black-100);
-  }
-  .show-header .info-holder .details .info-grid .info .info-value {
-    border-color: var(--clr-black-200);
-  }
-  .sale-wrapper .sale-products .sale-products-holder .categories-wrapper,
-  .sale-wrapper .sale-products .sale-products-holder .categories-wrapper > * {
-    border-color: var(--clr-black-300);
-  }
-  .product-row .product-info .cart-actions .quantity-holder input,
-  .card-holder .card-title,
-  .table-responsive table tbody tr,
-  .tables-holder
-    .table-row
-    .table-card
-    .table-responsive
-    table.quick-stats-table
-    tr {
-    border-color: var(--clr-black-450);
-  }
-  form .form-element:focus,
-  form .form-element:focus-within,
-  .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable),
-  form .form-control .drop-zone,
-  .pop-up-holder .pop-up .pop-up-body form .form-control input:focus-within,
-  .pop-up-holder .pop-up .pop-up-body form .form-control input:focus {
-    border-color: var(--clr-blueGray-100) !important;
-  }
-  .modal-holder
-    .modal.opening-hours-modal
-    .modal-body
-    .day
-    .hours-holder
-    p.hour {
-    border-color: currentColor;
-  }
-  .navigation-menu-holder nav ul li a.active {
-    border: unset;
-  }
-
-  // Border Radius
-  .navigation-menu-holder nav ul li a.active {
-    border-radius: $radius10;
-  }
-
-  // Media
-  @include max-width(medium) {
-    .navigation-menu-holder nav {
-      background-color: var(--clr-teal-200);
+    .review-criteria .criterion .points .point {
+        border-color: var(--clr-black-100);
+    }
+    .show-header .info-holder .details .info-grid .info .info-value {
+        border-color: var(--clr-black-200);
+    }
+    .sale-wrapper .sale-products .sale-products-holder .categories-wrapper,
+    .sale-wrapper .sale-products .sale-products-holder .categories-wrapper > * {
+        border-color: var(--clr-black-300);
+    }
+    .product-row .product-info .cart-actions .quantity-holder input,
+    .card-holder .card-title,
+    .table-responsive table tbody tr,
+    .tables-holder
+        .table-row
+        .table-card
+        .table-responsive
+        table.quick-stats-table
+        tr {
+        border-color: var(--clr-black-450);
+    }
+    form .form-element:focus,
+    form .form-element:focus-within,
+    .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable),
+    form .form-control .drop-zone,
+    .pop-up-holder .pop-up .pop-up-body form .form-control input:focus-within,
+    .pop-up-holder .pop-up .pop-up-body form .form-control input:focus {
+        border-color: var(--clr-blueGray-100) !important;
+    }
+    .modal-holder
+        .modal.opening-hours-modal
+        .modal-body
+        .day
+        .hours-holder
+        p.hour {
+        border-color: currentColor;
     }
     .navigation-menu-holder nav ul li a.active {
-      background-color: unset !important;
-      border-bottom: 3px solid currentColor;
-      border-radius: unset;
+        border: unset;
     }
-  }
+
+    // Border Radius
+    .navigation-menu-holder nav ul li a.active {
+        border-radius: $radius10;
+    }
+
+    // Media
+    @include max-width(medium) {
+        .navigation-menu-holder nav {
+            background-color: var(--clr-teal-200);
+        }
+        .navigation-menu-holder nav ul li a.active {
+            background-color: unset !important;
+            border-bottom: 3px solid currentColor;
+            border-radius: unset;
+        }
+    }
 }

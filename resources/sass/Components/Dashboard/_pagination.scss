@@ -1,29 +1,30 @@
 @use "../../Abstracts/" as *;
 
 .pagination-holder {
-  gap: 20px;
-  margin-block: 20px;
-  flex-wrap: wrap;
-  li {
-    &.page-item {
-      $size: 30px;
-      font-size: 20px;
-      width: $size;
-      height: $size;
-      background: var(--clr-blueGray-500);
-      text-align: center;
-      color: var(--clr-white-1000);
-      border-radius: 5px;
-      a {
-        color: inherit;
-      }
+    gap: 20px;
+    margin-block: 20px;
+    flex-wrap: wrap;
+    li {
+        cursor: pointer;
+        &.page-item {
+            $size: 30px;
+            font-size: 20px;
+            width: $size;
+            height: $size;
+            background: var(--clr-blueGray-500);
+            text-align: center;
+            color: var(--clr-white-1000);
+            border-radius: 5px;
+            a {
+                color: inherit;
+            }
+        }
+        &.disabled {
+            cursor: no-drop;
+        }
+        &.active {
+            background-color: var(--clr-blueGray-200);
+            color: var(--clr-blueGray-700);
+        }
     }
-    &.disabled {
-      cursor: no-drop;
-    }
-    &.active {
-      background-color: var(--clr-blueGray-200);
-      color: var(--clr-blueGray-700);
-    }
-  }
 }

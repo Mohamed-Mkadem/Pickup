@@ -52,28 +52,28 @@
 
             <ul class="nav-links">
                 <li class="nav-item">
-                    <a href="home.html" class="nav-link ">
+                    <a href="{{ route('admin.home') }}"
+                        class="nav-link {{ request()->is('admin/home*') ? 'active' : '' }}">
                         <i class="fa-light fa-house"></i><span>Home</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="brands_categories_list.html" class="nav-link">
-                        <i class="fa-solid fa-list"></i>
-                        <span>Brands Categories</span></a>
-                </li>
+
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link collapsed {{ request()->is('admin/brands*') ? 'active' : '' }}"> <i
                             class="fa-light fa-medal"></i> <span>Brands</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="brands_add.html">New Brand</a></li>
-                        <li class="nav-item"><a href="brands_list.html">List</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.brands.create') }}">New Brand</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.brands.index') }}">List</a></li>
+
                     </ul>
                 </li>
 
 
-                <li class="nav-item"><a href="vouchers_categories.html" class="nav-link">
+                <li class="nav-item"><a href="{{ route('admin.vouchers-categories.index') }}"
+                        class="nav-link {{ request()->is('admin/vouchers-categories*') ? 'active' : '' }}">
                         <i class="fa-solid fa-credit-card-front"></i>
                         <span>Vouchers
                             Categories</span></a>
@@ -95,8 +95,8 @@
                             class="fa-solid fa-money-check-dollar-pen"></i> <span>Fees</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu"
-                        class="nav-link collapsed notifiable"> <i class="fa-light fa-memo-circle-info"></i>
+                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed notifiable">
+                        <i class="fa-light fa-memo-circle-info"></i>
                         <span>Requests</span></a>
                     <ul class="nav-sub-dropdown">
                         <li class="nav-item"><a href="req_validation_list.html" class="notifiable">Validation</a>

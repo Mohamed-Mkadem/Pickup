@@ -463,6 +463,7 @@ button {
 .dark .modal-holder .modal.voucher-details .used-by-holder p {
   color: var(--clr-white-600);
 }
+.dark form .field-instructions,
 .dark .product-details .product-detail .detail-body p,
 .dark .product-details .product-detail .detail-body.about-brand .brand-header h4,
 .dark .review .review-body p,

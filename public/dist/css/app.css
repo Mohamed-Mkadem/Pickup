@@ -843,6 +843,11 @@ form .editor-holder p.error-message, form .form-control p.error-message {
   text-align: left;
 }
 
+form .field-instructions {
+  color: var(--clr-blueGray-900);
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
 form .form-element {
   background-color: var(--clr-blueGray-0);
   color: var(--clr-blueGray-800);
@@ -3658,6 +3663,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .card.simple > .info img {
   width: 150px;
+  height: 150px;
   border-radius: 50%;
   position: absolute;
   top: -35%;
@@ -4232,6 +4238,9 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   gap: 20px;
   margin-block: 20px;
   flex-wrap: wrap;
+}
+.pagination-holder li {
+  cursor: pointer;
 }
 .pagination-holder li.page-item {
   font-size: 20px;
