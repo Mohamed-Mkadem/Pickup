@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @stack('title')
+    @stack('meta')
     <link rel="shortcut icon" href="{{ asset('dist/Assets/favicon.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +42,7 @@
         </div>
     </div> -->
     <div id="overlay" class="overlay"></div>
+    @yield('loader')
     <div class="main-wrapper">
         <aside id="aside" class="" aria-current="expanded">
             <a href="home.html" class="logo d-block light visible"><i class="fa-light fa-bag-shopping"></i>
@@ -80,16 +82,19 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed">
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link collapsed {{ request()->is('admin/vouchers/*') ? 'active' : '' }}">
                         <i class="fa-light fa-credit-card"></i>
                         <span>Vouchers</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="vouchers_add.html">New Voucher</a></li>
-                        <li class="nav-item"><a href="vouchers_list.html">List</a></li>
-                        <li class="nav-item"><a href="vouchers_check.html">Check Voucher</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.vouchers.create') }}">New Voucher</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.vouchers.index') }}">List</a></li>
+
                     </ul>
                 </li>
-                <li class="nav-item"><a href="sectors.html" class="nav-link"> <i class="fa-solid fa-chart-pie"></i>
+                <li class="nav-item"><a href="{{ route('admin.sectors.index') }}"
+                        class="nav-link {{ request()->is('admin/sectors*') ? 'active' : '' }}"> <i
+                            class="fa-solid fa-chart-pie"></i>
                         <span>Sectors</span></a></li>
                 <li class="nav-item"><a href="fees.html" class="nav-link"><i
                             class="fa-solid fa-money-check-dollar-pen"></i> <span>Fees</span></a>

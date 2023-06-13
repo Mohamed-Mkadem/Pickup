@@ -12,7 +12,7 @@ class VouchersCategoriesController extends Controller
 {
     public function index()
     {
-        $vouchersCategories = VoucherCategory::paginate();
+        $vouchersCategories = VoucherCategory::withCount('vouchers')->paginate();
 
         return view(
             'Admin.Vouchers.vouchers-categories',
@@ -31,8 +31,8 @@ class VouchersCategoriesController extends Controller
         $mindate = $request->min_date ?? '';
         $maxdate = $request->max_date ?? '';
         $sort = $request->sort ?? 'newest';
-        // dd($search);
-
+        $minVouchers = $request->min_vouchers ?? '';
+        $maxVouchers = $request->max_vouchers ?? '';
         if (!empty($search)) {
             $query->where('name', 'like', "%$search%");
         }
@@ -60,8 +60,17 @@ class VouchersCategoriesController extends Controller
             $query->orderBy('created_at', 'asc');
 
         }
-
-        $vouchersCategories = $query->paginate(2);
+        if (!empty($minVouchers)) {
+            $query->whereHas('vouchers', function ($subQuery) use ($minVouchers) {
+                $subQuery->havingRaw('COUNT(*) >= ?', [$minVouchers]);
+            });
+        }
+        if (!empty($maxVouchers)) {
+            $query->whereHas('vouchers', function ($subQuery) use ($maxVouchers) {
+                $subQuery->havingRaw('COUNT(*) <= ?', [$maxVouchers]);
+            });
+        }
+        $vouchersCategories = $query->withCount('vouchers')->paginate();
 
         return view(
             'Admin.Vouchers.vouchers-categories',

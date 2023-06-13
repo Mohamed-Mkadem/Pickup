@@ -6,7 +6,9 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\VouchersCategoriesController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +56,8 @@ Route::middleware(['auth'])->prefix('client')->name('client.')->group(function (
     Route::get('home', [ClientController::class, 'home'])->name('home');
     Route::get('profile', [ClientController::class, 'profile'])
         ->name('profile');
+    Route::get('balance', [ClientController::class, 'balance'])->name('balance');
+    Route::post('balance/add', [ClientController::class, 'topUp'])->name('topup');
     // Route::get('shopping', ClientController::class, 'shopping')->name('shopping');
     // Route::get('orders', ClientController::class, 'orders')->name('orders');
     // Route::get('stores', ClientController::class, 'stores')->name('stores');
@@ -65,6 +69,8 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
     Route::get('home', [SellerController::class, 'home'])->name('home');
     Route::get('profile', [SellerController::class, 'profile'])
         ->name('profile');
+    Route::get('balance', [SellerController::class, 'balance'])->name('balance');
+    Route::post('balance/add', [SellerController::class, 'topUp'])->name('topup');
 
 });
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
@@ -79,10 +85,23 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('brand', [BrandsController::class, 'store'])->name('brands.store');
     Route::delete('brand/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
     Route::get('brands/filter', [BrandsController::class, 'filter'])->name('brands.filter');
-    // Vouchers & Vouchers Categories
+    // Vouchers Categories
     Route::get('vouchers-categories', [VouchersCategoriesController::class, 'index'])->name('vouchers-categories.index');
     Route::get('vouchers-categories/filter', [VouchersCategoriesController::class, 'filter'])->name('vouchers-categories.filter');
     Route::post('vouchers-categories', [VouchersCategoriesController::class, 'store'])->name('vouchers-categories.store');
     Route::patch('vouchers-categories/{id}', [VouchersCategoriesController::class, 'update'])->name('vouchers-categories.update');
     Route::delete('vouchers-categories/{id}', [VouchersCategoriesController::class, 'destroy'])->name('vouchers-categories.destroy');
+    //  Vouchers
+    Route::get('vouchers/', [VoucherController::class, 'index'])->name('vouchers.index');
+    Route::get('vouchers/filter', [VoucherController::class, 'filter'])->name('vouchers.filter');
+    Route::get('vouchers/create', [VoucherController::class, 'create'])->name('vouchers.create');
+    // Route::get('vouchers/check', [VoucherController::class, 'check'])->name('vouchers.check');
+    // Route::post('vouchers/show', [VoucherController::class, 'show'])->name('vouchers.show');
+    Route::post('vouchers/store', [VoucherController::class, 'store'])->name('vouchers.store');
+    // Sectors
+    Route::get('sectors', [SectorController::class, 'index'])->name('sectors.index');
+    Route::get('sectors/filter', [SectorController::class, 'filter'])->name('sectors.filter');
+    Route::post('sectors', [SectorController::class, 'store'])->name('sectors.store');
+    Route::delete('sectors/{id}', [SectorController::class, 'destroy'])->name('sectors.destroy');
+    Route::patch('sectors/update/{id}', [SectorController::class, 'update'])->name('sectors.update');
 });

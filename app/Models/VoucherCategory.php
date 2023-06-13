@@ -12,4 +12,9 @@ class VoucherCategory extends Model
     protected $fillable = [
         'name', 'value', 'icon',
     ];
+
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class, 'category_id');
+    }
 }

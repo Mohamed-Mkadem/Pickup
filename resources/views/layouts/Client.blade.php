@@ -53,7 +53,8 @@
 
             <ul class="nav-links">
                 <li class="nav-item">
-                    <a href="client_home.html" class="nav-link ">
+                    <a href="{{ route('client.home') }}"
+                        class="nav-link {{ request()->is('client/home*') ? 'active' : '' }}">
                         <i class="fa-light fa-house"></i><span>Home</span>
                     </a>
                 </li>
@@ -70,7 +71,8 @@
 
 
                 <li class="nav-item">
-                    <a href="client_balance.html" class="nav-link">
+                    <a href="{{ route('client.balance') }}"
+                        class="nav-link {{ request()->is('client/balance*') ? 'active' : '' }}">
                         <i class="fa-light fa-dollar-sign"></i>
                         <span>Balance</span></a>
                 </li>
@@ -223,7 +225,8 @@
                         <ul class="dropdown-menu profile-dropdown  ">
                             <li><a href="{{ route('client.profile') }}"><i class="fa-light fa-circle-user"></i>
                                     Profile</a></li>
-                            <li><a href="client_balance.html"><i class="fa-light fa-dollar-sign"></i> Balance</a></li>
+                            <li><a href="{{ route('client.balance') }}"><i class="fa-light fa-dollar-sign"></i>
+                                    Balance</a></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf

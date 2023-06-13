@@ -9,7 +9,7 @@
     <section class="content" id="content">
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
-            <h1>Hello {{ Auth::user()->first_name }}</h1>
+            <h1>Hello {{ Auth::user()->first_name }} jhsdlf</h1>
             <!-- Start Link  -->
             <a href="seller_sale_add.html" class="header-btn d-block add-btn">
                 <i class="fa-light fa-plus"></i>
@@ -21,6 +21,13 @@
         </div>
         <!-- End Starter Header -->
 
+        @foreach ($vouchers as $voucher)
+            <form action="" method="post">
+                <div class="form-control">
+                    <label for="" class="form-label">{{ $voucher->code }}</label>
+                </div>
+            </form>
+        @endforeach
 
     </section>
 @endsection

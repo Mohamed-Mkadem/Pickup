@@ -1,30 +1,37 @@
 @use "../../Abstracts/" as *;
 
 .message-holder {
-  border-radius: $radius10;
-  display: none;
-  &.show {
-    display: block;
-  }
-  .wrapper {
-    width: min(400px, 100%);
-    text-align: center;
-    margin-inline: auto;
-    i {
-      font-size: 30px;
-      color: var(--clr-green-600);
-      width: max-content;
+    border-radius: $radius10;
+    display: none;
+    &.show {
+        display: block;
+    }
+    .wrapper {
+        width: min(400px, 100%);
+        text-align: center;
+        margin-inline: auto;
+        i {
+            font-size: 30px;
+            color: var(--clr-green-600);
+            width: max-content;
 
-      margin-bottom: 20px;
-      display: block;
-      margin-inline: auto;
-      border: 2px solid currentColor;
-      padding: 10px 12px;
-      border-radius: 50%;
+            margin-bottom: 20px;
+            display: block;
+            margin-inline: auto;
+            border: 2px solid currentColor;
+            padding: 10px 12px;
+            border-radius: 50%;
+        }
+        p {
+            color: var(--clr-blueGray-900);
+            font-size: 20px;
+        }
     }
-    p {
-      color: var(--clr-blueGray-900);
-      font-size: 20px;
+    &.error {
+        .wrapper {
+            i {
+                color: var(--clr-red-600);
+            }
+        }
     }
-  }
 }

@@ -18,11 +18,14 @@ class Seller extends Model
         'verification',
         'balance',
 
-
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-
+    public function vouchers()
+    {
+        return $this->morphMany(Voucher::class, 'user');
+    }
 }
