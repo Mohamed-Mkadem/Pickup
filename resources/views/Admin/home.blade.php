@@ -10,7 +10,7 @@
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
             <h1>Hello {{ Auth::user()->first_name }}</h1>
             <!-- Start Link  -->
-            <a href="../FE/index.html" class="action-btn d-block">
+            <a href="{{ route('homePage') }}" class="action-btn d-block">
                 <i class="fa-light fa-arrow-right-from-bracket"></i>
                 <span>Visit Front End</span>
             </a>

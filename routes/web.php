@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
@@ -104,4 +105,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('sectors', [SectorController::class, 'store'])->name('sectors.store');
     Route::delete('sectors/{id}', [SectorController::class, 'destroy'])->name('sectors.destroy');
     Route::patch('sectors/update/{id}', [SectorController::class, 'update'])->name('sectors.update');
+    // Fees
+    Route::get('fees', [FeeController::class, 'index'])->name('fees.index');
+    Route::post('fees', [FeeController::class, 'store'])->name('fees.store');
+    Route::patch('fees/update/{id}', [FeeController::class, 'update'])->name('fees.update');
 });

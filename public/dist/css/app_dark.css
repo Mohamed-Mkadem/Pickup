@@ -493,7 +493,7 @@ button {
 .dark .product-details .product-detail .detail-body:hover p:not(.modal p),
 .dark .alert.alert-light,
 .dark .validation-box,
-.dark .card.fee ul.features li,
+.dark .card.fee ul li,
 .dark .description-holder .description-body,
 .dark .show-header .info-holder .top-header h2,
 .dark .penEditBtn,

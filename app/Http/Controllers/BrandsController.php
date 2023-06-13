@@ -23,10 +23,8 @@ class BrandsController extends Controller
         $search = $request->search ?? '';
         $minDate = $request->min_date ?? '';
         $maxDate = $request->max_date ?? '';
-        // $status = $request->input('status', []);
         $status = $request->status ?? ['Active', 'Inactive'];
         $sort = $request->sort ?? 'newest';
-        // dd($status);
         $query = Brand::query();
 
         // Apply the filters

@@ -96,7 +96,8 @@
                         class="nav-link {{ request()->is('admin/sectors*') ? 'active' : '' }}"> <i
                             class="fa-solid fa-chart-pie"></i>
                         <span>Sectors</span></a></li>
-                <li class="nav-item"><a href="fees.html" class="nav-link"><i
+                <li class="nav-item"><a href="{{ route('admin.fees.index') }}"
+                        class="nav-link {{ request()->is('admin/fees*') ? 'active' : '' }}"><i
                             class="fa-solid fa-money-check-dollar-pen"></i> <span>Fees</span></a>
                 </li>
                 <li class="nav-item">
