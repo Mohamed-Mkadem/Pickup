@@ -42,6 +42,7 @@
         </div>
     </div> -->
     <div id="overlay" class="overlay"></div>
+    @stack('light-box')
     @yield('loader')
     <div class="main-wrapper">
         <aside id="aside" class="" aria-current="expanded">
@@ -101,13 +102,14 @@
                             class="fa-solid fa-money-check-dollar-pen"></i> <span>Fees</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed notifiable">
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link collapsed notifiable {{ request()->is('admin/requests/verification*') ? 'active' : '' }}">
                         <i class="fa-light fa-memo-circle-info"></i>
                         <span>Requests</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="req_validation_list.html" class="notifiable">Validation</a>
-                        </li>
-                        <li class="nav-item"><a href="req_verification_list.html" class="notifiable">Verification</a>
+
+                        <li class="nav-item"><a href="{{ route('admin.verification-requests.index') }}"
+                                class="notifiable">Verification</a>
                         </li>
                         <li class="nav-item"><a href="req_payment_list.html" class="notifiable">Payment</a></li>
                     </ul>
@@ -211,7 +213,7 @@
                             <ul class="notifications-wrapper">
                                 <!-- Start Notification -->
                                 <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href="" class="unread"> Lorem ipsum dolor sit amet consectetur
@@ -226,7 +228,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -240,7 +242,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -254,7 +256,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -268,7 +270,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.

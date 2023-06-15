@@ -28,4 +28,27 @@ class Seller extends Model
     {
         return $this->morphMany(Voucher::class, 'user');
     }
+
+    public function verificationRequests()
+    {
+        return $this->hasMany(VerificationRequest::class);
+    }
+    public function hasPendingVerificationRequest()
+    {
+        return $this->verificationRequests()->where('status', 'pending')->exists();
+    }
+
+    public function hasSentVerificationRequest()
+    {
+        return $this->verificationRequests()->exists();
+    }
+    public function isVerified()
+    {
+        return $this->verification === 'Verified';
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->user->first_name . ' ' . $this->user->last_name;
+    }
 }

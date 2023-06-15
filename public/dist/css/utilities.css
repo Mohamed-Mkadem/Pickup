@@ -978,7 +978,7 @@ section#store-holder {
   background: var(--clr-black-650);
   color: var(--clr-white-1000);
 }
-.table-responsive table tbody tr td.status.in-stock span, .table-responsive table tbody tr td.status.accepted span {
+.table-responsive table tbody tr td.status.in-stock span, .table-responsive table tbody tr td.status.approved span {
   background-color: var(--clr-green-700);
   color: var(--clr-green-300);
 }
@@ -1588,6 +1588,9 @@ a.editBtn i {
   padding: 1em;
   letter-spacing: 1px;
   width: min(500px, 90%);
+}
+.alert.full-width {
+  width: 100%;
 }
 .alert li {
   list-style-type: disc;

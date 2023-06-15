@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @stack('title')
-    <link rel="shortcut icon" href="../../dist/Assets/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href=" {{ asset('dist/Assets/favicon.png') }} " type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -41,6 +41,7 @@
         </div>
     </div> -->
     <div id="overlay" class="overlay"></div>
+    @stack('light-box')
     <div class="main-wrapper">
         <aside id="aside" class="seller-aside" aria-current="expanded">
             <a href="{{ route('seller.home') }}" class="logo d-block light visible"><i
@@ -106,10 +107,11 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
-                        class="nav-link collapsed notifiable"> <i class="fa-light fa-memo-circle-info"></i>
+                        class="nav-link collapsed notifiable {{ request()->is('seller/requests*') ? 'active' : '' }}">
+                        <i class="fa-light fa-memo-circle-info"></i>
                         <span>Requests</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="seller_req_verfification_list.html"
+                        <li class="nav-item"><a href="{{ route('seller.verification-requests.index') }}"
                                 class="notifiable">Verification</a>
                         </li>
                         <li class="nav-item"><a href="seller_req_payment_list.html" class="notifiable">Payment</a>
@@ -316,7 +318,7 @@
 
     @stack('scripts')
 
-    <script src="../../dist/js/app.js"></script>
+    <script src="{{ asset('dist/JS/app.js') }}"></script>
 </body>
 
 </html>

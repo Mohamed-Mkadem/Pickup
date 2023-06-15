@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\VerificationRequestController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\VouchersCategoriesController;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +53,7 @@ require __DIR__ . '/auth.php';
 
 Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');
 Route::get('/api/cities/{stateId}', [CityController::class, 'getCities']);
-
+// Client
 Route::middleware(['auth'])->prefix('client')->name('client.')->group(function () {
     Route::get('home', [ClientController::class, 'home'])->name('home');
     Route::get('profile', [ClientController::class, 'profile'])
@@ -66,14 +67,24 @@ Route::middleware(['auth'])->prefix('client')->name('client.')->group(function (
     // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
     // Route::get('profile', ClientController::class, 'profile')->name('profile');
 });
+
+// Seller
 Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function () {
+    // Profile
     Route::get('home', [SellerController::class, 'home'])->name('home');
     Route::get('profile', [SellerController::class, 'profile'])
         ->name('profile');
+    // Balance
     Route::get('balance', [SellerController::class, 'balance'])->name('balance');
     Route::post('balance/add', [SellerController::class, 'topUp'])->name('topup');
-
+    // Verification
+    Route::get('requests/verification', [VerificationRequestController::class, 'index'])->name('verification-requests.index');
+    Route::get('requests/verification/create', [VerificationRequestController::class, 'create'])->name('verification-requests.create');
+    Route::get('requests/verification/show/{id}', [VerificationRequestController::class, 'show'])->name('verification-requests.show');
+    Route::post('requests/verification', [VerificationRequestController::class, 'store'])->name('verification-requests.store');
 });
+
+// Admin
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('home', [AdminController::class, 'home'])->name('home');
     Route::get('profile', [AdminController::class, 'profile'])
@@ -109,4 +120,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('fees', [FeeController::class, 'index'])->name('fees.index');
     Route::post('fees', [FeeController::class, 'store'])->name('fees.store');
     Route::patch('fees/update/{id}', [FeeController::class, 'update'])->name('fees.update');
+    // Verification
+    Route::get('requests/verification', [VerificationRequestController::class, 'AdminIndex'])->name('verification-requests.index');
+    Route::get('requests/verification/filter', [VerificationRequestController::class, 'filter'])->name('verification-requests.filter');
+    Route::get('requests/verification/show/{id}', [VerificationRequestController::class, 'adminShow'])->name('verification-requests.show');
+    Route::patch('requests/verification/approve/{id}', [VerificationRequestController::class, 'approve'])->name('verification-requests.approve');
+    Route::patch('requests/verification/reject/{id}', [VerificationRequestController::class, 'reject'])->name('verification-requests.reject');
 });

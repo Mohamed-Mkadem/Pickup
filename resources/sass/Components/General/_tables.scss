@@ -1,600 +1,606 @@
 @use "../../abstracts" as *;
 %scrollbar {
-  &::-webkit-scrollbar {
-    height: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--clr-blueGray-300);
-  }
-  scrollbar-width: thin;
-  @supports (scrollbar-color: red blue) {
-    scrollbar-color: var(--clr-blueGray-300) var(--clr-white-1000);
-  }
+    &::-webkit-scrollbar {
+        height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--clr-blueGray-300);
+    }
+    scrollbar-width: thin;
+    @supports (scrollbar-color: red blue) {
+        scrollbar-color: var(--clr-blueGray-300) var(--clr-white-1000);
+    }
 }
 %cellStyle {
-  padding: 10px 2px;
-  // border: 1px solid var(--clr-white-400);
+    padding: 10px 2px;
+    // border: 1px solid var(--clr-white-400);
 }
 .table-responsive {
-  overflow-x: auto;
-  border-radius: 30px;
+    overflow-x: auto;
+    border-radius: 30px;
 
-  table {
-    border-radius: $radius5;
-    width: 100%;
-    thead {
-      th {
-        @extend %cellStyle;
-        font-size: 18px;
-        letter-spacing: 1px;
-        // color: var(--clr-white-900);
-      }
-    }
-    tbody {
-      tr {
-        @include trOddEven(var(--clr-turquoise-900), var(--clr-navy-900));
-        border-bottom: 1px solid var(--clr-black-850);
-        &:last-of-type {
-          border: none;
+    table {
+        border-radius: $radius5;
+        width: 100%;
+        thead {
+            th {
+                @extend %cellStyle;
+                font-size: 18px;
+                letter-spacing: 1px;
+                // color: var(--clr-white-900);
+            }
         }
-        text-align: center;
-        align-items: center;
-        td {
-          @extend %cellStyle;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-transform: capitalize;
-          color: var(--clr-blueGray-800);
-          img {
-            width: 50px;
-            margin-inline: auto;
-          }
-          a {
-            color: inherit;
-            text-decoration: underline;
-            transition: $colorTransition;
-            &:hover {
-              color: var(--clr-teal-400);
+        tbody {
+            tr {
+                @include trOddEven(
+                    var(--clr-turquoise-900),
+                    var(--clr-navy-900)
+                );
+                border-bottom: 1px solid var(--clr-black-850);
+                &:last-of-type {
+                    border: none;
+                }
+                text-align: center;
+                align-items: center;
+                td {
+                    @extend %cellStyle;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    text-transform: capitalize;
+                    color: var(--clr-blueGray-800);
+                    img {
+                        width: 50px;
+                        margin-inline: auto;
+                    }
+                    a {
+                        color: inherit;
+                        text-decoration: underline;
+                        transition: $colorTransition;
+                        &:hover {
+                            color: var(--clr-teal-400);
+                        }
+                    }
+                    &.status {
+                        span {
+                            padding: 7px;
+                            border-radius: 3px;
+                        }
+                        &.stock-alert,
+                        &.new {
+                            span {
+                                background-color: var(--clr-yellow-700);
+                                color: var(--clr-orange-600);
+                            }
+                        }
+                        &.visited {
+                            span {
+                                background-color: var(--clr-navy-700);
+                                color: var(--clr-navy-400);
+                            }
+                        }
+                        &.in-progress {
+                            span {
+                                background-color: var(--clr-navy-800);
+                                color: var(--clr-navy-400);
+                            }
+                        }
+                        &.pending {
+                            span {
+                                background: var(--clr-black-650);
+                                color: var(--clr-white-1000);
+                            }
+                        }
+                        &.in-stock,
+                        &.approved {
+                            span {
+                                background-color: var(--clr-green-700);
+                                color: var(--clr-green-300);
+                            }
+                        }
+                        &.out-of-stock,
+                        &.rejected {
+                            span {
+                                background-color: var(--clr-red-900);
+                                color: var(--clr-red-500);
+                            }
+                        }
+                        &.picked,
+                        &.closed {
+                            span {
+                                background-color: var(--clr-blueGray-200);
+                                color: var(--clr-blueGray-700);
+                            }
+                        }
+                        &.ready {
+                            span {
+                                background-color: var(--clr-navy-800);
+                                color: var(--clr-navy-400);
+                            }
+                        }
+                    }
+                    ul.actions {
+                        gap: 10px;
+                        li {
+                            a.td-btn,
+                            button.td-btn {
+                                display: block;
+                                background-color: var(--clr-blueGray-500);
+                                color: var(--clr-blueGray-0);
+                                border-radius: 5px;
+                                font-size: 14px;
+                                padding: 4px 10px;
+                                transition: $bgTransition;
+                                &:hover {
+                                    background-color: var(--clr-blueGray-600);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
-          &.status {
-            span {
-              padding: 7px;
-              border-radius: 3px;
+        }
+    }
+    &.transfers {
+        table {
+            tr {
+                $cols: 130px minmax(200px, 1fr) minmax(200px, 1fr)
+                    minmax(150px, 1fr) 160px;
+                @include detailledGrid($cols);
             }
-            &.stock-alert,
-            &.new {
-              span {
-                background-color: var(--clr-yellow-700);
-                color: var(--clr-orange-600);
-              }
+            thead {
+                background: var(--clr-blueGray-800);
+                th {
+                    color: var(--clr-white-900);
+                }
             }
-            &.visited {
-              span {
-                background-color: var(--clr-navy-700);
-                color: var(--clr-navy-400);
-              }
+        }
+    }
+    &.seller-transfers {
+        table {
+            tr {
+                $cols: 130px repeat(3, minmax(200px, 1fr));
+                @include detailledGrid($cols);
             }
-            &.in-progress {
-              span {
-                background-color: var(--clr-navy-800);
-                color: var(--clr-navy-400);
-              }
+            thead {
+                background: var(--clr-blueGray-800);
+                th {
+                    color: var(--clr-white-900);
+                }
             }
-            &.pending {
-              span {
-                background: var(--clr-black-650);
-                color: var(--clr-white-1000);
-              }
+        }
+    }
+    &.subscriptions {
+        table {
+            tr {
+                $cols: 130px 140px minmax(200px, 1fr) minmax(160px, 1fr)
+                    minmax(150px, 1fr) 160px;
+
+                @include detailledGrid($cols);
             }
-            &.in-stock,
-            &.accepted {
-              span {
-                background-color: var(--clr-green-700);
-                color: var(--clr-green-300);
-              }
+            thead {
+                background: var(--clr-mustard-600);
+                th {
+                    color: var(--clr-blueGray-800);
+                }
             }
-            &.out-of-stock,
-            &.rejected {
-              span {
-                background-color: var(--clr-red-900);
-                color: var(--clr-red-500);
-              }
+        }
+    }
+    &.seller-subscriptions {
+        table {
+            tr {
+                $cols: 130px repeat(3, minmax(180px, 1fr));
+
+                @include detailledGrid($cols);
             }
-            &.picked,
-            &.closed {
-              span {
-                background-color: var(--clr-blueGray-200);
-                color: var(--clr-blueGray-700);
-              }
+            thead {
+                background: var(--clr-mustard-600);
+                th {
+                    color: var(--clr-blueGray-800);
+                }
             }
-            &.ready {
-              span {
-                background-color: var(--clr-navy-800);
-                color: var(--clr-navy-400);
-              }
+        }
+    }
+    &.tickets {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
             }
-          }
-          ul.actions {
-            gap: 10px;
-            li {
-              a.td-btn,
-              button.td-btn {
-                display: block;
+            tr {
+                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr)
+                    minmax(160px, 1fr) 150px 130px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.tickets-seller-client {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 150px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.seller-sales {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 150px minmax(160px, 1fr) 180px minmax(150px, 1fr) 180px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.products-list {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 80px minmax(180px, 1fr) repeat(2, minmax(160px, 1fr))
+                    110px 110px repeat(2, 130px) 160px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.sale-cart-table {
+        border-radius: 20px;
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 80px 90px minmax(180px, 1fr) 100px 190px 110px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.client-cart-table {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: repeat(2, 100px) minmax(180px, 1fr) 150px 200px 150px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.checkout-table {
+        table {
+            thead {
+                background-color: var(--clr-teal-200);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 150px minmax(180px, 1fr) 150px 200px 150px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+
+    &.orders {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-600);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr)
+                    repeat(3, 150px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.client-orders {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-600);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr)
+                    repeat(2, 150px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.sales {
+        table {
+            thead {
+                background-color: var(--clr-turquoise-100);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 120px 150px minmax(200px, 1fr) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+
+    &.sale-details {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-700);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.order-details {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.verification-requests {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px 150px minmax(200px, 1fr) repeat(2, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.seller-verification-requests {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px repeat(2, minmax(200px, 1fr));
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.inventory-table {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 100px 80px minmax(180px, 1fr) 180px 110px
+                    repeat(2, 120px) 80px 160px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.payment-requests {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.seller-payment-requests {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 200px repeat(3, minmax(180px, 1fr));
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.validation-requests {
+        table {
+            thead {
+                background-color: var(--clr-white-400);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 150px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.expenses-revenues {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-600);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 150px repeat(2, minmax(200px, 1fr)) repeat(2, 180px)
+                    200px;
+                @include detailledGrid($cols);
+            }
+        }
+    }
+    &.earnings-reports {
+        table {
+            thead {
                 background-color: var(--clr-blueGray-500);
                 color: var(--clr-blueGray-0);
-                border-radius: 5px;
-                font-size: 14px;
-                padding: 4px 10px;
-                transition: $bgTransition;
-                &:hover {
-                  background-color: var(--clr-blueGray-600);
+                th {
+                    &:first-of-type {
+                        padding-inline: 10px;
+                        text-align: left;
+                    }
                 }
-              }
             }
-          }
+            tr {
+                $cols: minmax(300px, 1fr) 200px;
+                @include detailledGrid($cols);
+                td {
+                    &:first-of-type {
+                        padding-inline: 10px;
+                        text-align: left;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-  &.transfers {
-    table {
-      tr {
-        $cols: 130px minmax(200px, 1fr) minmax(200px, 1fr) minmax(150px, 1fr)
-          160px;
-        @include detailledGrid($cols);
-      }
-      thead {
-        background: var(--clr-blueGray-800);
-        th {
-          color: var(--clr-white-900);
+    &.latest-sales,
+    &.latest-orders {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-600);
+                color: var(--clr-blueGray-0);
+            }
         }
-      }
     }
-  }
-  &.seller-transfers {
-    table {
-      tr {
-        $cols: 130px repeat(3, minmax(200px, 1fr));
-        @include detailledGrid($cols);
-      }
-      thead {
-        background: var(--clr-blueGray-800);
-        th {
-          color: var(--clr-white-900);
+    &.latest-orders {
+        table {
+            tr {
+                $cols: 100px 160px 1fr 180px;
+                @include detailledGrid($cols);
+            }
         }
-      }
     }
-  }
-  &.subscriptions {
-    table {
-      tr {
-        $cols: 130px 140px minmax(200px, 1fr) minmax(160px, 1fr)
-          minmax(150px, 1fr) 160px;
-
-        @include detailledGrid($cols);
-      }
-      thead {
-        background: var(--clr-mustard-600);
-        th {
-          color: var(--clr-blueGray-800);
+    &.latest-sales {
+        table {
+            tr {
+                $cols: 100px repeat(2, minmax(180px, 1fr));
+                @include detailledGrid($cols);
+            }
         }
-      }
     }
-  }
-  &.seller-subscriptions {
-    table {
-      tr {
-        $cols: 130px repeat(3, minmax(180px, 1fr));
-
-        @include detailledGrid($cols);
-      }
-      thead {
-        background: var(--clr-mustard-600);
-        th {
-          color: var(--clr-blueGray-800);
-        }
-      }
-    }
-  }
-  &.tickets {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) minmax(160px, 1fr)
-          150px 130px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.tickets-seller-client {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 150px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.seller-sales {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 150px minmax(160px, 1fr) 180px minmax(150px, 1fr) 180px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.products-list {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 80px minmax(180px, 1fr) repeat(2, minmax(160px, 1fr)) 110px 110px
-          repeat(2, 130px) 160px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.sale-cart-table {
-    border-radius: 20px;
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 80px 90px minmax(180px, 1fr) 100px 190px 110px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.client-cart-table {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: repeat(2, 100px) minmax(180px, 1fr) 150px 200px 150px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.checkout-table {
-    table {
-      thead {
-        background-color: var(--clr-teal-200);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 150px minmax(180px, 1fr) 150px 200px 150px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-
-  &.orders {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-600);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(3, 150px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.client-orders {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-600);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(2, 150px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.sales {
-    table {
-      thead {
-        background-color: var(--clr-turquoise-100);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 120px 150px minmax(200px, 1fr) repeat(3, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-
-  &.sale-details {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-700);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.order-details {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.verification-requests {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px 150px minmax(200px, 1fr) repeat(2, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.seller-verification-requests {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px repeat(2, minmax(200px, 1fr));
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.inventory-table {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 100px 80px minmax(180px, 1fr) 180px 110px repeat(2, 120px) 80px
-          160px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.payment-requests {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.seller-payment-requests {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 200px repeat(3, minmax(180px, 1fr));
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.validation-requests {
-    table {
-      thead {
-        background-color: var(--clr-white-400);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 150px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.expenses-revenues {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-600);
-        color: var(--clr-blueGray-0);
-      }
-      tr {
-        $cols: 150px repeat(2, minmax(200px, 1fr)) repeat(2, 180px) 200px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.earnings-reports {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-500);
-        color: var(--clr-blueGray-0);
-        th {
-          &:first-of-type {
-            padding-inline: 10px;
-            text-align: left;
-          }
-        }
-      }
-      tr {
-        $cols: minmax(300px, 1fr) 200px;
-        @include detailledGrid($cols);
-        td {
-          &:first-of-type {
-            padding-inline: 10px;
-            text-align: left;
-          }
-        }
-      }
-    }
-  }
-  &.latest-sales,
-  &.latest-orders {
-    table {
-      thead {
-        background-color: var(--clr-blueGray-600);
-        color: var(--clr-blueGray-0);
-      }
-    }
-  }
-  &.latest-orders {
-    table {
-      tr {
-        $cols: 100px 160px 1fr 180px;
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  &.latest-sales {
-    table {
-      tr {
-        $cols: 100px repeat(2, minmax(180px, 1fr));
-        @include detailledGrid($cols);
-      }
-    }
-  }
-  @extend %scrollbar;
+    @extend %scrollbar;
 }
 
 .tables-holder {
-  .table-row {
-    @include grid(min(100%, 400px), 1fr, 0, 0, 1rem);
-    margin-bottom: 3rem;
-    .table-responsive {
-      border-radius: 0 0 30px 30px;
-    }
-    &:last-of-type {
-      margin-bottom: 0;
-    }
-    .table-card {
-      box-shadow: $boxShadow2;
-      border-radius: $radius5;
-      &.earnings {
-        box-shadow: none;
-        .table-header {
-          background-color: var(--clr-blueGray-900) !important;
-          gap: 10px;
-          flex-wrap: wrap;
-          h4 {
-            letter-spacing: 1px;
-          }
-        }
-      }
-      .table-header {
-        border-radius: $radius5 $radius5 0 0;
-        padding: 0.7em 1em;
-        background: var(--clr-blueGray-400);
-        color: var(--clr-white-1000);
-        h4 {
-          letter-spacing: 1px;
-        }
-        a.action-btn {
-          color: var(--clr-turquoise-900);
-          letter-spacing: 1px;
-          text-decoration: underline;
-          transition: $colorTransition;
-          &:hover {
-            color: var(--clr-mustard-600);
-            // color: var(--clr-yellow-600);
-          }
-        }
-      }
-      .table-responsive {
-        table.quick-stats-table {
-          border-radius: $radius5;
-          width: 100%;
-          // background-color: var(--clr-white-1000);
-          // background-color: red;
-          tr {
-            // @include tableGrid(4, 150px, 1fr);
-            // $cols: 100px 200px 150px 100px;
-            $cols: 100px minmax(200px, 1fr) minmax(150px, 1fr) 115px;
-            @include detailledGrid($cols);
-            border-bottom: 1px solid var(--clr-black-850);
-            &:last-of-type {
-              border: none;
-            }
-            text-align: center;
-            // padding-block: 10px;
-            align-items: center;
-          }
-          thead {
-            background: var(--clr-blueGray-0);
-            th {
-              @extend %cellStyle;
-              font-size: 18px;
-              letter-spacing: 1px;
-              color: var(--clr-white-400);
-            }
-          }
-          tbody {
-            tr {
-              @include trOddEven(
-                var(--clr-turquoise-900),
-                var(--clr-white-1000)
-              );
-              td {
-                @extend %cellStyle;
-                color: var(--clr-black-250);
-
-                // @extend %tdStatus;
-              }
-            }
-          }
-        }
-        // &::-webkit-scrollbar {
-        //   height: 5px;
-        // }
-        // &::-webkit-scrollbar-thumb {
-        //   background-color: var(--clr-blueGray-300);
-        // }
-        // @supports (scrollbar-color: red blue) {
-        //   scrollbar-width: thin;
-
-        //   scrollbar-color: var(--clr-blueGray-300) var(--clr-white-1000);
-        // }
-        @extend %scrollbar;
-      }
-    }
-  }
-  @include min-width(medium) {
     .table-row {
-      .table-card {
-        &.earnings {
-          box-shadow: none;
-          .table-header {
-            flex-wrap: nowrap;
-          }
+        @include grid(min(100%, 400px), 1fr, 0, 0, 1rem);
+        margin-bottom: 3rem;
+        .table-responsive {
+            border-radius: 0 0 30px 30px;
         }
-      }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        .table-card {
+            box-shadow: $boxShadow2;
+            border-radius: $radius5;
+            &.earnings {
+                box-shadow: none;
+                .table-header {
+                    background-color: var(--clr-blueGray-900) !important;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    h4 {
+                        letter-spacing: 1px;
+                    }
+                }
+            }
+            .table-header {
+                border-radius: $radius5 $radius5 0 0;
+                padding: 0.7em 1em;
+                background: var(--clr-blueGray-400);
+                color: var(--clr-white-1000);
+                h4 {
+                    letter-spacing: 1px;
+                }
+                a.action-btn {
+                    color: var(--clr-turquoise-900);
+                    letter-spacing: 1px;
+                    text-decoration: underline;
+                    transition: $colorTransition;
+                    &:hover {
+                        color: var(--clr-mustard-600);
+                        // color: var(--clr-yellow-600);
+                    }
+                }
+            }
+            .table-responsive {
+                table.quick-stats-table {
+                    border-radius: $radius5;
+                    width: 100%;
+                    // background-color: var(--clr-white-1000);
+                    // background-color: red;
+                    tr {
+                        // @include tableGrid(4, 150px, 1fr);
+                        // $cols: 100px 200px 150px 100px;
+                        $cols: 100px minmax(200px, 1fr) minmax(150px, 1fr) 115px;
+                        @include detailledGrid($cols);
+                        border-bottom: 1px solid var(--clr-black-850);
+                        &:last-of-type {
+                            border: none;
+                        }
+                        text-align: center;
+                        // padding-block: 10px;
+                        align-items: center;
+                    }
+                    thead {
+                        background: var(--clr-blueGray-0);
+                        th {
+                            @extend %cellStyle;
+                            font-size: 18px;
+                            letter-spacing: 1px;
+                            color: var(--clr-white-400);
+                        }
+                    }
+                    tbody {
+                        tr {
+                            @include trOddEven(
+                                var(--clr-turquoise-900),
+                                var(--clr-white-1000)
+                            );
+                            td {
+                                @extend %cellStyle;
+                                color: var(--clr-black-250);
+
+                                // @extend %tdStatus;
+                            }
+                        }
+                    }
+                }
+                // &::-webkit-scrollbar {
+                //   height: 5px;
+                // }
+                // &::-webkit-scrollbar-thumb {
+                //   background-color: var(--clr-blueGray-300);
+                // }
+                // @supports (scrollbar-color: red blue) {
+                //   scrollbar-width: thin;
+
+                //   scrollbar-color: var(--clr-blueGray-300) var(--clr-white-1000);
+                // }
+                @extend %scrollbar;
+            }
+        }
     }
-  }
+    @include min-width(medium) {
+        .table-row {
+            .table-card {
+                &.earnings {
+                    box-shadow: none;
+                    .table-header {
+                        flex-wrap: nowrap;
+                    }
+                }
+            }
+        }
+    }
 }

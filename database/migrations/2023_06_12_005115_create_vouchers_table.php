@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('category_id')->references('id')->on('voucher_categories');
             $table->enum('status', ['used', 'unused'])->default('unused');
             $table->string('code');
+            $table->integer('user_id')->nullable();
+            $table->string('user_type')->nullable();
             $table->timestamps();
         });
     }

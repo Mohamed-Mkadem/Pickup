@@ -106,7 +106,7 @@ class ProfileController extends Controller
     }
     public function updateSeller(Request $request)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = User::find(Auth::id());
         $data = $request->all();
 
         $validatedData = Validator::make($data, [
@@ -147,22 +147,27 @@ class ProfileController extends Controller
                 $user->save();
             };
             $user->update([
-                'first_name' => $request->first_name ? $request->first_name : $user->first_name,
-                'last_name' => $request->last_name ? $request->last_name : $user->last_name,
+
                 'address' => $request->address,
                 'photo' => $path ? $path : $user->photo,
-                'gender' => $request->gender ? $request->gender : $user->gender,
                 'phone' => $request->phone,
-                'd_o_b' => $request->d_o_b ? $request->d_o_b : $user->d_o_b,
                 'email' => $request->email,
                 'state_id' => $request->state_id,
                 'city_id' => $request->city_id,
 
             ]);
-            if ($user) {
-                $user->seller->update([
-                    'nid' => $request->nid ? $request->nid : $user->seller->nid,
+            if (!$user->seller->hasSentVerificationRequest()) {
+                $user->update([
+                    'first_name' => $request->first_name ? $request->first_name : $user->first_name,
+                    'last_name' => $request->last_name ? $request->last_name : $user->last_name,
+                    'gender' => $request->gender ? $request->gender : $user->gender,
+                    'd_o_b' => $request->d_o_b ? $request->d_o_b : $user->d_o_b,
                 ]);
+                if ($user) {
+                    $user->seller->update([
+                        'nid' => $request->nid ? $request->nid : $user->seller->nid,
+                    ]);
+                }
             }
 
         }

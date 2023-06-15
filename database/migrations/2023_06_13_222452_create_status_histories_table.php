@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vouchers', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();
-            $table->string('user_type')->nullable();
+        Schema::create('status_histories', function (Blueprint $table) {
+            $table->id();
+            $table->string('statusable_type');
+            $table->integer('statusable_id');
+            $table->string('action');
+
+            $table->timestamps();
         });
     }
 
@@ -22,9 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vouchers', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-            $table->dropColumn('user_type');
-        });
+        Schema::dropIfExists('status_histories');
     }
 };

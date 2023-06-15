@@ -6,6 +6,9 @@
     padding: 1em;
     letter-spacing: 1px;
     width: min(500px, 90%);
+    &.full-width {
+        width: 100%;
+    }
     li {
         list-style-type: disc;
         list-style-position: inside;

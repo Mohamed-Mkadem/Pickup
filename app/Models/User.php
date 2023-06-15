@@ -69,4 +69,12 @@ class User extends Authenticatable
     {
         return $this->morphMany(Voucher::class, 'user');
     }
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    public function getStateCityAttribute()
+    {
+        return $this->city->state->name . ' - ' . $this->city->name;
+    }
 }

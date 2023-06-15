@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSeeder extends Seeder
 {
@@ -27,7 +26,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('developer'),
             'email_verified_at' => '2023-06-09 16:26:02',
             'phone' => '56927726',
-            'photo' => 'profiles_photos/default.jpg'
+            'photo' => 'profiles_photos/default.jpg',
         ]);
     }
 }

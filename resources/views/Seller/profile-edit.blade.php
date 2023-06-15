@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            @if ($user->seller->verification == 'Unverified')
+            @if (!$user->seller->hasSentVerificationRequest())
                 <div class="holder radius-10 p-1 mb-2">
                     <div class="form-row">
                         <div class="form-control">
