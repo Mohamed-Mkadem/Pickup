@@ -273,7 +273,9 @@
                                         </td>
                                         <td><img src="{{ asset('storage/' . $request->seller->user->photo) }}"
                                                 alt=""></td>
-                                        <td><a href="">{{ $request->seller->user->full_name }}</a></td>
+                                        <td><a
+                                                href="{{ route('admin.sellers.show', $request->seller->user->id) }}">{{ $request->seller->user->full_name }}</a>
+                                        </td>
                                         <td class="status {{ $request->status }}"><span>{{ $request->status }}</span>
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($request->created_at)->format('M jS Y') }}</td>

@@ -139,7 +139,9 @@
                     {{ request()->is('admin/clients*') ? 'active' : '' }}">
                         <i class="fa-light fa-users"></i>
                         <span>Clients</span></a></li>
-                <li class="nav-item"><a href="sellers_list.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="{{ route('admin.sellers.index') }}"
+                        class="nav-link notifiable
+                    {{ request()->is('admin/sellers*') ? 'active' : '' }}">
                         <i class="fa-light fa-users-viewfinder"></i>
                         <span>Sellers</span></a></li>
 

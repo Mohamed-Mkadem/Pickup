@@ -43,7 +43,8 @@
                 <div class="info-holder">
                     <div class="top-header d-flex col j-center a-center">
                         <h2>{{ $request->seller->user->full_name }} ({{ $request->seller->user->status }}) </h2>
-                        <ul class="horizontal-actions-holder  d-flex  j-center a-center">
+                        <ul
+                            class="horizontal-actions-holder  d-flex  j-center a-center  {{ $request->status == 'pending' ? 'gap-1 wrap' : '' }} ">
 
                             @if ($request->status == 'pending')
                                 <li>

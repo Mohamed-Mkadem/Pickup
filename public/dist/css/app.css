@@ -4256,6 +4256,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .pagination-holder li.page-item a {
   color: inherit;
+  display: block;
 }
 .pagination-holder li.disabled {
   cursor: no-drop;

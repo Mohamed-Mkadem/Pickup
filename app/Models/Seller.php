@@ -42,6 +42,10 @@ class Seller extends Model
     {
         return $this->verificationRequests()->exists();
     }
+    public function verificationRequestsCount()
+    {
+        return $this->verificationRequests()->count();
+    }
     public function isVerified()
     {
         return $this->verification === 'Verified';

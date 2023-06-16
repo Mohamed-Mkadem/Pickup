@@ -38,18 +38,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/admin/profile', [ProfileController::class, 'updateAdmin'])->name('admin.profile.update');
     Route::patch('/client/profile', [ProfileController::class, 'updateClient'])->name('client.profile.update');
     Route::patch('/seller/profile', [ProfileController::class, 'updateSeller'])->name('seller.profile.update');
     Route::patch('/seller/bank', [ProfileController::class, 'updateBankInfo'])->name('seller.bank.update');
-    Route::get('profile/banned', [ProfileController::class, 'banned'])
-        ->middleware('banned')
-        ->name('profile.banned');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('profile/banned', [ProfileController::class, 'banned'])
+    ->middleware('banned')
+    ->name('profile.banned');
 
 require __DIR__ . '/auth.php';
 
@@ -71,7 +71,7 @@ Route::middleware(['auth', 'active'])->prefix('client')->name('client.')->group(
 });
 
 // Seller
-Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function () {
+Route::middleware(['auth', 'active'])->prefix('seller')->name('seller.')->group(function () {
     // Profile
     Route::get('home', [SellerController::class, 'home'])->name('home');
     Route::get('profile', [SellerController::class, 'profile'])
@@ -134,4 +134,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('clients/show/{id}', [ClientController::class, 'show'])->name('clients.show');
     Route::patch('clients/ban/{id}', [ClientController::class, 'ban'])->name('clients.ban');
     Route::patch('clients/activate/{id}', [ClientController::class, 'activate'])->name('clients.activate');
+    // Sellers
+    Route::get('sellers', [SellerController::class, 'index'])->name('sellers.index');
+    Route::get('sellers/filter', [SellerController::class, 'filter'])->name('sellers.filter');
+    Route::get('sellers/show/{id}', [SellerController::class, 'show'])->name('sellers.show');
+    Route::patch('sellers/ban/{id}', [SellerController::class, 'ban'])->name('sellers.ban');
+    Route::patch('sellers/activate/{id}', [SellerController::class, 'activate'])->name('sellers.activate');
 });

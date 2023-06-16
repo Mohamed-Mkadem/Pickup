@@ -20,7 +20,7 @@
             <div class="alert-info alert full-width">
                 <h3>Info</h3>
                 <p>
-                    You Are Already Sent A Verification Request, Please wait until we review You Request <br>
+                    We Recieved Your Verification Request , Please wait until we review It <br>
                     Thank You For Your Patience
                 </p>
             </div>

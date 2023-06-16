@@ -3,10 +3,10 @@
 @push('title')
     <title>Pickup | Vouchers </title>
 @endpush
-@include('components.errors-alert')
-@include('components.session-errors-alert')
-@include('components.success-alert')
 @section('content')
+    @include('components.errors-alert')
+    @include('components.session-errors-alert')
+    @include('components.success-alert')
 @endsection
 
 @push('scripts')
