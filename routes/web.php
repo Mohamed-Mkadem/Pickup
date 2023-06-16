@@ -45,7 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/client/profile', [ProfileController::class, 'updateClient'])->name('client.profile.update');
     Route::patch('/seller/profile', [ProfileController::class, 'updateSeller'])->name('seller.profile.update');
     Route::patch('/seller/bank', [ProfileController::class, 'updateBankInfo'])->name('seller.bank.update');
-
+    Route::get('profile/banned', [ProfileController::class, 'banned'])
+        ->middleware('banned')
+        ->name('profile.banned');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -54,7 +56,7 @@ require __DIR__ . '/auth.php';
 Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');
 Route::get('/api/cities/{stateId}', [CityController::class, 'getCities']);
 // Client
-Route::middleware(['auth'])->prefix('client')->name('client.')->group(function () {
+Route::middleware(['auth', 'active'])->prefix('client')->name('client.')->group(function () {
     Route::get('home', [ClientController::class, 'home'])->name('home');
     Route::get('profile', [ClientController::class, 'profile'])
         ->name('profile');
@@ -126,4 +128,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('requests/verification/show/{id}', [VerificationRequestController::class, 'adminShow'])->name('verification-requests.show');
     Route::patch('requests/verification/approve/{id}', [VerificationRequestController::class, 'approve'])->name('verification-requests.approve');
     Route::patch('requests/verification/reject/{id}', [VerificationRequestController::class, 'reject'])->name('verification-requests.reject');
+    // Clients
+    Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('clients/filter', [ClientController::class, 'filter'])->name('clients.filter');
+    Route::get('clients/show/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::patch('clients/ban/{id}', [ClientController::class, 'ban'])->name('clients.ban');
+    Route::patch('clients/activate/{id}', [ClientController::class, 'activate'])->name('clients.activate');
 });

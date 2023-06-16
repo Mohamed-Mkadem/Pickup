@@ -313,4 +313,8 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function banned()
+    {
+        return view('errors.account-banned');
+    }
 }

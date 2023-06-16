@@ -134,7 +134,9 @@
                     </a>
                 </li>
 
-                <li class="nav-item"><a href="clients_list.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="{{ route('admin.clients.index') }}"
+                        class="nav-link notifiable 
+                    {{ request()->is('admin/clients*') ? 'active' : '' }}">
                         <i class="fa-light fa-users"></i>
                         <span>Clients</span></a></li>
                 <li class="nav-item"><a href="sellers_list.html" class="nav-link notifiable">
