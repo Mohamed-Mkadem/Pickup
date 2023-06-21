@@ -1,248 +1,249 @@
 @use "../../Abstracts/" as *;
 
 #header {
-  $height: 70px;
-  padding: 0 1em;
-  background-color: var(--clr-white-1000);
-  &:not(.store-fixed-header) {
-    box-shadow: $boxShadow1;
-  }
-  #layout-toggle {
-    transition: color 0.3s ease;
-    &:hover {
-      color: var(--clr-navy-400);
+    $height: 70px;
+    padding: 0 1em;
+    background-color: var(--clr-white-1000);
+    &:not(.store-fixed-header) {
+        box-shadow: $boxShadow1;
     }
-  }
-  .dropdowns-holder {
-    gap: 10px;
-    #mode-switcher {
-      font-size: 22px;
-      &[aria-current="Disabled"] {
-        i.moon-icon {
-          display: block;
+    #layout-toggle {
+        transition: color 0.3s ease;
+        &:hover {
+            color: var(--clr-navy-400);
         }
-        i.sun-icon {
-          display: none;
-        }
-      }
-      &[aria-current="Enabled"] {
-        i.moon-icon {
-          display: none;
-        }
-        i.sun-icon {
-          display: block;
-        }
-      }
     }
-    .dropdown-holder {
-      button {
-        font-size: 22px;
-        &#notifications-handler {
-          position: relative;
-          &::after {
-            $size: 22px;
-            position: absolute;
-            content: attr(data-count);
-            background-color: var(--clr-red-600);
-            color: var(--clr-white-1000);
-            width: $size;
-            height: $size;
-            border-radius: 50%;
-            font-size: 12px;
-            text-align: center;
-            line-height: 2;
-            right: 0;
-            top: -5px;
-          }
-        }
-        &#profile-handler {
-          height: $height;
-          background-color: var(--clr-blueGray-100);
-          padding-inline: 10px;
-          transition: background-color 0.3s ease;
-          position: relative;
-          gap: 10px;
-          &:hover {
-            background-color: var(--clr-blueGray-200);
-          }
-          img {
-            width: 32px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-          }
-          span {
-            font-weight: 300;
-            display: none;
-          }
-          &.seller-client {
-            font-size: 18px;
-            font-weight: 400;
-            .name-holder {
-              gap: 10px;
-              margin-bottom: 5px;
-              span {
-              }
-              img {
-                width: 25px;
-              }
-            }
-            .balance-value {
-              text-align: left;
-              font-size: 16px;
-              display: none;
-            }
-          }
-        }
-        &#balance-handler {
-          font-size: 18px;
-          background-color: var(--clr-blueGray-100);
-          height: $height;
-          padding-inline: 10px;
-          h4 {
-          }
-          p {
-          }
-        }
-      }
-      .dropdown-menu {
-        // display: none;
-        @include dropDown(100%, var(--clr-teal-900), 0, 80px);
-
-        padding: 0;
-        &.show {
-          display: block;
-        }
-        &.notifications-dropdown {
-          h4 {
+    .dropdowns-holder {
+        gap: 10px;
+        #mode-switcher {
             font-size: 22px;
-            letter-spacing: 1px;
-            color: var(--clr-teal-200);
-            margin: 20px;
-          }
-          ul.notifications-wrapper {
-            $dropdownHeight: 300px;
-            height: $dropdownHeight;
-            overflow-y: auto;
-            &::-webkit-scrollbar {
-              display: none;
-            }
-            scrollbar-width: none;
-
-            li.notification {
-              padding: 0.5em 1em;
-              &.unread {
-                background-color: var(--clr-navy-900);
-              }
-              @include flex(row, center, flex-start);
-              gap: 10px;
-              // margin-bottom: 15px;
-              img {
-                width: 35px;
-                border-radius: 50%;
-                margin-top: 5px;
-              }
-              .details {
-                p {
-                  line-height: 1.7;
-                  font-size: 14px;
-                  &.notification-body {
-                    a {
-                      color: var(--clr-blueGray-900);
-                      letter-spacing: 1px;
-                      transition: color 0.3s ease;
-                      font-weight: bold;
-
-                      &:hover {
-                        color: var(--clr-teal-400);
-                      }
-                    }
-                  }
-                  &.notification-time {
-                    i {
-                      margin-right: 5px;
-                    }
-                  }
+            &[aria-current="Disabled"] {
+                i.moon-icon {
+                    display: block;
                 }
-              }
+                i.sun-icon {
+                    display: none;
+                }
             }
-          }
-          a.see-all {
-            background-color: var(--clr-teal-300);
-            color: var(--clr-white-1000);
-            font-weight: bold;
-            padding: 0.5em;
-            letter-spacing: 1px;
-            text-decoration: underline;
-            transition: background-color 0.3s ease;
+            &[aria-current="Enabled"] {
+                i.moon-icon {
+                    display: none;
+                }
+                i.sun-icon {
+                    display: block;
+                }
+            }
+        }
+        .dropdown-holder {
+            button {
+                font-size: 22px;
+                &#notifications-handler {
+                    position: relative;
+                    &::after {
+                        $size: 22px;
+                        position: absolute;
+                        content: attr(data-count);
+                        background-color: var(--clr-red-600);
+                        color: var(--clr-white-1000);
+                        width: $size;
+                        height: $size;
+                        border-radius: 50%;
+                        font-size: 12px;
+                        text-align: center;
+                        line-height: 2;
+                        right: 0;
+                        top: -5px;
+                    }
+                }
+                &#profile-handler {
+                    height: $height;
+                    background-color: var(--clr-blueGray-100);
+                    padding-inline: 10px;
+                    transition: background-color 0.3s ease;
+                    position: relative;
+                    gap: 10px;
+                    &:hover {
+                        background-color: var(--clr-blueGray-200);
+                    }
+                    img {
+                        width: 32px;
+                        aspect-ratio: 1;
+                        border-radius: 50%;
+                    }
+                    span {
+                        font-weight: 300;
+                        display: none;
+                    }
+                    &.seller-client {
+                        font-size: 18px;
+                        font-weight: 400;
+                        .name-holder {
+                            gap: 10px;
+                            margin-bottom: 5px;
+                            span {
+                            }
+                            img {
+                                width: 25px;
+                            }
+                        }
+                        .balance-value {
+                            text-align: left;
+                            font-size: 16px;
+                            display: none;
+                        }
+                    }
+                }
+                &#balance-handler {
+                    font-size: 18px;
+                    background-color: var(--clr-blueGray-100);
+                    height: $height;
+                    padding-inline: 10px;
+                    h4 {
+                    }
+                    p {
+                    }
+                }
+            }
+            .dropdown-menu {
+                // display: none;
+                @include dropDown(100%, var(--clr-teal-900), 0, 80px);
 
-            &:hover {
-              background-color: var(--clr-teal-400);
-            }
-          }
-        }
-        &.profile-dropdown {
-          height: auto;
-          width: 150px;
-          right: 15px;
-          top: 84px;
-          li {
-            padding: 0.5em 0.8em;
-            &:hover {
-              background-color: var(--clr-navy-900);
-              cursor: pointer;
-            }
-            %common {
-              font-size: 18px;
-              color: var(--clr-blueGray-900);
-              letter-spacing: 1px;
-            }
-            a {
-              @extend %common;
-            }
-            form {
-              button {
-                @extend %common;
-                padding-left: 0;
-                width: 100%;
-                text-align: left;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                padding: 0;
+                &.show {
+                    display: block;
+                }
+                &.notifications-dropdown {
+                    h4 {
+                        font-size: 22px;
+                        letter-spacing: 1px;
+                        color: var(--clr-teal-200);
+                        margin: 20px;
+                    }
+                    ul.notifications-wrapper {
+                        $dropdownHeight: 300px;
+                        height: $dropdownHeight;
+                        overflow-y: auto;
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+                        scrollbar-width: none;
 
-  @include min-width("xsmall") {
-    .dropdowns-holder {
-      .dropdown-holder {
-        position: relative;
-        .dropdown-menu {
-          width: 370px;
-          top: 70px;
-          &.profile-dropdown {
-            right: 0;
-          }
-        }
-      }
-    }
-  }
-  @include min-width(medium) {
-    .dropdowns-holder {
-      .dropdown-holder {
-        button {
-          &#profile-handler {
-            &.seller-client {
-              p.balance-value {
-                display: block;
-              }
+                        li.notification {
+                            padding: 0.5em 1em;
+                            &.unread {
+                                background-color: var(--clr-navy-900);
+                            }
+                            @include flex(row, center, flex-start);
+                            gap: 10px;
+                            // margin-bottom: 15px;
+                            img {
+                                width: 35px;
+                                border-radius: 50%;
+                                margin-top: 5px;
+                            }
+                            .details {
+                                p {
+                                    line-height: 1.7;
+                                    font-size: 14px;
+                                    &.notification-body {
+                                        a {
+                                            color: var(--clr-blueGray-900);
+                                            letter-spacing: 1px;
+                                            transition: color 0.3s ease;
+                                            font-weight: bold;
+
+                                            &:hover {
+                                                color: var(--clr-teal-400);
+                                            }
+                                        }
+                                    }
+                                    &.notification-time {
+                                        i {
+                                            margin-right: 5px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    a.see-all {
+                        background-color: var(--clr-teal-300);
+                        color: var(--clr-white-1000);
+                        font-weight: bold;
+                        padding: 0.5em;
+                        letter-spacing: 1px;
+                        text-decoration: underline;
+                        transition: background-color 0.3s ease;
+
+                        &:hover {
+                            background-color: var(--clr-teal-400);
+                        }
+                    }
+                }
+                &.profile-dropdown {
+                    height: auto;
+                    width: 150px;
+                    right: 15px;
+                    top: 84px;
+                    li {
+                        padding: 0.5em 0.8em;
+                        &:hover {
+                            background-color: var(--clr-navy-900);
+                            cursor: pointer;
+                        }
+                        %common {
+                            font-size: 18px;
+                            color: var(--clr-blueGray-900);
+                            letter-spacing: 1px;
+                        }
+                        a {
+                            @extend %common;
+                        }
+                        form {
+                            margin-bottom: 0 !important;
+                            button {
+                                @extend %common;
+                                padding-left: 0;
+                                width: 100%;
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
             }
-            span {
-              display: inline;
-            }
-          }
         }
-      }
     }
-  }
+
+    @include min-width("xsmall") {
+        .dropdowns-holder {
+            .dropdown-holder {
+                position: relative;
+                .dropdown-menu {
+                    width: 370px;
+                    top: 70px;
+                    &.profile-dropdown {
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+    @include min-width(medium) {
+        .dropdowns-holder {
+            .dropdown-holder {
+                button {
+                    &#profile-handler {
+                        &.seller-client {
+                            p.balance-value {
+                                display: block;
+                            }
+                        }
+                        span {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

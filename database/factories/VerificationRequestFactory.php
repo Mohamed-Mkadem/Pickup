@@ -21,6 +21,7 @@ class VerificationRequestFactory extends Factory
             'nid_front' => '/v_reqs/default.jpg',
             'nid_back' => '/v_reqs/default.jpg',
             'commercial_register' => '/v_reqs/default.jpg',
+            'status' => 'approved',
         ];
     }
 }

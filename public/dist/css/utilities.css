@@ -402,6 +402,10 @@ picture {
   display: block;
 }
 
+select {
+  text-transform: capitalize;
+}
+
 input,
 button,
 textarea,

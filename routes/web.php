@@ -9,6 +9,8 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\VerificationRequestController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\VouchersCategoriesController;
@@ -84,6 +86,19 @@ Route::middleware(['auth', 'active'])->prefix('seller')->name('seller.')->group(
     Route::get('requests/verification/create', [VerificationRequestController::class, 'create'])->name('verification-requests.create');
     Route::get('requests/verification/show/{id}', [VerificationRequestController::class, 'show'])->name('verification-requests.show');
     Route::post('requests/verification', [VerificationRequestController::class, 'store'])->name('verification-requests.store');
+    // Stores
+    Route::get('stores/create', [StoreController::class, 'create'])->name('stores.create');
+    Route::get('stores/edit/{username}', [StoreController::class, 'edit'])->name('stores.edit');
+    // Route::get('stores/edit/{id}', [StoreController::class, 'edit'])->name('stores.edit');
+    Route::get('stores/subscriptions', [SubscriptionController::class, 'index'])->name('stores.subscriptions.index');
+    Route::get('stores/subscriptions/create', [SubscriptionController::class, 'create'])->name('stores.subscriptions.create');
+    Route::post('stores/subscriptions', [SubscriptionController::class, 'store'])->name('stores.subscriptions.store');
+    Route::patch('stores/update/{username}', [StoreController::class, 'update'])->name('stores.update');
+    Route::patch('stores/maintenance/enable/{id}', [StoreController::class, 'enableMaintenance'])->name('stores.enableMaintenance');
+    Route::patch('stores/maintenance/disable/{id}', [StoreController::class, 'disableMaintenance'])->name('stores.disableMaintenance');
+    Route::post('stores/store', [StoreController::class, 'store'])->name('stores.store');
+    Route::get('stores', [StoreController::class, 'index'])->name('stores.index');
+    Route::get('stores/show/{username}', [StoreController::class, 'show'])->name('stores.show');
 });
 
 // Admin
@@ -140,4 +155,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('sellers/show/{id}', [SellerController::class, 'show'])->name('sellers.show');
     Route::patch('sellers/ban/{id}', [SellerController::class, 'ban'])->name('sellers.ban');
     Route::patch('sellers/activate/{id}', [SellerController::class, 'activate'])->name('sellers.activate');
+    // Stores
+    Route::get('stores', [StoreController::class, 'adminIndex'])->name('stores.index');
+    Route::get('stores/filter', [StoreController::class, 'filter'])->name('stores.filter');
+    Route::get('stores/{username}/home', [StoreController::class, 'showHome'])->name('stores.home');
+    // Show Stores
+    Route::get('store/{username}/home', [StoreController::class, 'home'])->name('store.home');
+    Route::get('store/{username}/reviews', [StoreController::class, 'reviews'])->name('store.reviews');
+    Route::get('store/{username}/owner', [StoreController::class, 'owner'])->name('store.owner');
+    Route::get('store/{username}/orders', [StoreController::class, 'orders'])->name('store.orders');
+    Route::get('store/{username}/order/{id}', [StoreController::class, 'order'])->name('store.order');
+    Route::get('store/{username}/sales', [StoreController::class, 'sales'])->name('store.sales');
+    Route::get('store/{username}/sale/{id}', [StoreController::class, 'sale'])->name('store.sale');
+    Route::get('store/{username}/transfers', [StoreController::class, 'transfers'])->name('store.transfers');
 });

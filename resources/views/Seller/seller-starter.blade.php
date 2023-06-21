@@ -3,11 +3,10 @@
 @push('title')
     <title>Pickup | Home</title>
 @endpush
-
-@include('components.errors-alert')
-@include('components.session-errors-alert')
-@include('components.success-alert')
 @section('content')
+    @include('components.errors-alert')
+    @include('components.session-errors-alert')
+    @include('components.success-alert')
 @endsection
 
 @push('scripts')

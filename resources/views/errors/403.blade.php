@@ -66,7 +66,7 @@
     <div class="error-wrapper">
         <h1>403!</h1>
         <p>Oops! You are unauthorized to do this action!</p>
-        <a href="">Go Back</a>
+        <a href="{{ url()->previous() }}">Go Back</a>
     </div>
 </body>
 

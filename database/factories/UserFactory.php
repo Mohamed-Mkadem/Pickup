@@ -28,15 +28,14 @@ class UserFactory extends Factory
             'd_o_b' => fake()->date('Y-m-d'),
             'phone' => rand($min = (int) 11111111, $max = (int) 99999999),
             'address' => fake()->address(),
-            'type' => 'Client',
+            'type' => 'Seller',
             'state_id' => 1,
             'city_id' => 1,
-            'gender' => 'Female',
+            'gender' => 'Male',
             'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make('password'), // password
         ];
     }
-
     /**
      * Indicate that the model's email address should be unverified.
      */

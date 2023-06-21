@@ -98,11 +98,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-box-dollar"></i> <span>Subscriptions</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link collapsed
+                    {{ request()->is('seller/subscriptions*' ? 'active' : '') }}">
+                        <i class="fa-light fa-box-dollar"></i> <span>Subscriptions</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="subscriptions_add.html">Add New</a></li>
-                        <li class="nav-item"><a href="seller_subscriptions.html">List</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.stores.subscriptions.create') }}">Add New</a>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('seller.stores.subscriptions.index') }}">List</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -123,11 +126,14 @@
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-shop"></i> <span>Stores</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link collapsed 
+                        {{ request()->is('seller/stores*') ? 'active' : '' }}
+                    ">
+                        <i class="fa-light fa-shop"></i> <span>Stores</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="store_create.html">New Store</a></li>
-                        <li class="nav-item"><a href="seller_stores.html">List</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.stores.create') }}">New Store</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.stores.index') }}">List</a></li>
                     </ul>
                 </li>
 
@@ -209,7 +215,7 @@
                             <ul class="notifications-wrapper">
                                 <!-- Start Notification -->
                                 <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href="" class="unread"> Lorem ipsum dolor sit amet consectetur
@@ -224,7 +230,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -238,7 +244,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -252,7 +258,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -266,7 +272,7 @@
                                 <!-- End Notification -->
                                 <!-- Start Notification -->
                                 <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
+                                    <img src="" alt="">
                                     <div class="details">
                                         <p class="notification-body">
                                             <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.

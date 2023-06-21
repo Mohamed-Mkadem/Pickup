@@ -152,7 +152,8 @@
                 <li class="nav-item"><a href="transfers.html" class="nav-link notifiable"> <i
                             class="fa-light fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span></a></li>
-                <li class="nav-item"><a href="stores.html" class="nav-link notifiable"> <i
+                <li class="nav-item"><a href="{{ route('admin.stores.index') }}"
+                        class="nav-link notifiable {{ request()->is('admin/stores*') ? 'active' : '' }}"> <i
                             class="fa-light fa-shop"></i>
                         <span>Stores</span></a></li>
 

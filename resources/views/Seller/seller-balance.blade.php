@@ -56,7 +56,7 @@
                 <div class="top-info mb-0 d-flex a-start j-sp-between">
                     <div class="title-value-box">
                         <p class="box-title">Available (DT)</p>
-                        <p class="box-value">{{ $user->seller->balance }} </p>
+                        <p class="box-value">{{ $seller->balance }} </p>
                     </div>
 
                     <div class="icon-holder">
@@ -74,7 +74,7 @@
                 <div class="top-info mb-0 d-flex a-start j-sp-between">
                     <div class="title-value-box">
                         <p class="box-title">Store Balance (DT)</p>
-                        <p class="box-value">220 </p>
+                        <p class="box-value">{{ $seller->store->balance }} </p>
                     </div>
 
                     <div class="icon-holder">

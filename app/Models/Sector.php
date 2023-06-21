@@ -12,4 +12,9 @@ class Sector extends Model
     protected $fillable = [
         'name', 'icon', 'status',
     ];
+
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 }

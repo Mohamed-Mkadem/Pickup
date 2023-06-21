@@ -55,4 +55,16 @@ class Seller extends Model
     {
         return $this->user->first_name . ' ' . $this->user->last_name;
     }
+    public function store()
+    {
+        return $this->hasOne(Store::class, 'seller_id');
+    }
+    public function hasStore()
+    {
+        return $this->store()->exists();
+    }
+    public function storesCount()
+    {
+        return $this->store()->count();
+    }
 }

@@ -66,7 +66,7 @@
     <div class="error-wrapper">
         <h1>404!</h1>
         <p>Oops! Page Not Found</p>
-        <a href="">Go Back</a>
+        <a href="{{ url()->previous() }}">Go Back</a>
     </div>
 </body>
 

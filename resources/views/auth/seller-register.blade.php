@@ -166,14 +166,9 @@
                                         <div class="form-control">
                                             <label class="d-block required">City :</label>
                                             <div class="select-box">
-                                                <select name="city_id" value="{{ old('city_id') }}"
-                                                    id="city-select">
+                                                <select name="city_id" id="city-select">
 
-                                                    {{-- <option value="Mnihla" aria-checked="true" checked>Mnihla</option>
-                                                    <option value="Haffouz" aria-checked="false">Haffouz</option>
-                                                    <option value="Sijoumi" aria-checked="false">sijoumi</option>
-                                                    <option value="Hammamet" aria-checked="false">Hammamet</option>
-                                                    <option value="Sokra" aria-checked="false">Sokra</option> --}}
+
 
                                                     @if (old('state_id'))
                                                         @foreach ($states as $state)

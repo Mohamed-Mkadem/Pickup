@@ -66,7 +66,7 @@
     <div class="error-wrapper">
         <h1>500!</h1>
         <p>Oops! The server has some difficulties to treat your request!</p>
-        <a href="">Go Back</a>
+        <a href="{{ url()->previous() }}">Go Back</a>
     </div>
 </body>
 

@@ -4,8 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Client;
+use App\Models\Sector;
+use App\Models\Seller;
+use App\Models\StatusHistory;
+use App\Models\Store;
 use App\Models\User;
+use App\Models\VerificationRequest;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,19 +32,22 @@ class DatabaseSeeder extends Seeder
                 // BrandsSeeder::class,
                 // VoucherCategoriesSeeder::class,
             ]);
+        // Client Factory (check userFactory File)
+        // User::factory(80)
+        //     ->has(Client::factory(1)
 
-        User::factory(80)
-            ->has(Client::factory(1)
-
-                , 'client')
-            ->create();
-        // User::factory(10)
-        //     ->has(Seller::factory(1)
-        //             ->has(VerificationRequest::factory(1)
-        //                     ->has(StatusHistory::factory(1), 'statusHistories')
-        //                 , 'verificationRequests')
-        //         , 'seller')
+        //         , 'client')
         //     ->create();
+        // Seller Factory (check userFactory File)
+        Sector::factory(10)->create();
+        User::factory(50)
+            ->has(Seller::factory(1)
+                    ->has(VerificationRequest::factory(1)
+                            ->has(StatusHistory::factory(1), 'statusHistories')
+                        , 'verificationRequests')
+                    ->has(Store::factory(1), 'store')
+                , 'seller')
+            ->create();
 
     }
 }

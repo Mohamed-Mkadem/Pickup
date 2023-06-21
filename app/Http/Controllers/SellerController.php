@@ -33,8 +33,9 @@ class SellerController extends Controller
     }
     public function balance()
     {
-        $user = User::findOrFail(Auth::id());
-        return view('Seller.seller-balance', ['user' => $user]);
+        // $user = User::findOrFail(Auth::id());
+        $seller = Seller::where('user_id', Auth::id())->with('store')->first();
+        return view('Seller.seller-balance', ['seller' => $seller]);
     }
     public function topUp(Request $request)
     {
