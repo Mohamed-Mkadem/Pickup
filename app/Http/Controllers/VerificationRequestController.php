@@ -197,7 +197,7 @@ class VerificationRequestController extends Controller
         if (!$verificationRequest) {
             return back()->with('error', 'Could Not Find The specified Verification Request');
         }
-
+        $this->authorize('view', $verificationRequest);
         return view('Seller.Verification.verification-show', ['request' => $verificationRequest]);
 
     }

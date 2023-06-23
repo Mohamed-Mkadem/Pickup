@@ -208,6 +208,10 @@ button {
 #aside ul.nav-links li a {
   position: relative;
 }
+#aside ul.nav-links li a.disabled-link {
+  cursor: no-drop;
+  opacity: 0.5 !important;
+}
 #aside ul.nav-links li a.notifiable::before {
   position: absolute;
   content: "";
@@ -232,6 +236,7 @@ button {
   gap: 10px;
   font-size: 18px;
   padding: 0.5em 0.8em;
+  opacity: 1;
   height: 45px;
   overflow-x: visible !important;
   letter-spacing: 1px;

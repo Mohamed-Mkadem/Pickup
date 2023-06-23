@@ -22,6 +22,9 @@
 
 @section('content')
     <section class="content" id="store-holder">
+        @include('components.errors-alert')
+        @include('components.session-errors-alert')
+        @include('components.success-alert')
         @include('components.Stores.store-header', ['store' => $store])
         <!-- Start Store Content -->
         <div class="store-content home m-block-2">

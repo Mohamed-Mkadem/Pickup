@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
@@ -58,7 +59,7 @@ require __DIR__ . '/auth.php';
 Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');
 Route::get('/api/cities/{stateId}', [CityController::class, 'getCities']);
 // Client
-Route::middleware(['auth', 'active'])->prefix('client')->name('client.')->group(function () {
+Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('client.')->group(function () {
     Route::get('home', [ClientController::class, 'home'])->name('home');
     Route::get('profile', [ClientController::class, 'profile'])
         ->name('profile');
@@ -73,7 +74,7 @@ Route::middleware(['auth', 'active'])->prefix('client')->name('client.')->group(
 });
 
 // Seller
-Route::middleware(['auth', 'active'])->prefix('seller')->name('seller.')->group(function () {
+Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('seller.')->group(function () {
     // Profile
     Route::get('home', [SellerController::class, 'home'])->name('home');
     Route::get('profile', [SellerController::class, 'profile'])
@@ -99,10 +100,18 @@ Route::middleware(['auth', 'active'])->prefix('seller')->name('seller.')->group(
     Route::post('stores/store', [StoreController::class, 'store'])->name('stores.store');
     Route::get('stores', [StoreController::class, 'index'])->name('stores.index');
     Route::get('stores/show/{username}', [StoreController::class, 'show'])->name('stores.show');
+
+    // Categories
+
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('categories/filter', [CategoryController::class, 'filter'])->name('categories.filter');
+    Route::post('categories/', [CategoryController::class, 'store'])->name('categories.store');
+    Route::patch('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 // Admin
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('home', [AdminController::class, 'home'])->name('home');
     Route::get('profile', [AdminController::class, 'profile'])
         ->name('profile');
@@ -121,7 +130,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::patch('vouchers-categories/{id}', [VouchersCategoriesController::class, 'update'])->name('vouchers-categories.update');
     Route::delete('vouchers-categories/{id}', [VouchersCategoriesController::class, 'destroy'])->name('vouchers-categories.destroy');
     //  Vouchers
-    Route::get('vouchers/', [VoucherController::class, 'index'])->name('vouchers.index');
+    Route::get('vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
     Route::get('vouchers/filter', [VoucherController::class, 'filter'])->name('vouchers.filter');
     Route::get('vouchers/create', [VoucherController::class, 'create'])->name('vouchers.create');
     // Route::get('vouchers/check', [VoucherController::class, 'check'])->name('vouchers.check');
@@ -168,4 +177,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('store/{username}/sales', [StoreController::class, 'sales'])->name('store.sales');
     Route::get('store/{username}/sale/{id}', [StoreController::class, 'sale'])->name('store.sale');
     Route::get('store/{username}/transfers', [StoreController::class, 'transfers'])->name('store.transfers');
+    Route::patch('store/ban/{id}', [StoreController::class, 'ban'])->name('store.ban');
+    Route::patch('store/activate/{id}', [StoreController::class, 'activate'])->name('store.activate');
 });

@@ -67,66 +67,42 @@
                             </nav>
                             <button class="actions-controller"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                             <ul class="actions-holder ">
-                                <li>
-                                    <button class="unPublishBtn">Unpublish</button>
-                                    <div class="modal-holder ">
-                                        <form action="" method="post" class="modal t-center confirm-form">
-                                            <i class=" fa-light fa-trash"></i>
-                                            <p>Are You Sure You Want To Unpublish This Store ?</p>
-                                            <div class="buttons d-flex j-center a-center">
-                                                <button class="cancelBtn">Cancel</button>
-                                                <button class="confirmBtn">Yes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li>
-                                <li>
-                                    <button class="publishBtn">Publish</button>
-                                    <div class="modal-holder">
-                                        <div class=" form-modal modal">
-                                            <div class="modal-header d-flex j-sp-between a-center">
-                                                <h2>Publish Store </h2>
-                                                <button class="close-modal-holder-btn"><i
-                                                        class="fa-light fa-close"></i></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Start Form -->
-                                                <form action="#" method="post" id="publish-form">
-                                                    <div class="form-control">
-                                                        <label for="publish-date" class="d-block required form-label">
-                                                            Publish Untill :
-                                                        </label>
-                                                        <div class="select-box">
-                                                            <select name="" id="period-select"
-                                                                class="form-element">
-
-                                                                <option value="day" aria-checked="true" checked>One
-                                                                    Day
-                                                                </option>
-                                                                <option value="week" aria-checked="false">One Week
-                                                                </option>
-                                                                <option value="month" aria-checked="false">One Month
-                                                                </option>
-                                                                <option value="1 year" aria-checked="false">One Year
-                                                                </option>
-                                                            </select>
-                                                            <p class="error-message" id="period-error-message">This
-                                                                Field Is
-                                                                Required</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-control d-flex j-end">
-                                                        <button type="submit" class="submit-btn">Publish</button>
-                                                    </div>
-                                                </form>
-                                                <!-- End Form -->
-
-                                            </div>
+                                @if ($store->status != 'banned')
+                                    <li>
+                                        <button class="unPublishBtn">Ban</button>
+                                        <div class="modal-holder ">
+                                            <form action="{{ route('admin.store.ban', $store->id) }}" method="post"
+                                                class="modal t-center confirm-form">
+                                                @csrf
+                                                @method('PATCH')
+                                                <i class=" fa-light fa-trash"></i>
+                                                <p>Are You Sure You Want To Ban This Store ?</p>
+                                                <div class="buttons d-flex j-center a-center">
+                                                    <button class="cancelBtn">Cancel</button>
+                                                    <button class="confirmBtn">Yes</button>
+                                                </div>
+                                            </form>
                                         </div>
+                                    </li>
+                                @else
+                                    <li>
+                                        <button class="unPublishBtn">Activate</button>
+                                        <div class="modal-holder ">
+                                            <form action="{{ route('admin.store.activate', $store->id) }}"
+                                                method="post" class="modal t-center confirm-form">
+                                                @csrf
+                                                @method('PATCH')
+                                                <i class=" fa-light fa-trash"></i>
+                                                <p>Are You Sure You Want To Activate This Store ?</p>
+                                                <div class="buttons d-flex j-center a-center">
+                                                    <button class="cancelBtn">Cancel</button>
+                                                    <button class="confirmBtn">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                @endif
 
-                                    </div>
-                                </li>
 
                             </ul>
                         </div>

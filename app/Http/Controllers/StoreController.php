@@ -9,6 +9,7 @@ use App\Models\Store;
 use App\Models\StoreOpeningHour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,7 @@ class StoreController extends Controller
     protected $fileNames;
     public function __construct()
     {
-
+        $this->middleware('isVerified')->only(['create', 'index']);
         $this->states = State::with('cities')->get();
         $this->sectors = Sector::where('status', 'active')->get();
         $this->covers = Storage::files('public/stores/covers');
@@ -59,6 +60,7 @@ class StoreController extends Controller
     public function create()
     {
         $seller = Seller::with('user')->find(Auth::user()->seller->id);
+        // $this->authorize('create');
         return view('Seller.Stores.stores-create', ['seller' => $seller, 'states' => $this->states, 'sectors' => $this->sectors, 'covers' => $this->covers, 'fileNames' => $this->fileNames]);
     }
 
@@ -67,9 +69,11 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
         Validator::extend('one_word', function ($attribute, $value, $parameters, $validator) {
             return preg_match('/^\w+$/', $value);
         });
+
         // dd($request->openingHours);
         // Set an array of attributes to rename the fields
         $validated = Validator::make($request->all(), [
@@ -140,8 +144,8 @@ class StoreController extends Controller
      */
     public function show($username)
     {
-        $store = Store::where('username', $username)->where('seller_id', Auth::user()->seller->id)->with(['owner', 'sector', 'openingHours'])->first();
-
+        $store = Store::where('username', $username)->with(['owner', 'sector', 'openingHours'])->first();
+        $this->authorize('view', $store);
         // dd($store->openingHours->where('day_of_week', 'friday'));
         return view('Seller.Stores.stores-show', ['store' => $store]);
 
@@ -153,8 +157,9 @@ class StoreController extends Controller
     public function edit($username)
     {
         // $store = Store::where('seller_id', Auth::user()->seller->id)->with(['owner', 'sector', 'openingHours'])->findOrFail($id);
-        $store = Store::where('username', $username)->where('seller_id', Auth::user()->seller->id)->with(['owner', 'sector', 'openingHours'])->first();
+        $store = Store::where('username', $username)->with(['owner', 'sector', 'openingHours'])->first();
         // dd($store);
+        $this->authorize('update', $store);
         return view('Seller.Stores.stores-edit', ['store' => $store, 'states' => $this->states, 'sectors' => $this->sectors, 'covers' => $this->covers, 'fileNames' => $this->fileNames]);
 
     }
@@ -165,11 +170,11 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
 
-        $store = Store::where('seller_id', Auth::user()->seller->id)->find($id);
-        if (!$store) {
-            return redirect()->back()->with('Cannot Update This Store');
-        }
-
+        $store = Store::findOrFail($id);
+        // if (!$store) {
+        //     return redirect()->back()->with('Cannot Update This Store');
+        // }
+        $this->authorize('update', $store);
         $validated = Validator::make($request->all(), [
             'name' => ['required', 'max:60', 'string', Rule::unique('stores', 'name')->ignore($store->id)],
             'sector_id' => ['required', 'exists:sectors,id'],
@@ -236,7 +241,9 @@ class StoreController extends Controller
 
     public function enableMaintenance($id)
     {
-        $store = Store::where('seller_id', Auth::user()->seller->id)->findOrFail($id);
+        $store = Store::findOrFail($id);
+        $this->authorize('update', $store);
+        return redirect()->back()->with('success', 'Maintenance Mode Enabled Successfully');
         if ($store->status == 'published') {
             $store->status = 'maintenance';
             $store->save();
@@ -247,7 +254,8 @@ class StoreController extends Controller
     }
     public function disableMaintenance($id)
     {
-        $store = Store::where('seller_id', Auth::user()->seller->id)->findOrFail($id);
+        $store = Store::findOrFail($id);
+        $this->authorize('update', $store);
         if ($store->status == 'maintenance') {
             $store->status = 'published';
             $store->save();
@@ -388,5 +396,44 @@ class StoreController extends Controller
             abort(404);
         }
         return view('Admin.Stores.show_store_reviews', ['store' => $store]);
+    }
+    public function ban($id)
+    {
+        $store = Store::findOrFail($id);
+
+        if ($store->status == 'banned') {
+            return redirect()->back()->with('error', 'This Store Is Already Banned');
+        }
+
+        $store->status = 'banned';
+        $store->save();
+        // When you create the orders table, check If store has pending orders ande reject them
+        return redirect()->back()->with('success', 'Store Banned Successfully');
+
+    }
+    public function activate($id)
+    {
+        $store = Store::findOrFail($id);
+
+        if ($store->status != 'banned') {
+            return redirect()->back()->with('error', 'This Store Is Already Active');
+        }
+        $currentDate = date('Y-m-d');
+
+        if ($store->expiry_date >= $currentDate) {
+
+            $store->status = 'maintenance';
+            $store->save();
+
+            return redirect()->back()->with('success', 'Store Returned To Maintenance Mode Successfully');
+        } else {
+
+            $store->status = 'unpublished';
+            $store->save();
+
+            return redirect()->back()->with('success', 'Store Activated Successfully');
+
+        }
+
     }
 }

@@ -256,4 +256,101 @@
 @endsection
 
 @push('scripts')
+    <script>
+        const verificationForm = document.getElementById('verification-form')
+        if (verificationForm) {
+
+
+            const fileInputs = document.querySelectorAll('.file-input')
+            verificationForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+                let errors = 0
+                for (let i = 0; i < fileInputs.length; i++) {
+
+                    errors += validateField(fileInputs[i], fileInputs[i].parentElement.nextElementSibling)
+                }
+                if (!errors) {
+                    verificationForm.submit()
+                }
+
+            })
+
+            function validateField(field, errorMessage) {
+                let errors = 0
+                if (!field.value) {
+                    errorMessage.textContent = 'This Field Is Required'
+                    errorMessage.classList.add('show')
+                    errors = 1
+                } else {
+                    errorMessage.textContent = ''
+                    errorMessage.classList.remove('show')
+                    errors = 0
+                }
+                return errors
+            }
+            fileInputs.forEach((fileInput) => {
+                fileInput.addEventListener('change', () => {
+                    if (validateFileType(fileInput)) {
+                        showFileInfo(fileInput)
+
+                    } else {
+                        showFileTypeError(fileInput)
+                    }
+
+                })
+            })
+
+            function showFileInfo(input) {
+                let errorMessage = input.parentElement.nextElementSibling
+                let uploadArea = errorMessage.nextElementSibling
+                let fileNameHolder = uploadArea.children[1].children[0]
+                let fileSizeHolder = uploadArea.children[1].children[1]
+                errorMessage.classList.remove('show')
+                errorMessage.textContent = '';
+                let fileSize = Math.floor(input.files[0].size / 1000)
+                let fileName = input.files[0].name
+                if (fileName.length > 12) {
+                    let splitName = fileName.split('.')
+                    fileName = splitName[0].substring(0, 12) + '... .' + splitName[1];
+                    console.log(fileName);
+                }
+                uploadArea.classList.add('show')
+                fileNameHolder.textContent = fileName
+                fileSizeHolder.textContent = fileSize > 1000 ? `${Math.floor(fileSize / 1000)} MB` : `${fileSize} KB`
+            }
+
+            function validateFileType(actualFileInput) {
+                allowedExtensions = /(\.jpg|\.jpeg)$/i
+                return allowedExtensions.exec(actualFileInput.files[0].name);
+
+            }
+
+            function showFileTypeError(input) {
+                let errorMessage = input.parentElement.nextElementSibling
+                let uploadArea = errorMessage.nextElementSibling
+                uploadArea.classList.remove('show')
+                input.value = ''
+                errorMessage.textContent = 'We Only Accept Jpeg, Jpg Formats'
+                errorMessage.classList.add('show')
+            }
+            const resetBtn = document.getElementById('reset-btn')
+            const uploadAreas = document.querySelectorAll('.upload-area')
+            resetBtn.addEventListener('click', () => {
+                let errorMessages = document.querySelectorAll('.error-message')
+                errorMessages.forEach((msg) => {
+                    msg.textContent = ''
+                    msg.classList.remove('show')
+                })
+                uploadAreas.forEach((area) => {
+                    let fileName = area.querySelector('.file-name')
+                    let fileSize = area.querySelector('.file-size')
+                    fileName.textContent = ''
+                    fileSize.textContent = ''
+                    area.classList.remove('show')
+                    let input = area.previousElementSibling.previousElementSibling.querySelector('input')
+                    input.value = ''
+                })
+            })
+        }
+    </script>
 @endpush

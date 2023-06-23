@@ -54,4 +54,8 @@ class Store extends Model
     {
         return $this->hasMany(StoreOpeningHour::class);
     }
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

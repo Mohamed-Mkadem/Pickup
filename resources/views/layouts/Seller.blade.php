@@ -59,34 +59,50 @@
                         <i class="fa-light fa-house"></i><span>Home</span>
                     </a>
                 </li>
-
+                @if (Auth::user()->seller->hasStore())
+                @endif
                 <li class="nav-item">
-                    <a href="categories.html" class="nav-link">
+                    <a href="{{ route('seller.categories.index') }}"
+                        class="nav-link 
+                            {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    {{ request()->is('seller/categories*') ? 'active' : '' }}
+                    ">
                         <i class="fa-solid fa-list"></i>
                         <span>Categories</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-box"></i> <span>Products</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link 
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    collapsed">
+                        <i class="fa-light fa-box"></i> <span>Products</span></a>
                     <ul class="nav-sub-dropdown">
                         <li class="nav-item"><a href="products_add.html">New Product</a></li>
                         <li class="nav-item"><a href="products_list.html">List Products</a></li>
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="seller_orders_list.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="seller_orders_list.html"
+                        class="nav-link
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    notifiable">
                         <i class="fa-light fa-cart-arrow-down"></i>
                         <span>Orders</span></a></li>
 
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-hand-holding-dollar"></i> <span>Sales</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    collapsed">
+                        <i class="fa-light fa-hand-holding-dollar"></i> <span>Sales</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="seller_sale_add.html">New Sale</a></li>
-                        <li class="nav-item"><a href="seller_sales.html">List </a></li>
+                        <li class="nav-item"><a class=" {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="seller_sale_add.html">New Sale</a></li>
+                        <li class="nav-item"><a class=" {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="seller_sales.html">List </a></li>
                     </ul>
                 </li>
 
@@ -100,12 +116,15 @@
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
                         class="nav-link collapsed
+                        {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     {{ request()->is('seller/subscriptions*' ? 'active' : '') }}">
                         <i class="fa-light fa-box-dollar"></i> <span>Subscriptions</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="{{ route('seller.stores.subscriptions.create') }}">Add New</a>
+                        <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="{{ route('seller.stores.subscriptions.create') }}">Add New</a>
                         </li>
-                        <li class="nav-item"><a href="{{ route('seller.stores.subscriptions.index') }}">List</a></li>
+                        <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="{{ route('seller.stores.subscriptions.index') }}">List</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -117,7 +136,10 @@
                         <li class="nav-item"><a href="{{ route('seller.verification-requests.index') }}"
                                 class="notifiable">Verification</a>
                         </li>
-                        <li class="nav-item"><a href="seller_req_payment_list.html" class="notifiable">Payment</a>
+                        <li class="nav-item"><a href="seller_req_payment_list.html"
+                                class="
+                            {{ Auth::user()->seller->isVerified() ? '' : 'disabled-link' }}
+                            notifiable">Payment</a>
                         </li>
                     </ul>
                 </li>
@@ -129,15 +151,23 @@
                     <a href="#" role="button" aria-controls="#sub-menu"
                         class="nav-link collapsed 
                         {{ request()->is('seller/stores*') ? 'active' : '' }}
+                        {{ Auth::user()->seller->isVerified() ? '' : 'disabled-link' }}
                     ">
                         <i class="fa-light fa-shop"></i> <span>Stores</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="{{ route('seller.stores.create') }}">New Store</a></li>
-                        <li class="nav-item"><a href="{{ route('seller.stores.index') }}">List</a></li>
+                        <li class="nav-item"><a
+                                class="{{ Auth::user()->seller->isVerified() ? '' : 'disabled-link' }}"
+                                href="{{ route('seller.stores.create') }}">New Store</a></li>
+                        <li class="nav-item"><a
+                                class="{{ Auth::user()->seller->isVerified() ? '' : 'disabled-link' }}"
+                                href="{{ route('seller.stores.index') }}">List</a></li>
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="inventory.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="inventory.html"
+                        class="nav-link 
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    notifiable">
                         <i class="fa-light fa-warehouse"></i>
                         <span>Inventory</span></a></li>
                 <li class="nav-item"><a href="seller_notifications.html" class="nav-link notifiable"> <i
@@ -164,11 +194,17 @@
 
 
 
-                <li class="nav-item"><a href="seller_transfers.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-arrow-right-arrow-left"></i>
+                <li class="nav-item"><a href="seller_transfers.html"
+                        class="nav-link
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    notifiable">
+                        <i class="fa-light fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span></a></li>
-                <li class="nav-item"><a href="seller_reviews.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-star"></i>
+                <li class="nav-item"><a href="seller_reviews.html"
+                        class="nav-link 
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    notifiable">
+                        <i class="fa-light fa-star"></i>
                         <span>Reviews</span></a></li>
 
 
@@ -177,12 +213,18 @@
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-sack-dollar"></i> <span>Treasury</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link 
+                    {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    collapsed">
+                        <i class="fa-light fa-sack-dollar"></i> <span>Treasury</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="seller_earnings.html">Earnings</a></li>
-                        <li class="nav-item"><a href="seller_revenues.html">Revenues</a></li>
-                        <li class="nav-item"><a href="seller_expenses.html">Expenses</a></li>
+                        <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="seller_earnings.html">Earnings</a></li>
+                        <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="seller_revenues.html">Revenues</a></li>
+                        <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
+                                href="seller_expenses.html">Expenses</a></li>
                     </ul>
                 </li>
 

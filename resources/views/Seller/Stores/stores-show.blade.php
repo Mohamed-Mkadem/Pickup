@@ -39,8 +39,8 @@
                                 <button class="deleteBtn delete-button">Enable Maintenance Mode</button>
 
                                 <div class="modal-holder ">
-                                    <form action="{{ route('seller.stores.enableMaintenance', $store->id) }}" method="post"
-                                        class="modal t-center confirm-form">
+                                    <form action="{{ route('seller.stores.enableMaintenance', 240404) }}" method="post"
+                                        {{-- <form action="{{ route('seller.stores.enableMaintenance', $store->id) }}" method="post" --}} class="modal t-center confirm-form">
                                         @csrf
                                         @method('PATCH')
                                         <i class=" fa-light fa-trash"></i>

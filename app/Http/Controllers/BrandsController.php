@@ -9,8 +9,10 @@ use Illuminate\Validation\Rule;
 
 class BrandsController extends Controller
 {
+
     public function index()
     {
+
         $brands = Brand::OrderBy('created_at', 'desc')
             ->paginate(1);
         return view('Admin.Brands.brands-index', [

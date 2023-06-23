@@ -77,4 +77,16 @@ class User extends Authenticatable
     {
         return $this->city->state->name . ' - ' . $this->city->name;
     }
+    public function isAdmin()
+    {
+        return $this->type == 'Admin';
+    }
+    public function isSeller()
+    {
+        return $this->type == 'Seller';
+    }
+    public function isClient()
+    {
+        return $this->type == 'Client';
+    }
 }
