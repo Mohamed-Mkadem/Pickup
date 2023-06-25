@@ -75,11 +75,12 @@
                     <a href="#" role="button" aria-controls="#sub-menu"
                         class="nav-link 
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
+                    {{ request()->is('seller/products*') ? 'active' : '' }}
                     collapsed">
                         <i class="fa-light fa-box"></i> <span>Products</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="products_add.html">New Product</a></li>
-                        <li class="nav-item"><a href="products_list.html">List Products</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.products.create') }}">New Product</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.products.index') }}">List Products</a></li>
                     </ul>
                 </li>
 

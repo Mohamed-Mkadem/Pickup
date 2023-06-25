@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -13,8 +14,8 @@ class BrandsController extends Controller
     public function index()
     {
 
-        $brands = Brand::OrderBy('created_at', 'desc')
-            ->paginate(1);
+        $brands = Brand::with('products')->orderBy('created_at', 'desc')
+            ->paginate();
         return view('Admin.Brands.brands-index', [
             'brands' => $brands,
         ]);
@@ -25,8 +26,10 @@ class BrandsController extends Controller
         $search = $request->search ?? '';
         $minDate = $request->min_date ?? '';
         $maxDate = $request->max_date ?? '';
-        $status = $request->status ?? ['Active', 'Inactive'];
+        $status = $request->status ?? [];
         $sort = $request->sort ?? 'newest';
+        $minProducts = $request->min_products ?? '';
+        $maxProducts = $request->max_products ?? '';
         $query = Brand::query();
 
         // Apply the filters
@@ -46,19 +49,32 @@ class BrandsController extends Controller
             $query->whereIn('status', $status);
         }
 
-        // if (is_array($status) && count($status) > 0) {
-        //     $query->whereIn('status', $status);
-        // }
+        $query->select('brands.*')
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM products WHERE products.brand_id = brands.id) AS products_count'));
 
-        // Apply the order by clause
+// Apply the filter by minimum and maximum products
+        if (!empty($minProducts)) {
+            $query->having('products_count', '>=', $minProducts);
+        }
+
+        if (!empty($maxProducts)) {
+            $query->having('products_count', '<=', $maxProducts);
+        }
+
+// Apply the order by clause
         if ($sort === 'oldest') {
             $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'highest_products') {
+            $query->orderBy('products_count', 'desc');
+        } elseif ($sort === 'lowest_products') {
+            $query->orderBy('products_count', 'asc');
         } else {
             $query->orderBy('created_at', 'desc');
         }
         // dd($query);
         $brands = $query->paginate();
         return view('Admin.Brands.brands-index', ['brands' => $brands]);
+
     }
     public function create()
     {
@@ -149,12 +165,14 @@ class BrandsController extends Controller
     }
     public function destroy($id)
     {
-        $result = Brand::destroy($id);
-        if ($result) {
-            return redirect()->route('admin.brands.index')->with('success', 'Brand Deleted Successfully');
+        $brand = Brand::findOrfail($id);
+
+        if ($brand->productsCount() > 0) {
+            return redirect()->back()->with('error', 'Brands That Have Products Cannot Be Deleted, You can Desactivate It Instead To Prevent Sellers From Using It ');
 
         } else {
-            return redirect()->route('admin.brands.index')->with('error', 'Brand Cannot be Deleted ');
+            $brand->delete();
+            return redirect()->back()->with('success', 'Brand Deleted Successfully');
         }
     }
 }

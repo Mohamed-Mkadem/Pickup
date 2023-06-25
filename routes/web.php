@@ -7,6 +7,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
@@ -108,6 +109,17 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::post('categories/', [CategoryController::class, 'store'])->name('categories.store');
     Route::patch('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    // Products
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/filter', [ProductController::class, 'filter'])->name('products.filter');
+    Route::get('products/details/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::delete('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::patch('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::post('products/populate', [ProductController::class, 'populate'])->name('products.populate');
 });
 
 // Admin

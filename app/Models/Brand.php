@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'name','logo','description','status'
+    protected $fillable = [
+        'name', 'logo', 'description', 'status',
     ];
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function productsCount(){
+        return $this->products()->count();
+    }
 }

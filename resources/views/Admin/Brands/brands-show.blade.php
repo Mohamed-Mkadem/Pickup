@@ -14,7 +14,9 @@
             <h1>{{ $brand->name }}</h1>
         </div>
         <!-- End Starter Header -->
-
+        @include('components.session-errors-alert')
+        @include('components.errors-alert')
+        @include('components.success-alert')
         <!-- Start Show Header -->
         <div class="show-header brands d-flex j-start  a-center  col main-holder">
             <div class="img-holder">
@@ -64,7 +66,7 @@
             <header class="d-flex j-sp-between a-center">
                 <h2>Description</h2>
                 <!-- <button id="description-holder-controller" aria-controls="#description-body"><i
-                                                            class="fa-light fa-circle-caret-down"></i></button> -->
+                                                                class="fa-light fa-circle-caret-down"></i></button> -->
             </header>
             <div class="description-body" id="description-body">
                 {!! $brand->description !!}
@@ -77,7 +79,7 @@
 
 
 
-        
+
     </section>
 @endsection
 @push('scripts')

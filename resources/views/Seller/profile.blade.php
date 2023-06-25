@@ -41,7 +41,7 @@
                                 <h3>Stores</h3>
                             </div>
                             <div class="info-value">
-                                <p>1</p>
+                                <p>{{ Auth::user()->seller->storesCount() }}</p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -52,7 +52,7 @@
                                 <h3>Subscriptions </h3>
                             </div>
                             <div class="info-value">
-                                <p>24</p>
+                                <p>{{ Auth::user()->seller->store->subscriptionsCount() }}</p>
                             </div>
                         </div>
                         <!-- End Info -->

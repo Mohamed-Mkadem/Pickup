@@ -15,4 +15,12 @@ class Category extends Model
     {
         return $this->belongsTo(Store::class);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function productsCount()
+    {
+        return $this->products()->count();
+    }
 }

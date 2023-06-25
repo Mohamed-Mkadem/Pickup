@@ -17,4 +17,8 @@ class VoucherCategory extends Model
     {
         return $this->hasMany(Voucher::class, 'category_id');
     }
+    public function vouchersCount()
+    {
+        return $this->vouchers()->count();
+    }
 }

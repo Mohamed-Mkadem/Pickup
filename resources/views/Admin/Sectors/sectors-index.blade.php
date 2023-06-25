@@ -126,6 +126,12 @@
                                         Newest</option>
                                     <option value="oldest" {{ request()->input('sort') === 'oldest' ? 'selected' : '' }}>
                                         Oldest</option>
+                                    <option value="highest_stores"
+                                        {{ request()->input('sort') === 'highest_stores' ? 'selected' : '' }}>
+                                        Highest Stores</option>
+                                    <option value="lowest_stores"
+                                        {{ request()->input('sort') === 'lowest_stores' ? 'selected' : '' }}>
+                                        Lowest Stores</option>
                                 </select>
                             </div>
                         </div>
@@ -153,14 +159,14 @@
                             <div class="numbers-range-boxes filter-row sm-row2 ">
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">From : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="0"
-                                        class="form-element" />
+                                    <input type="number" placeholder="eg:5" value="{{ request()->min_stores }}"
+                                        name="min_stores" pattern="^\d{8}$" inputmode="numeric" class="form-element" />
 
                                 </div>
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">To : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="1000"
-                                        class="form-element" />
+                                    <input type="number" placeholder="eg:50" value="{{ request()->max_stores }}"
+                                        name="max_stores" pattern="^\d{8}$" inputmode="numeric" class="form-element" />
                                 </div>
                             </div>
                         </div>
@@ -293,10 +299,13 @@
                             </header>
 
                             <div class="info">
-                                <img loading="lazy" src="{{ asset('storage/' . $sector->icon) }}" alt="">
+                                <img loading="lazy" src="{{ asset($sector->icon) }}" alt="">
+                                {{-- <img loading="lazy" src="{{ asset('storage/' . $sector->icon) }}" alt=""> --}}
                                 <h3>{{ $sector->name }}</h3>
-                                <p>150 Stores</p>
-                                <p class="p-span">Created At : <span>{{ $sector->created_at }}</span></p>
+                                <p>{{ $sector->storesCount() == 1 ? '1 Store' : $sector->storesCount() . ' Stores' }}</p>
+                                <p class="p-span">Added At :
+                                    <span>{{ \Carbon\Carbon::parse($sector->created_at)->format('M jS Y') }}</span>
+                                </p>
                             </div>
                         </div>
                         <!-- End Sector Card -->

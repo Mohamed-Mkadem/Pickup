@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Sector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,7 @@ class SectorController extends Controller
 {
     public function index()
     {
-        $sectors = Sector::paginate();
+        $sectors = Sector::with('stores')->orderBy('created_at', 'desc')->paginate();
 
         return view('Admin.Sectors.sectors-index', ['sectors' => $sectors]);
     }
@@ -21,8 +22,10 @@ class SectorController extends Controller
         $search = $request->search ?? '';
         $minDate = $request->min_date ?? '';
         $maxDate = $request->max_date ?? '';
-        $status = $request->status ?? ['active', 'inactive'];
+        $status = $request->status ?? [];
         $sort = $request->sort ?? 'newest';
+        $minStores = $request->min_stores ?? '';
+        $maxStores = $request->max_stores ?? '';
         $query = Sector::query();
 
         // Apply the filters
@@ -42,16 +45,29 @@ class SectorController extends Controller
             $query->whereIn('status', $status);
         }
 
-        // if (is_array($status) && count($status) > 0) {
-        //     $query->whereIn('status', $status);
-        // }
+        $query->select('sectors.*')
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM stores WHERE stores.sector_id = sectors.id) AS stores_count'));
 
-        // Apply the order by clause
+// Apply the filter by minimum and maximum products
+        if (!empty($minStores)) {
+            $query->having('stores_count', '>=', $minStores);
+        }
+
+        if (!empty($maxStores)) {
+            $query->having('stores_count', '<=', $maxStores);
+        }
+
+// Apply the order by clause
         if ($sort === 'oldest') {
             $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'highest_stores') {
+            $query->orderBy('stores_count', 'desc');
+        } elseif ($sort === 'lowest_stores') {
+            $query->orderBy('stores_count', 'asc');
         } else {
             $query->orderBy('created_at', 'desc');
         }
+
         // dd($query);
         $sectors = $query->paginate();
         return view('Admin.Sectors.sectors-index', ['sectors' => $sectors]);
@@ -116,12 +132,14 @@ class SectorController extends Controller
     }
     public function destroy($id)
     {
-        $result = Sector::destroy($id);
-        if ($result) {
-            return redirect()->route('admin.sectors.index')->with('success', 'Sector Deleted Successfully');
+        $sector = Sector::findOrFail($id);
+
+        if ($sector->storesCount() > 0) {
+            return redirect()->back()->with('error', 'Sectors That Have Stores Cannot Be Deleted, You can Desactivate It Instead To Prevent Sellers From Using It  ');
 
         } else {
-            return redirect()->route('admin.sectors.index')->with('error', 'Sector Cannot be Deleted ');
+            $sector->delete();
+            return redirect()->back()->with('success', 'Sector Deleted Successfully');
         }
     }
 }

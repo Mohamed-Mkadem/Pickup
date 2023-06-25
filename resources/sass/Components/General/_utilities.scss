@@ -1,116 +1,118 @@
 @use "../../Abstracts/" as *;
 .t-center {
-  text-align: center;
+    text-align: center;
 }
 .t-left {
-  text-align: left;
+    text-align: left;
 }
 .t-right {
-  text-align: right;
+    text-align: right;
 }
 .d-block {
-  display: block;
+    display: block;
 }
 .m-auto {
-  margin-inline: auto;
+    margin-inline: auto;
 }
 
 .form-dialog-btns-wrapper {
-  margin-block: 1em;
-  @include min-width(medium) {
-    justify-content: flex-end !important;
-  }
+    margin-block: 1em;
+    @include min-width(medium) {
+        justify-content: flex-end !important;
+    }
 }
 .w-100 {
-  width: 100%;
+    width: 100%;
 }
 .mb-0-5 {
-  margin-bottom: 0.5em !important;
+    margin-bottom: 0.5em !important;
 }
 .mb-1 {
-  margin-bottom: 1em !important;
+    margin-bottom: 1em !important;
 }
 .mb-2 {
-  margin-bottom: 2em !important;
+    margin-bottom: 2em !important;
 }
 .mt-0 {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 .mt-1 {
-  margin-top: 1em !important;
+    margin-top: 1em !important;
 }
 .mt-2 {
-  margin-top: 2em !important;
+    margin-top: 2em !important;
 }
 .mb-0 {
-  margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 .p-1 {
-  padding: 1em;
+    padding: 1em;
 }
 .p-0-5 {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 .radius-5 {
-  border-radius: 5px;
+    border-radius: 5px;
 }
 .radius-10 {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 .shadow-1 {
-  box-shadow: $boxShadow1;
+    box-shadow: $boxShadow1;
 }
 .shadow-2 {
-  box-shadow: $boxShadow2;
+    box-shadow: $boxShadow2;
 }
 .m-0 {
-  margin: 0 !important;
+    margin: 0 !important;
 }
 .m-block-1 {
-  margin-block: 1rem;
+    margin-block: 1rem;
 }
 .m-block-2 {
-  margin-block: 2rem;
+    margin-block: 2rem;
 }
 p.rate {
-  color: var(--clr-blueGray-800);
-  font-weight: 500;
+    color: var(--clr-blueGray-800);
+    font-weight: 500;
 }
 a.editBtn {
-  color: var(--clr-blueGray-900);
-  font-size: 18px;
-  background-color: var(--clr-blueGray-100);
-  padding: 0.3em 0.8em;
-  border-radius: $radius5;
-  transition: $bgTransition;
-  &:hover {
-    background-color: var(--clr-blueGray-200);
-  }
-  i {
-    font-size: 0.85em;
-    margin-right: 5px;
-  }
+    color: var(--clr-blueGray-900);
+    font-size: 16px;
+    display: block;
+    min-height: max-content;
+    background-color: var(--clr-blueGray-100);
+    padding: 5px 12px;
+    border-radius: $radius5;
+    transition: $bgTransition;
+    &:hover {
+        background-color: var(--clr-blueGray-200);
+    }
+    i {
+        font-size: 0.85em;
+        margin-right: 5px;
+    }
 }
 .fw-bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 .relative {
-  position: relative;
+    position: relative;
 }
 .d-none {
-  display: none;
+    display: none;
 }
 .h-100 {
-  height: 100%;
+    height: 100%;
 }
 .abs-error-message {
-  color: var(--clr-red-600);
-  letter-spacing: 1px;
-  font-style: italic;
-  display: none;
-  font-size: 16px;
-  text-align: left;
-  &.show {
-    display: block;
-  }
+    color: var(--clr-red-600);
+    letter-spacing: 1px;
+    font-style: italic;
+    display: none;
+    font-size: 16px;
+    text-align: left;
+    &.show {
+        display: block;
+    }
 }

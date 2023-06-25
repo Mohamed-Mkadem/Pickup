@@ -26,10 +26,10 @@ class CategoryController extends Controller
         $minDate = $request->min_date ?? '';
         $maxDate = $request->max_date ?? '';
         $status = $request->status ?? 'all';
-        // $minProducts = $request->min_products ?? '';
-        // $maxProducts = $request->max_products ?? '';
+        $minProducts = $request->min_products ?? '';
+        $maxProducts = $request->max_products ?? '';
         $sort = $request->sort ?? 'newest';
-        dd($minDate);
+        // dd($minDate);
         $query->where('store_id', Auth::user()->seller->store->id);
 
         if (!empty($minDate)) {
@@ -47,12 +47,27 @@ class CategoryController extends Controller
         if ($status != 'all') {
             $query->where('status', $status);
         }
+
+        if (!empty($minProducts)) {
+            $query->whereHas('products', function ($query) use ($minProducts) {
+                $query->groupBy('category_id')
+                    ->havingRaw('COUNT(*) >= ?', [$minProducts]);
+            });
+        }
+
+        if (!empty($maxProducts)) {
+            $query->whereHas('products', function ($query) use ($maxProducts) {
+                $query->groupBy('category_id')
+                    ->havingRaw('COUNT(*) <= ?', [$maxProducts]);
+            });
+        }
+
         if ($sort === 'oldest') {
             $query->orderBy('created_at', 'asc');
         } else {
             $query->orderBy('created_at', 'desc');
         }
-        // Implements Products when you create them
+        // Implements Products filter when you create them
         $categories = $query->paginate();
         return view('Seller.Categories.categories-index', ['categories' => $categories]);
     }
@@ -62,7 +77,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $categories = Category::where('store_id', Auth::user()->seller->store->id)->paginate();
+        $categories = Category::where('store_id', Auth::user()->seller->store->id)->with('products')->orderBy('created_at', 'desc')->paginate();
 
         return view('Seller.Categories.categories-index', ['categories' => $categories]);
     }
@@ -179,7 +194,11 @@ class CategoryController extends Controller
         // }
         $this->authorize('delete', $category);
         // Check if the categories has products so don't delete a category that has products
-        $result = $category->delete();
+        if ($category->productsCount() > 0) {
+            return redirect()->back()->with('error', 'Categories That Have Products Cannot Be Deleted,Instead You Can Deactivate It, Or Remove their related Products/change their Category');
+        }
+        $category->delete();
+        return redirect()->back()->with('success', 'Category Deleted Successfully');
         // dd($result);
     }
 }

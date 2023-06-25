@@ -1411,6 +1411,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 .show-header .img-holder img {
   width: 100%;
   border-radius: 10px;
+  aspect-ratio: 1;
 }
 .show-header .img-holder.has-overlay {
   position: relative;
@@ -1462,7 +1463,6 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   gap: 1em;
 }
 .show-header .info-holder .top-header h2 {
-  text-align: center;
   color: var(--clr-blueGray-700);
 }
 .show-header .info-holder .top-header h2 small {
@@ -1470,6 +1470,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .show-header .info-holder .top-header ul.horizontal-actions-holder {
   width: 100%;
+  min-width: 158px;
 }
 .show-header .info-holder .top-header ul.horizontal-actions-holder li p {
   color: var(--clr-blueGray-800);
@@ -1564,15 +1565,15 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 
 @media (min-width: 768px) {
-  .full-width .show-header {
+  .full-width .show-header:not(.product-show-header) {
     flex-direction: row !important;
     align-items: flex-start;
   }
-  .full-width .show-header .info-holder .top-header {
+  .full-width .show-header:not(.product-show-header) .info-holder .top-header {
     flex-direction: row;
     justify-content: space-between;
   }
-  .full-width .show-header .info-holder .top-header ul.horizontal-actions-holder {
+  .full-width .show-header:not(.product-show-header) .info-holder .top-header ul.horizontal-actions-holder {
     width: -moz-max-content;
     width: max-content;
     gap: 15px;
@@ -2037,7 +2038,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 @media (min-width: 991px) {
   .form-grid.has-sticky {
-    grid-template-columns: min(250px, 100%) 1fr;
+    grid-template-columns: min(300px, 100%) 1fr;
     position: relative;
   }
   .form-grid.has-sticky .form-sidebar.sticky {
@@ -2046,7 +2047,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
     position: sticky;
     top: 0;
     left: 0;
-    width: 250px;
+    width: 300px;
     scrollbar-width: none;
   }
   .form-grid.has-sticky .form-sidebar.sticky::-webkit-scrollbar {

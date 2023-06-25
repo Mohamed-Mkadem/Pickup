@@ -162,7 +162,7 @@
 
         function showFileInfo(input) {
             let errorMessage = input.parentElement.nextElementSibling
-            let uploadArea = errorMessage.nextElementSibling
+            let uploadArea = errorMessage.nextElementSibling.nextElementSibling
             let fileNameHolder = uploadArea.children[1].children[0]
             let fileSizeHolder = uploadArea.children[1].children[1]
             errorMessage.classList.remove('show')
@@ -187,7 +187,7 @@
 
         function showFileTypeError(input) {
             let errorMessage = input.parentElement.nextElementSibling
-            let uploadArea = errorMessage.nextElementSibling
+            let uploadArea = errorMessage.nextElementSibling.nextElementSibling
             uploadArea.classList.remove('show')
             input.value = ''
             errorMessage.textContent = 'We Only Accept Jpeg, Jpg, Png Formats'

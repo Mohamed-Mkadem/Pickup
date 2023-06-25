@@ -17,4 +17,8 @@ class Sector extends Model
     {
         return $this->hasMany(Store::class);
     }
+    public function storesCount()
+    {
+        return $this->stores()->count();
+    }
 }

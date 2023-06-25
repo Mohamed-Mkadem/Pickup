@@ -144,13 +144,15 @@
                             <div class="numbers-range-boxes filter-row sm-row2 ">
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">From : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="0"
+                                    <input type="number" placeholder="eg:5" value="{{ request()->min_products }}"
+                                        name="min_products" pattern="^\d{8}$" inputmode="numeric"
                                         class="form-element" />
 
                                 </div>
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">To : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="1000"
+                                    <input type="number" placeholder="eg:50" value="{{ request()->max_products }}"
+                                        name="max_products" pattern="^\d{8}$" inputmode="numeric"
                                         class="form-element" />
                                 </div>
                             </div>
@@ -278,9 +280,11 @@
                                 </ul>
                             </header>
                             <div class="info">
-                                <img loading="lazy" src="{{ asset('storage/' . $category->icon) }}" alt="">
+                                <img loading="lazy" src="{{ asset($category->icon) }}" alt="">
+                                {{-- <img loading="lazy" src="{{ asset('storage/' . $category->icon) }}" alt=""> --}}
                                 <h3> {{ $category->name }} <small>({{ ucfirst($category->status) }})</small></h3>
-                                <p>15 Products</p>
+                                <p>{{ $category->productsCount() == 1 ? '1 Product' : $category->productsCount() . ' Products' }}
+                                </p>
 
                             </div>
                         </div>

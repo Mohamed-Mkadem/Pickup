@@ -1493,9 +1493,12 @@ p.rate {
 
 a.editBtn {
   color: var(--clr-blueGray-900);
-  font-size: 18px;
+  font-size: 16px;
+  display: block;
+  min-height: -moz-max-content;
+  min-height: max-content;
   background-color: var(--clr-blueGray-100);
-  padding: 0.3em 0.8em;
+  padding: 5px 12px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }

@@ -66,6 +66,12 @@
                                         Newest</option>
                                     <option value="oldest" {{ request()->input('sort') === 'oldest' ? 'selected' : '' }}>
                                         Oldest</option>
+                                    <option value="highest_products"
+                                        {{ request()->input('sort') === 'highest_products' ? 'selected' : '' }}>
+                                        Highest Products</option>
+                                    <option value="lowest_products"
+                                        {{ request()->input('sort') === 'lowest_products' ? 'selected' : '' }}>
+                                        Lowest Products</option>
 
 
                                 </select>
@@ -96,14 +102,14 @@
                             <div class="numbers-range-boxes filter-row sm-row2 ">
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">From : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="0"
-                                        class="form-element" name="product_min" />
+                                    <input type="number" placeholder="eg:5" value="{{ request()->min_products }}"
+                                        name="min_products" pattern="^\d{8}$" inputmode="numeric" class="form-element" />
 
                                 </div>
                                 <div class="number-box min-grid">
                                     <p class="limiters form-limiters">To : </p>
-                                    <input type="number" pattern="^\d{8}$" inputmode="numeric" value="1000"
-                                        class="form-element" name="product_max" />
+                                    <input type="number" placeholder="eg:50" value="{{ request()->max_products }}"
+                                        name="max_products" pattern="^\d{8}$" inputmode="numeric" class="form-element" />
                                 </div>
                             </div>
                         </div>
@@ -157,9 +163,11 @@
                             </header>
 
                             <div class="info">
-                                <img loading="lazy" src="{{ asset('storage/' . $brand->logo) }}" alt="">
+                                <img loading="lazy" src="{{ asset($brand->logo) }}" alt="">
+                                {{-- <img loading="lazy" src="{{ asset('storage/' . $brand->logo) }}" alt=""> --}}
                                 <h3><a href="{{ route('admin.brands.show', $brand->id) }}">{{ $brand->name }}</a></h3>
-                                <p>15 Products</p>
+                                <p>{{ $brand->productsCount() == 1 ? '1 Product' : $brand->productsCount() . ' Products' }}
+                                </p>
                                 <p> {{ \Carbon\Carbon::parse($brand->created_at)->format('M jS Y') }} </p>
                             </div>
                         </div>

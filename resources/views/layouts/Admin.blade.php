@@ -88,7 +88,7 @@
                         <i class="fa-light fa-credit-card"></i>
                         <span>Vouchers</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="{{ route('admin.vouchers.create') }}">New Voucher</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.vouchers.create') }}">New Vouchers</a></li>
                         <li class="nav-item"><a href="{{ route('admin.vouchers.index') }}">List</a></li>
 
                     </ul>

@@ -136,10 +136,13 @@ class VouchersCategoriesController extends Controller
     }
     public function destroy($id)
     {
-        $result = VoucherCategory::destroy($id);
-        if ($result) {
-            return redirect()->back()->with('success', 'Voucher Category Deleted Successfully');
+        $voucherCategory = VoucherCategory::findOrFail($id);
+
+        if ($voucherCategory->vouchersCount() > 0) {
+            return redirect()->back()->with('error', 'Vouchers Categories That Have Vouchers Cannot Be Deleted');
+
         }
-        return redirect()->back()->with('error', 'Voucher Category Cannot Be Deleted');
+        $voucherCategory->delete();
+        return redirect()->back()->with('success', 'Voucher Category Deleted Successfully');
     }
 }
