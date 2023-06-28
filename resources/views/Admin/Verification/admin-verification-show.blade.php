@@ -4,6 +4,17 @@
     <title>Pickup | Verification Request Details </title>
 @endpush
 
+{{-- @push('light-box')
+    <div class="light-box" id="light-box">
+        <div class="main-image">
+            <button id="close-light-box"><i class="fa-light fa-close"></i></button>
+            <button class="arrow-btn" id="prev-btn"><i class="fa-light fa-circle-arrow-left"></i></button>
+            <img src="{{ asset('storage/' . $request->photo) }}" alt="">
+            <button class="arrow-btn" id="next-btn"><i class="fa-light fa-circle-arrow-right"></i></button>
+        </div>
+
+    </div>
+@endpush --}}
 @push('light-box')
     <div class="light-box" id="light-box">
         <div class="main-image">
@@ -406,10 +417,11 @@
 
         let lightBoxNextBtn = document.getElementById("next-btn");
         const lightBox = document.getElementById("light-box");
+
         const lightboxImages = Array.from(
             document.querySelectorAll(".document-img img")
         );
-        const mainLightBoxImg = lightBox.querySelector(".main-image img");
+        const mainLightBoxImg = document.querySelector(".main-image img");
         lightBox.addEventListener("click", (e) => {
             if (e.target.classList.contains("light-box")) {
                 lightBox.classList.remove("show");
@@ -468,3 +480,4 @@
         }
     </script>
     @include('components.inc_modals-js')
+@endpush

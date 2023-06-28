@@ -32,6 +32,7 @@ class Store extends Model
     }
     public function subscriptionsCount()
     {
+
         return $this->subscriptions()->count();
     }
     public function sector()

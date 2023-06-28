@@ -7,6 +7,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
@@ -191,4 +192,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('store/{username}/transfers', [StoreController::class, 'transfers'])->name('store.transfers');
     Route::patch('store/ban/{id}', [StoreController::class, 'ban'])->name('store.ban');
     Route::patch('store/activate/{id}', [StoreController::class, 'activate'])->name('store.activate');
+    // Notifications
+
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
 });

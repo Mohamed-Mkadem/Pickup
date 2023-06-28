@@ -38,21 +38,23 @@
             button {
                 font-size: 22px;
                 &#notifications-handler {
-                    position: relative;
-                    &::after {
-                        $size: 22px;
-                        position: absolute;
-                        content: attr(data-count);
-                        background-color: var(--clr-red-600);
-                        color: var(--clr-white-1000);
-                        width: $size;
-                        height: $size;
-                        border-radius: 50%;
-                        font-size: 12px;
-                        text-align: center;
-                        line-height: 2;
-                        right: 0;
-                        top: -5px;
+                    &.has-notifications {
+                        position: relative;
+                        &::after {
+                            $size: 22px;
+                            position: absolute;
+                            content: attr(data-count);
+                            background-color: var(--clr-red-600);
+                            color: var(--clr-white-1000);
+                            width: $size;
+                            height: $size;
+                            border-radius: 50%;
+                            font-size: 12px;
+                            text-align: center;
+                            line-height: 2;
+                            right: 0;
+                            top: -5px;
+                        }
                     }
                 }
                 &#profile-handler {

@@ -391,10 +391,10 @@ button {
 #header .dropdowns-holder .dropdown-holder button {
   font-size: 22px;
 }
-#header .dropdowns-holder .dropdown-holder button#notifications-handler {
+#header .dropdowns-holder .dropdown-holder button#notifications-handler.has-notifications {
   position: relative;
 }
-#header .dropdowns-holder .dropdown-holder button#notifications-handler::after {
+#header .dropdowns-holder .dropdown-holder button#notifications-handler.has-notifications::after {
   position: absolute;
   content: attr(data-count);
   background-color: var(--clr-red-600);
@@ -3379,13 +3379,14 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   padding: 1em;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 .notifications-holder ul.notifications-wrapper li.notification.unread {
-  border-left: 3px solid var(--clr-teal-400);
+  border-left: 5px solid var(--clr-teal-400);
 }
 .notifications-holder ul.notifications-wrapper li.notification img {
   width: 60px;

@@ -1,106 +1,107 @@
 @use "../../Abstracts/" as *;
 
 .notifications-holder {
-  width: min(700px, 100%);
-  margin-inline: auto;
-  border-radius: 20px;
-  h1 {
-    letter-spacing: 1px;
-    color: var(--clr-teal-300);
-  }
-  form {
-    margin-block: 1em 2em;
-    .statuses-holder {
-      .status {
-        height: 40px;
-        position: relative;
-        @include flex(row, center, center);
-        border-radius: 10px;
-        background-color: var(--clr-blueGray-100);
-        transition: $bgTransition;
-        label {
-          cursor: pointer;
-          margin: 0;
-          z-index: 2;
-        }
-        input[type="radio"] {
-          height: 100%;
-          appearance: none;
-          position: absolute;
-          inset: 0;
-          padding: 0 !important;
-          margin: 0 !important;
-          cursor: pointer;
-          // background: violet;
-        }
-        &:hover {
-          background-color: var(--clr-blueGray-200);
-        }
-        &:has(> input[type="radio"]:checked) {
-          background-color: var(--clr-turquoise-700);
-        }
-      }
+    width: min(700px, 100%);
+    margin-inline: auto;
+    border-radius: 20px;
+    h1 {
+        letter-spacing: 1px;
+        color: var(--clr-teal-300);
     }
-  }
-  ul.notifications-wrapper {
-    li.notification {
-      position: relative;
-      background-color: var(--clr-blueGray-0);
-      transition: $bgTransition;
-      &.unread {
-        border-left: 3px solid var(--clr-teal-400);
-      }
-      padding: 1em;
-      @include flex(row, center, flex-start);
-      gap: 10px;
-      margin-bottom: 10px;
-      img {
-        width: 60px;
-        border-radius: 50%;
-      }
-      .details {
-        p {
-          line-height: 1.7;
-          font-size: 14px;
-          color: var(--clr-blueGray-900);
-          &.notification-body {
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            font-weight: bold;
-
-            &:hover {
-              //   color: var(--clr-teal-400);
+    form {
+        margin-block: 1em 2em;
+        .statuses-holder {
+            .status {
+                height: 40px;
+                position: relative;
+                @include flex(row, center, center);
+                border-radius: 10px;
+                background-color: var(--clr-blueGray-100);
+                transition: $bgTransition;
+                label {
+                    cursor: pointer;
+                    margin: 0;
+                    z-index: 2;
+                }
+                input[type="radio"] {
+                    height: 100%;
+                    appearance: none;
+                    position: absolute;
+                    inset: 0;
+                    padding: 0 !important;
+                    margin: 0 !important;
+                    cursor: pointer;
+                    // background: violet;
+                }
+                &:hover {
+                    background-color: var(--clr-blueGray-200);
+                }
+                &:has(> input[type="radio"]:checked) {
+                    background-color: var(--clr-turquoise-700);
+                }
             }
-          }
-          &.notification-time {
-            i {
-              margin-right: 5px;
-            }
-          }
         }
-      }
-      &:hover {
-        background-color: var(--clr-turquoise-900);
-        .details {
-          p {
-            &.notification-body {
-              color: var(--clr-teal-400);
-            }
-          }
-        }
-      }
-      a {
-        position: absolute;
-        inset: 0;
-        background-color: transparent;
-      }
     }
-  }
-  @include min-width(medium) {
     ul.notifications-wrapper {
-      li.notification {
-        gap: 1em;
-      }
+        li.notification {
+            position: relative;
+            background-color: var(--clr-blueGray-0);
+            transition: $bgTransition;
+            &.unread {
+                border-left: 5px solid var(--clr-teal-400);
+            }
+            padding: 1em;
+            @include flex(row, flex-start, flex-start);
+            gap: 10px;
+            margin-bottom: 10px;
+            border-radius: $radius10;
+            img {
+                width: 60px;
+                border-radius: 50%;
+            }
+            .details {
+                p {
+                    line-height: 1.7;
+                    font-size: 14px;
+                    color: var(--clr-blueGray-900);
+                    &.notification-body {
+                        letter-spacing: 1px;
+                        transition: color 0.3s ease;
+                        font-weight: bold;
+
+                        &:hover {
+                            //   color: var(--clr-teal-400);
+                        }
+                    }
+                    &.notification-time {
+                        i {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            &:hover {
+                background-color: var(--clr-turquoise-900);
+                .details {
+                    p {
+                        &.notification-body {
+                            color: var(--clr-teal-400);
+                        }
+                    }
+                }
+            }
+            a {
+                position: absolute;
+                inset: 0;
+                background-color: transparent;
+            }
+        }
     }
-  }
+    @include min-width(medium) {
+        ul.notifications-wrapper {
+            li.notification {
+                gap: 1em;
+            }
+        }
+    }
 }

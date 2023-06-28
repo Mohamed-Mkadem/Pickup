@@ -15,7 +15,7 @@
             <div class="info-holder">
                 <div class="top-header d-flex col j-center a-center">
                     <h2>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} ({{ Auth::user()->status }})</h2>
-                    <ul class="horizontal-actions-holder d-flex j-center a-center">
+                    <ul class="horizontal-actions-holder d-flex j-end a-center">
                         <a href="{{ route('profile.edit') }}" class="editBtn"> <i class="fa-light fa-pen"></i>
                             Edit</a>
                     </ul>
@@ -52,7 +52,8 @@
                                 <h3>Subscriptions </h3>
                             </div>
                             <div class="info-value">
-                                <p>{{ Auth::user()->seller->store->subscriptionsCount() }}</p>
+                                <p> {{ Auth::user()->seller->hasStore() ? Auth::user()->seller->store->subscriptionsCount() : 0 }}
+                                </p>
                             </div>
                         </div>
                         <!-- End Info -->

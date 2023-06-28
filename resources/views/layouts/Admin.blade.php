@@ -42,8 +42,8 @@
         </div>
     </div> -->
     <div id="overlay" class="overlay"></div>
-    @stack('light-box')
     @yield('loader')
+    @stack('light-box')
     <div class="main-wrapper">
         <aside id="aside" class="" aria-current="expanded">
             <a href="home.html" class="logo d-block light visible"><i class="fa-light fa-bag-shopping"></i>
@@ -114,8 +114,12 @@
                         <li class="nav-item"><a href="req_payment_list.html" class="notifiable">Payment</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="notifications.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-bell"></i>
+                <li class="nav-item"><a href="{{ route('admin.notifications.index') }}"
+                        class="nav-link
+                    
+                    {{ request()->is('admin/notifications*') ? 'active' : '' }}
+                    notifiable">
+                        <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
                 <li class="nav-item"><a href="subscriptions.html" class="nav-link notifiable"> <i
                             class="fa-light fa-box-dollar"></i>
@@ -208,6 +212,7 @@
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
 
+                    {{--
                     <div class="dropdown-holder">
                         <button id="notifications-handler" data-count="99" class="top-bar-btn dropdown-toggle"
                             aria-pressed="false">
@@ -291,7 +296,9 @@
                             </ul>
                             <a href="notifications.html" class="see-all d-block t-center">See All</a>
                         </div>
-                    </div>
+
+                    </div> --}}
+                    <x-notification-menu />
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" d-flex  a-center dropdown-toggle" aria-pressed="false">
 

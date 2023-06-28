@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VerificationRequestApproved;
+use App\Events\VerificationRequestCreated;
+use App\Events\VerificationRequestRejected;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\VerificationRequest;
@@ -176,12 +179,15 @@ class VerificationRequestController extends Controller
                 'nid_back' => $nid_backPath,
                 'commercial_register' => $com_rPath,
             ]);
+            // dd($verificationRequest);
             $verificationRequest->statusHistories()->create([
                 'statusable_type' => 'App\Models\VerificationRequest',
                 'statusable_id' => $verificationRequest->id,
                 'action' => 'Placed',
             ]);
             DB::commit();
+            event(new VerificationRequestCreated($verificationRequest, $seller));
+            // event('newV');
             return redirect()->back()->with('success', 'Verification Request Added Successfully');
         }
     }
@@ -240,6 +246,7 @@ class VerificationRequestController extends Controller
 
         ]);
         DB::commit();
+        event(new VerificationRequestApproved($verificationRequest));
         return redirect()->back()->with('success', 'Verification Request Approved Successfully');
 
     }
@@ -266,6 +273,7 @@ class VerificationRequestController extends Controller
 
         ]);
         DB::commit();
+        event(new VerificationRequestRejected($verificationRequest));
         return redirect()->back()->with('success', 'Verification Request Rejected Successfully');
 
     }
