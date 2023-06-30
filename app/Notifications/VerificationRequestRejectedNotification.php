@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -26,7 +27,8 @@ class VerificationRequestRejectedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database', 'broadcast'];
+        // return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -43,6 +45,27 @@ class VerificationRequestRejectedNotification extends Notification
             ->line('Thank you for your understanding.');
     }
 
+    public function toDatabase(object $notifiable)
+    {
+        $admin = User::where('type', 'Admin')->first();
+        return [
+            'image' => $admin->photo,
+            'body' => 'Unfortunately!, Your Verification Request Has Been Rejected',
+            'url' => url(route('seller.verification-requests.show', $this->verificationRequest->id)),
+        ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        $admin = User::where('type', 'Admin')->first();
+        return [
+            'image' => $admin->photo,
+            'body' => 'Unfortunately!, Your Verification Request Has Been Rejected',
+            'url' => url(route('seller.verification-requests.show', $this->verificationRequest->id)),
+            'created_at' => time(),
+        ];
+
+    }
     /**
      * Get the array representation of the notification.
      *

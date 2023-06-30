@@ -95,8 +95,11 @@
 
 
 
-                <li class="nav-item"><a href="client_notifications.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-bell"></i>
+                <li class="nav-item"><a href="{{ route('client.notifications.index') }}"
+                        class="nav-link 
+                    {{ request()->is('client/notifications*') ? 'active' : '' }}
+                    notifiable">
+                        <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
 
 
@@ -129,7 +132,7 @@
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
 
-                    <div class="dropdown-holder">
+                    {{-- <div class="dropdown-holder">
                         <button id="notifications-handler" data-count="99" class="top-bar-btn dropdown-toggle"
                             aria-pressed="false">
                             <i class="fa-light fa-bell"></i>
@@ -212,8 +215,8 @@
                             </ul>
                             <a href="client_notifications.html" class="see-all d-block t-center">See All</a>
                         </div>
-                    </div>
-
+                    </div> --}}
+                    <x-notification-menu />
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" seller-client  dropdown-toggle" aria-pressed="false">
                             <div class="name-holder d-flex  a-center">
@@ -250,7 +253,14 @@
 
 
     @stack('scripts')
-    <script src="../../dist/js/app.js"></script>
+    <script>
+        const prefix = {{ Auth::user()->type }}
+        const user_id = {{ Auth::id() }}
+        const baseUrl = "{{ asset('') }}";
+    </script>
+    <script src="{{ asset('js/index.js') }}"></script>
+    <script src="{{ asset('dist/js/app.js') }}"></script>
+
 </body>
 
 </html>

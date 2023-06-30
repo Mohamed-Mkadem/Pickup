@@ -89,4 +89,8 @@ class User extends Authenticatable
     {
         return $this->type == 'Client';
     }
+    // public function receivesBroadcastNotificationsOn(): string
+    // {
+    //     return 'users.' . $this->id;
+    // }
 }

@@ -29,7 +29,8 @@ class VerificationRequestCreatedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database', 'broadcast'];
+        // return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -57,6 +58,17 @@ class VerificationRequestCreatedNotification extends Notification
             'body' => $this->seller->full_name . ' Submitted A Verification Request',
             'url' => url(route('admin.verification-requests.show', $this->verificationRequest->id)),
         ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'image' => $this->seller->user->photo,
+            'body' => $this->seller->full_name . ' Submitted A Verification Request',
+            'url' => url(route('admin.verification-requests.show', $this->verificationRequest->id)),
+            'created_at' => time(),
+        ];
+
     }
     /**
      * Get the array representation of the notification.

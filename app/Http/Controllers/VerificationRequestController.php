@@ -120,7 +120,7 @@ class VerificationRequestController extends Controller
     }
     public function adminIndex()
     {
-        $verificationRequests = VerificationRequest::with('seller.user')->paginate();
+        $verificationRequests = VerificationRequest::with('seller.user')->orderBy('created_at', 'desc')->paginate();
         $statistics = $this->calculateStatistics();
         return view('Admin.Verification.admin-verification-index', [
             'verificationRequests' => $verificationRequests,
@@ -188,7 +188,7 @@ class VerificationRequestController extends Controller
             DB::commit();
             event(new VerificationRequestCreated($verificationRequest, $seller));
             // event('newV');
-            return redirect()->back()->with('success', 'Verification Request Added Successfully');
+            // return redirect()->back()->with('success', 'Verification Request Added Successfully');
         }
     }
 

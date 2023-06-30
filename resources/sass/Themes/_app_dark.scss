@@ -358,6 +358,13 @@
     .navigation-menu-holder nav ul button#close-main-navigation,
     .card-holder .card-title a,
     .navigation-menu-holder nav ul li a,
+    .notifications-holder h3,
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        > h3,
     .navigation-menu-holder > p.rate,
     p.rate,
     .review,
@@ -379,6 +386,15 @@
     .show-holder header .info-holder p.header-title span.header-id {
         color: var(--clr-blueGray-300);
     }
+    #header
+        .dropdowns-holder
+        .dropdown-holder
+        .dropdown-menu.notifications-dropdown
+        ul.notifications-wrapper
+        li.notification
+        .details
+        p.notification-body
+        a:hover,
     .validation-box a:hover,
     .order-holder .results-holder .card-holder.review .card.review .rate-value {
         color: var(--clr-mustard-500);

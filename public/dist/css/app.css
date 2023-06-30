@@ -473,12 +473,16 @@ button {
   margin: 20px;
 }
 #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper {
-  height: 300px;
+  max-height: 300px;
   overflow-y: auto;
   scrollbar-width: none;
 }
 #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper::-webkit-scrollbar {
   display: none;
+}
+#header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper > h3 {
+  color: var(--clr-blueGray-800);
+  letter-spacing: 1px;
 }
 #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification {
   padding: 0.5em 1em;
@@ -3336,8 +3340,9 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   letter-spacing: 1px;
   color: var(--clr-teal-300);
 }
-.notifications-holder form {
-  margin-block: 1em 2em;
+.notifications-holder h3 {
+  color: var(--clr-blueGray-800);
+  letter-spacing: 1px;
 }
 .notifications-holder form .statuses-holder .status {
   height: 40px;

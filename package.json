@@ -17,6 +17,8 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
-        "autoprefixer": "10.4.5"
+        "autoprefixer": "10.4.5",
+        "laravel-echo": "^1.15.1",
+        "pusher-js": "^8.2.0"
     }
 }

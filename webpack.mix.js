@@ -17,8 +17,4 @@ mix.sass("resources/sass/fe_dark.scss", "public/dist/css")
 mix.sass("resources/sass/fe.scss", "public/dist/css").options({
     processCssUrls: false,
 });
-mix.sass("resources/sass/app.scss", "public/dist/css");
-// mix.sass("resources/sass/main.scss", "public/css").sass(
-//     "resources/sass/test.scss",
-//     "public/css"
-// );
+mix.js("resources/js/index.js", "public/js");

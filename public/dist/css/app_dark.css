@@ -380,6 +380,8 @@ button {
 .dark .navigation-menu-holder nav ul button#close-main-navigation,
 .dark .card-holder .card-title a,
 .dark .navigation-menu-holder nav ul li a,
+.dark .notifications-holder h3,
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper > h3,
 .dark .navigation-menu-holder > p.rate,
 .dark p.rate,
 .dark .review,
@@ -394,6 +396,7 @@ button {
 .dark .show-holder header .info-holder p.header-title span.header-id {
   color: var(--clr-blueGray-300);
 }
+.dark #header .dropdowns-holder .dropdown-holder .dropdown-menu.notifications-dropdown ul.notifications-wrapper li.notification .details p.notification-body a:hover,
 .dark .validation-box a:hover,
 .dark .order-holder .results-holder .card-holder.review .card.review .rate-value {
   color: var(--clr-mustard-500);

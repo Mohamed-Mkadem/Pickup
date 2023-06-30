@@ -73,6 +73,11 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
     // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
     // Route::get('profile', ClientController::class, 'profile')->name('profile');
+
+    // Notifications
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
+    Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
 });
 
 // Seller
@@ -120,7 +125,13 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::delete('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::patch('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    // Populate Products
     Route::post('products/populate', [ProductController::class, 'populate'])->name('products.populate');
+
+    // Notifications
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
+    Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
 });
 
 // Admin
@@ -195,4 +206,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // Notifications
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
+    Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
+
 });

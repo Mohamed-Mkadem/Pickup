@@ -123,13 +123,16 @@
                     }
                     ul.notifications-wrapper {
                         $dropdownHeight: 300px;
-                        height: $dropdownHeight;
+                        max-height: $dropdownHeight;
                         overflow-y: auto;
                         &::-webkit-scrollbar {
                             display: none;
                         }
                         scrollbar-width: none;
-
+                        > h3 {
+                            color: var(--clr-blueGray-800);
+                            letter-spacing: 1px;
+                        }
                         li.notification {
                             padding: 0.5em 1em;
                             &.unread {

@@ -171,8 +171,11 @@
                     notifiable">
                         <i class="fa-light fa-warehouse"></i>
                         <span>Inventory</span></a></li>
-                <li class="nav-item"><a href="seller_notifications.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-bell"></i>
+                <li class="nav-item"><a href="{{ route('seller.notifications.index') }}"
+                        class="nav-link
+                    {{ request()->is('seller/notifications*') ? 'active' : '' }}
+                    notifiable">
+                        <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
 
 
@@ -247,90 +250,9 @@
                         <i class="fa-light fa-moon moon-icon"></i>
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
+                    <div id="notification-menu">
 
-                    <div class="dropdown-holder">
-                        <button id="notifications-handler" data-count="99" class="top-bar-btn dropdown-toggle"
-                            aria-pressed="false">
-                            <i class="fa-light fa-bell"></i>
-                        </button>
-                        <div class="dropdown-menu notifications-dropdown ">
-                            <h4>Notifications</h4>
-                            <ul class="notifications-wrapper">
-                                <!-- Start Notification -->
-                                <li class="notification unread">
-                                    <img src="" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href="" class="unread"> Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification unread">
-                                    <img src="" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-
-                            </ul>
-                            <a href="seller_notifications.html" class="see-all d-block t-center">See All</a>
-                        </div>
+                        <x-notification-menu />
                     </div>
 
                     <div class="dropdown-holder">
@@ -365,9 +287,18 @@
         </main>
     </div>
 
+    <audio id="notification-sound" src="{{ asset('dist/Assets/notification-sound.mp3') }}"></audio>
     @stack('scripts')
+    <script>
+        const prefix = "{{ Auth::user()->type }}"
+
+        const user_id = {{ Auth::id() }}
+        const baseUrl = "{{ asset('') }}";
+    </script>
 
     <script src="{{ asset('dist/JS/app.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
+
 </body>
 
 </html>

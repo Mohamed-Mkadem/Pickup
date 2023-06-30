@@ -83,6 +83,7 @@ function diasbleDarkMode() {
 }
 
 const overlay = document.getElementById("overlay");
+// const dropdowns = Array.from(document.querySelectorAll(".dropdown-menu"));
 
 const dropdownsTogglers = Array.from(
     document.querySelectorAll(".dropdown-toggle")

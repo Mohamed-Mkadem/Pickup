@@ -1,22 +1,24 @@
-@extends('layouts.Admin')
+@extends('layouts.Client')
 
 @push('title')
-    <title>Pickup | Vouchers </title>
+    <title>Pickup | Notifications</title>
 @endpush
+
+
 @section('content')
     <section class="content" id="content">
 
         @include('components.errors-alert')
         @include('components.session-errors-alert')
         @include('components.success-alert')
-        <!-- Start Notificatio Holder -->
+        <!-- Start Notification Holder -->
         <div class="results">
 
 
             <div class=" notifications-holder">
                 <div class="holder p-1 radius-10">
                     <h1 class="mb-0-5">Filter</h1>
-                    <form action="{{ route('admin.notifications.filter') }}" method="get">
+                    <form action="{{ route('client.notifications.filter') }}" method="get">
 
                         <div class="statuses-holder  form-row sm  ">
                             <div class="status form-element">
@@ -53,8 +55,8 @@
                                 <!-- Start Notification -->
                                 <li
                                     class="notification 
-                        {{ $notification->unread() ? 'unread' : '' }}
-                        ">
+                {{ $notification->unread() ? 'unread' : '' }}
+                ">
                                     <img src="{{ asset('storage/' . $notification->data['image']) }}" alt="">
                                     <div class="details">
                                         <p class="notification-body">
@@ -82,7 +84,7 @@
             <!-- End Pagination -->
 
         </div>
-        <!-- End Notificatio Holder -->
+        <!-- End Notification Holder -->
     </section>
 @endsection
 
