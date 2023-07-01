@@ -4155,13 +4155,16 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .modal-holder .confirm-form i {
   font-size: 25px;
-  padding: 0.5em;
   border-radius: 50%;
   color: var(--clr-red-600);
   border: 1px solid currentColor;
-  width: -moz-max-content;
-  width: max-content;
+  width: 50px;
   margin-inline: auto;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .modal-holder .confirm-form p {
   margin-block: 1em;

@@ -65,7 +65,7 @@
                             <button class="submit-btn " id="modal-btn">Purchase</button>
                             <div class="modal-holder ">
                                 <div class="modal t-center">
-                                    <i class=" fa-light fa-trash "></i>
+                                    <i class=" fa-light fa-info "></i>
                                     <p class="m-block-1">Are You Sure You Want To Confirm Your Purchase ?</p>
                                     <div class="buttons d-flex j-center a-center gap-1 wrap ">
                                         <button class="cancelBtn visited-button">Cancel</button>

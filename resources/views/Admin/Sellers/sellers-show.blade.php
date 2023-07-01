@@ -39,7 +39,7 @@
                                         class="modal t-center confirm-form">
                                         @csrf
                                         @method('PATCH')
-                                        <i class=" fa-light fa-trash"></i>
+                                        <i class=" fa-light fa-info"></i>
                                         <p>Are You Sure You Want To Ban This Seller ?</p>
                                         <div class="buttons d-flex j-center a-center">
                                             <button class="cancelBtn">Cancel</button>
@@ -56,7 +56,7 @@
                                         class="modal t-center confirm-form">
                                         @csrf
                                         @method('PATCH')
-                                        <i class=" fa-light fa-trash"></i>
+                                        <i class=" fa-light fa-info"></i>
                                         <p>Are You Sure You Want To Activate This Seller ?</p>
                                         <div class="buttons d-flex j-center a-center">
                                             <button class="cancelBtn">Cancel</button>

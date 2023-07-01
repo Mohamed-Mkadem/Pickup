@@ -163,7 +163,7 @@
                                                     method="post" class="modal t-center confirm-form">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <i class=" fa-light fa-trash"></i>
+                                                    <i class=" fa-light fa-info"></i>
                                                     <p>Are You Sure You Want To Activate This Client ?</p>
                                                     <div class="buttons d-flex j-center a-center">
                                                         <button class="cancelBtn">Cancel</button>
@@ -180,7 +180,7 @@
                                                     method="post" class="modal t-center confirm-form">
                                                     @method('PATCH')
                                                     @csrf
-                                                    <i class=" fa-light fa-trash"></i>
+                                                    <i class=" fa-light fa-info"></i>
                                                     <p>Are You Sure You Want To Ban This Client ?</p>
                                                     <div class="buttons d-flex j-center a-center">
                                                         <button class="cancelBtn">Cancel</button>

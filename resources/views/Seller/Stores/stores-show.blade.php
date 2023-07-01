@@ -25,7 +25,7 @@
                                         method="post" class="modal t-center confirm-form">
                                         @csrf
                                         @method('PATCH')
-                                        <i class=" fa-light fa-trash"></i>
+                                        <i class=" fa-light fa-info"></i>
                                         <p>Are You Sure You Want To Disable The Maintenance Mode ?</p>
                                         <div class="buttons d-flex j-center a-center">
                                             <button class="cancelBtn">Cancel</button>
@@ -43,7 +43,7 @@
                                         {{-- <form action="{{ route('seller.stores.enableMaintenance', $store->id) }}" method="post" --}} class="modal t-center confirm-form">
                                         @csrf
                                         @method('PATCH')
-                                        <i class=" fa-light fa-trash"></i>
+                                        <i class=" fa-light fa-info"></i>
                                         <p>Are You Sure You Want To Enable The Maintenance Mode ?</p>
                                         <div class="buttons d-flex j-center a-center">
                                             <button class="cancelBtn">Cancel</button>

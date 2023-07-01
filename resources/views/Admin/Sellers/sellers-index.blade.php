@@ -4,16 +4,16 @@
     <title>Pickup | Sellers </title>
 @endpush
 @section('content')
-    @include('components.errors-alert')
-    @include('components.session-errors-alert')
-    @include('components.success-alert')
+
     <section class="content" id="content">
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
             <h1>Sellers</h1>
         </div>
         <!-- End Starter Header -->
-
+        @include('components.errors-alert')
+        @include('components.session-errors-alert')
+        @include('components.success-alert')
         <!-- Start Filters -->
         <div class="filters-holder">
             <div class="filters-header d-flex j-sp-between a-center">
@@ -170,7 +170,7 @@
                                                     method="post" class="modal t-center confirm-form">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <i class=" fa-light fa-trash"></i>
+                                                    <i class=" fa-light fa-info"></i>
                                                     <p>Are You Sure You Want To Activate This Seller ?</p>
                                                     <div class="buttons d-flex j-center a-center">
                                                         <button class="cancelBtn">Cancel</button>
@@ -187,7 +187,7 @@
                                                     method="post" class="modal t-center confirm-form">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <i class=" fa-light fa-trash"></i>
+                                                    <i class=" fa-light fa-info"></i>
                                                     <p>Are You Sure You Want To Ban This Seller ?</p>
                                                     <div class="buttons d-flex j-center a-center">
                                                         <button class="cancelBtn">Cancel</button>

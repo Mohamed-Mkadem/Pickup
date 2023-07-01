@@ -12,6 +12,7 @@ const mix = require("laravel-mix");
  */
 
 mix.sass("resources/sass/fe_dark.scss", "public/dist/css")
+    .sass("resources/sass/app.scss", "public/dist/css")
     .sass("resources/sass/app_dark.scss", "public/dist/css")
     .sass("resources/sass/utilities.scss", "public/dist/css");
 mix.sass("resources/sass/fe.scss", "public/dist/css").options({

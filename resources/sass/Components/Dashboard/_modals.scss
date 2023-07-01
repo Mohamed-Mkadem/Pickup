@@ -1,198 +1,199 @@
 @use "../../Abstracts/" as *;
 
 .modal-holder {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.1);
-  inset: 0;
-  display: none;
-  z-index: 9999;
-  &.show {
-    @include flex(row, center, center);
-  }
-
-  .modal {
-    background: var(--clr-white-1000);
-    padding: 2em 1em;
-    border-radius: 10px;
-    // text-align: center;
-    max-height: 90vh;
-    overflow-y: scroll;
-    margin-block: 50px;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.1);
+    inset: 0;
+    display: none;
     z-index: 9999;
-    &::-webkit-scrollbar {
-      display: none;
+    &.show {
+        @include flex(row, center, center);
     }
-    scrollbar-width: none;
-    &.order-modal {
-      width: min(400px, 90%);
-    }
-    &.brand-modal {
-      width: min(600px, 90%);
-    }
-    &.product-modal {
-      width: min(600px, 90%);
-    }
-    &.lg {
-      width: min(800px, 90%);
-    }
-    &.form-modal {
-      width: min(400px, 95%);
-    }
-    &.opening-hours-modal {
-      width: min(600px, 95%);
-      .modal-body {
-        .day {
-          $cols: 1fr;
-          gap: 10px;
-          @include detailledGrid($cols);
-          align-items: center;
-          margin-bottom: 10px;
-          &:last-of-type {
-            margin-bottom: 0;
-          }
 
-          h3 {
-            font-weight: 400;
-            letter-spacing: 0;
-            color: var(--clr-blueGray-800);
-          }
-          .hours-holder {
-            @include grid(100px, 1fr, 0, 0, 10px);
-            align-items: center;
-            p.hour {
-              text-align: center;
-              border: 1px solid var(--clr-blueGray-200);
-              border-radius: $radius5;
-              color: var(--clr-blueGray-700);
+    .modal {
+        background: var(--clr-white-1000);
+        padding: 2em 1em;
+        border-radius: 10px;
+        // text-align: center;
+        max-height: 90vh;
+        overflow-y: scroll;
+        margin-block: 50px;
+        z-index: 9999;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        scrollbar-width: none;
+        &.order-modal {
+            width: min(400px, 90%);
+        }
+        &.brand-modal {
+            width: min(600px, 90%);
+        }
+        &.product-modal {
+            width: min(600px, 90%);
+        }
+        &.lg {
+            width: min(800px, 90%);
+        }
+        &.form-modal {
+            width: min(400px, 95%);
+        }
+        &.opening-hours-modal {
+            width: min(600px, 95%);
+            .modal-body {
+                .day {
+                    $cols: 1fr;
+                    gap: 10px;
+                    @include detailledGrid($cols);
+                    align-items: center;
+                    margin-bottom: 10px;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+
+                    h3 {
+                        font-weight: 400;
+                        letter-spacing: 0;
+                        color: var(--clr-blueGray-800);
+                    }
+                    .hours-holder {
+                        @include grid(100px, 1fr, 0, 0, 10px);
+                        align-items: center;
+                        p.hour {
+                            text-align: center;
+                            border: 1px solid var(--clr-blueGray-200);
+                            border-radius: $radius5;
+                            color: var(--clr-blueGray-700);
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+        .modal-header {
+            margin-bottom: 2em;
+            h2 {
+                color: var(--clr-teal-300);
+            }
+            button {
+                $size: 25px;
+                background-color: var(--clr-red-600);
+                color: var(--clr-white-1000);
+                font-weight: bold;
+                width: $size;
+                height: $size;
+                border-radius: 5px;
+                &:hover {
+                    background-color: var(--clr-red-700);
+                }
+                i {
+                }
+            }
+        }
+
+        &.voucher-details {
+            background-color: var(--clr-turquoise-900);
+            width: min(400px, 95%);
+            .header {
+                p.value {
+                    color: var(--clr-blueGray-800);
+                }
+            }
+            p.voucher-number {
+                color: var(--clr-blueGray-800);
+                font-weight: bold;
+                border-block: 1px solid var(--clr-black-700);
+                font-size: 20px;
+            }
+            .details {
+                color: var(--clr-black-400);
+            }
+            .used-by-holder {
+                color: var(--clr-blueGray-800);
+                h3 {
+                    font-size: 18px;
+                    letter-spacing: 1px;
+                    color: var(--clr-black-250);
+                    margin-block: 0.7em 0.3em;
+                }
+                .info-holder {
+                    gap: 1em;
+                    flex-wrap: wrap;
+                    img {
+                        width: 40px;
+                        border-radius: 50%;
+                    }
+                    p {
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                    }
+                }
+                p.date {
+                }
+            }
+        }
     }
-    .modal-header {
-      margin-bottom: 2em;
-      h2 {
-        color: var(--clr-teal-300);
-      }
-      button {
-        $size: 25px;
-        background-color: var(--clr-red-600);
-        color: var(--clr-white-1000);
-        font-weight: bold;
-        width: $size;
-        height: $size;
-        border-radius: 5px;
-        &:hover {
-          background-color: var(--clr-red-700);
-        }
+
+    .confirm-form {
+        width: min(400px, 95%);
         i {
-        }
-      }
-    }
-
-    &.voucher-details {
-      background-color: var(--clr-turquoise-900);
-      width: min(400px, 95%);
-      .header {
-        p.value {
-          color: var(--clr-blueGray-800);
-        }
-      }
-      p.voucher-number {
-        color: var(--clr-blueGray-800);
-        font-weight: bold;
-        border-block: 1px solid var(--clr-black-700);
-        font-size: 20px;
-      }
-      .details {
-        color: var(--clr-black-400);
-      }
-      .used-by-holder {
-        color: var(--clr-blueGray-800);
-        h3 {
-          font-size: 18px;
-          letter-spacing: 1px;
-          color: var(--clr-black-250);
-          margin-block: 0.7em 0.3em;
-        }
-        .info-holder {
-          gap: 1em;
-          flex-wrap: wrap;
-          img {
-            width: 40px;
+            font-size: 25px;
             border-radius: 50%;
-          }
-          p {
-            font-weight: bold;
-            letter-spacing: 1px;
-          }
+            color: var(--clr-red-600);
+            border: 1px solid currentColor;
+            width: 50px;
+            margin-inline: auto;
+            aspect-ratio: 1;
+            @include flex(row, center, center);
         }
-        p.date {
+        p {
+            margin-block: 1em;
+            width: 75%;
+            margin-inline: auto;
+            color: var(--clr-blueGray-800);
+            white-space: pre-wrap;
         }
-      }
+        .buttons {
+            gap: 30px;
+            button {
+                padding: 0.3em 0.8em;
+                border-radius: 5px;
+                transition: $bgTransition;
+                &.cancelBtn {
+                    background-color: var(--clr-yellow-700);
+                    &:hover {
+                        background-color: var(--clr-yellow-500);
+                    }
+                }
+                &.confirmBtn {
+                    background-color: var(--clr-red-600);
+                    color: var(--clr-white-1000);
+                    &:hover {
+                        background-color: var(--clr-red-700);
+                    }
+                }
+            }
+        }
     }
-  }
+    &.edit-form {
+    }
 
-  .confirm-form {
-    width: min(400px, 95%);
-    i {
-      font-size: 25px;
-      padding: 0.5em;
-      border-radius: 50%;
-      color: var(--clr-red-600);
-      border: 1px solid currentColor;
-      width: max-content;
-      margin-inline: auto;
-    }
-    p {
-      margin-block: 1em;
-      width: 75%;
-      margin-inline: auto;
-      color: var(--clr-blueGray-800);
-      white-space: pre-wrap;
-    }
-    .buttons {
-      gap: 30px;
-      button {
-        padding: 0.3em 0.8em;
-        border-radius: 5px;
-        transition: $bgTransition;
-        &.cancelBtn {
-          background-color: var(--clr-yellow-700);
-          &:hover {
-            background-color: var(--clr-yellow-500);
-          }
+    @media (max-height: 400px) {
+        .modal {
+            &.form-modal {
+                height: 250px;
+            }
         }
-        &.confirmBtn {
-          background-color: var(--clr-red-600);
-          color: var(--clr-white-1000);
-          &:hover {
-            background-color: var(--clr-red-700);
-          }
+    }
+    @include min-width("small") {
+        .modal {
+            &.opening-hours-modal {
+                width: min(600px, 95%);
+                .modal-body {
+                    .day {
+                        grid-template-columns: 120px 1fr;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-  &.edit-form {
-  }
-
-  @media (max-height: 400px) {
-    .modal {
-      &.form-modal {
-        height: 250px;
-      }
-    }
-  }
-  @include min-width("small") {
-    .modal {
-      &.opening-hours-modal {
-        width: min(600px, 95%);
-        .modal-body {
-          .day {
-            grid-template-columns: 120px 1fr;
-          }
-        }
-      }
-    }
-  }
 }
