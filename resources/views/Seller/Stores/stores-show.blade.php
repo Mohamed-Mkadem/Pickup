@@ -170,7 +170,7 @@
                                         <div class="hours-holder">
                                             <div class="hour">
                                                 <label for="" class="form-label">Open</label>
-                                                <input type="time" class="form-element"
+                                                <input type="time" class="form-element" readonly
                                                     value="{{ $store->openingHours[0]->opening_time }}"
                                                     pattern="([01][0-9]|2[0-3]):[0-5][0-9]" required>
                                             </div>

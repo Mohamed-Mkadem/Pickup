@@ -374,7 +374,8 @@ class StoreController extends Controller
     public function home($username)
     {
         $store = Store::where('username', $username)->with(['owner.user', 'sector', 'city', 'openingHours'])->first();
-
+        // $owner = $store->owner->user;
+        // dd($owner);
         if (!$store) {
             abort(404);
         }

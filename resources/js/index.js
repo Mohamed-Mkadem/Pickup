@@ -26,7 +26,7 @@ channel.notification(function (data) {
     notificationModalWrapper.append(notificationModalBody);
     let link = document.createElement("a");
     link.className = "notification-modal-link";
-    link.href = data.url;
+    link.href = ` ${data.url}?notification_id=${data.id}`;
     notificationModalWrapper.append(link);
     notificationModal.append(notificationModalWrapper);
     document.body.append(notificationModal);
@@ -39,20 +39,6 @@ channel.notification(function (data) {
     setTimeout(function () {
         notificationModal.classList.remove("show");
     }, 5000);
-    console.log(data);
-    // let url = `${baseUrl}${prefix.toLowerCase()}/getNotifications`;
-    // fetch(url)
-    //     .then((response) => response.text())
-    //     .then((html) => {
-    //         // Replace the existing component HTML with the updated HTML
-    //         let notificationMenu = document.getElementById("notification-menu");
-    //         notificationMenu.innerHTML = html;
-    //         // addEventListenersToDropdowns();
-
-    //     })
-    //     .catch((error) => {
-    //         console.error("Failed to fetch notifications:", error);
-    //     });
 
     createNotification(data);
 });

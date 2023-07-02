@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
 use App\Events\VerificationRequestRejected;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
+use App\Listeners\StoreUnpublishedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         VerificationRequestRejected::class => [
             SendVerificationRequestRejectedNotification::class,
+        ],
+        StoreUnpublished::class => [
+            StoreUnpublishedListener::class,
         ],
     ];
 
