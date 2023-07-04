@@ -91,6 +91,7 @@
                                 color: var(--clr-white-1000);
                             }
                         }
+                        &.accepted,
                         &.in-stock,
                         &.approved {
                             span {
@@ -111,6 +112,10 @@
                                 background-color: var(--clr-blueGray-200);
                                 color: var(--clr-blueGray-700);
                             }
+                        }
+                        &.paid {
+                            background-color: var(--clr-navy-700);
+                            color: var(--clr-white-800);
                         }
                         &.ready {
                             span {
@@ -396,7 +401,7 @@
                 color: var(--clr-blueGray-0);
             }
             tr {
-                $cols: 200px minmax(200px, 1fr) repeat(3, 180px);
+                $cols: 180px minmax(200px, 1fr) repeat(3, 210px);
                 @include detailledGrid($cols);
             }
         }

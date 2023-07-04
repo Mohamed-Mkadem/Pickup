@@ -268,7 +268,7 @@
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
                             <p class="box-title">Payment</p>
-                            <p class="box-value">21 </p>
+                            <p class="box-value">{{ $user->seller->paymentRequestsCount() }} </p>
                         </div>
 
                         <div class="icon-holder">
@@ -360,30 +360,34 @@
             </div>
 
 
+            @if ($user->seller->hasStore())
+                <!-- Start Stores  -->
+                <h2 class="t-left mb-0-5 ">Store</h2>
+                <div class="results-holder mt-0 minimal">
 
-            <!-- Start Stores  -->
-            <h2 class="t-left mb-0-5 ">Stores</h2>
-            <div class="results-holder mt-0 minimal">
+                    <!-- Start Card -->
+                    <div class="card simple  store">
+                        <header>
+                            <p class="status">Status : <span>{{ $user->seller->store->status }}</span></p>
+                            <p class="rate"><i class="fa-light fa-star"></i> {{ $user->seller->store->rate }}%</p>
+                        </header>
 
-                <!-- Start Card -->
-                <div class="card simple  store">
-                    <header>
-                        <p class="status">Status : <span>Published</span></p>
-                        <p class="rate"><i class="fa-light fa-star"></i> 80%</p>
-                    </header>
+                        <div class="info">
+                            <img loading="lazy" src="{{ asset('storage/' . $user->seller->store->photo) }}"
+                                alt="">
+                            <h3><a
+                                    href="{{ route('admin.store.home', $user->seller->store->username) }}">{{ $user->seller->store->name }}</a>
+                            </h3>
+                            <p>{{ $user->seller->store->sector->name }}</p>
+                            <p>{{ $user->seller->store->state_city }}</p>
 
-                    <div class="info">
-                        <img loading="lazy" src="../../dist/Assets/store.svg" alt="">
-                        <h3><a href="store_home.html">Store Name</a></h3>
-                        <p>Grocery</p>
-                        <p>Ariana - Mnihla</p>
-
+                        </div>
                     </div>
-                </div>
-                <!-- End Card -->
+                    <!-- End Card -->
 
-            </div>
-            <!-- End Stores -->
+                </div>
+                <!-- End Stores -->
+            @endif
         </div>
         <!-- End Info -->
     </section>

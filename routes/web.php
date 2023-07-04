@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
@@ -131,7 +132,11 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     // Notifications
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
-    Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
+    // Payments
+    Route::get('requests/payments', [PaymentRequestController::class, 'index'])->name('payment-requests.index');
+    Route::get('requests/payments/filter', [PaymentRequestController::class, 'filter'])->name('payment-requests.filter');
+    Route::get('requests/payments/{id}', [PaymentRequestController::class, 'show'])->name('payment-requests.show');
+    Route::post('requests/payments', [PaymentRequestController::class, 'store'])->name('payment-requests.store');
 });
 
 // Admin
@@ -191,7 +196,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // Stores
     Route::get('stores', [StoreController::class, 'adminIndex'])->name('stores.index');
     Route::get('stores/filter', [StoreController::class, 'filter'])->name('stores.filter');
-    Route::get('stores/{username}/home', [StoreController::class, 'showHome'])->name('stores.home');
+
     // Show Stores
     Route::get('store/{username}/home', [StoreController::class, 'home'])->name('store.home');
     Route::get('store/{username}/reviews', [StoreController::class, 'reviews'])->name('store.reviews');
@@ -204,9 +209,16 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::patch('store/ban/{id}', [StoreController::class, 'ban'])->name('store.ban');
     Route::patch('store/activate/{id}', [StoreController::class, 'activate'])->name('store.activate');
     // Notifications
-
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
     Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
+    // Payments
+    Route::get('requests/payments', [PaymentRequestController::class, 'adminIndex'])->name('payment-requests.index');
+    Route::get('requests/payments/filter', [PaymentRequestController::class, 'filter'])->name('payment-requests.filter');
+    Route::get('requests/payments/{id}', [PaymentRequestController::class, 'adminShow'])->name('payment-requests.show');
+    Route::patch('requests/payments/accept/{id}', [PaymentRequestController::class, 'accept'])->name('payment-requests.accept');
+    Route::patch('requests/payments/reject/{id}', [PaymentRequestController::class, 'reject'])->name('payment-requests.reject');
+    Route::patch('requests/payments/accept-all', [PaymentRequestController::class, 'acceptAll'])->name('payment-requests.acceptAll');
+    Route::patch('requests/payments/reject-all', [PaymentRequestController::class, 'rejectAll'])->name('payment-requests.rejectAll');
 
 });

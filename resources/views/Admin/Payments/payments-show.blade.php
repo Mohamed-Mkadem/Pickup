@@ -1,83 +1,156 @@
-@extends('layouts.Store')
+@extends('layouts.Admin')
 
 @push('title')
-    <title> {{ $store->name }} | Owner</title>
+    <title>Pickup | Payment Request Details </title>
 @endpush
-
 @section('content')
-    <section class="content" id="store-holder">
+    <section class="content" id="content">
+        <!-- Start Starter Header -->
+        <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
+            <h1>Payment Request Details</h1>
+
+            <!-- Start Link -->
+            <a href="{{ url()->previous() }}" class="action-btn d-block">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span>Go Back</span> </a>
+            <!-- End Link -->
+        </div>
+        <!-- End Starter Header -->
         @include('components.errors-alert')
         @include('components.session-errors-alert')
         @include('components.success-alert')
-        @include('components.Stores.store-header', ['store' => $store])
-
 
         <!-- Start Show Header -->
         <div class="show-header clients d-flex j-start  a-center  col main-holder">
             <div class="img-holder">
-                <img src="{{ asset('storage/' . $store->owner->user->photo) }}" alt="">
+                <img src="{{ asset('storage/' . $paymentRequest->seller->user->photo) }}" alt="">
             </div>
             <div class="info-holder">
                 <div class="top-header d-flex col j-center a-center">
-                    <h2>{{ $store->owner->user->full_name }} <small>({{ $store->owner->user->status }})</small></h2>
+                    <h2>#{{ $paymentRequest->id }} </h2>
+                    <ul class="horizontal-actions-holder  d-flex  j-center a-center">
+                        @if ($paymentRequest->status == 'pending')
+                            <li>
+                                <button class="deleteBtn delete-button">Reject</button>
+
+                                <div class="modal-holder ">
+                                    <form action="{{ route('admin.payment-requests.reject', $paymentRequest->id) }}"
+                                        method="post" class="modal t-center confirm-form">
+                                        @csrf
+                                        @method('PATCH')
+                                        <i class=" fa-light fa-info"></i>
+                                        <p>Are You Sure You Want To Reject This Request ?</p>
+                                        <div class="buttons d-flex j-center a-center">
+                                            <button class="cancelBtn">Cancel</button>
+                                            <button class="confirmBtn">Yes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <button class="activateBtn activate-button">Accept</button>
+                                <div class="modal-holder ">
+                                    <form action="{{ route('admin.payment-requests.accept', $paymentRequest->id) }}"
+                                        method="post" class="modal t-center confirm-form">
+                                        @csrf
+                                        @method('PATCH')
+                                        <i class=" fa-light fa-info"></i>
+                                        <p>Are You Sure You Want To Accept This Request ?</p>
+                                        <div class="buttons d-flex j-center a-center">
+                                            <button class="cancelBtn">Cancel</button>
+                                            <button class="confirmBtn">Yes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                        @else
+                            <li>
+                                <p>
+                                    {{ $paymentRequest->statusHistories()->latest()->first()->action . ':' }}
+                                    {{ $paymentRequest->statusHistories()->latest()->first()->created_at->format('M jS Y : H:i') }}
+                                </p>
+                            </li>
+                        @endif
 
 
+                    </ul>
                 </div>
                 <div class="details">
-                    <p>{{ $store->owner->user->state_city }}</p>
-                    <div class="info-grid">
+                    <p> <span>By : </span> <a
+                            href="{{ route('admin.sellers.show', $paymentRequest->seller->user->id) }}">{{ $paymentRequest->seller->full_name }}
+                            ({{ $paymentRequest->seller->user->status }})</a> </p>
+                    <div class="info-grid minimal">
+                        <!-- Start Info -->
+                        <div class="info">
+                            <div class="info-title">
+                                <i class="fa-light fa-sack-dollar"></i>
+                                <h3>Balance </h3>
+                            </div>
+                            <div class="info-value">
+                                <p>{{ $paymentRequest->seller->balance }} <span>DT</span></p>
+                            </div>
+                        </div>
+                        <!-- End Info -->
                         <!-- Start Info -->
                         <div class="info">
                             <div class="info-title">
                                 <i class="fa-light fa-dollar"></i>
-                                <h3>Balance </h3>
+                                <h3>Amount </h3>
                             </div>
                             <div class="info-value">
-                                <p>{{ $store->owner->balance }} <span>DT</span></p>
+                                <p>{{ $paymentRequest->amount }} <span>DT</span></p>
                             </div>
                         </div>
                         <!-- End Info -->
-                        <!-- Start Info -->
-                        <div class="info">
-                            <div class="info-title">
-                                <i class="fa-light fa-shop"></i>
-                                <h3>Stores</h3>
-                            </div>
-                            <div class="info-value">
-                                <p>{{ $store->owner->storesCount() }}</p>
-                            </div>
-                        </div>
-                        <!-- End Info -->
-                        <!-- Start Info -->
-                        <div class="info">
-                            <div class="info-title">
-                                <i class="fa-light fa-box-dollar"></i>
-                                <h3>Subscriptions </h3>
-                            </div>
-                            <div class="info-value">
-                                <p>{{ $store->subscriptionsCount() }}</p>
-                            </div>
-                        </div>
-                        <!-- End Info -->
-                        <!-- Start Info -->
-                        <div class="info">
-                            <div class="info-title">
-                                <i class="fa-light fa-user-headset"></i>
-                                <h3>Tickets</h3>
-                            </div>
-                            <div class="info-value">
-                                <p>8 </p>
-                            </div>
-                        </div>
-                        <!-- End Info -->
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Show Header -->
 
+
         <!-- Start Info -->
         <div class="results">
+
+
+            <h2 class="t-left mb-0-5 ">Request History</h2>
+            <!-- Start Quick Stats Holder -->
+            <div class="quick-stats-holder ">
+                @foreach ($paymentRequest->statusHistories as $history)
+                    <!-- Start Stat -->
+                    <div class="stat-item">
+                        <!-- Start Top Info -->
+                        <div class="top-info mb-0 d-flex a-start j-sp-between">
+                            <div class="title-value-box">
+                                <p class="box-title">{{ $history->action }}</p>
+                                <p class="box-value light">{{ $history->created_at->format('M jS Y : H:i') }}</p>
+                            </div>
+
+                            <div class="icon-holder">
+                                @if ($history->action == 'Placed')
+                                    <i class="fa-solid fa-timer placed"></i>
+                                @elseif($history->action == 'Accepted')
+                                    <i class="fa-solid fa-badge-check accepted"></i>
+                                @elseif($history->action == 'Rejected')
+                                    <i class="fa-regular fa-xmark rejected"></i>
+                                @else
+                                    <i class="fa-light fa-arrow-right-arrow-left paid "></i>
+                                @endif
+                            </div>
+
+                        </div>
+                        <!-- End Top Info -->
+
+                    </div>
+                    <!-- End Stat -->
+                @endforeach
+
+
+            </div>
+            <!-- End Quick Stats Holder -->
+
+
             <h2 class="t-left mb-0-5 ">General Info</h2>
             <div class=" results-holder mt-0 client-seller-show ">
                 <!-- Start Info Card -->
@@ -94,7 +167,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->user->email }}
+                                    {{ $paymentRequest->seller->user->email }}
                                 </p>
                             </div>
                         </div>
@@ -107,7 +180,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->user->phone }}
+                                    {{ $paymentRequest->seller->user->phone }}
                                 </p>
                             </div>
                         </div>
@@ -120,7 +193,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ \Carbon\Carbon::parse($store->owner->user->d_o_b)->format('M jS Y') }}
+                                    {{ $paymentRequest->seller->user->d_o_b }}
                                 </p>
                             </div>
                         </div>
@@ -133,7 +206,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->user->gender }}
+                                    {{ $paymentRequest->seller->user->gender }}
                                 </p>
                             </div>
                         </div>
@@ -161,7 +234,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->verification }}
+                                    {{ $paymentRequest->seller->verification }}
                                 </p>
                             </div>
                         </div>
@@ -174,7 +247,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->nid }}
+                                    {{ $paymentRequest->seller->nid }}
                                 </p>
                             </div>
                         </div>
@@ -187,7 +260,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ $store->owner->user->address }}
+                                    {{ $paymentRequest->seller->user->address }}
                                 </p>
                             </div>
                         </div>
@@ -200,7 +273,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ \Carbon\Carbon::parse($store->owner->user->created_at)->diffForHumans() }}
+                                    {{ \Carbon\Carbon::parse($paymentRequest->seller->user->created_at)->diffForHumans() }}
                                 </p>
                             </div>
                         </div>
@@ -210,23 +283,24 @@
                     <!-- End Card Info -->
 
                 </div>
-
+                <!-- End Info Card -->
             </div>
 
-            <h2 class="t-left mb-0-5 ">Requests Summary</h2>
+
+            <h2 class="t-left mb-0-5 ">Payments Summary</h2>
             <!-- Start Quick Stats Holder -->
-            <div class="quick-stats-holder " id="quick-stats-holder">
+            <div class="quick-stats-holder ">
                 <!-- Start Stat -->
                 <div class="stat-item">
                     <!-- Start Top Info -->
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
-                            <p class="box-title">Payment</p>
-                            <p class="box-value">{{ $store->owner->paymentRequestsCount() }} </p>
+                            <p class="box-title">Pending</p>
+                            <p class="box-value">{{ $paymentRequest->seller->paymentsSummary()['pending'] }} </p>
                         </div>
 
                         <div class="icon-holder">
-                            <i class="fa-solid fa-sack-dollar payment"></i>
+                            <i class="fa-solid fa-hourglass-clock pending"></i>
                         </div>
 
                     </div>
@@ -239,13 +313,13 @@
                     <!-- Start Top Info -->
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
-                            <p class="box-title">Verification</p>
-                            <p class="box-value">{{ $store->owner->verificationRequestsCount() }} </p>
+                            <p class="box-title">Accepted</p>
+                            <p class="box-value">{{ $paymentRequest->seller->paymentsSummary()['accepted'] }} </p>
                         </div>
 
                         <div class="icon-holder">
 
-                            <i class="fa-solid fa-badge-check verification"></i>
+                            <i class="fa-solid fa-badge-check accepted"></i>
                         </div>
 
                     </div>
@@ -258,13 +332,33 @@
                     <!-- Start Top Info -->
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
-                            <p class="box-title">Transfers</p>
-                            <p class="box-value">21 </p>
+                            <p class="box-title">Rejected</p>
+                            <p class="box-value">{{ $paymentRequest->seller->paymentsSummary()['rejected'] }} </p>
                         </div>
 
                         <div class="icon-holder">
 
-                            <i class="fa-light fa-arrow-right-arrow-left transfers"></i>
+                            <i class="fa-regular fa-xmark rejected"></i>
+                        </div>
+
+                    </div>
+                    <!-- End Top Info -->
+
+                </div>
+                <!-- End Stat -->
+
+                <!-- Start Stat -->
+                <div class="stat-item">
+                    <!-- Start Top Info -->
+                    <div class="top-info mb-0 d-flex a-start j-sp-between">
+                        <div class="title-value-box">
+                            <p class="box-title">Paid</p>
+                            <p class="box-value">{{ $paymentRequest->seller->paymentsSummary()['paid'] }} </p>
+                        </div>
+
+                        <div class="icon-holder">
+
+                            <i class="fa-light fa-arrow-right-arrow-left paid"></i>
                         </div>
 
                     </div>
@@ -285,7 +379,7 @@
                         <h3>Bank</h3>
                     </div>
                     <div class="info-value">
-                        <p>{{ $store->owner->bank }}</p>
+                        <p>{{ $paymentRequest->seller->bank }}</p>
                     </div>
                 </div>
                 <!-- End Info -->
@@ -296,7 +390,7 @@
                         <h3>Account Holer</h3>
                     </div>
                     <div class="info-value">
-                        <p>{{ $store->owner->account_name }}</p>
+                        <p>{{ $paymentRequest->seller->account_name }}</p>
                     </div>
                 </div>
                 <!-- End Info -->
@@ -307,7 +401,7 @@
                         <h3>R.I.B</h3>
                     </div>
                     <div class="info-value">
-                        <p>{{ $store->owner->rib }}</p>
+                        <p>{{ $paymentRequest->seller->rib }}</p>
                     </div>
                 </div>
                 <!-- End Info -->
@@ -321,6 +415,6 @@
     </section>
 @endsection
 
-
 @push('scripts')
+    @include('components.inc_modals-js')
 @endpush

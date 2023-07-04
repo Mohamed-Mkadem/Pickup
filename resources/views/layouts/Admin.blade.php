@@ -111,7 +111,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
-                        class="nav-link collapsed notifiable {{ request()->is('admin/requests/verification*') ? 'active' : '' }}">
+                        class="nav-link collapsed notifiable {{ request()->is('admin/requests*') ? 'active' : '' }}">
                         <i class="fa-light fa-memo-circle-info"></i>
                         <span>Requests</span></a>
                     <ul class="nav-sub-dropdown">
@@ -119,7 +119,11 @@
                         <li class="nav-item"><a href="{{ route('admin.verification-requests.index') }}"
                                 class="notifiable">Verification</a>
                         </li>
-                        <li class="nav-item"><a href="req_payment_list.html" class="notifiable">Payment</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.payment-requests.index') }}"
+                                class=" 
+                             notifiable
+                             ">Payment</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="{{ route('admin.notifications.index') }}"

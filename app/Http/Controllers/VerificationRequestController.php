@@ -26,22 +26,14 @@ class VerificationRequestController extends Controller
      */
     public function index()
     {
-        $verificationRequests = VerificationRequest::where('seller_id', Auth::user()->seller->id)->paginate();
+        $verificationRequests = VerificationRequest::where('seller_id', Auth::user()->seller->id)->with('statusHistories')->paginate();
 
         return view('Seller.Verification.verification-index', ['verificationRequests' => $verificationRequests]);
     }
     private function calculateStatistics()
     {
 
-        // $currentMonthStart = Carbon::now()->startOfMonth();
-        // $currentMonthEnd = Carbon::now()->endOfMonth();
-        // $previousMonthStart = Carbon::now()->subMonth()->startOfMonth();
-        // $previousMonthEnd = Carbon::now()->subMonth()->endOfMonth();
-        // $currentMonthTotalRequests = VerificationRequest::whereBetween('created_at', [$currentMonthStart, $currentMonthEnd])->count();
-        // $previousMonthTotalRequests = VerificationRequest::whereBetween('created_at', [$previousMonthStart, $previousMonthEnd])->count();
-        // $totalChange = $currentMonthTotalRequests - $previousMonthTotalRequests;
-
-        // return compact('totalRequests', 'pendingRequests', 'approvedRequests', 'rejectedRequests', 'totalChange');
+    
         $currentMonthStart = Carbon::now()->startOfMonth();
         $currentMonthEnd = Carbon::now()->endOfMonth();
         $previousMonthStart = Carbon::now()->subMonth()->startOfMonth();

@@ -982,7 +982,7 @@ section#store-holder {
   background: var(--clr-black-650);
   color: var(--clr-white-1000);
 }
-.table-responsive table tbody tr td.status.in-stock span, .table-responsive table tbody tr td.status.approved span {
+.table-responsive table tbody tr td.status.accepted span, .table-responsive table tbody tr td.status.in-stock span, .table-responsive table tbody tr td.status.approved span {
   background-color: var(--clr-green-700);
   color: var(--clr-green-300);
 }
@@ -993,6 +993,10 @@ section#store-holder {
 .table-responsive table tbody tr td.status.picked span, .table-responsive table tbody tr td.status.closed span {
   background-color: var(--clr-blueGray-200);
   color: var(--clr-blueGray-700);
+}
+.table-responsive table tbody tr td.status.paid {
+  background-color: var(--clr-navy-700);
+  color: var(--clr-white-800);
 }
 .table-responsive table tbody tr td.status.ready span {
   background-color: var(--clr-navy-800);
@@ -1184,7 +1188,7 @@ section#store-holder {
 }
 .table-responsive.payment-requests table tr {
   display: grid;
-  grid-template-columns: 200px minmax(200px, 1fr) repeat(3, 180px);
+  grid-template-columns: 180px minmax(200px, 1fr) repeat(3, 210px);
 }
 .table-responsive.seller-payment-requests table thead {
   background-color: var(--clr-white-400);

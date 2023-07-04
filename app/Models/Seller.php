@@ -29,6 +29,35 @@ class Seller extends Model
         return $this->morphMany(Voucher::class, 'user');
     }
 
+    public function suspendedBalance()
+    {
+        $suspendedBalance = 0;
+
+        foreach ($this->paymentRequests()->where('status', 'pending')->get() as $paymentRequest) {
+            $suspendedBalance += ($paymentRequest->amount + 5); // Five is Fee
+        }
+        return $suspendedBalance;
+    }
+    public function paymentsSummary()
+    {
+        $paymentRequests = $this->paymentRequests;
+        $paymentsSummary =
+            [
+            'pending' => $paymentRequests->where('status', 'pending')->count(),
+            'accepted' => $paymentRequests->where('status', 'accepted')->count(),
+            'rejected' => $paymentRequests->where('status', 'rejected')->count(),
+            'paid' => $paymentRequests->where('status', 'paid')->count(),
+        ];
+        return $paymentsSummary;
+    }
+    public function paymentRequests()
+    {
+        return $this->hasMany(PaymentRequest::class);
+    }
+    public function paymentRequestsCount()
+    {
+        return $this->paymentRequests()->count();
+    }
     public function verificationRequests()
     {
         return $this->hasMany(VerificationRequest::class);

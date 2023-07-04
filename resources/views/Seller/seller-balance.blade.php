@@ -92,8 +92,9 @@
                 <!-- Start Top Info -->
                 <div class="top-info mb-0 d-flex a-start j-sp-between">
                     <div class="title-value-box">
-                        <p class="box-title">Suspended</p>
-                        <p class="box-value">1 </p>
+                        <p class="box-title">Suspended (DT)</p>
+
+                        <p class="box-value">{{ $seller->suspendedBalance() }} </p>
                     </div>
 
                     <div class="icon-holder">

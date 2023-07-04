@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\PaymentRequestAccepted;
+use App\Events\PaymentRequestCreated;
 use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
 use App\Events\VerificationRequestRejected;
+use App\Listeners\SendPaymentRequestAcceptedNotification;
+use App\Listeners\SendPaymentRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -37,6 +41,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         StoreUnpublished::class => [
             StoreUnpublishedListener::class,
+        ],
+        PaymentRequestCreated::class => [
+            SendPaymentRequestCreatedNotification::class,
+        ],
+        PaymentRequestAccepted::class => [
+            SendPaymentRequestAcceptedNotification::class,
         ],
     ];
 

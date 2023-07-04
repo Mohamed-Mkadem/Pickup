@@ -137,8 +137,9 @@
                         <li class="nav-item"><a href="{{ route('seller.verification-requests.index') }}"
                                 class="notifiable">Verification</a>
                         </li>
-                        <li class="nav-item"><a href="seller_req_payment_list.html"
+                        <li class="nav-item"><a href="{{ route('seller.payment-requests.index') }}"
                                 class="
+                               
                             {{ Auth::user()->seller->isVerified() ? '' : 'disabled-link' }}
                             notifiable">Payment</a>
                         </li>

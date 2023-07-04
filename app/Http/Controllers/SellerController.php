@@ -35,6 +35,7 @@ class SellerController extends Controller
     {
         // $user = User::findOrFail(Auth::id());
         $seller = Seller::where('user_id', Auth::id())->with('store')->first();
+
         return view('Seller.seller-balance', ['seller' => $seller]);
     }
     public function topUp(Request $request)
@@ -133,7 +134,9 @@ class SellerController extends Controller
     }
     public function show($id)
     {
-        $user = User::where('type', '=', 'Seller')->with('seller')->findOrFail($id);
+        $user = User::where('type', '=', 'Seller')
+        ->with('seller.store','seller.store.sector', 'seller.paymentRequests', 'seller.verificationRequests')
+        ->findOrFail($id);
 
         // dd($user);
         return view('Admin.Sellers.sellers-show', ['user' => $user]);

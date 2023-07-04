@@ -220,7 +220,7 @@
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
                             <p class="box-title">Payment</p>
-                            <p class="box-value">21 </p>
+                            <p class="box-value">{{ Auth::user()->seller->paymentRequestsCount() }} </p>
                         </div>
 
                         <div class="icon-holder">
@@ -232,32 +232,14 @@
 
                 </div>
                 <!-- End Stat -->
-                <!-- Start Stat -->
-                <div class="stat-item">
-                    <!-- Start Top Info -->
-                    <div class="top-info mb-0 d-flex a-start j-sp-between">
-                        <div class="title-value-box">
-                            <p class="box-title">Validation</p>
-                            <p class="box-value">2 </p>
-                        </div>
 
-                        <div class="icon-holder">
-
-                            <i class="fa-regular fa-magnifying-glass validation"></i>
-                        </div>
-
-                    </div>
-                    <!-- End Top Info -->
-
-                </div>
-                <!-- End Stat -->
                 <!-- Start Stat -->
                 <div class="stat-item">
                     <!-- Start Top Info -->
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
                             <p class="box-title">Verification</p>
-                            <p class="box-value">1 </p>
+                            <p class="box-value">{{ Auth::user()->seller->verificationRequestsCount() }} </p>
                         </div>
 
                         <div class="icon-holder">
