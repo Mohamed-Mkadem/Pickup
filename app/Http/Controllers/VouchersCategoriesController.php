@@ -46,8 +46,9 @@ class VouchersCategoriesController extends Controller
         if (!empty($mindate)) {
             $query->where('created_at', '>=', $mindate);
         }
-        if (!empty($maxdate)) {
-            $query->where('created_at', '<=', $maxdate);
+        if (!empty($maxDate)) {
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
         }
         if ($sort == 'highest') {
             $query->orderBy('value', 'desc');

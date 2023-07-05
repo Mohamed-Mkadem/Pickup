@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Transfer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -95,5 +96,12 @@ class Seller extends Model
     public function storesCount()
     {
         return $this->store()->count();
+    }
+
+    // Transfers
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
     }
 }

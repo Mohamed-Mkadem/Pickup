@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\StoreOpeningHour;
+use App\Models\Transfer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,5 +67,12 @@ class Store extends Model
     public function isBanned()
     {
         return $this->status == 'banned';
+    }
+
+    // Transfers
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
     }
 }

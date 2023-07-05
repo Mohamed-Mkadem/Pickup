@@ -91,7 +91,8 @@ class ClientController extends Controller
             }
 
             if (!empty($maxDate)) {
-                $userQuery->where('created_at', '<=', $maxDate);
+                $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+                $userQuery->where('created_at', '<=', $maxDateTime);
             }
 
             if (!empty($search)) {

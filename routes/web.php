@@ -15,6 +15,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\VerificationRequestController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\VouchersCategoriesController;
@@ -137,6 +138,13 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('requests/payments/filter', [PaymentRequestController::class, 'filter'])->name('payment-requests.filter');
     Route::get('requests/payments/{id}', [PaymentRequestController::class, 'show'])->name('payment-requests.show');
     Route::post('requests/payments', [PaymentRequestController::class, 'store'])->name('payment-requests.store');
+
+    // Transfers
+
+    Route::get('transfers', [TransferController::class, 'index'])->name('transfers.index');
+    Route::get('transfers/filter', [TransferController::class, 'filter'])->name('transfers.filter');
+    Route::post('transfers', [TransferController::class, 'store'])->name('transfers.store');
+
 });
 
 // Admin
@@ -221,4 +229,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::patch('requests/payments/accept-all', [PaymentRequestController::class, 'acceptAll'])->name('payment-requests.acceptAll');
     Route::patch('requests/payments/reject-all', [PaymentRequestController::class, 'rejectAll'])->name('payment-requests.rejectAll');
 
+    // Transfers
+    Route::get('transfers', [TransferController::class, 'adminIndex'])->name('transfers.index');
+    Route::get('transfers/filter', [TransferController::class, 'filter'])->name('transfers.filter');
 });

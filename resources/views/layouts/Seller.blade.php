@@ -199,8 +199,9 @@
 
 
 
-                <li class="nav-item"><a href="seller_transfers.html"
-                        class="nav-link
+                <li class="nav-item"><a href="{{ route('seller.transfers.index') }}"
+                        class="nav-link 
+                        {{ request()->is('seller/transfers*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     notifiable">
                         <i class="fa-light fa-arrow-right-arrow-left"></i>

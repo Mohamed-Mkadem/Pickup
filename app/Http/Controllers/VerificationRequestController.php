@@ -33,7 +33,6 @@ class VerificationRequestController extends Controller
     private function calculateStatistics()
     {
 
-    
         $currentMonthStart = Carbon::now()->startOfMonth();
         $currentMonthEnd = Carbon::now()->endOfMonth();
         $previousMonthStart = Carbon::now()->subMonth()->startOfMonth();
@@ -85,7 +84,8 @@ class VerificationRequestController extends Controller
         }
 
         if (!empty($maxDate)) {
-            $query->where('created_at', '<=', $maxDate);
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
         }
 
         if (!empty($search)) {

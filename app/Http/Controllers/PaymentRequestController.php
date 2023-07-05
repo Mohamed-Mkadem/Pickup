@@ -26,11 +26,7 @@ class PaymentRequestController extends Controller
 
     public function adminIndex()
     {
-        // // dd(Carbon::now()->subDays(3));
-        // $paymentRequests = PaymentRequest::where('status', 'accepted')
-        //     ->whereDate('updated_at', '<=', Carbon::now()->subDays(3))
-        //     ->get();
-        // // dd($paymentRequests);
+
         $paymentRequests = PaymentRequest::with('seller.user')->orderBY('created_at', 'desc')->paginate();
 
         return view('Admin.Payments.payments-index', ['payments' => $paymentRequests, 'statistics' => $this->calculateStatistics()]);
@@ -45,8 +41,8 @@ class PaymentRequestController extends Controller
 
     public function filter(Request $request)
     {
-        $user = Auth::user();
         $query = PaymentRequest::query();
+        $user = Auth::user();
         if ($user->type == 'Seller') {
             $query->where('seller_id', $user->seller->id);
         }
@@ -63,7 +59,8 @@ class PaymentRequestController extends Controller
         }
 
         if (!empty($maxDate)) {
-            $query->where('created_at', '<=', $maxDate);
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
         }
 
         if (!empty($search)) {

@@ -99,7 +99,8 @@ class SellerController extends Controller
             }
 
             if (!empty($maxDate)) {
-                $userQuery->where('created_at', '<=', $maxDate);
+                $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+                $userQuery->where('created_at', '<=', $maxDateTime);
             }
 
             if (!empty($search)) {
@@ -135,8 +136,8 @@ class SellerController extends Controller
     public function show($id)
     {
         $user = User::where('type', '=', 'Seller')
-        ->with('seller.store','seller.store.sector', 'seller.paymentRequests', 'seller.verificationRequests')
-        ->findOrFail($id);
+            ->with('seller.store', 'seller.store.sector', 'seller.paymentRequests', 'seller.verificationRequests')
+            ->findOrFail($id);
 
         // dd($user);
         return view('Admin.Sellers.sellers-show', ['user' => $user]);

@@ -37,7 +37,8 @@ class CategoryController extends Controller
         }
 
         if (!empty($maxDate)) {
-            $query->where('created_at', '<=', $maxDate);
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
         }
 
         if (!empty($search)) {

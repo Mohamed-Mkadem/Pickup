@@ -1,53 +1,49 @@
 @extends('layouts.Seller')
 
 @push('title')
-    <title>Pickup | Payments</title>
+    <title>Pickup | Transfers</title>
 @endpush
 @section('content')
 
+
     <section class="content" id="content">
+
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
-            <h1>Payment Requests</h1>
+            <h1>Transfers</h1>
 
-            @if (Auth::user()->seller->balance - 5 > 0)
+            @if ($store->balance != 0)
                 <button class="header-btn add-btn pop-up-controller" id="add-btn"> <i class="fa-light fa-plus"></i> New
-                    Payment</button>
+                    Transfer</button>
                 <div class="pop-up-holder ">
                     <div class="pop-up form-pop-up">
                         <div class="pop-up-header d-flex j-sp-between a-center">
-                            <h2>New Payment</h2>
+                            <h2>New Transfer</h2>
                             <button class="close-pop-up-btn"><i class="fa-light fa-close"></i></button>
                         </div>
                         <div class="pop-up-body">
                             <!-- Start Form -->
-                            <form action="{{ route('seller.payment-requests.store') }}" method="post" id="payment-form">
+                            <form action="{{ route('seller.transfers.store') }}" method="post" id="transfer-form">
                                 @csrf
                                 <div class="form-control">
                                     <label for="" class="d-block  form-label">
-                                        Available To Withdraw (DT) :
+                                        Available To Transfer (DT) :
                                     </label>
-
-                                    <input type="number" name="" value="{{ Auth::user()->seller->balance - 5 }}"
-                                        readonly id="available-input" class="form-element">
+                                    <input type="number" value="{{ $store->balance }}" readonly id="available-input"
+                                        class="form-element">
 
                                 </div>
                                 <div class="form-control">
                                     <label for="" class="d-block required form-label">
-                                        Amount To Withdraw (DT) :
+                                        Amount To Transfer (DT) :
                                     </label>
-
-                                    <input type="number" step="0.01" name="amount" id="amount-input"
-                                        placeholder="eg: 500" class="form-element">
+                                    <input type="number" name="amount" id="amount-input" placeholder="eg: 500"
+                                        class="form-element">
                                     <p class="error-message">This Field Is Required</p>
                                 </div>
-                                <div class="form-control">
-                                    <label for="" class="d-block form-label">
-                                        Payment Fee : 5 DT
-                                    </label>
-                                </div>
+
                                 <div class="form-control d-flex j-end">
-                                    <button type="submit">Confirm</button>
+                                    <button type="submit">Transfer</button>
                                 </div>
                             </form>
                             <!-- End Form -->
@@ -56,14 +52,12 @@
                     </div>
                 </div>
             @endif
-
-
-
         </div>
         <!-- End Starter Header -->
         @include('components.errors-alert')
         @include('components.session-errors-alert')
         @include('components.success-alert')
+
 
         <!-- Start Filters -->
         <div class="filters-holder">
@@ -73,16 +67,13 @@
                         class="fa-light fa-circle-caret-down"></i></button>
             </div>
             <div class="filters-wrapper" id="filters-wrapper">
-                <form action="{{ route('seller.payment-requests.filter') }}" method="GET">
+                <form action="{{ route('seller.transfers.filter') }}" method="GET">
                     <div class="filter-row row2">
                         <div class="filter-box">
                             <label for="" class="form-label">Search</label>
                             <input type="search" name="search" value="{{ request()->search }}"
-                                placeholder="Type A Request ID" class="form-element">
+                                placeholder="Type A Transfer ID" class="form-element">
                         </div>
-
-
-
 
                         <div class="filter-box">
                             <label for="" class="form-label">Sort By</label>
@@ -105,37 +96,6 @@
                         </div>
                     </div>
 
-                    <div class="filter-row row3">
-                        <div class="filter-box">
-                            <label for="" class="form-label">Status</label>
-                            <div class="choices-btns-wrapper  ">
-                                <div class="choice-btn form-element">
-                                    <label for="pending-input"> pending</label>
-                                    <input type="checkbox"
-                                        {{ in_array('pending', (array) request()->input('status')) ? 'checked' : '' }}
-                                        id="pending-input" name="status[]" value="pending">
-                                </div>
-                                <div class="choice-btn form-element">
-                                    <label for="accepted-input">accepted</label>
-                                    <input type="checkbox"
-                                        {{ in_array('accepted', (array) request()->input('status')) ? 'checked' : '' }}
-                                        id="accepted-input" name="status[]" value="accepted">
-                                </div>
-                                <div class="choice-btn form-element">
-                                    <label for="rejected-input">rejected</label>
-                                    <input type="checkbox"
-                                        {{ in_array('rejected', (array) request()->input('status')) ? 'checked' : '' }}
-                                        id="rejected-input" name="status[]" value="rejected">
-                                </div>
-                                <div class="choice-btn form-element">
-                                    <label for="paid-input">paid</label>
-                                    <input type="checkbox"
-                                        {{ in_array('paid', (array) request()->input('status')) ? 'checked' : '' }}
-                                        id="paid-input" name="status[]" value="paid">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="filter-row row2">
 
                         <div class="filter-box">
@@ -169,13 +129,10 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="buttons d-flex j-end gap-1 wrap mt-1">
                         <button type="reset" class="resetBtn">Reset</button>
                         <button type="submit" id="submitBtn" class="submitBtn">Filter</button>
-
                     </div>
                 </form>
             </div>
@@ -184,58 +141,50 @@
         </div>
         <!-- End Filters -->
 
-        @if ($payments->count() > 0)
+        @if ($transfers->count() > 0)
             <div class="results">
                 <h2 class="t-left">Results</h2>
                 <!-- Start Results Holder -->
                 <div class=" main-holder">
-                    <div class="table-responsive seller-payment-requests">
+                    <div class="table-responsive seller-transfers">
                         <table>
 
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Amount (DT)</th>
-                                    <th>Status </th>
+                                    <th>Store Name</th>
+                                    <th>Amount <span>(DT)</span></th>
                                     <th>Date </th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($payments as $payment)
+                                @foreach ($transfers as $transfer)
                                     <tr>
+                                        <td>#{{ $transfer->id }}</td>
                                         <td><a
-                                                href="{{ route('seller.payment-requests.show', $payment->id) }}">#{{ $payment->id }}</a>
+                                                href="{{ route('seller.stores.show', $transfer->store->username) }}">{{ $transfer->store->name }}</a>
                                         </td>
-                                        <td>{{ $payment->amount }}</td>
-                                        <td class="status {{ $payment->status }}"><span>{{ $payment->status }}</span>
-                                        </td>
-                                        <td>{{ $payment->created_at->format('M jS Y') }}</td>
+
+                                        <td>{{ $transfer->amount }}</td>
+                                        <td>{{ $transfer->created_at->format('M jS Y H:i') }}</td>
                                     </tr>
                                 @endforeach
-
-
-
-
 
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
                 <!-- End Results Holder -->
 
 
                 <!-- Start Pagination -->
-                {!! $payments->appends(request()->input())->links() !!}
-
+                {!! $transfers->appends(request()->input())->links() !!}
                 <!-- End Pagination -->
             </div>
             <!-- End Results -->
         @else
             <!-- Start Not found -->
-            <div class="not-found-holder show ">
+            <div class="not-found-holder show">
                 <div class="wrapper">
                     <i class="fa-light fa-circle-info"></i>
                     <p>There Is No Results Found</p>
@@ -244,42 +193,38 @@
             <!-- End Not found -->
         @endif
 
+
     </section>
 @endsection
 
 @push('scripts')
     <script>
-        const paymentForm = document.getElementById('payment-form')
+        const availableInput = document.getElementById('available-input')
+        const transferForm = document.getElementById('transfer-form')
         const amountInput = document.getElementById('amount-input')
-        if (paymentForm) {
+        transferForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            let errors = 0
+            errors += validateField(amountInput, amountInput.nextElementSibling)
 
-
-            paymentForm.addEventListener('submit', (e) => {
-                e.preventDefault()
-                let errors = 0
-                errors += validateNumber(amountInput, amountInput.nextElementSibling, 10)
-
-                if (!errors) {
-                    paymentForm.submit()
-                }
-
-            })
-
-            function validateNumber(field, errorMsg, minValue = 0) {
-                let errors = 0
-                if (!field.value || field.value <= minValue) {
-
-                    errors = 1
-                    errorMsg.classList.add('show')
-                    errorMsg.textContent = `This Field Is Required, Minimum Value : ${minValue}`
-                } else {
-                    errors = 0
-                    errorMsg.classList.remove('show')
-                    errorMsg.textContent = ``
-
-                }
-                return errors
+            if (!errors) {
+                transferForm.submit()
             }
+
+        })
+
+        function validateField(field, errorMessage) {
+            let errors = 0
+            if (!field.value) {
+                errorMessage.textContent = 'This Field Is Required'
+                errorMessage.classList.add('show')
+                errors = 1
+            } else {
+                errorMessage.textContent = ''
+                errorMessage.classList.remove('show')
+                errors = 0
+            }
+            return errors
         }
     </script>
 @endpush
