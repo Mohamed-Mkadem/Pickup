@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PaymentRequestAccepted;
 use App\Events\PaymentRequestCreated;
+use App\Events\PaymentRequestRejected;
 use App\Models\PaymentRequest;
 use App\Models\Seller;
 use App\Models\Store;
@@ -25,6 +26,11 @@ class PaymentRequestController extends Controller
 
     public function adminIndex()
     {
+        // // dd(Carbon::now()->subDays(3));
+        // $paymentRequests = PaymentRequest::where('status', 'accepted')
+        //     ->whereDate('updated_at', '<=', Carbon::now()->subDays(3))
+        //     ->get();
+        // // dd($paymentRequests);
         $paymentRequests = PaymentRequest::with('seller.user')->orderBY('created_at', 'desc')->paginate();
 
         return view('Admin.Payments.payments-index', ['payments' => $paymentRequests, 'statistics' => $this->calculateStatistics()]);
@@ -185,7 +191,9 @@ class PaymentRequestController extends Controller
                 'statusable_type' => 'App\Models\PaymentRequest',
                 'statusable_id' => $request->id,
             ]);
+            event(new PaymentRequestAccepted($request));
         }
+
         DB::commit();
         return redirect()->back()->with('success', "{$paymentRequests->count()} Payment Requests Accepted Successfully");
 
@@ -209,8 +217,9 @@ class PaymentRequestController extends Controller
             'statusable_type' => 'App\Models\PaymentRequest',
             'statusable_id' => $paymentRequest->id,
         ]);
+
         DB::commit();
-        // add event here
+        event(new PaymentRequestRejected($paymentRequest));
         return redirect()->back()->with('success', 'Payment Request Rejected Successfully');
     }
     public function rejectAll()
@@ -234,6 +243,7 @@ class PaymentRequestController extends Controller
                 'statusable_type' => 'App\Models\PaymentRequest',
                 'statusable_id' => $request->id,
             ]);
+            event(new PaymentRequestRejected($request));
         }
         DB::commit();
         return redirect()->back()->with('success', "{$paymentRequests->count()} Payment Requests Rejected Successfully");

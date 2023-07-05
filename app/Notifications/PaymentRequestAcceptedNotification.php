@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -25,7 +26,10 @@ class PaymentRequestAcceptedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database', 'broadcast'];
+        // Add email channel
+        return ['mail', 'database', 'broadcast'];
+
     }
 
     /**
@@ -49,6 +53,27 @@ class PaymentRequestAcceptedNotification extends Notification
      *
      * @return array<string, mixed>
      */
+    public function toDatabase(Object $notifiable)
+    {
+
+        $admin = User::where('type', 'Admin')->first();
+        return [
+            'image' => $admin->photo,
+            'body' => "Congratulations!, Your Payment Request #{$this->paymentRequest->id} Has Been Accepted",
+            'url' => url(route('seller.payment-requests.show', $this->paymentRequest->id)),
+        ];
+    }
+
+    public function toBroadcast(Object $notifiable)
+    {
+        $admin = User::where('type', 'Admin')->first();
+        return [
+            'image' => $admin->photo,
+            'body' => "Congratulations!, Your Payment Request #{$this->paymentRequest->id} Has Been Accepted",
+            'url' => url(route('seller.payment-requests.show', $this->paymentRequest->id)),
+            'created_at' => time(),
+        ];
+    }
     public function toArray(object $notifiable): array
     {
         return [

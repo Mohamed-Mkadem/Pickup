@@ -114,8 +114,10 @@
                             }
                         }
                         &.paid {
-                            background-color: var(--clr-navy-700);
-                            color: var(--clr-white-800);
+                            span {
+                                background-color: var(--clr-navy-700);
+                                color: var(--clr-white-100);
+                            }
                         }
                         &.ready {
                             span {

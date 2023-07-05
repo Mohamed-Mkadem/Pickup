@@ -21,6 +21,16 @@
         @include('components.errors-alert')
         @include('components.session-errors-alert')
         @include('components.success-alert')
+        @if ($paymentRequest->status == 'accepted')
+            <div class="alert alert-info">
+                <h3>Notice:</h3>
+                <p>
+                    Please be informed that the amount of this payment request will be transferred to your designated bank
+                    account on {{ \Carbon\Carbon::parse($paymentRequest->updated_at)->addDays(3)->format('F jS Y') }}
+
+                </p>
+            </div>
+        @endif
         <!-- Start Show Header -->
         <div class="show-header clients d-flex j-start  a-center  col main-holder">
             <div class="img-holder">

@@ -27,7 +27,7 @@ class CheckStoresExpiryDate implements ShouldQueue
      */
     public function handle(): void
     {
-        $today = date('Y-m-d'); // Get today's date
+        $today = date('Y-m-d'); 
         $publishedStores = Store::where('status', 'published')->get();
         foreach ($publishedStores as $store) {
             if ($today > $store->expiry_date) {

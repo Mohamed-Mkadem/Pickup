@@ -2,8 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\PaymentRequestRejectedNotification;
 
 class SendPaymentRequestRejectedNotification
 {
@@ -20,6 +19,7 @@ class SendPaymentRequestRejectedNotification
      */
     public function handle(object $event): void
     {
-        //
+        $notifiable = $event->paymentRequest->seller->user;
+        $notifiable->notify(new PaymentRequestRejectedNotification($event->paymentRequest));
     }
 }

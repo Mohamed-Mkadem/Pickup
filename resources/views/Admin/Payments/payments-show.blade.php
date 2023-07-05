@@ -28,7 +28,8 @@
             <div class="info-holder">
                 <div class="top-header d-flex col j-center a-center">
                     <h2>#{{ $paymentRequest->id }} </h2>
-                    <ul class="horizontal-actions-holder  d-flex  j-center a-center">
+                    <ul
+                        class="horizontal-actions-holder  d-flex  @if ($paymentRequest->status == 'pending') j-sp-between @else j-center @endif  a-center">
                         @if ($paymentRequest->status == 'pending')
                             <li>
                                 <button class="deleteBtn delete-button">Reject</button>

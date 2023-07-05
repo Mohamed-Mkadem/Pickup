@@ -4,12 +4,16 @@ namespace App\Providers;
 
 use App\Events\PaymentRequestAccepted;
 use App\Events\PaymentRequestCreated;
+use App\Events\PaymentRequestPaid;
+use App\Events\PaymentRequestRejected;
 use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
 use App\Events\VerificationRequestRejected;
 use App\Listeners\SendPaymentRequestAcceptedNotification;
 use App\Listeners\SendPaymentRequestCreatedNotification;
+use App\Listeners\SendPaymentRequestPaidNotification;
+use App\Listeners\SendPaymentRequestRejectedNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -47,6 +51,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         PaymentRequestAccepted::class => [
             SendPaymentRequestAcceptedNotification::class,
+        ],
+        PaymentRequestRejected::class => [
+            SendPaymentRequestRejectedNotification::class,
+        ],
+        PaymentRequestPaid::class => [
+            SendPaymentRequestPaidNotification::class,
         ],
     ];
 

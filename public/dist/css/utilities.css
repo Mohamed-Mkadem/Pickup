@@ -994,9 +994,9 @@ section#store-holder {
   background-color: var(--clr-blueGray-200);
   color: var(--clr-blueGray-700);
 }
-.table-responsive table tbody tr td.status.paid {
+.table-responsive table tbody tr td.status.paid span {
   background-color: var(--clr-navy-700);
-  color: var(--clr-white-800);
+  color: var(--clr-white-100);
 }
 .table-responsive table tbody tr td.status.ready span {
   background-color: var(--clr-navy-800);
