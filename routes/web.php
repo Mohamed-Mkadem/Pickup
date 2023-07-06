@@ -7,6 +7,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\ProductController;
@@ -145,6 +146,10 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('transfers/filter', [TransferController::class, 'filter'])->name('transfers.filter');
     Route::post('transfers', [TransferController::class, 'store'])->name('transfers.store');
 
+    // Inventory
+    Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
+    Route::get('inventory/filter', [InventoryController::class, 'filter'])->name('inventory.filter');
+    Route::patch('inventory/manage/{id}', [InventoryController::class, 'manage'])->name('inventory.manage');
 });
 
 // Admin

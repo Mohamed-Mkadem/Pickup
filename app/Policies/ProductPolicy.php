@@ -46,7 +46,10 @@ class ProductPolicy
     {
         return $user->seller->store->id == $product->store_id;
     }
-
+    public function manage(User $user, Product $product)
+    {
+        return $user->seller->store->id == $product->store_id;
+    }
     /**
      * Determine whether the user can restore the model.
      */

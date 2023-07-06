@@ -166,8 +166,9 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="inventory.html"
+                <li class="nav-item"><a href="{{ route('seller.inventory.index') }}"
                         class="nav-link 
+                        {{ request()->is('seller/inventory*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     notifiable">
                         <i class="fa-light fa-warehouse"></i>

@@ -31,7 +31,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('store_id', Auth::user()->seller->store->id)->with(['store', 'category'])->orderBy('created_at', 'desc')->paginate();
+        $products = Product::where('store_id', Auth::user()->seller->store->id)->with(['store', 'category', 'brand'])->orderBy('created_at', 'desc')->paginate();
         $store = Auth::user()->seller->store;
 
         $categories = Category::where('store_id', $store->id)->get();
