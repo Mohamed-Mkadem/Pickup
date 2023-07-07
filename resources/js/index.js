@@ -1,11 +1,5 @@
 import "./bootstrap";
 
-// import Alpine from "alpinejs";
-
-// window.Alpine = Alpine;
-
-// Alpine.start();
-
 const notificationSound = document.getElementById("notification-sound");
 const notificationsHandler = document.getElementById("notifications-handler");
 const notificationsWrapper = document.getElementById("notifications-wrapper");

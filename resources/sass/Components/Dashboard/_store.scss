@@ -331,7 +331,44 @@
     @include min-width("small") {
     }
 }
-
+.unavailable-wrapper {
+    width: min(700px, 95%);
+    margin: auto;
+    padding-block: 2em;
+    img {
+        width: min(300px, 100%);
+    }
+    p {
+        color: var(--clr-blueGray-900);
+        text-align: center;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    .buttons {
+        a {
+            border-radius: 25px;
+            display: block;
+            min-width: 100px;
+            text-align: center;
+            padding: 0.6em;
+            transition: $bgTransition;
+            &.shopping {
+                color: var(--clr-white-1000);
+                background-color: var(--clr-green-1000);
+                &:hover {
+                    background-color: var(--clr-turquoise-200);
+                }
+            }
+            &.go-back {
+                background-color: var(--clr-mustard-700);
+                color: var(--clr-black-100);
+                &:hover {
+                    background-color: var(--clr-mustard-600);
+                }
+            }
+        }
+    }
+}
 // Seller : Show Store Page
 // .opening-hours-content {
 //   .day {

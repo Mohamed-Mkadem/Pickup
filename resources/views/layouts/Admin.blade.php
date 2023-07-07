@@ -227,10 +227,10 @@
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
 
-                    <div id="notification-menu">
 
-                        <x-notification-menu />
-                    </div>
+
+                    <x-notification-menu />
+
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" d-flex  a-center dropdown-toggle" aria-pressed="false">
 

@@ -452,6 +452,7 @@ button {
 .dark .modal-holder .modal.voucher-details .used-by-holder h3 {
   color: var(--clr-black-700);
 }
+.dark .unavailable-wrapper p,
 .dark form .form-row .form-col p.col-body,
 .dark .product-row .product-info p,
 .dark .info-sidebar,

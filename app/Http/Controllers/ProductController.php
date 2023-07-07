@@ -58,6 +58,7 @@ class ProductController extends Controller
         $sort = $request->sort ?? '';
         $stock_statuses = $request->stock_statuses ?? [];
         $query->where('store_id', $store->id);
+        // dd($brands);
         if (!empty($search)) {
             $query->where('name', 'like', "%$search%");
         }

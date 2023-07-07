@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Client;
+use App\Models\Product;
 use App\Models\Sector;
 use App\Models\Seller;
 use App\Models\State;
@@ -32,11 +35,15 @@ class StoreController extends Controller
     protected $sectors;
     protected $covers;
     protected $fileNames;
+    protected $brands;
     public function __construct()
     {
         $this->middleware('isVerified')->only(['create', 'index']);
+        // $this->brands = Brand::where('status', 'active')->get();
+        $this->brands = Brand::get();
         $this->states = State::with('cities')->get();
-        $this->sectors = Sector::where('status', 'active')->get();
+        // $this->sectors = Sector::where('status', 'active')->get();
+        $this->sectors = Sector::get();
         $this->covers = Storage::files('public/stores/covers');
         $this->fileNames = array_map(function ($file) {
             return File::basename($file);
@@ -269,7 +276,7 @@ class StoreController extends Controller
     public function adminIndex()
     {
         // Sectors, states, cities,
-        $stores = Store::with(['sector', 'city'])->paginate();
+        $stores = Store::with(['sector', 'city'])->orderBy('created_at', 'DESC')->paginate();
 
         return view('Admin.Stores.admin-stores-index', ['stores' => $stores, 'states' => $this->states, 'sectors' => $this->sectors]);
     }
@@ -291,7 +298,7 @@ class StoreController extends Controller
         $sort = $request->sort ?? 'newest';
 
         $query = Store::query();
-        // Apply the filters
+
         if (!empty($minDate)) {
             $query->where('created_at', '>=', $minDate);
         }
@@ -437,5 +444,196 @@ class StoreController extends Controller
 
         }
 
+    }
+
+    // Client Methods
+
+    public function clientIndex()
+    {
+
+        $stores = Store::where('status', 'published')->with(['sector', 'city'])->orderBy('rate', 'DESC')->paginate();
+
+        return view('Client.Stores.client-stores-index', ['stores' => $stores, 'states' => $this->states, 'sectors' => $this->sectors]);
+    }
+    public function clientFilter(Request $request)
+    {
+        $client = Client::where('user_id', Auth::id())->first();
+        $search = $request->search ?? '';
+        $state_id = $request->state_id ?? 'all';
+        $city_id = $request->city_id ?? 'all';
+        $min_rate = $request->min_rate ?? '';
+        $max_rate = $request->max_rate ?? '';
+        $min_followers = $request->min_followers ?? '';
+        $max_followers = $request->max_followers ?? '';
+        $sectors = $request->sectors ?? [];
+        $statuses = $request->statuses ?? [];
+        $sort = $request->sort ?? 'newest';
+
+        $query = Store::query();
+        $query->where('status', 'published');
+
+        if (!empty($statuses)) {
+            if (in_array('following', $statuses) && in_array('not following', $statuses)) {
+                // Skip filtering if both checkboxes are checked
+            } elseif (in_array('following', $statuses)) {
+                $query->whereHas('follows', function ($subQuery) use ($client) {
+                    $subQuery->where('client_id', $client->id);
+                });
+            } elseif (in_array('not following', $statuses)) {
+                $query->whereDoesntHave('follows', function ($subQuery) use ($client) {
+                    $subQuery->where('client_id', $client->id);
+                });
+            }
+        }
+
+        if (!empty($min_followers)) {
+            $query->where('followers', '>=', $min_followers);
+        }
+
+        if (!empty($max_followers)) {
+            $query->where('followers', '<=', $max_followers);
+        }
+        if (!empty($min_rate)) {
+            $query->where('rate', '>=', $min_rate);
+        }
+
+        if (!empty($max_rate)) {
+            $query->where('rate', '<=', $max_rate);
+        }
+
+        if (!empty($search)) {
+            $query->where('name', 'like', "%$search%");
+        }
+        if (!empty($sectors)) {
+            $query->whereIn('sector_id', $sectors);
+        }
+
+        if ($state_id != 'all') {
+            $query->where('state_id', $state_id);
+            if ($city_id != 'all') {
+                $query->where('city_id', $city_id);
+
+            }
+
+        }
+
+        if ($sort == 'highest rate') {
+            $query->orderBy('rate', 'desc');
+        }
+        if ($sort == 'lowest rate') {
+            $query->orderBy('rate', 'asc');
+        }
+        if ($sort == 'highest followers') {
+            $query->orderBy('followers', 'desc');
+        }
+        if ($sort == 'lowest followers') {
+            $query->orderBy('followers', 'asc');
+        }
+
+        $stores = $query->with(['sector', 'city'])->paginate();
+        return view('Client.Stores.client-stores-index', ['stores' => $stores, 'states' => $this->states, 'sectors' => $this->sectors]);
+    }
+    public function clientHome($username)
+    {
+        $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
+        // Handle the case where the store is unpublished / I will handle it on the view itself
+        $products = $store->products()->where('status', 'active')->latest()->take(9)->get();
+
+        if (!$store) {
+            abort(404);
+        }
+        // dd($store->openingHours);
+        return view('Client.Stores.client_store_home', ['store' => $store, 'products' => $products]);
+    }
+    public function clientProducts($username)
+    {
+        $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
+        if (!$store) {
+            abort(404);
+        }
+        $products = $store->products()
+            ->where('status', 'active')
+            ->whereHas('category', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->with('brand')
+            ->orderBy('name', 'asc')
+            ->paginate();
+        $categories = $store->categories->where('status', 'active');
+
+        return view('Client.Stores.client_store_products', [
+            'products' => $products,
+            'store' => $store,
+            'brands' => $this->brands,
+            'categories' => $categories]);
+    }
+
+    public function clientProduct($username, $id)
+    {
+        $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
+        if (!$store) {
+            abort(404);
+        }
+        $product = Product::where('store_id', $store->id)->where('status', 'active')->with(['category', 'brand'])->findOrFail($id);
+        return view('Client.Stores.client_store_product', ['product' => $product, 'store' => $store]);
+    }
+    public function clientProductsFilter($username, Request $request)
+    {
+        $store = Store::where('username', $username)->with(['sector', 'city'])->first();
+        if (!$store) {
+            abort(404);
+        }
+        $query = Product::query();
+        $query->where('store_id', $store->id);
+        $query->where('status', 'active');
+        $query->whereHas('category', function ($subQuery) {
+            $subQuery->where('status', 'active');
+        });
+
+        $search = $request->search ?? '';
+        $minPrice = $request->min_price ?? '';
+        $maxPrice = $request->max_price ?? '';
+        $categories = $request->categories ?? [];
+        $brands = $request->brands ?? [];
+        $sort = $request->sort ?? 'a-z';
+        // dd($brands);
+        if (!empty($search)) {
+            $query->where('name', 'like', "%$search%");
+        }
+        if (!empty($maxPrice)) {
+            $query->where('price', '<=', $maxPrice);
+        }
+        if (!empty($minPrice)) {
+            $query->where('price', '>=', $minPrice);
+        }
+        if (!empty($categories)) {
+            $query->whereIn('category_id', $categories);
+        }
+        if (!empty($brands)) {
+            $query->whereIn('brand_id', $brands);
+        }
+
+        if ($sort == 'z-a') {
+            $query->orderBy('name', 'desc');
+        }
+        if ($sort == 'a-z') {
+            $query->orderBy('name', 'asc');
+        }
+        if ($sort == 'highest_sale_price') {
+            $query->orderBy('price', 'desc');
+        }
+        if ($sort == 'lowest_sale_price') {
+            $query->orderBy('price', 'asc');
+        }
+        // $products = $query->with('brand')->get();
+        // dd($products);
+
+        $products = $query->with('brand')->paginate();
+        $storeCategories = $store->categories->where('status', 'active');
+        return view('Client.Stores.client_store_products', [
+            'products' => $products,
+            'store' => $store,
+            'brands' => $this->brands,
+            'categories' => $storeCategories]);
     }
 }

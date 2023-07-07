@@ -197,10 +197,23 @@
         }
         &.products-grid,
         &.products-holder {
+            // grid-template-columns: repeat(
+            //     auto-fit,
+            //     minmax(min(250px, 100%), 1fr)
+            // );
             grid-template-columns: repeat(
                 auto-fit,
-                minmax(min(250px, 100%), 1fr)
+                minmax(min(250px, 100%), 260px)
             );
+            justify-content: space-evenly;
+            gap: 1rem;
+        }
+        &.shopping-grid {
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(min(300px, 100%), 350px)
+            );
+            justify-content: space-evenly;
             gap: 1rem;
         }
         &.product-row {

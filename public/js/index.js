@@ -52,13 +52,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
-// import Alpine from "alpinejs";
-
-// window.Alpine = Alpine;
-
-// Alpine.start();
-
 var notificationSound = document.getElementById("notification-sound");
 var notificationsHandler = document.getElementById("notifications-handler");
 var notificationsWrapper = document.getElementById("notifications-wrapper");

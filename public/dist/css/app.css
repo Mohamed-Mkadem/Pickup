@@ -1883,6 +1883,43 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   gap: 10px;
   align-items: center;
 }
+.unavailable-wrapper {
+  width: min(700px, 95%);
+  margin: auto;
+  padding-block: 2em;
+}
+.unavailable-wrapper img {
+  width: min(300px, 100%);
+}
+.unavailable-wrapper p {
+  color: var(--clr-blueGray-900);
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.unavailable-wrapper .buttons a {
+  border-radius: 25px;
+  display: block;
+  min-width: 100px;
+  text-align: center;
+  padding: 0.6em;
+  transition: background-color 0.3s ease;
+}
+.unavailable-wrapper .buttons a.shopping {
+  color: var(--clr-white-1000);
+  background-color: var(--clr-green-1000);
+}
+.unavailable-wrapper .buttons a.shopping:hover {
+  background-color: var(--clr-turquoise-200);
+}
+.unavailable-wrapper .buttons a.go-back {
+  background-color: var(--clr-mustard-700);
+  color: var(--clr-black-100);
+}
+.unavailable-wrapper .buttons a.go-back:hover {
+  background-color: var(--clr-mustard-600);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: 100%;
@@ -2174,7 +2211,6 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   color: var(--clr-teal-200);
   font-size: 20px;
   margin-bottom: 0;
-  text-decoration: underline;
   font-weight: 400;
 }
 .product-row .product-info p.price-unit {
@@ -3570,7 +3606,13 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   gap: 1rem;
 }
 .results .results-holder.products-grid, .results .results-holder.products-holder {
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 260px));
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+.results .results-holder.shopping-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 350px));
+  justify-content: space-evenly;
   gap: 1rem;
 }
 .results .results-holder.product-row {

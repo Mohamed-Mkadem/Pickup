@@ -75,4 +75,14 @@ class Store extends Model
     {
         return $this->hasMany(Transfer::class);
     }
+    // Follows
+
+    public function follows()
+    {
+        return $this->hasMany(Follow::class);
+    }
+    public function isFollowing($id)
+    {
+        return $this->follows()->where('client_id', $id)->exists();
+    }
 }

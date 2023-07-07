@@ -21,4 +21,12 @@ class Client extends Model
     {
         return $this->morphMany(Voucher::class, 'user');
     }
+    public function follows()
+    {
+        return $this->hasMany(Follow::class);
+    }
+    public function isFollowing($storeId)
+    {
+        return $this->follows()->where('store_id', $storeId)->exists();
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransferController;
@@ -70,17 +72,33 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
         ->name('profile');
     Route::get('balance', [ClientController::class, 'balance'])->name('balance');
     Route::post('balance/add', [ClientController::class, 'topUp'])->name('topup');
-    // Route::get('shopping', ClientController::class, 'shopping')->name('shopping');
-    // Route::get('orders', ClientController::class, 'orders')->name('orders');
-    // Route::get('stores', ClientController::class, 'stores')->name('stores');
-    // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
-    // Route::get('tickets', ClientController::class, 'tickets')->name('tickets');
-    // Route::get('profile', ClientController::class, 'profile')->name('profile');
 
     // Notifications
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/filter', [NotificationController::class, 'filter'])->name('notifications.filter');
     Route::get('/getNotifications', [NotificationController::class, 'getNotifications']);
+    // Stores
+    Route::get('stores', [StoreController::class, 'clientIndex'])->name('stores.index');
+    Route::get('stores/filter', [StoreController::class, 'clientFilter'])->name('stores.filter');
+    // Show Stores
+    Route::get('store/{username}/home', [StoreController::class, 'clientHome'])->name('store.home');
+    Route::get('store/{username}/reviews', [StoreController::class, 'clientReviews'])->name('store.reviews');
+    Route::get('store/{username}/cart', [StoreController::class, 'cart'])->name('store.cart');
+    Route::get('store/{username}/checkout', [StoreController::class, 'checkout'])->name('store.checkout');
+    Route::get('store/{username}/orders', [StoreController::class, 'clientOrders'])->name('store.orders');
+    Route::get('store/{username}/order/{id}', [StoreController::class, 'clientOrder'])->name('store.order');
+    Route::get('store/{username}/products', [StoreController::class, 'clientProducts'])->name('store.products');
+    Route::get('store/{username}/products/filter', [StoreController::class, 'clientProductsFilter'])->name('store.products.filter');
+    Route::get('store/{username}/product/{id}', [StoreController::class, 'clientProduct'])->name('store.product');
+// Follows
+    // Route::post('follow/{id}', [FollowController::class, 'follow'])->name('store.follow');
+    Route::delete('unfollow/{store}', [FollowController::class, 'unfollow'])->name('store.unfollow');
+
+    Route::post('follow/{store}', [FollowController::class, 'follow'])->name('store.follow');
+
+    // Shopping
+    Route::get('shopping', [ShoppingController::class, 'shopping'])->name('shopping');
+    Route::get('shopping/filter', [ShoppingController::class, 'filter'])->name('shopping.filter');
 });
 
 // Seller

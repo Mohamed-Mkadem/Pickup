@@ -78,12 +78,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="shopping.html" class="nav-link">
+                    <a href="{{ route('client.shopping') }}"
+                        class="
+                    {{ request()->is('client/shopping*') ? 'active' : '' }}
+                    nav-link">
                         <i class="fa-light fa-bag-shopping"></i>
                         <span>Shopping</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="client_stores.html" class="nav-link">
+                    <a href="{{ route('client.stores.index') }}"
+                        class="
+                    {{ request()->is('client/stores*') ? 'active' : '' }}
+                    nav-link">
                         <i class="fa-light fa-shop"></i>
                         <span>Stores</span></a>
                 </li>
@@ -132,90 +138,7 @@
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
 
-                    {{-- <div class="dropdown-holder">
-                        <button id="notifications-handler" data-count="99" class="top-bar-btn dropdown-toggle"
-                            aria-pressed="false">
-                            <i class="fa-light fa-bell"></i>
-                        </button>
-                        <div class="dropdown-menu notifications-dropdown ">
-                            <h4>Notifications</h4>
-                            <ul class="notifications-wrapper">
-                                <!-- Start Notification -->
-                                <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href="" class="unread"> Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
-                                <!-- Start Notification -->
-                                <li class="notification unread">
-                                    <img src="../../dist/Assets/avatar-arthur.jpg" alt="">
-                                    <div class="details">
-                                        <p class="notification-body">
-                                            <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Ducimus, non!</a>
-                                        </p>
-                                        <p class="notification-time">
-                                            <i class="fa-light fa-timer"></i> 4 Hours ago
-                                        </p>
-                                    </div>
-                                </li>
-                                <!-- End Notification -->
 
-                            </ul>
-                            <a href="client_notifications.html" class="see-all d-block t-center">See All</a>
-                        </div>
-                    </div> --}}
                     <x-notification-menu />
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" seller-client  dropdown-toggle" aria-pressed="false">
@@ -254,12 +177,12 @@
 
     @stack('scripts')
     <script>
-        const prefix = {{ Auth::user()->type }}
+        const prefix = "{{ Auth::user()->type }}"
         const user_id = {{ Auth::id() }}
         const baseUrl = "{{ asset('') }}";
     </script>
-    <script src="{{ asset('js/index.js') }}"></script>
     <script src="{{ asset('dist/js/app.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
 
 </body>
 

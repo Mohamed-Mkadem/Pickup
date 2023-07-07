@@ -253,10 +253,10 @@
                         <i class="fa-light fa-moon moon-icon"></i>
                         <i class="fa-light fa-sun sun-icon"></i>
                     </button>
-                    <div id="notification-menu">
 
-                        <x-notification-menu />
-                    </div>
+
+                    <x-notification-menu />
+
 
                     <div class="dropdown-holder">
                         <button id="profile-handler" class=" seller-client  dropdown-toggle" aria-pressed="false">
