@@ -19,7 +19,6 @@
 
     <link rel="stylesheet" href=" {{ asset('dist/CSS/utilities.css') }} ">
     <link rel="stylesheet" href=" {{ asset('dist/CSS/app.css') }} ">
-    <link rel="stylesheet" href=" {{ asset('dist/CSS/admin.css') }} ">
     <link rel="stylesheet" href=" {{ asset('dist/CSS/app_dark.css') }} ">
 
     <link href="https://cdn.jsdelivr.net/gh/duyplus/fontawesome-pro/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -186,33 +185,7 @@
     </div>
 
     @stack('scripts')
-    <script>
-        const publishForm = document.getElementById('publish-form')
 
-        const periodSelect = document.getElementById('period-select')
-        const periodSelectErrorMessage = document.getElementById('period-error-message')
-        publishForm.addEventListener('submit', (e) => {
-            e.preventDefault()
-            let errors = 0
-
-            errors = +validateField(periodSelect, periodSelectErrorMessage)
-            if (!errors) publishForm.submit()
-        })
-
-        function validateField(field, errorMessage) {
-            let errors = 0
-            if (!field.value) {
-                errorMessage.textContent = 'This Field Is Required'
-                errorMessage.classList.add('show')
-                errors = 1
-            } else {
-                errorMessage.textContent = ''
-                errorMessage.classList.remove('show')
-                errors = 0
-            }
-            return errors
-        }
-    </script>
 
     <script src="{{ asset('dist/js/store.js') }} "></script>
 

@@ -50,7 +50,7 @@
                                             Orders</a></li>
 
                                     <li><a href="{{ route('admin.store.sales', $store->username) }}"
-                                            class="{{ request()->is('admin/store/*/sales*') ? 'active' : '' }}"> <i
+                                            class="{{ request()->is('admin/store/*/sale*') ? 'active' : '' }}"> <i
                                                 class="fa-light fa-hand-holding-dollar"></i>
                                             Sales</a></li>
                                     <li><a href="{{ route('admin.store.transfers', $store->username) }}"
@@ -75,7 +75,7 @@
                                                 class="modal t-center confirm-form">
                                                 @csrf
                                                 @method('PATCH')
-                                                <i class=" fa-light fa-trash"></i>
+                                                <i class=" fa-light fa-info"></i>
                                                 <p>Are You Sure You Want To Ban This Store ?</p>
                                                 <div class="buttons d-flex j-center a-center">
                                                     <button class="cancelBtn">Cancel</button>
@@ -92,7 +92,7 @@
                                                 method="post" class="modal t-center confirm-form">
                                                 @csrf
                                                 @method('PATCH')
-                                                <i class=" fa-light fa-trash"></i>
+                                                <i class=" fa-light fa-info"></i>
                                                 <p>Are You Sure You Want To Activate This Store ?</p>
                                                 <div class="buttons d-flex j-center a-center">
                                                     <button class="cancelBtn">Cancel</button>

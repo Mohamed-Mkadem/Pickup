@@ -89,7 +89,7 @@
                                 <h3>Stores</h3>
                             </div>
                             <div class="info-value">
-                                <p>1</p>
+                                <p>{{ $user->seller->storesCount() }}</p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -100,7 +100,11 @@
                                 <h3>Subscriptions </h3>
                             </div>
                             <div class="info-value">
-                                <p>24</p>
+                                @if ($user->seller->hasStore())
+                                    <p>{{ $user->seller->store->subscriptionsCount() }}</p>
+                                @else
+                                    <p>{{ 0 }}</p>
+                                @endif
                             </div>
                         </div>
                         <!-- End Info -->
@@ -305,7 +309,7 @@
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
                             <p class="box-title">Transfers</p>
-                            <p class="box-value">21 </p>
+                            <p class="box-value">{{ $user->seller->transfersCount() }} </p>
                         </div>
 
                         <div class="icon-holder">

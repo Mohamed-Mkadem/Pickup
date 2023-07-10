@@ -381,12 +381,13 @@ class StoreController extends Controller
 
     public function home($username)
     {
-        $store = Store::where('username', $username)->with(['owner.user', 'sector', 'city', 'openingHours'])->first();
+        $store = Store::where('username', $username)->with(['owner.user', 'sector', 'city', 'openingHours', 'transfers'])->first();
         // $owner = $store->owner->user;
         // dd($owner);
         if (!$store) {
             abort(404);
         }
+        // dd($store->salesThisMonth());
         // dd($store->openingHours);
         return view('Admin.Stores.show_store_home', ['store' => $store]);
     }

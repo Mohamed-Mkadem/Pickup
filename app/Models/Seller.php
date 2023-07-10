@@ -93,6 +93,10 @@ class Seller extends Model
     {
         return $this->store()->exists();
     }
+    public function hasPublishedStore()
+    {
+        return $this->store()->where('status', 'published')->exists();
+    }
     public function storesCount()
     {
         return $this->store()->count();
@@ -103,5 +107,9 @@ class Seller extends Model
     public function transfers()
     {
         return $this->hasMany(Transfer::class);
+    }
+    public function transfersCount()
+    {
+        return $this->transfers()->count();
     }
 }

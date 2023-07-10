@@ -259,7 +259,7 @@
                     <div class="top-info mb-0 d-flex a-start j-sp-between">
                         <div class="title-value-box">
                             <p class="box-title">Transfers</p>
-                            <p class="box-value">21 </p>
+                            <p class="box-value">{{ $store->owner->transfersCount() }} </p>
                         </div>
 
                         <div class="icon-holder">

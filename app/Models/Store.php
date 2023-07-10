@@ -6,6 +6,7 @@ use App\Models\StoreOpeningHour;
 use App\Models\Transfer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Store extends Model
 {
@@ -33,7 +34,6 @@ class Store extends Model
     }
     public function subscriptionsCount()
     {
-
         return $this->subscriptions()->count();
     }
     public function sector()
@@ -75,6 +75,15 @@ class Store extends Model
     {
         return $this->hasMany(Transfer::class);
     }
+
+    public function transfersCount()
+    {
+        return $this->transfers()->count();
+    }
+    public function transfersAmount()
+    {
+        return $this->transfers()->sum('amount');
+    }
     // Follows
 
     public function follows()
@@ -84,5 +93,33 @@ class Store extends Model
     public function isFollowing($id)
     {
         return $this->follows()->where('client_id', $id)->exists();
+    }
+
+    // Sales
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+    public function salesCount()
+    {
+        return $this->sales()->count();
+    }
+    public function salesToday()
+    {
+        return $this->sales()->whereDate('created_at', Carbon::today())->count();
+    }
+
+    public function salesThisWeek()
+    {
+        return $this->sales()->whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek(),
+        ])->count();
+    }
+
+    public function salesThisMonth()
+    {
+        return $this->sales()->whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)->count();
     }
 }

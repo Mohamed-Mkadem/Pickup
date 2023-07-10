@@ -96,14 +96,15 @@
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
                         class="nav-link
+                        {{ request()->is('seller/sales*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     collapsed">
                         <i class="fa-light fa-hand-holding-dollar"></i> <span>Sales</span></a>
                     <ul class="nav-sub-dropdown">
                         <li class="nav-item"><a class=" {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
-                                href="seller_sale_add.html">New Sale</a></li>
+                                href="{{ route('seller.sales.create') }}">New Sale</a></li>
                         <li class="nav-item"><a class=" {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
-                                href="seller_sales.html">List </a></li>
+                                href="{{ route('seller.sales.index') }}">List </a></li>
                     </ul>
                 </li>
 

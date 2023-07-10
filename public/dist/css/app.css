@@ -1038,10 +1038,10 @@ form input[type=date]::-webkit-inner-spin-button, form input[type=date]::-webkit
   background: none;
   z-index: 1;
 }
-form input[type=radio] {
+form input[type=checkbox], form input[type=radio] {
   cursor: pointer;
 }
-form input[type=radio].absolute {
+form input[type=checkbox].absolute, form input[type=radio].absolute {
   position: absolute;
   inset: 0;
   margin: 0;
@@ -4341,6 +4341,10 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .not-found-holder.show {
   display: block;
+}
+.not-found-holder.small {
+  width: min(500px, 95%);
+  margin-inline: auto;
 }
 .not-found-holder .wrapper {
   width: min(400px, 100%);

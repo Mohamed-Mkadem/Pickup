@@ -158,18 +158,20 @@
                                 </div>
                                 <div class="card single-info-card balance-card">
                                     <p class="balance-value main-value">
-
-                                        {{ $store->balance }}
+                                        {{-- This is all the balance (suspended(non picked orders) + available) --}}
+                                        {{ number_format($store->balance, 3, ',') }}
                                         <small> DT</small>
                                     </p>
                                     <div class="details">
                                         <div class="detail">
                                             <h4 class="detail-title">Available : </h4>
-                                            <p class="detail-value">414 <small>DT</small></p>
+                                            <p class="detail-value"> {{ number_format($store->balance, 3, ',') }}
+                                                <small>DT</small>
+                                            </p>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">Suspended : </h4>
-                                            <p class="detail-value">214 <small>DT</small></p>
+                                            <p class="detail-value">0 <small>DT</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -183,19 +185,27 @@
                                     <a href="store_sales_list.html">More Info</a>
                                 </div>
                                 <div class="card single-info-card sales-card">
-                                    <p class="sales-count main-value">250 <small>Sales</small></p>
+                                    <p class="sales-count main-value">{{ $store->salesCount() }}
+                                        <small>{{ $store->salesCount() == 1 ? 'Sale' : 'Sales' }}</small>
+                                    </p>
                                     <div class="details">
                                         <div class="detail">
                                             <h4 class="detail-title">Today : </h4>
-                                            <p class="detail-value">414 <small>Sales</small></p>
+                                            <p class="detail-value">{{ $store->salesToday() }}
+                                                <small>{{ $store->salesToday() == 1 ? 'Sale' : 'Sales' }}</small>
+                                            </p>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">This Week : </h4>
-                                            <p class="detail-value">414 <small>Sales</small></p>
+                                            <p class="detail-value">{{ $store->salesThisWeek() }}
+                                                <small>{{ $store->salesThisWeek() == 1 ? 'Sale' : 'Sales' }}</small>
+                                            </p>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">This Month : </h4>
-                                            <p class="detail-value">414 <small>Sales</small></p>
+                                            <p class="detail-value">{{ $store->salesThisMonth() }}
+                                                <small>{{ $store->salesThisMonth() == 1 ? 'Sale' : 'Sales' }}</small>
+                                            </p>
                                         </div>
 
 
@@ -210,11 +220,17 @@
                                     <a href="store_transfers.html">More Info</a>
                                 </div>
                                 <div class="card single-info-card transfers-card">
-                                    <p class="transfers-count main-value">25 <small>Transfers</small></p>
+                                    <p class="transfers-count main-value">{{ $store->transfersCount() }}
+                                        <small>
+                                            {{ $store->transfersCount() == 1 ? 'Transfer' : 'Transfers' }}
+                                        </small>
+                                    </p>
                                     <div class="details">
                                         <div class="detail">
                                             <h4 class="detail-title">Total Amount : </h4>
-                                            <p class="detail-value">4140 <small>DT</small></p>
+                                            <p class="detail-value">{{ number_format($store->transfersAmount(), 3, ',') }}
+                                                <small>DT</small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

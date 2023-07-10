@@ -144,7 +144,10 @@
                         <span>Orders</span></a></li>
 
                 <li class="nav-item">
-                    <a href="sales_list.html" class="nav-link notifiable">
+                    <a href="{{ route('admin.sales.index') }}"
+                        class="nav-link
+                    {{ request()->is('admin/sales*') ? 'active' : '' }}
+                    notifiable">
                         <i class="fa-light fa-hand-holding-dollar"></i>
                         <span>Sales</span>
                     </a>

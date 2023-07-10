@@ -13,6 +13,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShoppingController;
@@ -168,6 +169,16 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('inventory', [InventoryController::class, 'index'])->name('inventory.index');
     Route::get('inventory/filter', [InventoryController::class, 'filter'])->name('inventory.filter');
     Route::patch('inventory/manage/{id}', [InventoryController::class, 'manage'])->name('inventory.manage');
+
+    // Sales
+    Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('sales/filter', [SaleController::class, 'filter'])->name('sales.filter');
+    Route::get('sales/details/{id}', [SaleController::class, 'show'])->name('sales.show');
+    Route::get('sales/new', [SaleController::class, 'create'])->name('sales.create');
+    Route::post('sales/store', [SaleController::class, 'store'])->name('sales.store');
+    Route::get('sales/edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
+    Route::patch('sales/update/{id}', [SaleController::class, 'update'])->name('sales.update');
+    Route::delete('sales/destroy/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 });
 
 // Admin
@@ -234,9 +245,11 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('store/{username}/owner', [StoreController::class, 'owner'])->name('store.owner');
     Route::get('store/{username}/orders', [StoreController::class, 'orders'])->name('store.orders');
     Route::get('store/{username}/order/{id}', [StoreController::class, 'order'])->name('store.order');
-    Route::get('store/{username}/sales', [StoreController::class, 'sales'])->name('store.sales');
-    Route::get('store/{username}/sale/{id}', [StoreController::class, 'sale'])->name('store.sale');
-    Route::get('store/{username}/transfers', [StoreController::class, 'transfers'])->name('store.transfers');
+    Route::get('store/{username}/sales', [SaleController::class, 'sales'])->name('store.sales');
+    Route::get('store/{username}/sales/sales', [SaleController::class, 'filterSales'])->name('store.sales.filter');
+    Route::get('store/{username}/sale/{id}', [SaleController::class, 'sale'])->name('store.sale');
+    Route::get('store/{username}/transfers', [TransferController::class, 'transfers'])->name('store.transfers');
+    Route::get('store/{username}/transfers/filter', [TransferController::class, 'transfersFilter'])->name('store.transfers.filter');
     Route::patch('store/ban/{id}', [StoreController::class, 'ban'])->name('store.ban');
     Route::patch('store/activate/{id}', [StoreController::class, 'activate'])->name('store.activate');
     // Notifications
@@ -255,4 +268,10 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // Transfers
     Route::get('transfers', [TransferController::class, 'adminIndex'])->name('transfers.index');
     Route::get('transfers/filter', [TransferController::class, 'filter'])->name('transfers.filter');
+
+    // Sales
+    Route::get('sales', [SaleController::class, 'adminIndex'])->name('sales.index');
+    Route::get('sales/filter', [SaleController::class, 'adminFilter'])->name('sales.filter');
+    Route::get('sales/details/{id}', [SaleController::class, 'adminShow'])->name('sales.show');
+
 });
