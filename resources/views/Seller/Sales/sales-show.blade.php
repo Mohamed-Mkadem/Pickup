@@ -24,11 +24,7 @@
                         </p>
 
                         <ul class="d-flex j-center gap-0-5 a-center wrap">
-                            <li>
-                                <a href="{{ route('seller.sales.edit', $sale->id) }}" class="editBtn"> <i
-                                        class="fa-light fa-pen"></i> Edit
-                                </a>
-                            </li>
+
                             <li>
                                 <button class="deleteBtn delete-button">Delete</button>
 
@@ -38,6 +34,10 @@
                                         @csrf
                                         @method('DELETE')
                                         <i class=" fa-light fa-trash"></i>
+
+                                        <p> Deleting this sale will result in an adjustment to the product quantities
+                                            associated with this sale
+                                        </p>
 
                                         <p>Are You Sure You Want To Delete This Sale ?</p>
                                         <div class="buttons d-flex j-center a-center">

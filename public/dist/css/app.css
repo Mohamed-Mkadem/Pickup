@@ -4213,7 +4213,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   width: 75%;
   margin-inline: auto;
   color: var(--clr-blueGray-800);
-  white-space: pre-wrap;
+  white-space: initial;
 }
 .modal-holder .confirm-form .buttons {
   gap: 30px;

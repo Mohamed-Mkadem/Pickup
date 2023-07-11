@@ -176,8 +176,6 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('sales/details/{id}', [SaleController::class, 'show'])->name('sales.show');
     Route::get('sales/new', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales/store', [SaleController::class, 'store'])->name('sales.store');
-    Route::get('sales/edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
-    Route::patch('sales/update/{id}', [SaleController::class, 'update'])->name('sales.update');
     Route::delete('sales/destroy/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 });
 

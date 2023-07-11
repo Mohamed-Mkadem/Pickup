@@ -324,93 +324,39 @@ class SaleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        $sale = Sale::findOrFail($id);
-        $this->authorize('edit', $sale);
-        $saleProducts = ProductSale::where('sale_id', $sale->id)->get(['product_id', 'image', 'name', 'price', 'quantity', 'sub_total']);
-        $cart = json_encode($saleProducts);
-
-        $store = $sale->store;
-        $categories = $store->categories()->where('status', 'active')->get();
-        $query = Product::query();
-        $query->where('store_id', $store->id);
-        $query->where('status', 'active');
-        $query->whereHas('category', function ($subQuery) {
-            $subQuery->where('status', 'active');
-        });
-        $products = $query->with(['brand', 'category'])->get();
-        return view('Seller.Sales.sales-edit', ['sale' => $sale, 'stringCart' => $cart, 'products' => $products, 'categories' => $categories]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $sale = Sale::findOrFail($id);
-        $this->authorize('edit', $sale);
-        $seller = Seller::where('user_id', Auth::id())->first();
-        $store = $seller->store;
-        $cartString = $request->input('cart');
-        // dd($request->cart);
-        $cart = json_decode($cartString, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            // Invalid JSON, handle the error accordingly
-            return redirect()->back()->with('error', 'Invalid cart data');
-        }
-        // dd($cart);
-        $validation = Validator::make($cart, [
-            '*.product_id' => 'required|exists:products,id,store_id,' . $store->id,
-            '*.name' => 'required|string',
-            '*.price' => 'required|numeric',
-            '*.image' => 'required|url',
-            '*.quantity' => ['required', 'integer', 'min:1',
-                // ,new MaxQuantityRule('actual_id'),
-            ],
-        ], $this->messages);
-        if ($validation->fails()) {
-            // Validation failed
-            return redirect()->back()->withErrors($validation)->withInput();
-        }
-        $validation->after(function ($validation) use ($cart) {
-            foreach ($cart as $cart_item) {
-                $product = Product::findOrFail($cart_item['product_id']);
-                $arr[] = $product;
-                if ($product->quantity < $cart_item['quantity']) {
-                    $validation->errors()->add(
-                        '*.quantity', "The Maximum Quantity Of '{$cart_item['name']}' Is {$product->quantity}");
-
-                }
-
-            }
-        });
-
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $sale = Sale::findorFail($id);
+        $sale = Sale::where('id', $id)->first();
+
         $this->authorize('delete', $sale);
-        try {
-            DB::beginTransaction();
-            foreach ($sale->products as $product) {
-                $product->sale_products->delete();
+
+        $saleProducts = ProductSale::where('sale_id', $sale->id)->get();
+        if ($saleProducts) {
+
+            try {
+                DB::beginTransaction();
+                foreach ($saleProducts as $saleProduct) {
+                    $product = Product::find($saleProduct->product_id);
+                    if ($product) {
+                        $product->increment('quantity', $saleProduct->quantity);
+                        $saleProduct->delete();
+                    }
+                    $saleProduct->delete();
+                }
+                $sale->delete();
+
+                DB::commit();
+                return redirect()->route('seller.sales.index')->with('success', 'Sale Deleted Successfully');
+            } catch (\Throwable $th) {
+                // throw $th;
+                return redirect()->route('seller.sales.index')->with('error', 'Oops! Something Went Wrong');
+                //throw $th;
             }
+        } else {
             $sale->delete();
-
-            DB::commit();
-            return redirect()->back()->with('success', 'Sale Deleted Successfully');
-        } catch (\Throwable $th) {
-
-            return redirect()->back()->with('error', 'Oops! Something Went Wrong');
-            //throw $th;
+            return redirect()->route('seller.sales.index')->with('success', 'Sale Deleted Successfully');
         }
     }
     protected function getAmount($cart)

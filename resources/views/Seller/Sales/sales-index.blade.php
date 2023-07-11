@@ -143,10 +143,7 @@
                                                             class="fa-light fa-eye"></i></a>
 
                                                 </li>
-                                                <li>
-                                                    <a href="{{ route('seller.sales.edit', $sale->id) }}" class="td-btn"><i
-                                                            class="fa-light fa-pen"></i></a>
-                                                </li>
+
                                                 <li>
                                                     <button class="deleteBtn td-btn" title="Delete Expense"><i
                                                             class="fa-light fa-trash"></i></button>
@@ -156,7 +153,14 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <i class=" fa-light fa-trash"></i>
-                                                            <p>Are You Sure You Want To Delete This Sale?</p>
+
+
+                                                            <p> Deleting this sale will result in an adjustment to the
+                                                                product quantities
+                                                                associated with this sale
+                                                            </p>
+
+                                                            <p>Are You Sure You Want To Delete This Sale ?</p>
                                                             <div class="buttons d-flex j-center a-center">
                                                                 <button class="cancelBtn">Cancel</button>
                                                                 <button class="confirmBtn">Yes</button>
