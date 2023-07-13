@@ -29,4 +29,13 @@ class Client extends Model
     {
         return $this->follows()->where('store_id', $storeId)->exists();
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+    public function hasCart($store)
+    {
+        return $this->carts()->where('store_id', $store->id)->exists();
+    }
 }

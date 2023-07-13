@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
@@ -100,6 +101,11 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     // Shopping
     Route::get('shopping', [ShoppingController::class, 'shopping'])->name('shopping');
     Route::get('shopping/filter', [ShoppingController::class, 'filter'])->name('shopping.filter');
+
+    // Cart
+    Route::post('product/add/{storeID}', [CartController::class, 'addProduct'])->name('cart.add');
+    Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::patch('cart/empty/{id}', [CartController::class, 'empty'])->name('cart.empty');
 });
 
 // Seller

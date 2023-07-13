@@ -245,7 +245,7 @@ button {
 .dark a.editBtn,
 .dark .product-details .product-detail .top-header button.tabBtn:hover,
 .dark .product-details .product-detail .top-header button.tabBtn.active,
-.dark .product-row .product-info .cart-actions form > button,
+.dark .product-row .product-info .cart-actions .hidden-inputs > button,
 .dark .product-row .product-info .cart-actions .quantity-holder > button,
 .dark .product .actions form:hover,
 .dark .product .actions a:hover,
@@ -259,7 +259,7 @@ button {
   background-color: var(--clr-black-350) !important;
 }
 .dark a.editBtn:hover,
-.dark .product-row .product-info .cart-actions form > button:hover,
+.dark .product-row .product-info .cart-actions .hidden-inputs > button:hover,
 .dark .product-row .product-info .cart-actions .quantity-holder > button:hover {
   background-color: var(--clr-black-400) !important;
 }

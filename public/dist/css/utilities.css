@@ -1455,7 +1455,7 @@ section#store-holder {
 }
 
 .p-1 {
-  padding: 1em;
+  padding: 1em !important;
 }
 
 .p-0-5 {

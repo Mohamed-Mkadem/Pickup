@@ -2107,6 +2107,9 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 .product {
   padding: 1em;
 }
+.product.disabled {
+  opacity: 0.7;
+}
 .product .product-quantity-holder {
   color: var(--clr-teal-200);
   font-weight: 500;
@@ -2258,7 +2261,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   text-align: center;
   font-weight: bold;
 }
-.product-row .product-info .cart-actions form > button {
+.product-row .product-info .cart-actions .hidden-inputs > button {
   width: 100%;
   background-color: var(--clr-teal-200);
   color: var(--clr-white-1000);
@@ -2267,7 +2270,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   border-radius: 10px;
   transition: background-color 0.3s ease;
 }
-.product-row .product-info .cart-actions form > button:hover {
+.product-row .product-info .cart-actions .hidden-inputs > button:hover {
   background-color: var(--clr-teal-300);
 }
 @media (min-width: 501px) {

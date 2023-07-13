@@ -293,7 +293,7 @@
                                         title="{{ $product->name }}">{{ $product->name }}</a>
                                 </h3>
                                 <p class="product-brand">{{ $product->brand->name }}</p>
-                                <p class="product-brand">{{ $product->store->sector->name }}</p>
+
                                 <p class="product-price">{{ number_format($product->price, 3, ',') }} <small>DT</small>
                                 </p>
                             </div>

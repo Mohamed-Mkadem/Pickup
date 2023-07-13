@@ -264,7 +264,7 @@ class SaleController extends Controller
         $validation->after(function ($validation) use ($cart) {
             foreach ($cart as $cart_item) {
                 $product = Product::findOrFail($cart_item['id']);
-                $arr[] = $product;
+              
                 if ($product->quantity < $cart_item['quantity']) {
                     $validation->errors()->add(
                         '*.quantity', "The Maximum Quantity Of '{$cart_item['name']}' Is {$product->quantity}");

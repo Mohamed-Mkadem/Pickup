@@ -14,6 +14,7 @@
                     store owner purchases a new subscription. We apologize for any inconvenience caused. In the
                     meantime, feel free to check out our other active stores for your shopping needs.</p>
                 <div class="buttons d-flex j-sp-between a-center gap-1 wrap mt-1">
+
                     <a href="{{ url()->previous() }}" class="go-back">Go Back</a>
                     <a href="{{ route('client.shopping') }}" class="shopping">Shopping</a>
                 </div>
@@ -194,7 +195,10 @@
                         <div class="results-holder mt-2 products-holder">
                             @foreach ($products as $product)
                                 <!-- Start Product  -->
-                                <div class="product holder radius-10">
+                                <div class="product holder radius-10 @if ($product->quantity == 0) disabled @endif">
+                                    <p class="product-quantity-holder mb-1">Quantity: <span class="quantity-value"
+                                            data-id="{{ $product->id }}">{{ $product->quantity }}</span>
+                                    </p>
                                     <div class="img-holder ">
                                         <img src="{{ asset('storage/' . $product->image) }}" class=" radius-10"
                                             alt="">
@@ -205,8 +209,18 @@
                                         <p class="product-price">{{ $product->price }} <small>DT</small></p>
                                     </div>
                                     <div class="actions d-flex j-sp-between a-center gap-0-5 wrap">
-                                        <form action="" method="post">
-                                            <button type="submit"><i class="fa-light fa-cart-shopping"></i></button>
+                                        <form action="{{ route('client.cart.add', $store->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="image"
+                                                value="{{ asset('storage/' . $product->image) }}">
+
+
+                                            <button type="submit"
+                                                @if ($product->quantity == 0) @disabled(true) @endif><i
+                                                    class="fa-light fa-cart-shopping"></i></button>
                                         </form>
                                         <a
                                             href="{{ route('client.store.product', ['username' => $store->username, 'id' => $product->id]) }}"><i

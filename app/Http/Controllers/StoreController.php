@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Cart;
+use App\Models\CartProduct;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sector;
@@ -538,7 +540,11 @@ class StoreController extends Controller
     {
         $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
         // Handle the case where the store is unpublished / I will handle it on the view itself
-        $products = $store->products()->where('status', 'active')->latest()->take(9)->get();
+        $products = $store->products()->where('status', 'active')
+            ->whereHas('category', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->latest()->take(9)->get();
 
         if (!$store) {
             abort(404);
@@ -548,7 +554,7 @@ class StoreController extends Controller
     }
     public function clientProducts($username)
     {
-        $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
+        $store = Store::where('username', $username)->first();
         if (!$store) {
             abort(404);
         }
@@ -571,7 +577,7 @@ class StoreController extends Controller
 
     public function clientProduct($username, $id)
     {
-        $store = Store::where('username', $username)->with(['sector', 'city', 'openingHours'])->first();
+        $store = Store::where('username', $username)->first();
         if (!$store) {
             abort(404);
         }
@@ -580,7 +586,7 @@ class StoreController extends Controller
     }
     public function clientProductsFilter($username, Request $request)
     {
-        $store = Store::where('username', $username)->with(['sector', 'city'])->first();
+        $store = Store::where('username', $username)->first();
         if (!$store) {
             abort(404);
         }
@@ -636,5 +642,26 @@ class StoreController extends Controller
             'store' => $store,
             'brands' => $this->brands,
             'categories' => $storeCategories]);
+    }
+
+    public function cart($username)
+    {
+        $store = Store::where('username', $username)->first();
+        if (!$store) {
+            abort(404);
+        }
+        $client = Client::where('user_id', Auth::id())->first();
+        if (!$client) {
+            abort(404);
+        }
+        $cartInfo = Cart::where('store_id', $store->id)->where('client_id', $client->id)->first();
+
+        $cartProducts = [];
+        if ($cartInfo) {
+            $cartProducts = json_encode(CartProduct::where('cart_id', $cartInfo->id)->get());
+
+        }
+        // dd($cartInfo);
+        return view('Client.Stores.client_store_cart', ['cart' => $cartProducts, 'cartInfo' => $cartInfo, 'store' => $store]);
     }
 }

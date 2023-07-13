@@ -2,6 +2,9 @@
 
 .product {
     padding: 1em;
+    &.disabled {
+        opacity: 0.7;
+    }
     .product-quantity-holder {
         color: var(--clr-teal-200);
         font-weight: 500;
@@ -177,7 +180,7 @@
                     font-weight: bold;
                 }
             }
-            form {
+            .hidden-inputs {
                 > button {
                     width: 100%;
                     background-color: var(--clr-teal-200);

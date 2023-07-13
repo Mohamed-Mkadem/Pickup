@@ -122,4 +122,15 @@ class Store extends Model
         return $this->sales()->whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)->count();
     }
+    // Carts
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    // Helpers
+    public function isPublished()
+    {
+        return $this->status == 'published';
+    }
 }

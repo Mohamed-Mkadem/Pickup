@@ -58,19 +58,26 @@
                                     <span>(1 Piece)</span>
                                 @endif
                             </p>
-                            <div class="cart-actions mt-">
 
+                            <form action="{{ route('client.cart.add', $store->id) }}" method="post" class="cart-actions">
                                 <div class="quantity-holder  ">
 
                                     <button id="minus">-</button>
-                                    <input type="number" name="" id="quantity" readonly value="1" />
+                                    <input type="number" name="quantity" id="quantity" readonly value="1" />
                                     <button id="plus">+</button>
                                 </div>
-                                <form action="" method="post">
+                                <div class="hidden-inputs">
+
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="price" value="{{ $product->price }}">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" name="image" value="{{ asset('storage/' . $product->image) }}">
                                     <button type="submit"><i class="fa-light fa-cart-shopping"></i><span> Add To
                                             Cart</span></button>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                     <div class="results-holder product-details mt-2">
@@ -209,12 +216,14 @@
         const plusBtn = document.getElementById("plus");
         const quantity = document.getElementById("quantity");
 
-        minusBtn.addEventListener("click", () => {
+        minusBtn.addEventListener("click", (e) => {
+            e.preventDefault()
             if (quantity.value > 1) {
                 quantity.value = parseInt(quantity.value) - 1;
             }
         });
-        plusBtn.addEventListener("click", () => {
+        plusBtn.addEventListener("click", (e) => {
+            e.preventDefault()
             if (quantity.value < 99) {
                 quantity.value = parseInt(quantity.value) + 1;
             }
