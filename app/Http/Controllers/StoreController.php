@@ -664,4 +664,16 @@ class StoreController extends Controller
         // dd($cartInfo);
         return view('Client.Stores.client_store_cart', ['cart' => $cartProducts, 'cartInfo' => $cartInfo, 'store' => $store]);
     }
+    public function checkout($username)
+    {
+        $store = Store::where('username', $username)->firstOrFail();
+        $client = Client::where('user_id', Auth::id())->firstOrFail();
+
+        $cart = Cart::where('client_id', $client->id)->where('store_id', $store->id)->first();
+        $cartProducts = [];
+        if ($cart->products()) {
+            $cartProducts = CartProduct::where('cart_id', $cart->id)->get();
+        }
+        return view('Client.Stores.client_store_checkout', ['store' => $store, 'cart' => $cart, 'cartProducts' => $cartProducts]);
+    }
 }

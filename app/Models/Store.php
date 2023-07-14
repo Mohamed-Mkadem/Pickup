@@ -133,4 +133,9 @@ class Store extends Model
     {
         return $this->status == 'published';
     }
+    // Orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

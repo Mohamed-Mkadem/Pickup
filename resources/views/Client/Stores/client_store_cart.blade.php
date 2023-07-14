@@ -101,7 +101,7 @@
                                 <button type="submit" id="updateBtn" name="action" value="updateCart"
                                     class="updateBtn">Update
                                     Cart</button>
-                                <a href="checkout.html" class="submitBtn">Checkout
+                                <a href="{{ route('client.store.checkout', $store->username) }}" class="submitBtn">Checkout
                                 </a>
                             </div>
                         </div>

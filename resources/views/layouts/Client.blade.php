@@ -63,7 +63,10 @@
 
 
 
-                <li class="nav-item"><a href="client_orders.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="{{ route('client.orders.index') }}"
+                        class="nav-link 
+                    {{ request()->is('client/order*') ? 'active' : '' }}
+                    notifiable">
                         <i class="fa-light fa-cart-arrow-down"></i>
                         <span>Orders</span></a></li>
 

@@ -2,7 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\OrderNote;
+use App\Models\PaymentRequest;
+use App\Models\Store;
 use App\Models\Transfer;
+use App\Models\User;
+use App\Models\VerificationRequest;
+use App\Models\Voucher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -111,5 +117,10 @@ class Seller extends Model
     public function transfersCount()
     {
         return $this->transfers()->count();
+    }
+    // Orders
+    public function notes()
+    {
+        return $this->morphMany(OrderNote::class, 'notable');
     }
 }

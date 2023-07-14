@@ -66,6 +66,12 @@
                             padding: 7px;
                             border-radius: 3px;
                         }
+                        &.cancelled {
+                            span {
+                                background-color: var(--clr-red-600);
+                                color: var(--clr-white-900);
+                            }
+                        }
                         &.stock-alert,
                         &.new {
                             span {

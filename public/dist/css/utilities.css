@@ -966,6 +966,10 @@ section#store-holder {
   padding: 7px;
   border-radius: 3px;
 }
+.table-responsive table tbody tr td.status.cancelled span {
+  background-color: var(--clr-red-600);
+  color: var(--clr-white-900);
+}
 .table-responsive table tbody tr td.status.stock-alert span, .table-responsive table tbody tr td.status.new span {
   background-color: var(--clr-yellow-700);
   color: var(--clr-orange-600);

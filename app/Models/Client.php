@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Follow;
+use App\Models\Voucher;
+use App\Models\OrderNote;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Client extends Model
 {
@@ -37,5 +42,14 @@ class Client extends Model
     public function hasCart($store)
     {
         return $this->carts()->where('store_id', $store->id)->exists();
+    }
+    // Orders
+    public function orders()
+    {
+        return $this->hasMany(order::class);
+    }
+    public function notes()
+    {
+        return $this->morphMany(OrderNote::class, 'notable');
     }
 }

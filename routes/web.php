@@ -11,6 +11,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -106,6 +107,11 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     Route::post('product/add/{storeID}', [CartController::class, 'addProduct'])->name('cart.add');
     Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::patch('cart/empty/{id}', [CartController::class, 'empty'])->name('cart.empty');
+    // Orders
+
+    Route::post('order/place/{storeID}', [OrderController::class, 'placeOrder'])->name('order.place');
+    Route::get('orders', [OrderController::class, 'clientIndex'])->name('orders.index');
+    Route::get('order/details/{id}', [OrderController::class, 'clientShow'])->name('order.show');
 });
 
 // Seller

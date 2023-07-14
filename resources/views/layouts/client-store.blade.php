@@ -60,9 +60,12 @@
 
                         <x-notification-menu />
                         <div class="dropdown-holder">
-                            <button id="profile-handler" class=" d-flex  a-center dropdown-toggle" aria-pressed="false">
-                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="">
-                                <span>{{ Auth::user()->first_name }}</span>
+                            <button id="profile-handler" class=" seller-client dropdown-toggle" aria-pressed="false">
+                                <div class="name-holder d-flex  a-center">
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="">
+                                    <span>{{ Auth::user()->first_name }}</span>
+                                </div>
+                                <p class="balance-value"> {{ Auth::user()->client->balance }} DT</p>
                             </button>
                             <ul class="dropdown-menu profile-dropdown  ">
                                 <li><a href="{{ route('client.home') }}"><i class="fa-light fa-home"></i> Dashboard</a>
