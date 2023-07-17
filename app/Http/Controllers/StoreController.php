@@ -6,6 +6,8 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Client;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Sector;
 use App\Models\Seller;
@@ -676,4 +678,22 @@ class StoreController extends Controller
         }
         return view('Client.Stores.client_store_checkout', ['store' => $store, 'cart' => $cart, 'cartProducts' => $cartProducts]);
     }
+    public function clientOrders($username)
+    {
+        $store = Store::where('username', $username)->firstOrFail();
+        $client = Client::where('user_id', Auth::id())->firstOrFail();
+        $orders = $client->orders()->where('store_id', $store->id)->paginate();
+        return view('Client.Stores.client_store_orders', ['orders' => $orders, 'store' => $store]);
+    }
+
+    public function clientOrder($username, $id)
+    {
+        $store = Store::where('username', $username)->firstOrFail();
+        $client = Client::where('user_id', Auth::id())->firstOrFail();
+        $order = Order::findOrFail($id);
+        $products = OrderProduct::where('order_id', $order->id)->paginate();
+        // dd($products);
+        return view('Client.Stores.client_store_order', ['order' => $order, 'store' => $store, 'products' => $products]);
+    }
+
 }

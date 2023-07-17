@@ -112,6 +112,7 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     Route::post('order/place/{storeID}', [OrderController::class, 'placeOrder'])->name('order.place');
     Route::get('orders', [OrderController::class, 'clientIndex'])->name('orders.index');
     Route::get('order/details/{id}', [OrderController::class, 'clientShow'])->name('order.show');
+    Route::patch('order/{id}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 });
 
 // Seller
@@ -189,6 +190,14 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::get('sales/new', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales/store', [SaleController::class, 'store'])->name('sales.store');
     Route::delete('sales/destroy/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
+
+    // Orders
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('order/details/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::patch('order/{id}/reject', [OrderController::class, 'reject'])->name('orders.reject');
+    Route::patch('order/{id}/accept', [OrderController::class, 'accept'])->name('orders.accept');
+    Route::patch('order/{id}/ready', [OrderController::class, 'ready'])->name('orders.ready');
+
 });
 
 // Admin

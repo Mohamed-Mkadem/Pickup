@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ClientCancelledOrder;
+use App\Events\OrderAccepted;
+use App\Events\OrderPlaced;
+use App\Events\OrderReady;
+use App\Events\OrderRejected;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderNote;
 use App\Models\OrderProduct;
+use App\Models\Seller;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +23,18 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('hasStore')->only(['index', 'show']);
+    }
     public function index()
     {
-        //
+        $seller = Seller::where('user_id', Auth::id())->firstOrFail();
+        $store = $seller->store;
+        $orders = Order::where('store_id', $store->id)->with('client')->paginate();
+
+        return view('Seller.Orders.seller-orders-index', ['orders' => $orders]);
     }
 
     /**
@@ -30,20 +45,164 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function accept(Request $request, $id)
     {
-        //
+
+        $order = Order::findOrFail($id);
+        $this->authorize('update', $order);
+
+        $status = $order->status;
+
+        if ($status == 'accepted') {
+            return redirect()->back()->with('error', 'This Order Is already Accepted');
+        }
+        if ($status != 'pending') {
+            return redirect()->back()->with('error', 'Only Pending Orders Can Be Accepted');
+        }
+
+        try {
+            DB::beginTransaction();
+            $order->status = 'accepted';
+            $order->save();
+
+            // Add Status History
+            $order->statusHistories()->create([
+                'statusable_type' => 'App\Models\Order',
+                'statusable_id' => $order->id,
+                'action' => 'Accepted',
+            ]);
+
+            // Add Event
+            event(new OrderAccepted($order));
+
+            // Add Notes if there is
+            if ($request->note) {
+                OrderNote::create([
+                    'order_id' => $order->id,
+                    'note' => $request->note,
+                    'notable_id' => $order->store->id,
+                    'notable_type' => "App\Models\Store",
+                ]);
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Order Accepted Successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
+        }
+    }
+    public function ready($id)
+    {
+
+        $order = Order::findOrFail($id);
+        $this->authorize('update', $order);
+
+        $status = $order->status;
+
+        if ($status == 'ready') {
+            return redirect()->back()->with('error', 'This Order Is already Ready');
+        }
+
+        if ($status != 'accepted') {
+            return redirect()->back()->with('error', 'Only Accepted Orders Can Be Marked As Ready');
+        }
+
+        try {
+            DB::beginTransaction();
+            $order->status = 'ready';
+            $order->save();
+
+            // Add Status History
+            $order->statusHistories()->create([
+                'statusable_type' => 'App\Models\Order',
+                'statusable_id' => $order->id,
+                'action' => 'Ready',
+            ]);
+
+            // Add Event
+            event(new OrderReady($order));
+
+            DB::commit();
+            return redirect()->back()->with('success', 'The Order Is Ready');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
+        }
+    }
+    public function reject(Request $request, $id)
+    {
+
+        $order = Order::findOrFail($id);
+        $this->authorize('update', $order);
+        $refund = [
+            'percentage' => 0,
+            'value' => 0,
+        ];
+        $client = $order->client;
+        $status = $order->status;
+        $amount = $order->amount;
+
+        if ($status == 'rejected') {
+            return redirect()->back()->with('error', 'This Order Is already Rejected');
+        }
+        if ($status != 'pending') {
+            return redirect()->back()->with('error', 'Only Pending Orders Can Be Rejected');
+        }
+        try {
+            DB::beginTransaction();
+            $order->status = 'rejected';
+            $order->save();
+
+            $client->balance = DB::raw('balance + ' . $amount);
+            $client->save();
+
+            // Update products Quantity
+            foreach ($order->products as $product) {
+                $product->increment('quantity', $product->order_products->quantity);
+
+            }
+
+            // Add Status History
+            $order->statusHistories()->create([
+                'statusable_type' => 'App\Models\Order',
+                'statusable_id' => $order->id,
+                'action' => 'Rejected',
+            ]);
+
+            // Add Event
+            event(new OrderRejected($order));
+
+            // Add Notes if there is
+            if ($request->note) {
+                OrderNote::create([
+                    'order_id' => $order->id,
+                    'note' => $request->note,
+                    'notable_id' => $order->store->id,
+                    'notable_type' => "App\Models\Store",
+                ]);
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Order Rejected Successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::with(['client', 'client.user'])->findOrFail($id);
+        $this->authorize('view', $order);
+
+        $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();
+
+        return view('Seller.Orders.seller-orders-show', ['order' => $order, 'products' => $orderProducts]);
     }
 
     /**
@@ -133,7 +292,8 @@ class OrderController extends Controller
                 $cartProduct->decrement('quantity', $cartProduct->cart_products->quantity);
             }
             // Decrement the order amount from the client's balance
-            $client->decrement('balance', $order->amount);
+            $client->balance = DB::raw('balance -' . $order->amount);
+            $client->save();
             // Add Placed Status
             $order->statusHistories()->create([
                 'statusable_type' => 'App\Models\Order',
@@ -152,10 +312,11 @@ class OrderController extends Controller
                 ]);
             }
 
-            // Order Place Event
-            // Empty Cart using a listener or here
             DB::commit();
-            return redirect()->back()->with('success', 'Order Placed Successfully');
+            // Order Place Event
+            event(new OrderPlaced($order));
+            // Empty Cart using a listener or here
+            // return redirect()->back()->with('success', 'Order Placed Successfully');
         } catch (\Throwable $th) {
             DB::rollback();
             throw $th;
@@ -169,6 +330,72 @@ class OrderController extends Controller
     }
     public function clientShow($id)
     {
+        $order = Order::with(['store', 'notes', 'statusHistories', 'store.sector'])->findOrFail($id);
+
+        $this->authorize('show', $order);
+        $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();
+
+        return view('Client.Orders.client-orders-show', ['order' => $order, 'products' => $orderProducts]);
+    }
+    public function cancel($id)
+    {
+        $order = Order::with('products')->findOrFail($id);
+        $client = Client::where('user_id', Auth::id())->firstOrFail();
+        $this->authorize('cancel', $order);
+
+        $refund = [
+            'percentage' => 0,
+            'value' => 0,
+        ];
+        $status = $order->status;
+        $amount = $order->amount;
+        if ($status == 'cancelled') {
+            return redirect()->back()->with('error', 'This Order Is already Cancelled');
+        }
+        if ($status == 'accepted') {
+            $refund['percentage'] = 10;
+            $refund['value'] = ($amount / 100) * 10;
+        }
+        if ($status == 'ready') {
+            $refund['percentage'] = 20;
+            $refund['value'] = ($amount / 100) * 20;
+        }
+
+        try {
+            DB::beginTransaction();
+            // Change Order's status
+            $order->status = 'cancelled';
+            $order->save();
+
+            // Return Money to the client
+            $client->balance = DB::raw('balance +' . ($amount - $refund['value']));
+            $client->save();
+
+            // Add the refund amount to the store balance
+            $order->store->balance = DB::raw('balance + ' . $refund['value']);
+            $order->store->save();
+
+            // Update products Quantity
+            foreach ($order->products as $product) {
+                $product->increment('quantity', $product->order_products->quantity);
+
+            }
+            // Add The Event
+            event(new ClientCancelledOrder($order, $status, $refund));
+
+            // Add Status History
+            $order->statusHistories()->create([
+                'statusable_type' => 'App\Models\Order',
+                'statusable_id' => $order->id,
+                'action' => 'Cancelled',
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Order Cancelled Successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
 
     }
 }

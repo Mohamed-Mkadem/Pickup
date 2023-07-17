@@ -84,12 +84,14 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="seller_orders_list.html"
+                <li class="nav-item"><a href="{{ route('seller.orders.index') }}"
                         class="nav-link
+                        {{ request()->is('seller/order*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     notifiable">
                         <i class="fa-light fa-cart-arrow-down"></i>
-                        <span>Orders</span></a></li>
+                        <span>Orders</span></a>
+                </li>
 
 
 

@@ -1,131 +1,135 @@
 @use "../../Abstracts/" as *;
 
 .show-holder {
-  > header {
-    padding: 1em 1em 3em;
-    border-radius: $radius10;
-    @include flex(column, flex-start, flex-start);
-    gap: 1em;
-    box-shadow: $boxShadow1;
-    // min-height: 160px;
-    .img-holder {
-      flex-shrink: 0;
-      img {
-        width: 80px;
-        border-radius: 50%;
-      }
-    }
-    .info-holder {
-      p {
-        &.header-title {
-          font-size: 20px;
-          color: var(--clr-blueGray-800);
-          font-weight: 500;
-          //   @include flex(row, flex-start, center);
-          //   gap: 5px;
-          span {
-            &.header-id {
-              color: var(--clr-blueGray-500);
-            }
-
-            &.status {
-              padding: 4px 10px;
-              border-radius: 15px;
-              font-size: 14px;
-              margin-left: 10px;
-              font-weight: bold;
-              letter-spacing: 1px;
-              &.closed {
-                background-color: var(--clr-blueGray-200);
-                color: var(--clr-blueGray-700);
-              }
-              &.in-progress {
-                background-color: var(--clr-navy-800);
-                color: var(--clr-navy-400);
-              }
-              &.new {
-                background-color: var(--clr-teal-700);
-                color: var(--clr-teal-200);
-              }
-              &.pending {
-                background: var(--clr-black-650);
-                color: var(--clr-white-1000);
-              }
-              &.ready {
-                background-color: var(--clr-navy-800);
-                color: var(--clr-navy-400);
-              }
-              &.picked {
-                background-color: var(--clr-blueGray-200);
-                color: var(--clr-blueGray-700);
-              }
-              &.accepted {
-                background-color: var(--clr-green-700);
-                color: var(--clr-green-300);
-              }
-              &.rejected {
-                background-color: var(--clr-red-900);
-                color: var(--clr-red-500);
-              }
-            }
-          }
-        }
-      }
-      .header-details {
-        $gapSize: 10px;
-        @include flex(row, flex-start, center);
-        flex-wrap: wrap;
-        gap: $gapSize;
-        margin-top: $gapSize;
-
-        .detail {
-          color: var(--clr-blueGray-600);
-          @include flex(row, flex-start, center);
-          gap: 10px;
-          padding-inline: 0 8px;
-          border-right: 1px solid currentColor;
-          font-size: 14px;
-          &:last-of-type {
-            border: none;
-          }
-
-          a {
-            color: inherit;
-            text-decoration: underline;
-            transition: $colorTransition;
-            &:hover {
-              color: var(--clr-blueGray-800);
-            }
-          }
-          p {
-          }
-        }
-      }
-    }
-  }
-
-  h2:not(.modal h2) {
-    color: var(--clr-teal-400);
-    letter-spacing: 1px;
-    margin-bottom: 0.5em;
-  }
-  > .holder {
-    width: 95%;
-    margin-inline: auto;
-    background-color: var(--clr-white-1000);
-    margin-top: -30px;
-    &.mt-2 {
-      margin-top: 2em;
-    }
-    padding: 1em;
-    border-radius: $radius10;
-    box-shadow: $boxShadow1;
-  }
-  @include min-width("xsmall") {
     > header {
-      flex-direction: row;
-      //   align-items: flex-start;
-      //   justify-content: flex-start;
+        padding: 1em 1em 3em;
+        border-radius: $radius10;
+        @include flex(column, flex-start, flex-start);
+        gap: 1em;
+        box-shadow: $boxShadow1;
+        // min-height: 160px;
+        .img-holder {
+            flex-shrink: 0;
+            img {
+                width: 80px;
+                border-radius: 50%;
+            }
+        }
+        .info-holder {
+            p {
+                &.header-title {
+                    font-size: 20px;
+                    color: var(--clr-blueGray-800);
+                    font-weight: 500;
+                    //   @include flex(row, flex-start, center);
+                    //   gap: 5px;
+                    span {
+                        &.header-id {
+                            color: var(--clr-blueGray-500);
+                        }
+
+                        &.status {
+                            padding: 4px 10px;
+                            border-radius: 15px;
+                            font-size: 14px;
+                            margin-left: 10px;
+                            font-weight: bold;
+                            letter-spacing: 1px;
+                            &.closed {
+                                background-color: var(--clr-blueGray-200);
+                                color: var(--clr-blueGray-700);
+                            }
+                            &.in-progress {
+                                background-color: var(--clr-navy-800);
+                                color: var(--clr-navy-400);
+                            }
+                            &.new {
+                                background-color: var(--clr-teal-700);
+                                color: var(--clr-teal-200);
+                            }
+                            &.pending {
+                                background: var(--clr-black-650);
+                                color: var(--clr-white-1000);
+                            }
+                            &.ready {
+                                background-color: var(--clr-navy-800);
+                                color: var(--clr-navy-400);
+                            }
+                            &.picked {
+                                background-color: var(--clr-blueGray-200);
+                                color: var(--clr-blueGray-700);
+                            }
+                            &.accepted {
+                                background-color: var(--clr-green-700);
+                                color: var(--clr-green-300);
+                            }
+                            &.rejected {
+                                background-color: var(--clr-red-900);
+                                color: var(--clr-red-500);
+                            }
+                            &.cancelled {
+                                background-color: var(--clr-red-600);
+                                color: var(--clr-white-1000);
+                            }
+                        }
+                    }
+                }
+            }
+            .header-details {
+                $gapSize: 10px;
+                @include flex(row, flex-start, center);
+                flex-wrap: wrap;
+                gap: $gapSize;
+                margin-top: $gapSize;
+
+                .detail {
+                    color: var(--clr-blueGray-600);
+                    @include flex(row, flex-start, center);
+                    gap: 10px;
+                    padding-inline: 0 8px;
+                    border-right: 1px solid currentColor;
+                    font-size: 14px;
+                    &:last-of-type {
+                        border: none;
+                    }
+
+                    a {
+                        color: inherit;
+                        text-decoration: underline;
+                        transition: $colorTransition;
+                        &:hover {
+                            color: var(--clr-blueGray-800);
+                        }
+                    }
+                    p {
+                    }
+                }
+            }
+        }
     }
-  }
+
+    h2:not(.modal h2) {
+        color: var(--clr-teal-400);
+        letter-spacing: 1px;
+        margin-bottom: 0.5em;
+    }
+    > .holder {
+        width: 95%;
+        margin-inline: auto;
+        background-color: var(--clr-white-1000);
+        margin-top: -30px;
+        &.mt-2 {
+            margin-top: 2em;
+        }
+        padding: 1em;
+        border-radius: $radius10;
+        box-shadow: $boxShadow1;
+    }
+    @include min-width("xsmall") {
+        > header {
+            flex-direction: row;
+            //   align-items: flex-start;
+            //   justify-content: flex-start;
+        }
+    }
 }

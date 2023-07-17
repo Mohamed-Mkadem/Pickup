@@ -52,7 +52,7 @@
                                   Products</a>
                           </li>
                           <li><a href="{{ route('client.store.orders', $store->username) }}"
-                                  class="{{ request()->is('client/store/*/orders*') ? 'active' : '' }}">
+                                  class="{{ request()->is('client/store/*/order*') ? 'active' : '' }}">
                                   <i class="fa-light fa-cart-arrow-down">
                                   </i>
                                   Orders</a>

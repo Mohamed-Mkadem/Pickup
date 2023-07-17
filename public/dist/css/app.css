@@ -2732,6 +2732,10 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   background-color: var(--clr-red-900);
   color: var(--clr-red-500);
 }
+.show-holder > header .info-holder p.header-title span.status.cancelled {
+  background-color: var(--clr-red-600);
+  color: var(--clr-white-1000);
+}
 .show-holder > header .info-holder .header-details {
   display: flex;
   flex-direction: row;

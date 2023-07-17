@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\OrderNote;
 use App\Models\StoreOpeningHour;
 use App\Models\Transfer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -137,5 +138,9 @@ class Store extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+    public function notes()
+    {
+        return $this->morphMany(OrderNote::class, 'notable');
     }
 }

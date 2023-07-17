@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\ClientCancelledOrder;
+use App\Events\OrderAccepted;
+use App\Events\OrderPlaced;
+use App\Events\OrderReady;
+use App\Events\OrderRejected;
 use App\Events\PaymentRequestAccepted;
 use App\Events\PaymentRequestCreated;
 use App\Events\PaymentRequestPaid;
@@ -10,6 +15,11 @@ use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
 use App\Events\VerificationRequestRejected;
+use App\Listeners\SendClientCancelledOrderNotification;
+use App\Listeners\SendOrderAcceptedNotification;
+use App\Listeners\SendOrderPlacedNotification;
+use App\Listeners\SendOrderReadyNotification;
+use App\Listeners\SendOrderRejectedNotification;
 use App\Listeners\SendPaymentRequestAcceptedNotification;
 use App\Listeners\SendPaymentRequestCreatedNotification;
 use App\Listeners\SendPaymentRequestPaidNotification;
@@ -57,6 +67,21 @@ class EventServiceProvider extends ServiceProvider
         ],
         PaymentRequestPaid::class => [
             SendPaymentRequestPaidNotification::class,
+        ],
+        OrderPlaced::class => [
+            SendOrderPlacedNotification::class,
+        ],
+        ClientCancelledOrder::class => [
+            SendClientCancelledOrderNotification::class,
+        ],
+        OrderRejected::class => [
+            SendOrderRejectedNotification::class,
+        ],
+        OrderAccepted::class => [
+            SendOrderAcceptedNotification::class,
+        ],
+        OrderReady::class => [
+            SendOrderReadyNotification::class,
         ],
     ];
 

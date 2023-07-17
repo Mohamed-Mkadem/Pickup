@@ -281,6 +281,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+
         $product = Product::findOrFail($id);
         $this->authorize('delete', $product);
 
@@ -290,7 +291,24 @@ class ProductController extends Controller
         --- When You create the orders and sales use the delete and forcedelete
 
          */
-        $product->delete();
+        // dd($product->inCarts());
+        if ($product->inCarts()) {
+            $carts = $product->carts;
+            foreach ($carts as $cart) {
+                foreach ($cart->products as $cart_product) {
+                    if ($cart_product->cart_products->product_id == $product->id) {
+                        $cart_product->cart_products->delete();
+                    }
+                    $product->forceDelete();
+                }
+            }
+        }
+        if (!$product->hasOrders() && !$product->hasSales()) {
+            $product->forceDelete();
+
+        } else {
+            $product->delete();
+        }
         return redirect()->route('seller.products.index')->with('success', 'Product Deleted Successfully');
     }
     public function populate()

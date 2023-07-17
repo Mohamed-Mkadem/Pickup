@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\OrderProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,12 +48,39 @@ class Product extends Model
     }
     public function carts()
     {
-        return $this->belongsToMany(Cart::class, 'cart_products');
+        return $this->belongsToMany(Cart::class, 'cart_products')
+            ->using(CartProduct::class)
+            ->as('cart_products')
+            ->withPivot([
+                'quantity', 'price', 'name', 'sub_total', 'image',
+            ])
+        ;
 
     }
-    public function Orders()
+    public function orders()
     {
-        return $this->belongsToMany(Order::class, 'order_products');
+        return $this->belongsToMany(Order::class, 'order_products')
+            ->using(OrderProduct::class)
+            ->as('order_products')
+            ->withPivot([
+                'quantity', 'price', 'name', 'sub_total', 'image',
+            ])
+        ;
+
+    }
+
+    // Helpers
+    public function hasSales()
+    {
+        return $this->sales()->exists();
+    }
+    public function hasOrders()
+    {
+        return $this->orders()->exists();
+    }
+    public function inCarts()
+    {
+        return $this->carts()->exists();
 
     }
 }

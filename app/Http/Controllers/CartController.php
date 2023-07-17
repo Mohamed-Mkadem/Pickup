@@ -151,7 +151,7 @@ class CartController extends Controller
 
         $existingProduct = $cart->products()->where('product_id', $request->id)->first();
         if ($existingProduct) {
-            $quantity += $existingProduct->quantity;
+            $quantity += $existingProduct->cart_products->quantity;
         }
 
         $validation->after(function ($validation) use ($request, $quantity, $existingProduct) {
@@ -182,7 +182,7 @@ class CartController extends Controller
                 'sub_total' => $quantity * $request->price,
             ]);
         } else {
-            $existingProduct->cart_products->increment('quantity', $quantity);
+            $existingProduct->cart_products->increment('quantity', $request->quantity ? $request->quantity : 1);
             $existingProduct->cart_products->sub_total = $existingProduct->cart_products->quantity * $existingProduct->cart_products->price;
             $existingProduct->cart_products->save();
         }
@@ -235,14 +235,27 @@ class CartController extends Controller
             '*.image' => 'required|url',
             '*.quantity' => ['required', 'min:1'],
         ]);
-        $validation->after(function ($validation) use ($newCart) {
-            foreach ($newCart as $newCart_item) {
-                $product = Product::where('status', 'active')->find($newCart_item['product_id']);
-                if (!$product) {
-                    $validation->errors()->add(
-                        '*.name', "Product '{$newCart_item['name']}' Is Deleted Or Hidden"
-                    );
+        // dd($oldCart->products()->withTrashed()->find(6)->cart_products);
+        // $oldCartProducts = $oldCart->products()->withTrashed()->find(6)->cart_products;
+        // dd($oldCartProducts->cart_products);
+        // dd($oldCart->products());
+        $validation->after(function ($validation) use ($newCart, $oldCart) {
+            foreach ($newCart as $key => $newCart_item) {
 
+                $product = Product::withTrashed()->find($newCart_item['product_id']);
+                if ($product->status == 'inactive' || $product->deleted_at || !$product) {
+                    $validation->errors()->add(
+                        '*.name', "Product '{$newCart_item['name']}' Is Deleted Or Hidden By The Store Owner, So We Deleted It From The Cart"
+                    );
+                    // unset($newCart[$key]);
+                    $oldCart->products()->withTrashed()->find($newCart_item['product_id'])->cart_products->delete();
+
+                    $amount = $oldCart->products->sum(function ($product) {
+                        return $product->cart_products->sub_total;
+                    });
+
+                    $oldCart->amount = $amount;
+                    $oldCart->save();
                 }
                 if ($product->quantity < $newCart_item['quantity']) {
                     $validation->errors()->add(
@@ -252,6 +265,7 @@ class CartController extends Controller
 
             }
         });
+        // dd($newCart);
         if ($validation->fails()) {
 
             return redirect()->back()->withErrors($validation)->withInput();
@@ -259,23 +273,31 @@ class CartController extends Controller
 
         try {
             DB::beginTransaction();
-            foreach ($oldCart->products as $product) {
-                $product->cart_products->delete();
+            if (count($newCart) > 0) {
 
-            }
-            $oldCart->amount = 0;
-            $oldCart->save();
-            foreach ($newCart as $newProduct) {
-                $newAddedProduct = CartProduct::create([
-                    'cart_id' => $oldCart->id,
-                    'product_id' => $newProduct['product_id'],
-                    'price' => $newProduct['price'],
-                    'name' => $newProduct['name'],
-                    'image' => $newProduct['image'],
-                    'quantity' => $newProduct['quantity'],
-                    'sub_total' => $newProduct['quantity'] * $newProduct['price'],
-                ]);
-                $oldCart->increment('amount', $newAddedProduct->sub_total);
+                foreach ($oldCart->products as $product) {
+                    $product->cart_products->delete();
+                }
+                $oldCart->amount = 0;
+                $oldCart->save();
+                foreach ($newCart as $newProduct) {
+                    $newAddedProduct = CartProduct::create([
+                        'cart_id' => $oldCart->id,
+                        'product_id' => $newProduct['product_id'],
+                        'price' => $newProduct['price'],
+                        'name' => $newProduct['name'],
+                        'image' => $newProduct['image'],
+                        'quantity' => $newProduct['quantity'],
+                        'sub_total' => $newProduct['quantity'] * $newProduct['price'],
+                    ]);
+                    $oldCart->increment('amount', $newAddedProduct->sub_total);
+                }
+            } else {
+                foreach ($oldCart->products as $product) {
+                    $product->cart_products->delete();
+                }
+                $oldCart->amount = 0;
+                $oldCart->save();
             }
 
             DB::commit();

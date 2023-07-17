@@ -1128,7 +1128,7 @@ section#store-holder {
 }
 .table-responsive.orders table tr {
   display: grid;
-  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(3, 150px);
+  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(2, 180px);
 }
 .table-responsive.client-orders table thead {
   background-color: var(--clr-blueGray-600);
@@ -1136,7 +1136,7 @@ section#store-holder {
 }
 .table-responsive.client-orders table tr {
   display: grid;
-  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(2, 150px);
+  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) 180px 200px;
 }
 .table-responsive.sales table thead {
   background-color: var(--clr-turquoise-100);
