@@ -1,162 +1,25 @@
-@extends('layouts.Seller')
+@extends('layouts.Admin')
 
 @push('title')
-    <title>Pickup | Order Details</title>
+    <title>Pickup | Order Details </title>
 @endpush
 @section('content')
+    @include('components.errors-alert')
+    @include('components.session-errors-alert')
+    @include('components.success-alert')
     <section class="content" id="content">
 
-
-        @if ($order->status == 'pending')
-            <ul class="horizontal-actions-holder  d-flex gap-1 mb-2 wrap j-center a-center">
-
-                <li>
-                    <button class="deleteBtn delete-button">Reject</button>
-
-                    <div class="modal-holder ">
-                        <form action="{{ route('seller.orders.reject', $order->id) }}" method="post" id="reject-form"
-                            class="modal order-modal t-center ">
-                            @csrf
-                            @method('PATCH')
-                            <div class="modal-header d-flex j-sp-between a-center">
-                                <h2>Reject Order </h2>
-                                <button class="close-modal-holder-btn"><i class="fa-light fa-close"></i></button>
-                            </div>
-                            <div class="editor-holder pop-up-editor">
-                                <label for="" class="form-label ">Notes (To The Client)</label>
-                                <textarea name="note" class="form-element" id="reject-description" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="buttons d-flex j-end ">
-                                <button class="delete-button">Reject</button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <li>
-                    <button class="activateBtn activate-button">Accept</button>
-                    <div class="modal-holder ">
-                        <div class="modal t-center order-modal">
-                            <div class="modal-header d-flex j-sp-between a-center">
-                                <h2>Accept Order </h2>
-                                <button class="close-modal-holder-btn"><i class="fa-light fa-close"></i></button>
-                            </div>
-                            <form action="{{ route('seller.orders.accept', $order->id) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <div class="editor-holder pop-up-editor">
-                                    <label for="" class="form-label ">Notes (To The Client)</label>
-                                    <textarea name="note" class="form-element" id="accept-description" cols="30" rows="10"></textarea>
-                                </div>
-                                <div class="buttons d-flex j-end ">
-                                    <button class=" activate-button">Accept</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        @elseif($order->status == 'accepted')
-            <ul class="horizontal-actions-holder  d-flex gap-1 mb-2 wrap j-center a-center">
-                <li>
-                    <button class="deleteBtn delete-button">Cancel</button>
-
-                    <div class="modal-holder ">
-                        <form action="" method="post" class="modal t-center confirm-form">
-                            <i class=" fa-light fa-info"></i>
-
-                            <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You 10DT</p>
-                            <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
-
-                            <div class="buttons d-flex j-center a-center">
-                                <button class="cancelBtn">Cancel</button>
-                                <button class="confirmBtn">Yes</button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <li>
-                    <button class="deleteBtn activate-button">Mark As Ready</button>
-
-                    <div class="modal-holder ">
-                        <form action="{{ route('seller.orders.ready', $order->id) }}" method="post"
-                            class="modal t-center confirm-form">
-                            @csrf
-                            @method('PATCH')
-                            <i class=" fa-light fa-info"></i>
-                            <p>Are You Sure You Want To Mark This Order As Ready ? </p>
-
-                            <div class="buttons d-flex j-center a-center">
-                                <button class="cancelBtn">Cancel</button>
-                                <button class="activate-button">Yes</button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-            </ul>
-        @elseif($order->status == 'ready')
-            @if ($order->hasPendingPickRequest())
-                <p class="t-center mb-2 pick-request-message">A Pick Request Has Been Sent On :
-                    {{ $order->pickRequests()->latest()->first()->created_at->format('M jS Y H:i') }}</p>
-            @else
-                <ul class="horizontal-actions-holder  d-flex gap-1 mb-2 wrap j-center a-center">
-                    <li>
-                        <button class="deleteBtn delete-button">Cancel</button>
-
-                        <div class="modal-holder ">
-                            <form action="" method="post" class="modal t-center confirm-form">
-                                <i class=" fa-light fa-info"></i>
-
-                                <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You 20DT</p>
-                                <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
-
-                                <div class="buttons d-flex j-center a-center">
-                                    <button class="cancelBtn">Cancel</button>
-                                    <button class="confirmBtn">Yes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li>
-                        <button class="deleteBtn activate-button">Send A Pick Request</button>
-
-                        <div class="modal-holder ">
-                            <form action="{{ route('seller.pickRequest.store') }}" method="post"
-                                class="modal t-center confirm-form">
-                                @csrf
-                                <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                <i class=" fa-light fa-info"></i>
-                                <p>Are You Sure You Want To Send A Pick Request For This Order ? </p>
-
-                                <div class="buttons d-flex j-center a-center">
-                                    <button class="cancelBtn">Cancel</button>
-                                    <button class="activate-button">Yes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-                </ul>
-            @endif
-        @endif
-
-
-        @include('components.errors-alert')
-        @include('components.session-errors-alert')
-        @include('components.success-alert')
         <div class="order-holder show-holder">
             <!-- Start Header -->
             <header>
                 <div class="img-holder">
-                    <img loading="lazy" src="{{ asset('storage/' . $order->client->user->photo) }}" alt="">
+                    <img src="{{ asset('storage/' . $order->store->photo) }}" alt="">
                 </div>
                 <div class="info-holder">
                     <p class=" header-title">
                         Order - <span class=" header-id">#{{ $order->id }}</span>
 
-                        <span
-                            class="status  {{ $order->status }}
-                         ">{{ ucfirst($order->status) }}</span>
+                        <span class="status {{ $order->status }}">{{ ucfirst($order->status) }}</span>
                     </p>
                     <div class=" header-details">
                         <div class="detail">
@@ -197,18 +60,19 @@
                         </thead>
                         <tbody>
 
+
                             @foreach ($products as $product)
                                 <tr>
                                     <td><img src="{{ asset($product->image) }}" alt=""></td>
-                                    <td><a
-                                            href="{{ route('seller.products.show', $product->product_id) }}">{{ ucfirst($product->name) }}</a>
-                                    </td>
+                                    <td>{{ ucfirst($product->name) }}</td>
+
                                     <td>{{ number_format($product->price, 3, ',') }}</td>
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ number_format($product->sub_total, 3, ',') }}</td>
 
                                 </tr>
                             @endforeach
+
 
 
                         </tbody>
@@ -234,9 +98,10 @@
                         </header>
 
                         <div class="info">
-                            <img loading="lazy" src="{{ asset('storage/' . $order->client->user->photo) }}"
-                                alt="">
-                            <h3>{{ ucfirst($order->client->user->full_name) }}</h3>
+                            <img loading="lazy" src="{{ asset('storage/' . $order->client->user->photo) }}" alt="">
+                            <h3> <a
+                                    href="{{ route('admin.clients.show', $order->client->user->id) }}">{{ ucfirst($order->client->user->full_name) }}</a>
+                            </h3>
                             <p>{{ $order->client->user->state_city }}</p>
 
                         </div>
@@ -244,7 +109,31 @@
                     <!-- End Card -->
                 </div>
                 <!-- Start Card Holder -->
+                <!-- Start Card Holder -->
+                <div class="card-holder">
+                    <div class="card-title">
+                        <h3>Store :</h3>
+                    </div>
+                    <!-- Start Card -->
+                    <div class="card simple  store">
+                        <header class="wrap gap-1">
+                            <p>{{ $order->store->state_city }}</p>
+                            <p class="rate "><i class="fa-light fa-star"></i> {{ $order->store->rate }}%</p>
+                        </header>
 
+                        <div class="info">
+                            <img loading="lazy" src="{{ asset('storage/' . $order->store->photo) }}" alt="">
+                            <h3><a href={{ route('admin.store.home', $order->store->username) }}>
+                                    {{ ucfirst($order->store->name) }} </a>
+                            </h3>
+                            <p>{{ ucfirst($order->store->sector->name) }}</p>
+
+
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <!-- Start Card Holder -->
                 <!-- Start Card Holder -->
                 <div class="card-holder review">
                     <div class="card-title">
@@ -263,7 +152,7 @@
                                     <div class="modal-holder ">
                                         <div class="review-box modal">
                                             <header class="d-flex j-start a-center row">
-                                                <img loading="lazy" src="" alt="">
+                                                <img src="../../dist/Assets/avatar-griffin.jpg" alt="">
                                                 <div class="review-info">
                                                     <h3>Mohamed Mkadem</h3>
                                                     <p>21 - 2 - 2023 15:25</p>
@@ -315,7 +204,19 @@
                                         </div>
                                     </div>
                                 </li>
-
+                                <li>
+                                    <button class="deleteBtn">Remove</button>
+                                    <div class="modal-holder ">
+                                        <form action="" method="post" class="modal t-center confirm-form">
+                                            <i class=" fa-light fa-trash"></i>
+                                            <p>Are You Sure You Want To Delete This Brand ?</p>
+                                            <div class="buttons d-flex j-center a-center">
+                                                <button class="cancelBtn">Cancel</button>
+                                                <button class="confirmBtn">Yes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
                             </ul>
                         </header>
 
@@ -400,6 +301,7 @@
                             @endforeach
                         @endif
 
+
                     </div>
 
                 </div>
@@ -434,53 +336,19 @@
                             </li>
                         @endforeach
 
+
+
+
+
                     </ul>
                 </div>
             </div>
             <!-- End order Info Holder -->
         </div>
+
     </section>
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
-    <script>
-        const rejectDescription = document.getElementById('reject-description')
-        if (rejectDescription) {
-
-            ClassicEditor
-                .create(document.querySelector('#reject-description'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
-                })
-                // .then(editor => {
-                //     editor.model.document.on('change:data', () => {
-                //         editorData = editor.getData();
-                //         console.log(editorData);
-                //     });
-                // })
-
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-        const acceptDescription = document.getElementById('accept-description')
-        if (acceptDescription) {
-
-            ClassicEditor
-                .create(document.querySelector('#accept-description'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
-                })
-                // .then(editor => {
-                //     editor.model.document.on('change:data', () => {
-                //         editorData = editor.getData();
-                //         console.log(editorData);
-                //     });
-                // })
-
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    </script>
     @include('components.inc_modals-js')
 @endpush

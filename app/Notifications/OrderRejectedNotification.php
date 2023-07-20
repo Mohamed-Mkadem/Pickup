@@ -3,8 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class OrderRejectedNotification extends Notification
 {
@@ -34,12 +35,13 @@ class OrderRejectedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'client.order.show',  $this->order->id);
         return (new MailMessage)
             ->subject('Order Update')
             ->greeting("Dear $notifiable->full_name")
             ->line("We Regret To Inform you that {$this->order->store->name} has rejected your order number #{$this->order->id}")
-            ->action('More Info', url(route('client.order.show', $this->order->id)))
+            ->action('More Info', $url)
 
             ->line('Thank you for using Pickup!');
     }

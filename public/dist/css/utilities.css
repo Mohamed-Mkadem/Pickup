@@ -1128,7 +1128,7 @@ section#store-holder {
 }
 .table-responsive.orders table tr {
   display: grid;
-  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) repeat(2, 180px);
+  grid-template-columns: 100px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
 }
 .table-responsive.client-orders table thead {
   background-color: var(--clr-blueGray-600);
@@ -1544,6 +1544,11 @@ a.editBtn i {
 }
 .abs-error-message.show {
   display: block;
+}
+
+.pick-request-message {
+  color: var(--clr-blueGray-900);
+  letter-spacing: 1px;
 }
 
 .notification-modal {

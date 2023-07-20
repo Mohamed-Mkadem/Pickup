@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\OrderProduct;
+use App\Models\PickRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,8 +37,19 @@ class Order extends Model
             ])
         ;
     }
+    // Notes
     public function notes()
     {
         return $this->hasMany(OrderNote::class);
+    }
+
+    // Pick requests
+    public function pickRequests()
+    {
+        return $this->hasMany(PickRequest::class);
+    }
+    public function hasPendingPickRequest()
+    {
+        return $this->pickRequests()->where('status', 'pending')->exists();
     }
 }

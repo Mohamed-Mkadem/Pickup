@@ -12,36 +12,77 @@
         @include('components.success-alert')
         <ul class="horizontal-actions-holder  d-flex gap-1 mb-2 wrap j-center a-center">
             @if (!in_array($order->status, ['picked', 'cancelled', 'rejected']))
-                <li>
-                    <button class="deleteBtn delete-button">Cancel</button>
+                @if ($order->hasPendingPickRequest())
+                    <li>
+                        <button class="deleteBtn delete-button">Refuse The Pickup </button>
 
-                    <div class="modal-holder ">
-                        <form action="{{ route('client.order.cancel', $order->id) }}" method="post"
-                            class="modal t-center confirm-form">
-                            @csrf
-                            @method('PATCH')
-                            <i class=" fa-light fa-info"></i>
+                        <div class="modal-holder ">
+                            <form
+                                action="{{ route('client.pickRequest.refuse',$order->pickRequests()->latest()->first()->id) }}"
+                                method="post" class="modal t-center confirm-form">
+                                @csrf
+                                @method('PATCH')
+                                <i class=" fa-light fa-info"></i>
+                                <p>Are You Sure You Want To Refuse the pickup of this Order ? </p>
 
-                            @if ($order->status == 'accepted')
-                                <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
-                                    {{ ($order->amount / 100) * 10 }}DT </p>
-                            @elseif($order->status == 'ready')
-                                <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
-                                    {{ ($order->amount / 100) * 20 }}DT </p>
-                            @else
-                                <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
-                                    0 DT </p>
-                            @endif
+                                <div class="buttons d-flex j-center a-center">
+                                    <button class="cancelBtn">Cancel</button>
+                                    <button class="delete-button">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="deleteBtn activate-button">Confirm The Pickup </button>
 
-                            <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
+                        <div class="modal-holder ">
+                            <form
+                                action="{{ route('client.pickRequest.confirm',$order->pickRequests()->latest()->first()->id) }}"
+                                method="post" class="modal t-center confirm-form">
+                                @csrf
+                                @method('PATCH')
+                                <i class=" fa-light fa-info"></i>
+                                <p>Are You Sure You Want To Confirm the pickup of this Order ? </p>
 
-                            <div class="buttons d-flex j-center a-center">
-                                <button class="cancelBtn">Cancel</button>
-                                <button class="confirmBtn">Yes</button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
+                                <div class="buttons d-flex j-center a-center">
+                                    <button class="cancelBtn">Cancel</button>
+                                    <button class="activate-button">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                @else
+                    <li>
+                        <button class="deleteBtn delete-button">Cancel</button>
+
+                        <div class="modal-holder ">
+                            <form action="{{ route('client.order.cancel', $order->id) }}" method="post"
+                                class="modal t-center confirm-form">
+                                @csrf
+                                @method('PATCH')
+                                <i class=" fa-light fa-info"></i>
+
+                                @if ($order->status == 'accepted')
+                                    <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
+                                        {{ ($order->amount / 100) * 10 }}DT </p>
+                                @elseif($order->status == 'ready')
+                                    <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
+                                        {{ ($order->amount / 100) * 20 }}DT </p>
+                                @else
+                                    <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
+                                        0 DT </p>
+                                @endif
+
+                                <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
+
+                                <div class="buttons d-flex j-center a-center">
+                                    <button class="cancelBtn">Cancel</button>
+                                    <button class="confirmBtn">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                @endif
             @endif
             {{-- If Order Has Pickup Request --}}
             {{-- <li>

@@ -74,4 +74,50 @@ class SubscriptionController extends Controller
         DB::commit();
         return redirect()->back()->with('success', 'Subscription Added Successfully, Your Store Will Be Published Until ' . $newExpiryDate);
     }
+
+    public function adminIndex()
+    {
+        $subscriptions = Subscription::with('store')->paginate();
+        return view('Admin.subscriptions', ['subscriptions' => $subscriptions]);
+    }
+
+    public function filter(Request $request)
+    {
+        $query = Subscription::query();
+        $search = $request->search ?? '';
+        $minDate = $request->min_date ?? '';
+        $maxDate = $request->max_date ?? '';
+        $sort = $request->sort ?? 'newest';
+        $duration = $request->duration ?? 'all';
+        // dd($duration);
+        if (!empty($minDate)) {
+            $query->where('created_at', '>=', $minDate);
+        }
+
+        if (!empty($maxDate)) {
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
+        }
+
+        if (!empty($search)) {
+            $query->where('id', 'like', "%$search%");
+        }
+
+        if ($duration != 'all') {
+            $query->where('duration', 'like', "%$duration%");
+        }
+
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'highest_duration') {
+            $query->orderByRaw("CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) DESC");
+        } elseif ($sort === 'lowest_duration') {
+            $query->orderByRaw("CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) ASC");
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+        $subscriptions = $query->with('store')->paginate();
+        return view('Admin.subscriptions', ['subscriptions' => $subscriptions]);
+    }
+
 }

@@ -122,27 +122,34 @@
                                     <a href="{{ route('admin.store.orders', $store->username) }}">More Info</a>
                                 </div>
                                 <div class="card single-info-card orders-card">
-                                    <p class="orders-count main-value">250 <small>Orders</small></p>
+                                    <p class="orders-count main-value">{{ $store->ordersCount() }}
+                                        <small>{{ $store->ordersCount() == 1 ? 'Order' : 'Orders' }}</small>
+                                    </p>
                                     <div class="details">
                                         <div class="detail">
                                             <h4 class="detail-title">Pending : </h4>
-                                            <p class="detail-value">414 <small>Orders</small></p>
+                                            <p class="orders-count main-value">{{ $store->pendingOrdersCount() }}
+                                                <small>{{ $store->pendingOrdersCount() == 1 ? 'Order' : 'Orders' }}</small>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">Rejected : </h4>
-                                            <p class="detail-value">414 <small>Orders</small></p>
+                                            <p class="orders-count main-value">{{ $store->rejectedOrdersCount() }}
+                                                <small>{{ $store->rejectedOrdersCount() == 1 ? 'Order' : 'Orders' }}</small>
                                         </div>
                                         <div class="detail">
-                                            <h4 class="detail-title">Approved : </h4>
-                                            <p class="detail-value">414 <small>Orders</small></p>
+                                            <h4 class="detail-title">Accepted : </h4>
+                                            <p class="orders-count main-value">{{ $store->acceptedOrdersCount() }}
+                                                <small>{{ $store->acceptedOrdersCount() == 1 ? 'Order' : 'Orders' }}</small>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">Ready : </h4>
-                                            <p class="detail-value">414 <small>Orders</small></p>
+                                            <p class="orders-count main-value">{{ $store->readyOrdersCount() }}
+                                                <small>{{ $store->readyOrdersCount() == 1 ? 'Order' : 'Orders' }}</small>
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">Picked : </h4>
-                                            <p class="detail-value">414 <small>Orders</small></p>
+                                            <p class="orders-count main-value">{{ $store->pickedOrdersCount() }}
+                                                <small>{{ $store->pickedOrdersCount() == 1 ? 'Order' : 'Orders' }}</small>
                                         </div>
 
                                     </div>
@@ -159,7 +166,7 @@
                                 <div class="card single-info-card balance-card">
                                     <p class="balance-value main-value">
                                         {{-- This is all the balance (suspended(non picked orders) + available) --}}
-                                        {{ number_format($store->balance, 3, ',') }}
+                                        {{ number_format($store->allBalance(), 3, ',') }}
                                         <small> DT</small>
                                     </p>
                                     <div class="details">
@@ -171,7 +178,10 @@
                                         </div>
                                         <div class="detail">
                                             <h4 class="detail-title">Suspended : </h4>
-                                            <p class="detail-value">0 <small>DT</small></p>
+                                            <p class="detail-value">
+                                                {{ number_format($store->suspendedBalance(), 3, ',') }}
+                                                <small>DT</small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

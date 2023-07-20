@@ -177,7 +177,7 @@
         </main>
     </div>
 
-
+       <audio id="notification-sound" src="{{ asset('dist/Assets/notification-sound.mp3') }}"></audio>
     @stack('scripts')
     <script>
         const prefix = "{{ Auth::user()->type }}"

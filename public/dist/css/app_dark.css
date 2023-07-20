@@ -328,6 +328,7 @@ button {
 .dark .card.fee .top-header p.price {
   color: var(--clr-blueGray-0);
 }
+.dark .pick-request-message,
 .dark .product .store-name,
 .dark .modal-holder .confirm-form p,
 .dark .sale-wrapper .sale-products .sale-products-holder .categories-wrapper .sale-category h4,

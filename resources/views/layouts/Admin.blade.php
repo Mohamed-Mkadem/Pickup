@@ -133,13 +133,19 @@
                     notifiable">
                         <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
-                <li class="nav-item"><a href="subscriptions.html" class="nav-link notifiable"> <i
-                            class="fa-light fa-box-dollar"></i>
+                <li class="nav-item"><a href="{{ route('admin.subscriptions.index') }}"
+                        class="nav-link
+                    {{ request()->is('admin/subscriptions*') ? 'active' : '' }}
+                    notifiable">
+                        <i class="fa-light fa-box-dollar"></i>
                         <span>Subscriptions</span></a></li>
                 <li class="nav-item"><a href="tickets_list.html" class="nav-link notifiable"> <i
                             class="fa-light fa-user-headset"></i>
                         <span>Tickets</span></a></li>
-                <li class="nav-item"><a href="orders_list.html" class="nav-link notifiable">
+                <li class="nav-item"><a href="{{ route('admin.orders.index') }}"
+                        class="nav-link 
+                    {{ request()->is('admin/order*') ? 'active' : '' }}
+                    notifiable">
                         <i class="fa-light fa-cart-arrow-down"></i>
                         <span>Orders</span></a></li>
 

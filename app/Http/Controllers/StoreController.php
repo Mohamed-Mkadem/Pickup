@@ -450,7 +450,24 @@ class StoreController extends Controller
         }
 
     }
+    public function orders($username)
+    {
+        $store = Store::where('username', $username)->firstOrFail();
 
+        $orders = Order::where('store_id', $store->id)->paginate();
+
+        return view('Admin.Stores.show_store_orders', ['store' => $store, 'orders' => $orders]);
+    }
+
+    public function order($username, $id)
+    {
+        $store = Store::where('username', $username)->firstOrFail();
+        // dd($store);
+        $order = Order::where('store_id', $store->id)->findOrFail($id);
+
+        $products = OrderProduct::where('order_id', $order->id)->paginate();
+        return view('Admin.Stores.show_store_order', ['order' => $order, 'products' => $products, 'store' => $store]);
+    }
     // Client Methods
 
     public function clientIndex()

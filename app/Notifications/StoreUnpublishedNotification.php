@@ -35,6 +35,7 @@ class StoreUnpublishedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+       
         return (new MailMessage)
             ->subject('Store Subscription Expired')
             ->from('stores@pickup.com.tn', 'Stores Center')

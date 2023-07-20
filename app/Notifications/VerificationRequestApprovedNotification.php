@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\User;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -35,11 +36,13 @@ class VerificationRequestApprovedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.verification-requests.show', $this->verificationRequest->id);
         return (new MailMessage)
             ->subject('Verification Request Approved')
             ->greeting("Hi {$notifiable->full_name}")
             ->line('We are happy to inform you that your verification request number #' . $this->verificationRequest->id . ' Has Been Reviewed And Approved By Our Team, Now You Are Eligible To Open A Store And Start Earning ')
-            ->action('More Info', url(route('seller.verification-requests.show', $this->verificationRequest->id)))
+            ->action('More Info', $url)
             ->line('Thank you for using our application!');
     }
     public function toDatabase(object $notifiable)

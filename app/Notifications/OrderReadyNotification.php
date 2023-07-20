@@ -3,8 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class OrderReadyNotification extends Notification
 {
@@ -34,11 +35,13 @@ class OrderReadyNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'client.order.show',  $this->order->id);
         return (new MailMessage)
             ->subject('Order Update')
             ->greeting("Dear $notifiable->full_name")
             ->line("{$this->order->store->name} has Prepared your order number #{$this->order->id}, and now your order is ready to pick up")
-            ->action('More Info', url(route('client.order.show', $this->order->id)))
+            ->action('More Info', $url)
 
             ->line('Thank you for using Pickup!');
     }

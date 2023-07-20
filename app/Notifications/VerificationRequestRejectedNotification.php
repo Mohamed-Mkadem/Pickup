@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\User;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -36,11 +37,13 @@ class VerificationRequestRejectedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.verification-requests.show', $this->verificationRequest->id);
         return (new MailMessage)
             ->subject('Verification Request Rejected')
             ->greeting('Dear ' . $notifiable->full_name)
             ->line('We regret to inform you that your verification request has been reviewed and rejected. We appreciate your interest in becoming verified, but unfortunately, we are unable to approve your request at this time.')
-            ->action('More Info', url(route('seller.verification-requests.show', $this->verificationRequest->id)))
+            ->action('More Info', $url)
             ->line("If you have any questions or need further clarification regarding the rejection, please don't hesitate to reach out to our support team. We are here to assist you and provide any necessary guidance.")
             ->line('Thank you for your understanding.');
     }

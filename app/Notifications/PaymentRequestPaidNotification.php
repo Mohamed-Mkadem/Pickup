@@ -4,8 +4,9 @@ namespace App\Notifications;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class PaymentRequestPaidNotification extends Notification
 {
@@ -36,6 +37,8 @@ class PaymentRequestPaidNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.payment-requests.show', $this->paymentRequest->id);
         return (new MailMessage)
             ->subject('Payment Request Update: Payment Successfully Transferred')
             ->greeting("Dear {$notifiable->full_name}")
@@ -47,7 +50,7 @@ class PaymentRequestPaidNotification extends Notification
             ->line("Date of Request Placement: {$this->paymentRequest->created_at->format('d-m-Y : H:i')}")
             ->line("Date of Acceptance: {$this->paymentRequest->updated_at->format('d-m-Y : H:i')}")
 
-            ->action('More Details', url(route('seller.payment-requests.show', $this->paymentRequest->id)))
+            ->action('More Details', $url)
             ->line('Thank you for using our platform and congratulations on the successful completion of your payment request.');
     }
 

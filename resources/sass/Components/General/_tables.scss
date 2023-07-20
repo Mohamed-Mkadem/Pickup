@@ -309,8 +309,7 @@
                 color: var(--clr-blueGray-0);
             }
             tr {
-                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr)
-                    repeat(2, 180px);
+                $cols: 100px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
                 @include detailledGrid($cols);
             }
         }

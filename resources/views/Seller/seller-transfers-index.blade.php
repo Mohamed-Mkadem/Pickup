@@ -37,8 +37,8 @@
                                     <label for="" class="d-block required form-label">
                                         Amount To Transfer (DT) :
                                     </label>
-                                    <input type="number" name="amount" id="amount-input" placeholder="eg: 500"
-                                        class="form-element">
+                                    <input type="number" step="0.001" name="amount" id="amount-input"
+                                        placeholder="eg: 500" class="form-element">
                                     <p class="error-message">This Field Is Required</p>
                                 </div>
 

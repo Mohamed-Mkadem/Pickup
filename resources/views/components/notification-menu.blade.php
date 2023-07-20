@@ -17,7 +17,7 @@
                                                     <p class="notification-body">
                                                         <a
                                                             href="{{ $notification->data['url'] }}?notification_id={{ $notification->id }}">
-                                                            {{ $notification->data['body'] }}!</a>
+                                                            {{ $notification->data['body'] }}</a>
                                                     </p>
                                                     <p class="notification-time">
                                                         <i class="fa-light fa-timer"></i>

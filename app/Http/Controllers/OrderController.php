@@ -23,10 +23,43 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    protected $attributes = [
+        'order_id' => 'Order ID',
+    ];
     public function __construct()
     {
         $this->middleware('hasStore')->only(['index', 'show']);
+    }
+    // Track Order
+    public function getOrder(Request $request)
+    {
+        $order_id = $request->order_id;
+        if (!$order_id) {
+            return redirect()->back()->with('error', 'The Order ID Is Required');
+        }
+        $order = Order::with(['store', 'client'])->find($order_id);
+        $products = null;
+        if ($order) {
+            $products = OrderProduct::where('order_id', $order_id)->paginate();
+        }
+        return view('Front_End.trackOrder', ['order' => $order, 'products' => $products]);
+    }
+
+    // Admin Logic
+
+    public function adminIndex()
+    {
+        $orders = Order::with(['store', 'client', 'client.user'])->paginate();
+        $this->authorize('viewAny', Order::class);
+        return view('Admin.Orders.orders-index', ['orders' => $orders]);
+    }
+    public function adminShow($id)
+    {
+        $order = Order::with(['client', 'store', 'client.user', 'notes'])->findOrFail($id);
+        $this->authorize('viewAny', Order::class);
+
+        $products = OrderProduct::where('order_id', $order->id)->paginate();
+        return view('Admin.Orders.orders-show', ['order' => $order, 'products' => $products]);
     }
     public function index()
     {
@@ -37,6 +70,63 @@ class OrderController extends Controller
         return view('Seller.Orders.seller-orders-index', ['orders' => $orders]);
     }
 
+    public function filter(Request $request)
+    {
+        $user = Auth::user();
+
+        $query = Order::query();
+        $search = $request->search ?? '';
+        $minDate = $request->min_date ?? '';
+        $maxDate = $request->max_date ?? '';
+        $sort = $request->sort ?? 'newest';
+        $statuses = $request->status ?? [];
+
+        if (!empty($minDate)) {
+            $query->where('created_at', '>=', $minDate);
+        }
+
+        if (!empty($maxDate)) {
+            $maxDateTime = \Carbon\Carbon::parse($maxDate)->endOfDay();
+            $query->where('created_at', '<=', $maxDateTime);
+        }
+
+        if (!empty($statuses)) {
+            $query->whereIn('status', $statuses);
+        }
+
+        if (!empty($search)) {
+            $query->where('id', 'like', "%$search%");
+        }
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'highest_amount') {
+            $query->orderBy('amount', 'desc');
+        } elseif ($sort === 'lowest_amount') {
+            $query->orderBy('amount', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        if ($user->type == 'Admin') {
+            $orders = $query->with(['store', 'client', 'client.user'])->paginate();
+            return view('Admin.Orders.orders-index', ['orders' => $orders]);
+        }
+        if ($user->type == 'Seller') {
+            $store = $user->seller->store;
+            if (!$store) {
+                abort(404);
+            }
+            $query->where('store_id', $store->id);
+            $orders = $query->with('client')->paginate();
+            return view('Seller.Orders.seller-orders-index', ['orders' => $orders]);
+        }
+        if ($user->type == 'Client') {
+            $client = $user->client;
+            $query->where('client_id', $client->id);
+            $orders = $query->with('store')->paginate();
+            return view('Client.Orders.client-orders-index', ['orders' => $orders]);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -197,7 +287,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with(['client', 'client.user'])->findOrFail($id);
+        $order = Order::with(['client', 'client.user', 'pickRequests'])->findOrFail($id);
         $this->authorize('view', $order);
 
         $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();
@@ -330,7 +420,7 @@ class OrderController extends Controller
     }
     public function clientShow($id)
     {
-        $order = Order::with(['store', 'notes', 'statusHistories', 'store.sector'])->findOrFail($id);
+        $order = Order::with(['store', 'notes', 'statusHistories', 'store.sector', 'pickRequests'])->findOrFail($id);
 
         $this->authorize('show', $order);
         $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();

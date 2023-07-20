@@ -2,25 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Order;
+use App\Models\PickRequest;
 use App\Models\User;
 
-class OrderPolicy
+class PickRequestPolicy
 {
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user)
     {
-        return $user->type == 'Admin';
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Order $order)
+    public function view(User $user, PickRequest $pickRequest)
     {
-        return $user->seller->store->id == $order->store_id;
+        //
     }
 
     /**
@@ -34,15 +35,15 @@ class OrderPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Order $order)
+    public function update(User $user, PickRequest $pickRequest)
     {
-        return $user->seller->store->id == $order->store_id;
+        return $user->client->id == $pickRequest->order->client_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Order $order)
+    public function delete(User $user, PickRequest $pickRequest)
     {
         //
     }
@@ -50,23 +51,15 @@ class OrderPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Order $order)
+    public function restore(User $user, PickRequest $pickRequest)
     {
         //
-    }
-    public function show(User $user, Order $order)
-    {
-        return $user->client->id == $order->client_id;
-    }
-    public function cancel(User $user, Order $order)
-    {
-        return $user->client->id == $order->client_id;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Order $order)
+    public function forceDelete(User $user, PickRequest $pickRequest)
     {
         //
     }

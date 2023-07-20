@@ -13,6 +13,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentRequestController;
+use App\Http\Controllers\PickRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
@@ -43,6 +44,7 @@ Route::get('/about', [FrontEndController::class, 'about'])->name('aboutPage');
 Route::get('/faqs', [FrontEndController::class, 'faqs'])->name('faqsPage');
 Route::get('/contact', [FrontEndController::class, 'contact'])->name('contactPage');
 Route::get('/track-order', [FrontEndController::class, 'trackOrder'])->name('trackOrderPage');
+Route::get('/track-order/order', [OrderController::class, 'getOrder'])->name('order.get');
 Route::get('/privacy', [FrontEndController::class, 'privacy'])->name('privacyPage');
 Route::get('/terms', [FrontEndController::class, 'terms'])->name('termsPage');
 Route::get('/start-selling', [FrontEndController::class, 'startSelling'])->name('startSellingPage');
@@ -107,12 +109,17 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     Route::post('product/add/{storeID}', [CartController::class, 'addProduct'])->name('cart.add');
     Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::patch('cart/empty/{id}', [CartController::class, 'empty'])->name('cart.empty');
-    // Orders
 
+    // Orders
     Route::post('order/place/{storeID}', [OrderController::class, 'placeOrder'])->name('order.place');
     Route::get('orders', [OrderController::class, 'clientIndex'])->name('orders.index');
+    Route::get('orders/filter', [OrderController::class, 'filter'])->name('orders.filter');
     Route::get('order/details/{id}', [OrderController::class, 'clientShow'])->name('order.show');
     Route::patch('order/{id}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+
+    // Pick Requests
+    Route::patch('pick-request/{id}/refuse', [PickRequestController::class, 'refuse'])->name('pickRequest.refuse');
+    Route::patch('pick-request/{id}/confirm', [PickRequestController::class, 'confirm'])->name('pickRequest.confirm');
 });
 
 // Seller
@@ -193,11 +200,13 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
 
     // Orders
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/filter', [OrderController::class, 'filter'])->name('orders.filter');
     Route::get('order/details/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('order/{id}/reject', [OrderController::class, 'reject'])->name('orders.reject');
     Route::patch('order/{id}/accept', [OrderController::class, 'accept'])->name('orders.accept');
     Route::patch('order/{id}/ready', [OrderController::class, 'ready'])->name('orders.ready');
-
+    // Pick Requests
+    Route::post('pick-request', [PickRequestController::class, 'store'])->name('pickRequest.store');
 });
 
 // Admin
@@ -287,10 +296,17 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // Transfers
     Route::get('transfers', [TransferController::class, 'adminIndex'])->name('transfers.index');
     Route::get('transfers/filter', [TransferController::class, 'filter'])->name('transfers.filter');
-
+    // Subscriptions
+    Route::get('subscriptions', [SubscriptionController::class, 'adminIndex'])->name('subscriptions.index');
+    Route::get('subscriptions/filter', [SubscriptionController::class, 'filter'])->name('subscriptions.filter');
     // Sales
     Route::get('sales', [SaleController::class, 'adminIndex'])->name('sales.index');
     Route::get('sales/filter', [SaleController::class, 'adminFilter'])->name('sales.filter');
     Route::get('sales/details/{id}', [SaleController::class, 'adminShow'])->name('sales.show');
+
+    // Orders
+    Route::get('orders', [OrderController::class, 'adminIndex'])->name('orders.index');
+    Route::get('orders/filter', [OrderController::class, 'filter'])->name('orders.filter');
+    Route::get('order/details/{id}', [OrderController::class, 'adminShow'])->name('orders.show');
 
 });

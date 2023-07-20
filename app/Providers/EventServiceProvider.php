@@ -11,6 +11,9 @@ use App\Events\PaymentRequestAccepted;
 use App\Events\PaymentRequestCreated;
 use App\Events\PaymentRequestPaid;
 use App\Events\PaymentRequestRejected;
+use App\Events\PickRequestConfirmed;
+use App\Events\PickRequestCreated;
+use App\Events\PickRequestRejected;
 use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
@@ -24,6 +27,9 @@ use App\Listeners\SendPaymentRequestAcceptedNotification;
 use App\Listeners\SendPaymentRequestCreatedNotification;
 use App\Listeners\SendPaymentRequestPaidNotification;
 use App\Listeners\SendPaymentRequestRejectedNotification;
+use App\Listeners\SendPickRequestConfirmedNotification;
+use App\Listeners\SendPickRequestCreatedNotification;
+use App\Listeners\SendPickRequestRejectedNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -82,6 +88,15 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderReady::class => [
             SendOrderReadyNotification::class,
+        ],
+        PickRequestCreated::class => [
+            SendPickRequestCreatedNotification::class,
+        ],
+        PickRequestRejected::class => [
+            SendPickRequestRejectedNotification::class,
+        ],
+        PickRequestConfirmed::class => [
+            SendPickRequestConfirmedNotification::class,
         ],
     ];
 

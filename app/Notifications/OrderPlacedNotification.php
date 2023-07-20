@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -13,9 +14,11 @@ class OrderPlacedNotification extends Notification
     /**
      * Create a new notification instance.
      */
+
     public function __construct(public $order)
     {
         $this->order = $order;
+
     }
 
     /**
@@ -25,8 +28,8 @@ class OrderPlacedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
+        return ['mail', 'database', 'broadcast'];
         return ['database', 'broadcast'];
-        return ['mail'];
     }
 
     /**
@@ -34,6 +37,9 @@ class OrderPlacedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.orders.show', $this->order->id);
         return (new MailMessage)
             ->subject('New Order')
             ->greeting("Hi {$notifiable->full_name}")
@@ -43,7 +49,7 @@ class OrderPlacedNotification extends Notification
             ->line("Order Amount : " . number_format($this->order->amount, 3, ','))
             ->line("Order Date : " . $this->order->created_at->format('M jS Y H:i'))
 
-            ->action('More Info', url(route('seller.orders.show', $this->order->id)))
+            ->action('More Info', $url)
             ->line('Thank you for using Pickup. We appreciate your business!')
             ->line('Best regards')
             ->line('Pickup Team');

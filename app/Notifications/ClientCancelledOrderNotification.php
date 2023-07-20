@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -36,13 +37,15 @@ class ClientCancelledOrderNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.orders.show', $this->order->id);
         return (new MailMessage)
             ->subject('Order Update')
             ->greeting("Dear {$notifiable->full_name}")
             ->line("We Regret to inform you that {$this->order->client->user->full_name} Has Cancelled His Order Number #{$this->order->id}")
 
             ->line("The Status Of The Order When The Client Cancelled It was '{$this->status}' So You Got {$this->refund['percentage']}% Of The Order's Amount which Equals to {$this->refund['value']} TND")
-            ->action('More Info', url(route('seller.orders.show', $this->order->id)))
+            ->action('More Info', $url)
             ->line('Thank you for using Pickup!');
     }
 

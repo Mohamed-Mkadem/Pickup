@@ -39,11 +39,13 @@ class VerificationRequestCreatedNotification extends Notification
 
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'admin.verification-requests.show', $this->verificationRequest->id);
         return (new MailMessage)
             ->subject('New Verification Request')
             ->greeting('HI ' . $notifiable->full_name)
             ->line($this->seller->full_name . ' Submitted A Verification Request')
-            ->action('Review', url(route('admin.verification-requests.show', $this->verificationRequest->id)));
+            ->action('Review', $url);
 
     }
 

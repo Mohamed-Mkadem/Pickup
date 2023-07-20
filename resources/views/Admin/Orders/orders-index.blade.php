@@ -1,11 +1,10 @@
-@extends('layouts.Client')
+@extends('layouts.Admin')
 
 @push('title')
-    <title>Pickup | Orders</title>
+    <title>Pickup | Orders </title>
 @endpush
-
-
 @section('content')
+
     <section class="content" id="content">
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
@@ -17,6 +16,7 @@
         @include('components.success-alert')
 
 
+
         <!-- Start Filters -->
         <div class="filters-holder">
             <div class="filters-header d-flex j-sp-between a-center">
@@ -25,7 +25,7 @@
                         class="fa-light fa-circle-caret-down"></i></button>
             </div>
             <div class="filters-wrapper" id="filters-wrapper">
-                <form action="{{ route('client.orders.filter') }}" method="get">
+                <form action="{{ route('admin.orders.filter') }}" method="get">
                     <div class="filter-row row2">
                         <div class="filter-box">
                             <label for="" class="form-label">Search</label>
@@ -133,18 +133,17 @@
         <!-- End Filters -->
 
         @if ($orders->count() > 0)
-            <!-- Strt Results -->
             <div class="results">
                 <h2 class="t-left">Results</h2>
                 <!-- Start Results Holder -->
                 <div class=" main-holder">
-                    <div class="table-responsive client-orders">
+                    <div class="table-responsive orders">
                         <table>
 
                             <thead>
                                 <tr>
                                     <th>ID</th>
-
+                                    <th>Client </th>
                                     <th>Store </th>
                                     <th>Amount (DT)</th>
                                     <th>Status </th>
@@ -156,11 +155,13 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td><a
-                                                href="{{ route('client.order.show', $order->id) }}">#{{ $order->id }}</a>
+                                                href="{{ route('admin.orders.show', $order->id) }}">#{{ $order->id }}</a>
                                         </td>
-
                                         <td><a
-                                                href="{{ route('client.store.home', $order->store->username) }}">{{ ucfirst($order->store->name) }}</a>
+                                                href="{{ route('admin.clients.show', $order->client->user->id) }}">{{ ucfirst($order->client->user->full_name) }}</a>
+                                        </td>
+                                        <td><a
+                                                href="{{ route('admin.store.home', $order->store->username) }}">{{ ucfirst($order->store->name) }}</a>
                                         </td>
                                         <td>{{ number_format($order->amount, 3, ',') }}</td>
                                         <td class="status {{ $order->status }} ">
@@ -178,7 +179,7 @@
                 <!-- End Results Holder -->
 
 
-                <!-- Start Pagination   -->
+                <!-- Start Pagination -->
                 {!! $orders->appends(request()->input())->links() !!}
                 <!-- End Pagination -->
             </div>
@@ -193,8 +194,6 @@
             </div>
             <!-- End Not found -->
         @endif
-
-
     </section>
 @endsection
 

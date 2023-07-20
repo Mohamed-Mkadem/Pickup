@@ -4,196 +4,16 @@
     <title>Pickup | Orders</title>
 @endpush
 @section('content')
-    @include('components.errors-alert')
-    @include('components.session-errors-alert')
-    @include('components.success-alert')
     <section class="content" id="content">
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
             <h1>Orders</h1>
 
-
         </div>
         <!-- End Starter Header -->
-
-        <!-- Start Quick Stats Holder -->
-        <div class="quick-stats-holder orders" id="quick-stats-holder">
-
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Pending</p>
-                        <p class="box-value">10 </p>
-                    </div>
-
-                    <div class="icon-holder">
-
-                        <i class="fa-light fa-hourglass-start pending"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value danger">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Accepted</p>
-                        <p class="box-value">21 </p>
-                    </div>
-
-                    <div class="icon-holder">
-
-                        <i class="fa-light fa-badge-check accepted"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value ">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Cancelled</p>
-                        <p class="box-value">70 </p>
-                    </div>
-
-                    <div class="icon-holder">
-
-                        <i class="fa-solid fa-rotate-left rejected"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value success">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Ready</p>
-                        <p class="box-value">2 </p>
-                    </div>
-
-                    <div class="icon-holder">
-                        <i class="fa-light fa-gift ready"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value ">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Picked</p>
-                        <p class="box-value">20 </p>
-                    </div>
-
-                    <div class="icon-holder">
-                        <i class="fa-light fa-bag-shopping picked"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value danger">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-            <!-- Start Stat -->
-            <div class="stat-item">
-                <!-- Start Top Info -->
-                <div class="top-info d-flex a-start j-sp-between">
-                    <div class="title-value-box">
-                        <p class="box-title">Rejected</p>
-                        <p class="box-value">21070 </p>
-                    </div>
-
-                    <div class="icon-holder">
-                        <i class="fa-light fa-xmark rejected"></i>
-                    </div>
-
-                </div>
-                <!-- End Top Info -->
-                <!-- Start Bottom Info -->
-                <div class="bottom-info d-flex j-start a-center tickets-list">
-                    <div class="progression-box">
-
-                        <p class="progression-value danger">
-                            <span>14%</span>
-                        </p>
-                    </div>
-                    <p class="standard">vs Previous Month</p>
-                </div>
-                <!-- End Bottom Info -->
-            </div>
-            <!-- End Stat -->
-        </div>
-        <!-- End Quick Stats Holder -->
-
-
+        @include('components.errors-alert')
+        @include('components.session-errors-alert')
+        @include('components.success-alert')
 
         <!-- Start Filters -->
         <div class="filters-holder">
@@ -203,38 +23,79 @@
                         class="fa-light fa-circle-caret-down"></i></button>
             </div>
             <div class="filters-wrapper" id="filters-wrapper">
-                <form action="" method="get">
+                <form action="{{ route('seller.orders.filter') }}" method="get">
                     <div class="filter-row row2">
                         <div class="filter-box">
                             <label for="" class="form-label">Search</label>
-                            <input type="search" name="" placeholder="Type An Order ID" class="form-element">
+                            <input type="search" name="search" value="{{ request()->search }}"
+                                placeholder="Type An Order ID" class="form-element">
                         </div>
 
 
-                        <div class="filter-box">
-                            <label for="" class="form-label">Status</label>
-                            <div class="select-box">
-                                <select name="" class="form-element">
-                                    <option value="">Pending</option>
-                                    <option value="">Accepted</option>
-                                    <option value="">Ready</option>
-                                    <option value="">Picked</option>
-                                    <option value="">Rejected</option>
-                                    <option value="">Cancelled</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="filter-box">
                             <label for="" class="form-label">Sort By</label>
                             <div class="select-box">
-                                <select name="" class="form-element">
-                                    <option value="">Option</option>
-                                    <option value="">Option</option>
-                                    <option value="">Option</option>
-                                    <option value="">Option</option>
-                                    <option value="">Option</option>
+                                <select name="sort" class="form-element">
+                                    <option value="newest" {{ request()->input('sort') === 'newest' ? 'selected' : '' }}>
+                                        Newest</option>
+                                    <option value="oldest" {{ request()->input('sort') === 'oldest' ? 'selected' : '' }}>
+                                        Oldest</option>
+                                    <option value="highest_amount"
+                                        {{ request()->input('sort') === 'highest_amount' ? 'selected' : '' }}>
+                                        Highest Amount</option>
+                                    <option value="lowest_amount"
+                                        {{ request()->input('sort') === 'lowest_amount' ? 'selected' : '' }}>
+                                        Lowest Amount</option>
+
+
                                 </select>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-row row2">
+                        <div class="filter-box">
+                            <label for="" class="form-label">Status </label>
+                            <div class="choices-btns-wrapper  ">
+                                <div class="choice-btn form-element">
+                                    <label for="pending-input"> pending</label>
+                                    <input type="checkbox"
+                                        {{ in_array('pending', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="pending-input" name="status[]" value="pending">
+                                </div>
+                                <div class="choice-btn form-element">
+                                    <label for="accepted-input">accepted</label>
+                                    <input type="checkbox"
+                                        {{ in_array('accepted', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="accepted-input" name="status[]" value="accepted">
+                                </div>
+                                <div class="choice-btn form-element">
+                                    <label for="rejected-input">rejected</label>
+                                    <input type="checkbox"
+                                        {{ in_array('rejected', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="rejected-input" name="status[]" value="rejected">
+                                </div>
+                                <div class="choice-btn form-element">
+                                    <label for="ready-input">ready</label>
+                                    <input type="checkbox"
+                                        {{ in_array('ready', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="ready-input" name="status[]" value="ready">
+                                </div>
+                                <div class="choice-btn form-element">
+                                    <label for="picked-input">picked</label>
+                                    <input type="checkbox"
+                                        {{ in_array('picked', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="picked-input" name="status[]" value="picked">
+                                </div>
+                                <div class="choice-btn form-element">
+                                    <label for="cancelled-input">cancelled</label>
+                                    <input type="checkbox"
+                                        {{ in_array('cancelled', (array) request()->input('status')) ? 'checked' : '' }}
+                                        id="cancelled-input" name="status[]" value="cancelled">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -245,11 +106,13 @@
                             <div class="dates-boxes     filter-row sm-row2  ">
                                 <div class="date-box min-grid">
                                     <p class="limiters form-limiters">From : </p>
-                                    <input type="date" name="" class="form-element">
+                                    <input type="date" value="{{ request('min_date') }}" name="min_date"
+                                        class="form-element">
                                 </div>
                                 <div class="date-box min-grid">
                                     <p class="limiters form-limiters">To : </p>
-                                    <input type="date" name="" class="form-element">
+                                    <input type="date" value="{{ request('max_date') }}" name="max_date"
+                                        class="form-element">
                                 </div>
                             </div>
                         </div>
@@ -288,12 +151,14 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td><a href="{{ route('seller.orders.show', $order->id) }}">#{{ $order->id }}</a>
+                                        <td><a
+                                                href="{{ route('seller.orders.show', $order->id) }}">#{{ $order->id }}</a>
                                         </td>
                                         <td>{{ $order->client->user->full_name }}</td>
                                         <td>{{ number_format($order->amount, 3, ',') }}</td>
                                         <td class="status {{ $order->status }} ">
-                                            <span>{{ ucfirst($order->status) }}</span></td>
+                                            <span>{{ ucfirst($order->status) }}</span>
+                                        </td>
                                         <td>{{ $order->created_at->format('M jS Y H:i') }}</td>
                                     </tr>
                                 @endforeach

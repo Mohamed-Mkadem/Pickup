@@ -2173,11 +2173,11 @@ button {
 }
 .track-order .order header .info-holder .client-name-date {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 220px));
+  grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
   row-gap: 0;
   -moz-column-gap: 0;
        column-gap: 0;
-  gap: 0;
+  gap: 1em;
 }
 .track-order .order header .info-holder .client-name-date p {
   color: var(--clr-navy-300);

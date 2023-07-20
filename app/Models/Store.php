@@ -139,6 +139,45 @@ class Store extends Model
     {
         return $this->hasMany(Order::class);
     }
+    public function ordersCount()
+    {
+        return $this->orders()->count();
+    }
+    public function pendingordersCount()
+    {
+        return $this->orders()->where('status', 'pending')->count();
+    }
+
+    public function acceptedOrdersCount()
+    {
+        return $this->orders()->where('status', 'accepted')->count();
+    }
+
+    public function rejectedOrdersCount()
+    {
+        return $this->orders()->where('status', 'rejected')->count();
+    }
+
+    public function readyOrdersCount()
+    {
+        return $this->orders()->where('status', 'ready')->count();
+    }
+
+    public function pickedOrdersCount()
+    {
+        return $this->orders()->where('status', 'picked')->count();
+    }
+    public function suspendedBalance()
+    {
+        $balance = $this->orders()->whereIn('status', ['accepted', 'ready', 'pending'])->sum('amount');
+        return $balance;
+    }
+
+    public function allBalance()
+    {
+        return $this->balance + $this->suspendedBalance();
+    }
+    // Notes
     public function notes()
     {
         return $this->morphMany(OrderNote::class, 'notable');

@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\User;
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -37,13 +38,15 @@ class PaymentRequestAcceptedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'seller.payment-requests.show', $this->paymentRequest->id);
         return (new MailMessage)
             ->subject('Payment Request Accepted')
             ->greeting("Hi {$notifiable->full_name}")
 
             ->line("We are pleased to inform you that your payment request Number {$this->paymentRequest->id} has been successfully reviewed and accepted ")
             ->line("The requested amount of {$this->paymentRequest->amount} TND will be transferred to your bank account within the next 3 days.")
-            ->action('More Info', url(route('seller.payment-requests.show', $this->paymentRequest->id)))
+            ->action('More Info', $url)
 
             ->line('Thank you for your trust in our platform');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -35,11 +36,13 @@ class PaymentRequestCreatedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $urlGenerator = app(NotificationUrlGenerator::class);
+        $url = $urlGenerator->generateUrl($this->id, 'admin.payment-requests.show', $this->paymentRequest->id);
         return (new MailMessage)
             ->subject('New Payment Request')
             ->greeting("Hi {$notifiable->full_name} ")
             ->line("{$this->paymentRequest->seller->full_name} Added A New Payment Request")
-            ->action('Review', url(route('admin.payment-requests.show', $this->paymentRequest->id)));
+            ->action('Review', $url);
 
     }
     public function toDatabase(object $notifiable)
