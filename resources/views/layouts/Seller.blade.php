@@ -210,8 +210,9 @@
                     notifiable">
                         <i class="fa-light fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span></a></li>
-                <li class="nav-item"><a href="seller_reviews.html"
+                <li class="nav-item"><a href="{{ route('seller.reviews.index') }}"
                         class="nav-link 
+                        {{ request()->is('seller/reviews*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     notifiable">
                         <i class="fa-light fa-star"></i>

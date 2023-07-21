@@ -287,7 +287,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with(['client', 'client.user', 'pickRequests'])->findOrFail($id);
+        $order = Order::with(['client', 'client.user', 'pickRequests', 'review', 'review.client'])->findOrFail($id);
         $this->authorize('view', $order);
 
         $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();
@@ -420,7 +420,7 @@ class OrderController extends Controller
     }
     public function clientShow($id)
     {
-        $order = Order::with(['store', 'notes', 'statusHistories', 'store.sector', 'pickRequests'])->findOrFail($id);
+        $order = Order::with(['store', 'notes', 'statusHistories', 'store.sector', 'pickRequests', 'review'])->findOrFail($id);
 
         $this->authorize('show', $order);
         $orderProducts = OrderProduct::where('order_id', $order->id)->paginate();

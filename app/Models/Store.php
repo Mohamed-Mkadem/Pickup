@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\OrderNote;
+use App\Models\Review;
 use App\Models\StoreOpeningHour;
 use App\Models\Transfer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -181,5 +182,57 @@ class Store extends Model
     public function notes()
     {
         return $this->morphMany(OrderNote::class, 'notable');
+    }
+    // Reviews
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function updateRate()
+    {
+        $totalReviews = $this->reviews()->count();
+        if ($totalReviews > 0) {
+            $totalStars = $this->reviews()->sum('honesty') + $this->reviews()->sum('commitment') + $this->reviews()->sum('hospitality');
+            $this->rate = ($totalStars / ($totalReviews * 15)) * 100;
+            $this->save();
+        }
+    }
+    public function totalCommitment()
+    {
+        $totalReviews = $this->reviews()->count();
+        $commitment = 0;
+        if ($totalReviews > 0) {
+            $totalStars = $this->reviews()->sum('commitment');
+            $commitment = ($totalStars / ($totalReviews * 5)) * 100;
+
+        }
+        return number_format($commitment, 1);
+    }
+    public function totalHonesty()
+    {
+        $totalReviews = $this->reviews()->count();
+        $honesty = 0;
+        if ($totalReviews > 0) {
+            $totalStars = $this->reviews()->sum('honesty');
+            $honesty = ($totalStars / ($totalReviews * 5)) * 100;
+
+        }
+        return number_format($honesty, 1);
+    }
+    public function totalHospitality()
+    {
+        $totalReviews = $this->reviews()->count();
+        $hospitality = 0;
+        if ($totalReviews > 0) {
+            $totalStars = $this->reviews()->sum('hospitality');
+            $hospitality = ($totalStars / ($totalReviews * 5)) * 100;
+
+        }
+        return number_format($hospitality, 1);
+    }
+    public function reviewsCount()
+    {
+        return $this->reviews()->count();
     }
 }

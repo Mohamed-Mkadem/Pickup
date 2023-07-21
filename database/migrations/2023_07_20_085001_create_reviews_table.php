@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->references('id')->on('orders');
+            $table->foreignId('store_id')->references('id')->on('stores');
+            $table->foreignId('client_id')->references('id')->on('clients');
+            $table->unsignedTinyInteger('hospitality');
+            $table->unsignedTinyInteger('commitment');
+            $table->unsignedTinyInteger('honesty');
+            $table->unsignedFloat('total');
+            $table->text('feedback')->nullable();
+            $table->boolean('anonymous')->default(false);
             $table->timestamps();
         });
     }

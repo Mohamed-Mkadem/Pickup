@@ -14,6 +14,8 @@ use App\Events\PaymentRequestRejected;
 use App\Events\PickRequestConfirmed;
 use App\Events\PickRequestCreated;
 use App\Events\PickRequestRejected;
+use App\Events\ReviewCreated;
+use App\Events\ReviewDeleted;
 use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
@@ -30,6 +32,8 @@ use App\Listeners\SendPaymentRequestRejectedNotification;
 use App\Listeners\SendPickRequestConfirmedNotification;
 use App\Listeners\SendPickRequestCreatedNotification;
 use App\Listeners\SendPickRequestRejectedNotification;
+use App\Listeners\SendReviewCreatedNotification;
+use App\Listeners\SendReviewDeletedNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -97,6 +101,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         PickRequestConfirmed::class => [
             SendPickRequestConfirmedNotification::class,
+        ],
+        ReviewCreated::class => [
+            SendReviewCreatedNotification::class,
+        ],
+        ReviewDeleted::class => [
+            SendReviewDeletedNotification::class,
         ],
     ];
 

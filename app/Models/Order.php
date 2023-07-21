@@ -52,4 +52,14 @@ class Order extends Model
     {
         return $this->pickRequests()->where('status', 'pending')->exists();
     }
+
+    // Reviews
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+    public function hasReview()
+    {
+        return $this->review()->exists();
+    }
 }

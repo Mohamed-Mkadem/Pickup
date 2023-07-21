@@ -16,6 +16,7 @@ use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\PickRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SellerController;
@@ -87,7 +88,8 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     Route::get('stores/filter', [StoreController::class, 'clientFilter'])->name('stores.filter');
     // Show Stores
     Route::get('store/{username}/home', [StoreController::class, 'clientHome'])->name('store.home');
-    Route::get('store/{username}/reviews', [StoreController::class, 'clientReviews'])->name('store.reviews');
+    // Route::get('store/{username}/reviews', [StoreController::class, 'clientReviews'])->name('store.reviews');
+    Route::get('store/{username}/reviews', [StoreController::class, 'reviews'])->name('store.reviews');
     Route::get('store/{username}/cart', [StoreController::class, 'cart'])->name('store.cart');
     Route::get('store/{username}/checkout', [StoreController::class, 'checkout'])->name('store.checkout');
     Route::get('store/{username}/orders', [StoreController::class, 'clientOrders'])->name('store.orders');
@@ -120,6 +122,10 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     // Pick Requests
     Route::patch('pick-request/{id}/refuse', [PickRequestController::class, 'refuse'])->name('pickRequest.refuse');
     Route::patch('pick-request/{id}/confirm', [PickRequestController::class, 'confirm'])->name('pickRequest.confirm');
+
+    // Reviews
+    Route::post('order/{id}/review', [ReviewController::class, 'store'])->name('order.review');
+    Route::patch('review/{id}', [ReviewController::class, 'update'])->name('order.review.update');
 });
 
 // Seller
@@ -207,6 +213,9 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::patch('order/{id}/ready', [OrderController::class, 'ready'])->name('orders.ready');
     // Pick Requests
     Route::post('pick-request', [PickRequestController::class, 'store'])->name('pickRequest.store');
+    // Reviews
+    Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::get('reviews/filter', [ReviewController::class, 'filter'])->name('reviews.filter');
 });
 
 // Admin
@@ -309,4 +318,6 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('orders/filter', [OrderController::class, 'filter'])->name('orders.filter');
     Route::get('order/details/{id}', [OrderController::class, 'adminShow'])->name('orders.show');
 
+    // Reviews
+    Route::delete('review/{id}', [ReviewController::class, 'destroy'])->name('order.review.destroy');
 });

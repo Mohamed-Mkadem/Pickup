@@ -5,6 +5,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Route;
 
+// use App\Services\NotificationUrlGenerator;
+
 class NotificationUrlGenerator
 {
     public function generateUrl($notificationId, $routeName, $routeParameters = [])

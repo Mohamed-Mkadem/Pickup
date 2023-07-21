@@ -72,7 +72,7 @@
 
                                         <div>
                                             <h3>Status</h3>
-                                            <p>{{ $order->status }}</p>
+                                            <p>{{ ucfirst($order->status) }}</p>
                                         </div>
 
                                         <div><i class="fa-light fa-bag-shopping"></i> </div>

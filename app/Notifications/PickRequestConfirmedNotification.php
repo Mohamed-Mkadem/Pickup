@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Services\NotificationUrlGenerator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -48,7 +49,7 @@ class PickRequestConfirmedNotification extends Notification
     {
         return [
             'image' => $this->pickRequest->order->client->user->photo,
-            'body' => "Great news! The order #{$this->pickRequest->order->id} is confirmed, and your store balance has been credited with " . number_format($this->pickRequest->order->amount, 3, ','),
+            'body' => "Great news! The order #{$this->pickRequest->order->id} is confirmed, and your store balance has been credited with " . number_format($this->pickRequest->order->amount, 3, ',') . ' TND',
             'url' => url(route('seller.orders.show', $this->pickRequest->order->id)),
         ];
     }
@@ -56,7 +57,7 @@ class PickRequestConfirmedNotification extends Notification
     {
         return [
             'image' => $this->pickRequest->order->client->user->photo,
-            'body' => "Great news! The order #{$this->pickRequest->order->id} is confirmed, and your store balance has been credited with " . number_format($this->pickRequest->order->amount, 3, ','),
+            'body' => "Great news! The order #{$this->pickRequest->order->id} is confirmed, and your store balance has been credited with " . number_format($this->pickRequest->order->amount, 3, ',') . ' TND',
             'url' => url(route('seller.orders.show', $this->pickRequest->order->id)),
             'created_at' => time(),
         ];

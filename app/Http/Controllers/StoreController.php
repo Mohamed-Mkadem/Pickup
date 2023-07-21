@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Sector;
 use App\Models\Seller;
 use App\Models\State;
@@ -405,11 +406,18 @@ class StoreController extends Controller
     }
     public function reviews($username)
     {
-        $store = Store::where('username', $username)->with(['owner.user', 'owner.verificationRequests', 'sector', 'city'])->first();
-        if (!$store) {
-            abort(404);
+
+        $store = Store::where('username', $username)->with('reviews')->firstOrFail();
+        $user = Auth::user();
+
+        $reviews = Review::where('store_id', $store->id)->with(['client', 'order'])->paginate();
+
+        if ($user->type == 'Admin') {
+            return view('Admin.Stores.show_store_reviews', ['store' => $store, 'reviews' => $reviews]);
         }
-        return view('Admin.Stores.show_store_reviews', ['store' => $store]);
+        if ($user->type == 'Client') {
+            return view('Client.Stores.client_store_reviews', ['store' => $store, 'reviews' => $reviews]);
+        }
     }
     public function ban($id)
     {
@@ -712,5 +720,5 @@ class StoreController extends Controller
         // dd($products);
         return view('Client.Stores.client_store_order', ['order' => $order, 'store' => $store, 'products' => $products]);
     }
-
+    // public function clientReviews()
 }
