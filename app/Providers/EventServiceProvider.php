@@ -16,6 +16,7 @@ use App\Events\PickRequestCreated;
 use App\Events\PickRequestRejected;
 use App\Events\ReviewCreated;
 use App\Events\ReviewDeleted;
+use App\Events\SellerCancelledOrder;
 use App\Events\StoreUnpublished;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
@@ -34,6 +35,7 @@ use App\Listeners\SendPickRequestCreatedNotification;
 use App\Listeners\SendPickRequestRejectedNotification;
 use App\Listeners\SendReviewCreatedNotification;
 use App\Listeners\SendReviewDeletedNotification;
+use App\Listeners\SendSellerCancelledOrderNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -107,6 +109,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ReviewDeleted::class => [
             SendReviewDeletedNotification::class,
+        ],
+        SellerCancelledOrder::class => [
+            SendSellerCancelledOrderNotification::class,
         ],
     ];
 

@@ -7,18 +7,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ClientCancelledOrderNotification extends Notification
+class SellerCancelledOrderNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
+    public $total;
     public function __construct(public $order, public $status, public $refund)
     {
         $this->order = $order;
         $this->status = $status;
         $this->refund = $refund;
+        $this->total = $this->refund['value'] + $this->order->amount;
     }
 
     /**
@@ -38,32 +40,33 @@ class ClientCancelledOrderNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $urlGenerator = app(NotificationUrlGenerator::class);
-        $url = $urlGenerator->generateUrl($this->id, 'seller.orders.show', $this->order->id);
+        $url = $urlGenerator->generateUrl($this->id, 'client.order.show', $this->order->id);
+
         return (new MailMessage)
             ->subject('Order Update')
             ->greeting("Dear {$notifiable->full_name}")
-            ->line("We Regret to inform you that {$this->order->client->user->full_name} Has Cancelled His Order Number #{$this->order->id}")
+            ->line("We Regret to inform you that {$this->order->store->name} Has Cancelled The Order Number #{$this->order->id}")
 
-            ->line("The Status Of The Order When The Client Cancelled It was '{$this->status}' So You Got {$this->refund['percentage']} Of The Order's Amount which Equals to {$this->refund['value']} TND")
+            ->line("The Status Of The Order When The Store Owner Cancelled It was '{$this->status}' So You Got {$this->refund['percentage']} Of The Order's Amount which Equals to {$this->refund['value']} TND as a refund, so your account was credited by {$this->total} TND")
             ->action('More Info', $url)
+
             ->line('Thank you for using Pickup!');
     }
-
     public function toDatabase(object $notifiable)
     {
         return [
-            'image' => $this->order->client->user->photo,
-            'body' => "The Order #{$this->order->id} Was Cancelled By The Client, You Got {$this->refund['percentage']} ({$this->refund['value']} TND)  as a Refund",
-            'url' => url(route('seller.orders.show', $this->order->id)),
+            'image' => $this->order->store->photo,
+            'body' => "The Order #{$this->order->id} Was Cancelled By The Store, You Got {$this->refund['percentage']} ({$this->refund['value']} TND) as a Refund",
+            'url' => url(route('client.order.show', $this->order->id)),
 
         ];
     }
     public function toBroadcast(object $notifiable)
     {
         return [
-            'image' => $this->order->client->user->photo,
-            'body' => "The Order #{$this->order->id} Was Cancelled By The Client, You Got {$this->refund['percentage']} ({$this->refund['value']} TND)  as a Refund",
-            'url' => url(route('seller.orders.show', $this->order->id)),
+            'image' => $this->order->store->photo,
+            'body' => "The Order #{$this->order->id} Was Cancelled By The Store, You Got {$this->refund['percentage']} ({$this->refund['value']} TND) as a Refund",
+            'url' => url(route('client.order.show', $this->order->id)),
             'created_at' => time(),
         ];
     }

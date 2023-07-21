@@ -7,6 +7,7 @@ use App\Events\OrderAccepted;
 use App\Events\OrderPlaced;
 use App\Events\OrderReady;
 use App\Events\OrderRejected;
+use App\Events\SellerCancelledOrder;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderNote;
@@ -61,6 +62,7 @@ class OrderController extends Controller
         $products = OrderProduct::where('order_id', $order->id)->paginate();
         return view('Admin.Orders.orders-show', ['order' => $order, 'products' => $products]);
     }
+    // Seller Logic
     public function index()
     {
         $seller = Seller::where('user_id', Auth::id())->firstOrFail();
@@ -130,9 +132,91 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function sellerCancel($id)
     {
-        //
+        $order = Order::with('products')->findOrFail($id);
+        // dd($order);
+        $client = $order->client;
+        // dd($client);
+        $store = $order->store;
+        $seller = $store->owner;
+        $this->authorize('update', $order);
+        $refund = [
+            'percentage' => '0%',
+            'value' => 0,
+        ];
+        $status = $order->status;
+        $amount = $order->amount;
+        if ($status == 'cancelled') {
+            return redirect()->back()->with('error', 'This Order Is already Cancelled');
+        }
+        if ($status == 'accepted') {
+            $refund['percentage'] = '10%';
+            $refund['value'] = ($amount / 100) * 10;
+        }
+        if ($status == 'ready') {
+            $refund['percentage'] = '20%';
+            $refund['value'] = ($amount / 100) * 20;
+        }
+
+        if (($store->balance + $seller->balance) < $refund['value']) {
+            return redirect()->back()->with('error', "Your Balance is Insufficient to cover this order cancellation fee ({$refund['value']} TND), Please Top-up your account or complete the order process, or try to find a solution with the customer");
+        }
+        // dd($refund);
+        $charges = [
+            'store' => 0,
+            'seller' => 0,
+        ];
+        if ($store->balance >= $refund['value']) {
+            $charges['store'] = $refund['value'];
+        } else {
+            $charges['store'] = $store->balance;
+        }
+
+        if ($charges['store'] < $refund['value']) {
+            $charges['seller'] = $refund['value'] - $charges['store'];
+        }
+
+        // dd($charges);
+        try {
+            DB::beginTransaction();
+            // Change Order's status
+            $order->status = 'cancelled';
+            $order->save();
+
+            // Return Money to the client
+            $client->balance = DB::raw('balance +' . ($amount + $refund['value']));
+            $client->save();
+
+            // Update products Quantity
+            foreach ($order->products as $product) {
+                $product->increment('quantity', $product->order_products->quantity);
+
+            }
+
+            // Deduct the charges from the store balance
+            $store->balance = DB::raw('balance -' . $charges['store']);
+            $store->save();
+            // Deduct the charges from the seller balance
+            $seller->balance = DB::raw('balance -' . $charges['seller']);
+            $seller->save();
+
+            // Add The Event
+            event(new SellerCancelledOrder($order, $status, $refund));
+
+            // Add Status History
+            $order->statusHistories()->create([
+                'statusable_type' => 'App\Models\Order',
+                'statusable_id' => $order->id,
+                'action' => 'Cancelled',
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Order Cancelled Successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     public function accept(Request $request, $id)
@@ -434,7 +518,7 @@ class OrderController extends Controller
         $this->authorize('cancel', $order);
 
         $refund = [
-            'percentage' => 0,
+            'percentage' => '0%',
             'value' => 0,
         ];
         $status = $order->status;
@@ -443,11 +527,11 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'This Order Is already Cancelled');
         }
         if ($status == 'accepted') {
-            $refund['percentage'] = 10;
+            $refund['percentage'] = '10%';
             $refund['value'] = ($amount / 100) * 10;
         }
         if ($status == 'ready') {
-            $refund['percentage'] = 20;
+            $refund['percentage'] = '20%';
             $refund['value'] = ($amount / 100) * 20;
         }
 

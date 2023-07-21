@@ -211,6 +211,7 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::patch('order/{id}/reject', [OrderController::class, 'reject'])->name('orders.reject');
     Route::patch('order/{id}/accept', [OrderController::class, 'accept'])->name('orders.accept');
     Route::patch('order/{id}/ready', [OrderController::class, 'ready'])->name('orders.ready');
+    Route::patch('order/{id}/cancel', [OrderController::class, 'sellerCancel'])->name('orders.cancel');
     // Pick Requests
     Route::post('pick-request', [PickRequestController::class, 'store'])->name('pickRequest.store');
     // Reviews

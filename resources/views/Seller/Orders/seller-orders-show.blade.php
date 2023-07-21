@@ -61,10 +61,14 @@
                     <button class="deleteBtn delete-button">Cancel</button>
 
                     <div class="modal-holder ">
-                        <form action="" method="post" class="modal t-center confirm-form">
+                        <form action="{{ route('seller.orders.cancel', $order->id) }}" method="post"
+                            class="modal t-center confirm-form">
+                            @csrf
+                            @method('PATCH')
                             <i class=" fa-light fa-info"></i>
 
-                            <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You 10DT</p>
+                            <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You
+                                {{ ($order->amount / 100) * 10 }} DT</p>
                             <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
 
                             <div class="buttons d-flex j-center a-center">
@@ -104,10 +108,14 @@
                         <button class="deleteBtn delete-button">Cancel</button>
 
                         <div class="modal-holder ">
-                            <form action="" method="post" class="modal t-center confirm-form">
-                                <i class=" fa-light fa-info"></i>
+                            <form action="{{ route('seller.orders.cancel', $order->id) }}" method="post"
+                                class="modal t-center confirm-form">
+                                @csrf
+                                @method('PATCH')
 
-                                <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You 20DT</p>
+                                <i class=" fa-light fa-info"></i>
+                                <p class=" d-block fw-bold mb-0-5 mt-1">This Action Will Cost You
+                                    {{ ($order->amount / 100) * 20 }}DT</p>
                                 <p class="mt-0">Are You Sure You Want To Cancel This Order ? </p>
 
                                 <div class="buttons d-flex j-center a-center">

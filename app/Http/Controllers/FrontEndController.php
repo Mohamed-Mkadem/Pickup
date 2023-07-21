@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Mail\ContactFormMail;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Mail;
 class FrontEndController extends Controller
 {
     public function home(){
-        return view('Front_End.home');
+        $clientsCount = Client::count();
+        return view('Front_End.home',['clientsCount' => $clientsCount ]);
     }
     public function about(){
         return view('Front_End.about');

@@ -34,6 +34,10 @@ class OrderPolicy
     /**
      * Determine whether the user can update the model.
      */
+    public function sellerCancel(User $user, Order $order)
+    {
+        return $user->seller->store->id == $order->store_id;
+    }
     public function update(User $user, Order $order)
     {
         return $user->seller->store->id == $order->store_id;
