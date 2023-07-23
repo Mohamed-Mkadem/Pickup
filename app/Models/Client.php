@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use App\Models\Cart;
-use App\Models\User;
 use App\Models\Follow;
-use App\Models\Voucher;
 use App\Models\OrderNote;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
@@ -30,6 +30,10 @@ class Client extends Model
     {
         return $this->hasMany(Follow::class);
     }
+    public function followsCount()
+    {
+        return $this->follows()->count();
+    }
     public function isFollowing($storeId)
     {
         return $this->follows()->where('store_id', $storeId)->exists();
@@ -47,6 +51,39 @@ class Client extends Model
     public function orders()
     {
         return $this->hasMany(order::class);
+    }
+
+    public function ordersCount()
+    {
+        return $this->orders()->count();
+    }
+    public function pendingordersCount()
+    {
+        return $this->orders()->where('status', 'pending')->count();
+    }
+
+    public function acceptedOrdersCount()
+    {
+        return $this->orders()->where('status', 'accepted')->count();
+    }
+
+    public function rejectedOrdersCount()
+    {
+        return $this->orders()->where('status', 'rejected')->count();
+    }
+
+    public function readyOrdersCount()
+    {
+        return $this->orders()->where('status', 'ready')->count();
+    }
+
+    public function pickedOrdersCount()
+    {
+        return $this->orders()->where('status', 'picked')->count();
+    }
+    public function spentMoney()
+    {
+        return $this->orders()->where('status', 'picked')->sum('amount');
     }
     public function notes()
     {

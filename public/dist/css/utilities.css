@@ -865,6 +865,12 @@ button {
     flex-direction: column;
   }
 }
+@media (min-width: 768px) {
+  .d-flex.md-end {
+    justify-content: flex-end;
+  }
+}
+
 .wrap {
   flex-wrap: wrap;
 }
@@ -1069,7 +1075,7 @@ section#store-holder {
 }
 .table-responsive.tickets table tr {
   display: grid;
-  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) minmax(160px, 1fr) 150px 130px;
+  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) minmax(160px, 1fr) 150px 180px;
 }
 .table-responsive.tickets-seller-client table thead {
   background-color: var(--clr-teal-200);
@@ -1077,7 +1083,7 @@ section#store-holder {
 }
 .table-responsive.tickets-seller-client table tr {
   display: grid;
-  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 150px;
+  grid-template-columns: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 180px;
 }
 .table-responsive.seller-sales table thead {
   background-color: var(--clr-teal-200);
@@ -1561,6 +1567,28 @@ a.editBtn i {
 .pick-request-message {
   color: var(--clr-blueGray-900);
   letter-spacing: 1px;
+}
+
+.close-btn {
+  color: var(--clr-white-1000);
+  padding: 8px 25px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  background-color: var(--clr-red-600);
+}
+.close-btn:hover {
+  background-color: var(--clr-red-700);
+}
+
+.submit-btn2 {
+  background-color: var(--clr-teal-200);
+  color: var(--clr-white-1000);
+  padding: 8px 25px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.submit-btn2:hover {
+  background-color: var(--clr-teal-300);
 }
 
 .notification-modal {

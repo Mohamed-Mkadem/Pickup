@@ -188,11 +188,14 @@
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-user-headset"></i> <span>Tickets</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link
+                    {{ request()->is('seller/ticket*') ? 'active' : '' }}
+                    collapsed">
+                        <i class="fa-light fa-user-headset"></i> <span>Tickets</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="seller_ticket_add.html">New Ticket</a></li>
-                        <li class="nav-item"><a href="seller_tickets.html">List</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.tickets.create') }}">New Ticket</a></li>
+                        <li class="nav-item"><a href="{{ route('seller.tickets.index') }}">List</a></li>
                     </ul>
                 </li>
 

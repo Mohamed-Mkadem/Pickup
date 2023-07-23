@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Ticket;
+use App\Models\TicketResponse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -93,4 +95,18 @@ class User extends Authenticatable
     // {
     //     return 'users.' . $this->id;
     // }
+
+    // Tickets
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    public function ticketsCount()
+    {
+        return $this->tickets()->count();
+    }
+    public function responses()
+    {
+        return $this->hasMany(TicketResponse::class);
+    }
 }

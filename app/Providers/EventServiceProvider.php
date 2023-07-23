@@ -18,6 +18,9 @@ use App\Events\ReviewCreated;
 use App\Events\ReviewDeleted;
 use App\Events\SellerCancelledOrder;
 use App\Events\StoreUnpublished;
+use App\Events\TicketClosed;
+use App\Events\TicketResponseCreated;
+use App\Events\TicketSubmitted;
 use App\Events\VerificationRequestApproved;
 use App\Events\VerificationRequestCreated;
 use App\Events\VerificationRequestRejected;
@@ -36,6 +39,9 @@ use App\Listeners\SendPickRequestRejectedNotification;
 use App\Listeners\SendReviewCreatedNotification;
 use App\Listeners\SendReviewDeletedNotification;
 use App\Listeners\SendSellerCancelledOrderNotification;
+use App\Listeners\SendTicketClosedNotification;
+use App\Listeners\SendTicketResponseCreatedNotification;
+use App\Listeners\SendTicketSubmittedNotification;
 use App\Listeners\SendVerificationRequestApprovedNotification;
 use App\Listeners\SendVerificationRequestCreatedNotification;
 use App\Listeners\SendVerificationRequestRejectedNotification;
@@ -112,6 +118,15 @@ class EventServiceProvider extends ServiceProvider
         ],
         SellerCancelledOrder::class => [
             SendSellerCancelledOrderNotification::class,
+        ],
+        TicketSubmitted::class => [
+            SendTicketSubmittedNotification::class,
+        ],
+        TicketResponseCreated::class => [
+            SendTicketResponseCreatedNotification::class,
+        ],
+        TicketClosed::class => [
+            SendTicketClosedNotification::class,
         ],
     ];
 

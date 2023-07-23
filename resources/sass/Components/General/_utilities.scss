@@ -129,3 +129,23 @@ a.editBtn {
     color: var(--clr-blueGray-900);
     letter-spacing: 1px;
 }
+.close-btn {
+    color: var(--clr-white-1000);
+    padding: 8px 25px;
+    border-radius: $radius5;
+    transition: $bgTransition;
+    background-color: var(--clr-red-600);
+    &:hover {
+        background-color: var(--clr-red-700);
+    }
+}
+.submit-btn2 {
+    background-color: var(--clr-teal-200);
+    color: var(--clr-white-1000);
+    padding: 8px 25px;
+    border-radius: $radius5;
+    transition: $bgTransition;
+    &:hover {
+        background-color: var(--clr-teal-300);
+    }
+}

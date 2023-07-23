@@ -277,7 +277,7 @@ form {
     }
     button {
         &.submit-btn {
-            background: var(--clr-teal-200);
+            background-color: var(--clr-teal-200);
             color: var(--clr-white-1000);
             padding: 8px 25px;
             border-radius: $radius5;

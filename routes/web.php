@@ -23,6 +23,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\VerificationRequestController;
 use App\Http\Controllers\VoucherController;
@@ -126,6 +127,15 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
     // Reviews
     Route::post('order/{id}/review', [ReviewController::class, 'store'])->name('order.review');
     Route::patch('review/{id}', [ReviewController::class, 'update'])->name('order.review.update');
+
+    // Tickets
+    Route::get('tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('tickets/filter', [TicketController::class, 'filter'])->name('tickets.filter');
+    Route::get('tickets/{id}/details', [TicketController::class, 'show'])->name('tickets.show');
+    Route::get('tickets/new-ticket', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('new-ticket', [TicketController::class, 'store'])->name('tickets.store');
+    Route::post('tickets/{id}/response', [TicketController::class, 'response'])->name('tickets.response.new');
+    Route::patch('ticket/{id}/close', [TicketController::class, 'close'])->name('tickets.close');
 });
 
 // Seller
@@ -217,6 +227,15 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     // Reviews
     Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
     Route::get('reviews/filter', [ReviewController::class, 'filter'])->name('reviews.filter');
+
+    // Tickets
+    Route::get('tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('tickets/filter', [TicketController::class, 'filter'])->name('tickets.filter');
+    Route::get('tickets/{id}/details', [TicketController::class, 'show'])->name('tickets.show');
+    Route::get('tickets/new-ticket', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('new-ticket', [TicketController::class, 'store'])->name('tickets.store');
+    Route::post('tickets/{id}/response', [TicketController::class, 'response'])->name('tickets.response.new');
+    Route::patch('ticket/{id}/close', [TicketController::class, 'close'])->name('tickets.close');
 });
 
 // Admin
@@ -321,4 +340,11 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
     // Reviews
     Route::delete('review/{id}', [ReviewController::class, 'destroy'])->name('order.review.destroy');
+
+    // Tickets
+    Route::get('tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('tickets/filter', [TicketController::class, 'filter'])->name('tickets.filter');
+    Route::get('tickets/{id}/details', [TicketController::class, 'show'])->name('tickets.show');
+    Route::post('tickets/{id}/response', [TicketController::class, 'response'])->name('tickets.response.new');
+    Route::patch('ticket/{id}/close', [TicketController::class, 'close'])->name('tickets.close');
 });

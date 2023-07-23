@@ -128,7 +128,7 @@ class ClientController extends Controller
     }
     public function show($id)
     {
-        $user = User::where('type', '=', 'Client')->findOrFail($id);
+        $user = User::where('type', '=', 'Client')->with(['client'])->findOrFail($id);
         return view('Admin.Clients.clients-show', ['user' => $user]);
     }
     public function ban($id)

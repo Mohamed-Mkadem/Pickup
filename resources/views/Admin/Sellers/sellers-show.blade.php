@@ -115,7 +115,7 @@
                                 <h3>Tickets</h3>
                             </div>
                             <div class="info-value">
-                                <p>8 </p>
+                                <p>{{ $user->ticketsCount() }} </p>
                             </div>
                         </div>
                         <!-- End Info -->

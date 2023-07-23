@@ -91,7 +91,7 @@
                                 <h3>Orders</h3>
                             </div>
                             <div class="info-value">
-                                <p>18</p>
+                                <p>{{ $user->client->ordersCount() }}</p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -102,7 +102,7 @@
                                 <h3>Spent </h3>
                             </div>
                             <div class="info-value">
-                                <p>242 <span>DT</span></p>
+                                <p>{{ number_format($user->client->spentMoney(), 3, ',') }} <span>DT</span></p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -113,7 +113,9 @@
                                 <h3>Following</h3>
                             </div>
                             <div class="info-value">
-                                <p>8 <span>Stores</span></p>
+                                <p>{{ $user->client->followsCount() }}
+                                    <span>{{ $user->client->followsCount() == 1 ? ' Store' : ' Stores' }}</span>
+                                </p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -218,7 +220,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    2
+                                    {{ $user->client->pendingOrdersCount() }}
                                 </p>
                             </div>
                         </div>
@@ -227,11 +229,11 @@
                         <div class="info">
                             <div class="info-label">
                                 <i class="fa-light fa-square-check"></i>
-                                <h3>Approved</h3>
+                                <h3>Accepted</h3>
                             </div>
                             <div class="info-value">
                                 <p>
-                                    20
+                                    {{ $user->client->acceptedOrdersCount() }}
                                 </p>
                             </div>
                         </div>
@@ -244,7 +246,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    4
+                                    {{ $user->client->rejectedOrdersCount() }}
                                 </p>
                             </div>
                         </div>
@@ -257,7 +259,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    0
+                                    {{ $user->client->readyOrdersCount() }}
                                 </p>
                             </div>
                         </div>
@@ -270,7 +272,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    68
+                                    {{ $user->client->pickedOrdersCount() }}
                                 </p>
                             </div>
                         </div>

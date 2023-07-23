@@ -15,7 +15,7 @@
             <div class="info-holder">
                 <div class="top-header d-flex col j-center a-center">
                     <h2>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} ({{ Auth::user()->status }})</h2>
-                    <ul class="horizontal-actions-holder d-flex j-end a-center">
+                    <ul class="horizontal-actions-holder d-flex j-center md-end a-center">
                         <a href="{{ route('profile.edit') }}" class="editBtn"> <i class="fa-light fa-pen"></i>
                             Edit</a>
                     </ul>
@@ -64,7 +64,7 @@
                                 <h3>Tickets</h3>
                             </div>
                             <div class="info-value">
-                                <p>8 </p>
+                                <p>{{ Auth::user()->ticketsCount() }} </p>
                             </div>
                         </div>
                         <!-- End Info -->
@@ -117,7 +117,7 @@
                             </div>
                             <div class="info-value">
                                 <p>
-                                    {{ \Carbon\Carbon::parse(Auth::user()->d_o_b)->format('d-m-y') }}
+                                    {{ \Carbon\Carbon::parse(Auth::user()->d_o_b)->format('M jS Y') }}
 
                                 </p>
                             </div>

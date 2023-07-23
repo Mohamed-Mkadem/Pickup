@@ -222,7 +222,7 @@
             }
             tr {
                 $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr)
-                    minmax(160px, 1fr) 150px 130px;
+                    minmax(160px, 1fr) 150px 180px;
                 @include detailledGrid($cols);
             }
         }
@@ -234,7 +234,7 @@
                 color: var(--clr-blueGray-0);
             }
             tr {
-                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 150px;
+                $cols: 100px minmax(200px, 1fr) minmax(200px, 1fr) 160px 180px;
                 @include detailledGrid($cols);
             }
         }

@@ -116,11 +116,14 @@
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-user-headset"></i> <span>Tickets</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link
+                    {{ request()->is('client/ticket*') ? 'active' : '' }}
+                    collapsed">
+                        <i class="fa-light fa-user-headset"></i> <span>Tickets</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="client_ticket_add.html">New Ticket</a></li>
-                        <li class="nav-item"><a href="client_tickets.html">List</a></li>
+                        <li class="nav-item"><a href="{{ route('client.tickets.create') }}">New Ticket</a></li>
+                        <li class="nav-item"><a href="{{ route('client.tickets.index') }}">List</a></li>
                     </ul>
                 </li>
 
@@ -177,7 +180,7 @@
         </main>
     </div>
 
-       <audio id="notification-sound" src="{{ asset('dist/Assets/notification-sound.mp3') }}"></audio>
+    <audio id="notification-sound" src="{{ asset('dist/Assets/notification-sound.mp3') }}"></audio>
     @stack('scripts')
     <script>
         const prefix = "{{ Auth::user()->type }}"

@@ -1,154 +1,157 @@
 @use "../../Abstracts/" as *;
 
 .ticket-holder {
-  > header {
-    background-color: var(--clr-mustard-700);
-  }
-
-  .ticket-details-holder {
-    .detail {
-      margin-bottom: 1em;
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-
-      p {
-        &:not(.error-message, .form-label > p, .file-name, .file-size) {
-          color: var(--clr-blueGray-800);
-          line-height: 1.7;
-          letter-spacing: 1px;
-          margin-bottom: 10px;
-          &:last-of-type {
-            margin-bottom: 0;
-          }
-          a {
-            color: var(--clr-teal-400);
-            transition: $colorTransition;
-            text-decoration: underline;
-            &:hover {
-              color: var(--clr-teal-200);
-            }
-          }
-        }
-      }
-      .responses-wrapper {
-        .response {
-          margin-bottom: 1em;
-          &:last-of-type {
-            margin-bottom: 0;
-          }
-          gap: 10px;
-          .img-holder {
-            flex-shrink: 0;
-            img {
-              width: 50px;
-              border-radius: 50%;
-            }
-          }
-          .info-holder {
-            h3 {
-              font-size: 16px;
-              color: var(--clr-blueGray-800);
-              line-height: 1.5;
-              @include flex(row, flex-start, center);
-              gap: 15px;
-              flex-wrap: wrap;
-              margin-bottom: 0.5em;
-              letter-spacing: 1px;
-              small {
-                color: var(--clr-black-350);
-              }
-            }
-            .response-body {
-              padding: 1em;
-              border-radius: 10px;
-              background-color: var(--clr-blueGray-200);
-            }
-          }
-          &.admin {
-            .info-holder {
-              .response-body {
-                background-color: var(--clr-blueGray-600);
-                color: var(--clr-white-1000);
-              }
-            }
-          }
-        }
-      }
-      &.new-response {
-        margin-top: 2rem;
-
-        form {
-          .editor-holder {
-            &:has(p.error-message.show) {
-              margin-bottom: 2rem;
-            }
-            p.error-message {
-            }
-          }
-          .form-control {
-            gap: 10px;
-            label:has(+ input[type="checkbox"]) {
-              display: inline;
-              margin: 0;
-              cursor: pointer;
-              user-select: none;
-            }
-            input[type="checkbox"] {
-              width: max-content;
-              height: max-content;
-              cursor: pointer;
-            }
-          }
-        }
-      }
+    > header {
+        background-color: var(--clr-mustard-700);
     }
-  }
 
-  .attachements-holder {
-    width: 95%;
-    margin-inline: auto;
-    .attachements-grid {
-      @include grid(300px, 1fr, 0, 0, 2rem);
-      .attachement {
-        color: var(--clr-blueGray-700);
-        gap: 1em;
-        padding: 0.5em 1em;
-        background-color: var(--clr-blueGray-200);
-        border-radius: $radius5;
+    .ticket-details-holder {
+        .detail {
+            margin-bottom: 1em;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
 
-        .info {
-          max-width: 40%;
-          gap: 1em;
-          i {
-            font-size: 30px;
-          }
-          .name-size-holder {
-            max-width: 100%;
             p {
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis !important;
-              &.file-name {
-                font-weight: bold;
-              }
-              &.file-size {
-              }
+                &:not(.error-message, .form-label > p, .file-name, .file-size) {
+                    color: var(--clr-blueGray-800);
+                    line-height: 1.7;
+                    letter-spacing: 1px;
+                    margin-bottom: 10px;
+                    > *:not(a) {
+                        color: inherit;
+                    }
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                    a {
+                        color: var(--clr-teal-400);
+                        transition: $colorTransition;
+                        text-decoration: underline;
+                        &:hover {
+                            color: var(--clr-teal-200);
+                        }
+                    }
+                }
             }
-          }
+            .responses-wrapper {
+                .response {
+                    margin-bottom: 1em;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                    gap: 10px;
+                    .img-holder {
+                        flex-shrink: 0;
+                        img {
+                            width: 50px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .info-holder {
+                        h3 {
+                            font-size: 16px;
+                            color: var(--clr-blueGray-800);
+                            line-height: 1.5;
+                            @include flex(row, flex-start, center);
+                            gap: 15px;
+                            flex-wrap: wrap;
+                            margin-bottom: 0.5em;
+                            letter-spacing: 1px;
+                            small {
+                                color: var(--clr-black-350);
+                            }
+                        }
+                        .response-body {
+                            padding: 1em;
+                            border-radius: 10px;
+                            background-color: var(--clr-blueGray-200);
+                        }
+                    }
+                    &.admin {
+                        .info-holder {
+                            .response-body {
+                                background-color: var(--clr-blueGray-600);
+                                color: var(--clr-white-1000);
+                            }
+                        }
+                    }
+                }
+            }
+            &.new-response {
+                margin-top: 2rem;
+
+                form {
+                    .editor-holder {
+                        &:has(p.error-message.show) {
+                            margin-bottom: 2rem;
+                        }
+                        p.error-message {
+                        }
+                    }
+                    .form-control {
+                        gap: 10px;
+                        label:has(+ input[type="checkbox"]) {
+                            display: inline;
+                            margin: 0;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+                        input[type="checkbox"] {
+                            width: max-content;
+                            height: max-content;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
-        a {
-          color: var(--clr-white-1000);
-          background: var(--clr-blueGray-800);
-          padding: 0.3em 1em;
-          border-radius: 5px;
-          letter-spacing: 1px;
-          transition: $bgTransition;
-          &:hover {
-            background-color: var(--clr-blueGray-600);
-          }
-        }
-      }
     }
-  }
+
+    .attachements-holder {
+        width: 95%;
+        margin-inline: auto;
+        .attachements-grid {
+            @include grid(300px, 1fr, 0, 0, 2rem);
+            .attachement {
+                color: var(--clr-blueGray-700);
+                gap: 1em;
+                padding: 0.5em 1em;
+                background-color: var(--clr-blueGray-200);
+                border-radius: $radius5;
+
+                .info {
+                    max-width: 40%;
+                    gap: 1em;
+                    i {
+                        font-size: 30px;
+                    }
+                    .name-size-holder {
+                        max-width: 100%;
+                        p {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis !important;
+                            &.file-name {
+                                font-weight: bold;
+                            }
+                            &.file-size {
+                            }
+                        }
+                    }
+                }
+                a {
+                    color: var(--clr-white-1000);
+                    background: var(--clr-blueGray-800);
+                    padding: 0.3em 1em;
+                    border-radius: 5px;
+                    letter-spacing: 1px;
+                    transition: $bgTransition;
+                    &:hover {
+                        background-color: var(--clr-blueGray-600);
+                    }
+                }
+            }
+        }
+    }
 }
