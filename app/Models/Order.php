@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Expense;
 use App\Models\OrderProduct;
 use App\Models\PickRequest;
+use App\Models\Revenue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,5 +63,14 @@ class Order extends Model
     public function hasReview()
     {
         return $this->review()->exists();
+    }
+
+    public function revenues()
+    {
+        return $this->morphMany(Revenue::class, 'revenueable');
+    }
+    public function expenses()
+    {
+        return $this->morphMany(Expense::class, 'expensable');
     }
 }

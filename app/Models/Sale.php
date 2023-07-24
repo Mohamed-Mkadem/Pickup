@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Expense;
+use App\Models\Revenue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +30,13 @@ class Sale extends Model
                 'quantity', 'price', 'name', 'sub_total', 'image', 'sale_id', 'product_id',
             ])
         ;
+    }
+    public function revenues()
+    {
+        return $this->morphMany(Revenue::class, 'revenueable');
+    }
+    public function expenses()
+    {
+        return $this->morphMany(Expense::class, 'expensable');
     }
 }

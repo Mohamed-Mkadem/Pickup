@@ -303,7 +303,7 @@
 @endsection
 
 @push('scripts')
-    {{-- <script>
+    <script>
         const addForm = document.getElementById('add-form')
         const valueInput = document.getElementById('value-input')
         const fileInput = document.getElementById('icon-image')
@@ -369,7 +369,7 @@
         }
 
         function validateFileType(actualFileInput) {
-            allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i
+            allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i
             return allowedExtensions.exec(actualFileInput.files[0].name);
 
         }
@@ -379,7 +379,7 @@
             let uploadArea = errorMessage.nextElementSibling
             uploadArea.classList.remove('show')
             input.value = ''
-            errorMessage.textContent = 'We Only Accept Jpeg, Jpg, Png, Svg Formats'
+            errorMessage.textContent = 'We Only Accept Jpeg, Jpg Formats'
             errorMessage.classList.add('show')
         }
 
@@ -415,7 +415,7 @@
 
             })
         })
-    </script> --}}
+    </script>
 
     <script src="{{ asset('dist/js/modals.js') }}"></script>
 @endpush

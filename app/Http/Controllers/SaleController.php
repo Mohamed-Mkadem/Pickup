@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductSale;
+use App\Models\Revenue;
 use App\Models\Sale;
 use App\Models\Seller;
 use App\Models\Store;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,11 +50,11 @@ class SaleController extends Controller
     }
     public function filterSales(Request $request, $username)
     {
-        $store = Store::where('username', $username)->first();
+        $store = Store::where('username', $username)->firstOrFail();
 
-        if (!$store) {
-            abort(404);
-        }
+        // if (!$store) {
+        //     abort(404);
+        // }
         $query = Sale::query();
         $query->where('store_id', $store->id);
         $search = $request->search ?? '';
@@ -264,7 +266,7 @@ class SaleController extends Controller
         $validation->after(function ($validation) use ($cart) {
             foreach ($cart as $cart_item) {
                 $product = Product::findOrFail($cart_item['id']);
-              
+
                 if ($product->quantity < $cart_item['quantity']) {
                     $validation->errors()->add(
                         '*.quantity', "The Maximum Quantity Of '{$cart_item['name']}' Is {$product->quantity}");
@@ -300,7 +302,15 @@ class SaleController extends Controller
                 $dbProduct = Product::findOrFail($product['id']);
                 $dbProduct->decrement('quantity', $product['quantity']);
             }
-
+            $revenue = Revenue::create([
+                'user_id' => $seller->user_id,
+                'title' => "New Sale Added",
+                'category' => 'Sale Placement',
+                'description' => "<p>Sale #{$sale->id} Placed On " . Carbon::now() . "</p>",
+                'amount' => $this->getAmount($cart),
+                'revenueable_type' => get_class($sale),
+                'revenueable_id' => $sale->id,
+            ]);
             DB::commit();
             return redirect()->back()->with('success', 'Sale Added Successfully');
         } catch (\Throwable $th) {
@@ -345,6 +355,7 @@ class SaleController extends Controller
                     }
                     $saleProduct->delete();
                 }
+                $sale->revenues->first()->delete();
                 $sale->delete();
 
                 DB::commit();

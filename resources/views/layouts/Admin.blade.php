@@ -194,12 +194,17 @@
 
 
                 <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-sack-dollar"></i> <span>Treasury</span></a>
+                    <a href="#" role="button" aria-controls="#sub-menu"
+                        class="nav-link 
+                    {{ request()->is('admin/expenses*') ? 'active' : '' }}
+                    {{ request()->is('admin/revenues*') ? 'active' : '' }}
+                    {{ request()->is('admin/earnings*') ? 'active' : '' }}
+                    collapsed">
+                        <i class="fa-light fa-sack-dollar"></i> <span>Treasury</span></a>
                     <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="earnings.html">Earnings</a></li>
-                        <li class="nav-item"><a href="revenues.html">Revenues</a></li>
-                        <li class="nav-item"><a href="expenses.html">Expenses</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.earnings.index') }}">Earnings</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.revenues.index') }}">Revenues</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.expenses.index') }}">Expenses</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Expense;
+use App\Models\Revenue;
 use App\Models\Voucher;
 use App\Models\VoucherCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VoucherController extends Controller
 {
@@ -82,31 +87,64 @@ class VoucherController extends Controller
             'cost' => ['required', 'numeric'],
             'price' => ['required', 'numeric', 'gt:cost'],
         ]);
+
         $category = VoucherCategory::findOrFail($request->category_id);
-        // Generate a unique voucher code
-        for ($i = 0; $i < $request->quantity; $i++) {
-
-            $code = rand(00000000000000, 99999999999999);
-
-            // Check if the voucher code already exists in the database
-            while (Voucher::where('code', $code)->exists()) {
-                // Regenerate the voucher code
+        try {
+            DB::beginTransaction();
+            // Generate a unique voucher code
+            for ($i = 0; $i < $request->quantity; $i++) {
 
                 $code = rand(00000000000000, 99999999999999);
+
+                // Check if the voucher code already exists in the database
+                while (Voucher::where('code', $code)->exists()) {
+                    // Regenerate the voucher code
+
+                    $code = rand(00000000000000, 99999999999999);
+                }
+                Voucher::create([
+                    'category_id' => $request->category_id,
+                    'cost' => $request->cost,
+                    'price' => $request->price,
+                    'value' => $category->value,
+                    'code' => $code,
+                ]);
+
             }
-            Voucher::create([
-                'category_id' => $request->category_id,
-                'cost' => $request->cost,
-                'price' => $request->price,
-                'value' => $category->value,
-                'code' => $code,
+            $latestVoucher = Voucher::latest()->first();
+            $voucherMsg = $request->quantity == 1 ? '1 Voucher' : $request->quantity . " Vouchers ";
+            $expense = Expense::create([
+                'user_id' => Auth::id(),
+                'title' => $voucherMsg . " Created ",
+                'category' => 'Vouchers Creation',
+                'description' => $voucherMsg . " Created On " . Carbon::now(),
+                'amount' => $request->cost * $request->quantity,
+                'expensable_type' => get_class($latestVoucher),
+                'expensable_id' => $latestVoucher->id,
+            ]);
+            $revenue = Revenue::create([
+                'user_id' => Auth::id(),
+                'title' => $voucherMsg . " Sold ",
+                'category' => 'Vouchers Sale',
+                'description' => "<p>{$voucherMsg} Sold On " . Carbon::now() . "</p>",
+                'amount' => $request->price * $request->quantity,
+                'revenueable_type' => get_class($latestVoucher),
+                'revenueable_id' => $latestVoucher->id,
+            ]);
+            DB::commit();
+            return response()->json([
+                'success' =>
+                "$voucherMsg  Added Successfully",
+            ], 200);
+            //code...
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // throw $th;
+            return response()->json([
+                'error' =>
+                'Something Went Wrong!',
             ]);
         }
-
-        return response()->json([
-            'success' =>
-            $request->quantity == 1 ? '1 Voucher Added Successfully' : $request->quantity . ' Vouchers Added Successfully',
-        ], 200);
 
     }
 

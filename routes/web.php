@@ -6,6 +6,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EarningController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FrontEndController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\PaymentRequestController;
 use App\Http\Controllers\PickRequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SectorController;
@@ -236,6 +239,22 @@ Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('selle
     Route::post('new-ticket', [TicketController::class, 'store'])->name('tickets.store');
     Route::post('tickets/{id}/response', [TicketController::class, 'response'])->name('tickets.response.new');
     Route::patch('ticket/{id}/close', [TicketController::class, 'close'])->name('tickets.close');
+
+    // Expenses
+    Route::get('expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::get('expenses/filter', [ExpenseController::class, 'filter'])->name('expenses.filter');
+    Route::post('expenses/store', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::patch('expenses/update/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
+    Route::delete('expenses/destroy/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+    // Revenues
+    Route::get('revenues', [RevenueController::class, 'index'])->name('revenues.index');
+    Route::get('revenues/filter', [RevenueController::class, 'filter'])->name('revenues.filter');
+    Route::post('revenues/store', [RevenueController::class, 'store'])->name('revenues.store');
+    Route::patch('revenues/update/{id}', [RevenueController::class, 'update'])->name('revenues.update');
+    Route::delete('revenues/destroy/{id}', [RevenueController::class, 'destroy'])->name('revenues.destroy');
+    // Earnings
+    Route::get('earnings', [EarningController::class, 'index'])->name('earnings.index');
 });
 
 // Admin
@@ -347,4 +366,20 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     Route::get('tickets/{id}/details', [TicketController::class, 'show'])->name('tickets.show');
     Route::post('tickets/{id}/response', [TicketController::class, 'response'])->name('tickets.response.new');
     Route::patch('ticket/{id}/close', [TicketController::class, 'close'])->name('tickets.close');
+
+    // Expenses
+    Route::get('expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::get('expenses/filter', [ExpenseController::class, 'filter'])->name('expenses.filter');
+    Route::post('expenses/store', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::patch('expenses/update/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
+    Route::delete('expenses/destroy/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+    // Revenues
+    Route::get('revenues', [RevenueController::class, 'index'])->name('revenues.index');
+    Route::get('revenues/filter', [RevenueController::class, 'filter'])->name('revenues.filter');
+    Route::post('revenues/store', [RevenueController::class, 'store'])->name('revenues.store');
+    Route::patch('revenues/update/{id}', [RevenueController::class, 'update'])->name('revenues.update');
+    Route::delete('revenues/destroy/{id}', [RevenueController::class, 'destroy'])->name('revenues.destroy');
+
+    // Earnings
+    Route::get('earnings', [EarningController::class, 'index'])->name('earnings.index');
 });

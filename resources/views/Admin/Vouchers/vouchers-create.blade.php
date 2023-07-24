@@ -26,7 +26,7 @@
         <div id="errors-container"></div>
         <!-- End Starter Header -->
         @include('components.success-alert')
-
+        @include('components.session-errors-alert')
         <div class="main-holder">
             <form action="{{ route('admin.vouchers.store') }}" id="creation-form" method="POST">
                 @csrf
@@ -113,7 +113,7 @@
             loader.classList.remove('show')
             if (req.status === 200) {
                 let data = JSON.parse(req.response)
-                console.log(data['success']);
+
                 errorsContainer.innerHTML = ''
 
                 message = messageHolder.querySelector('p')
@@ -127,10 +127,9 @@
                 let errorAlert = document.createElement('ul')
                 errorAlert.className = 'alert alert-error mb-1'
                 data = JSON.parse(req.response)
-
                 for (var errorKey in data.errors) {
                     var value = data.errors[errorKey];
-                    console.log(errorKey + ': ' + value);
+
                     let li = document.createElement('li')
                     li.textContent = data.errors[errorKey];
                     errorAlert.append(li)

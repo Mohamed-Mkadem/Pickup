@@ -7,6 +7,8 @@ use App\Events\PickRequestCreated;
 use App\Events\PickRequestRejected;
 use App\Models\Order;
 use App\Models\PickRequest;
+use App\Models\Revenue;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -88,6 +90,15 @@ class PickRequestController extends Controller
             $store->balance = DB::raw('balance + ' . $order->amount);
             $store->save();
 
+            $revenue = Revenue::create([
+                'user_id' => $store->owner->user_id,
+                'title' => "New Order Completed",
+                'category' => 'Order Placement',
+                'description' => "<p>Order #{$order->id} Placed On " . Carbon::now() . "</p>",
+                'amount' => $order->amount,
+                'revenueable_type' => get_class($order),
+                'revenueable_id' => $order->id,
+            ]);
             // Add Status History To The Order
             $order->statusHistories()->create([
                 'statusable_type' => 'App\Models\Order',

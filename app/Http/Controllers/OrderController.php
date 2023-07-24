@@ -9,11 +9,14 @@ use App\Events\OrderReady;
 use App\Events\OrderRejected;
 use App\Events\SellerCancelledOrder;
 use App\Models\Client;
+use App\Models\Expense;
 use App\Models\Order;
 use App\Models\OrderNote;
 use App\Models\OrderProduct;
+use App\Models\Revenue;
 use App\Models\Seller;
 use App\Models\Store;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -201,6 +204,16 @@ class OrderController extends Controller
             $seller->balance = DB::raw('balance -' . $charges['seller']);
             $seller->save();
 
+            $expense = Expense::create([
+                'expensable_type' => get_class($order),
+                'expensable_id' => $order->id,
+                'user_id' => $seller->user_id,
+                'amount' => $refund['value'],
+                'description' => "Order {$order->id} Cancelled on " . Carbon::today(),
+                'title' => "Order {$order->id} Cancelled",
+                'category' => "Order Cancellation",
+
+            ]);
             // Add The Event
             event(new SellerCancelledOrder($order, $status, $refund));
 
@@ -545,14 +558,24 @@ class OrderController extends Controller
             $client->balance = DB::raw('balance +' . ($amount - $refund['value']));
             $client->save();
 
-            // Add the refund amount to the store balance
-            $order->store->balance = DB::raw('balance + ' . $refund['value']);
-            $order->store->save();
-
             // Update products Quantity
             foreach ($order->products as $product) {
                 $product->increment('quantity', $product->order_products->quantity);
 
+            }
+            if ($refund['value'] > 0) {
+                // Add the refund amount to the store balance
+                $order->store->balance = DB::raw('balance + ' . $refund['value']);
+                $order->store->save();
+                $revenue = Revenue::create([
+                    'user_id' => $order->store->owner->user_id,
+                    'title' => "New Order Cancelled",
+                    'category' => 'Client Order Cancellation',
+                    'description' => "<p>Order #{$order->id} Cancelled On " . Carbon::now() . "</p>",
+                    'amount' => $refund['value'],
+                    'revenueable_type' => get_class($order),
+                    'revenueable_id' => $order->id,
+                ]);
             }
             // Add The Event
             event(new ClientCancelledOrder($order, $status, $refund));

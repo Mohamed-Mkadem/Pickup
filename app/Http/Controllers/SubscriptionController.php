@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Models\Fee;
+use App\Models\Revenue;
 use App\Models\Seller;
 use App\Models\Subscription;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,9 +36,10 @@ class SubscriptionController extends Controller
     }
     public function store(Request $request)
     {
+        $admin = User::where('type', 'Admin')->first();
         $seller = Seller::where('user_id', Auth::id())->with('store')->first();
         $subscriptionFee = Fee::where('name', 'subscription')->first();
-        // dd($request->plan);
+
         $validation = Validator::make($request->all(), [
             'plan' => ['required', 'numeric', 'between :1,12'],
         ], $this->messages);
@@ -58,21 +63,48 @@ class SubscriptionController extends Controller
             $newExpiryDate = strtotime($store->expiry_date . " +$planDuration");
 
         }
-        DB::beginTransaction();
-        $newExpiryDate = date('Y-m-d', $newExpiryDate);
-        $store->expiry_date = $newExpiryDate;
-        $store->status = 'published';
-        $store->save();
-        $seller->balance = DB::raw('balance -' . $planPrice);
-        $seller->save();
-        Subscription::create([
-            'store_id' => $store->id,
-            'amount' => $planPrice,
-            'duration' => $planDuration,
-        ]);
+        try {
+            //code...
+            DB::beginTransaction();
+            $newExpiryDate = date('Y-m-d', $newExpiryDate);
+            $store->expiry_date = $newExpiryDate;
+            $store->status = 'published';
+            $store->save();
+            $seller->balance = DB::raw('balance -' . $planPrice);
+            $seller->save();
+            $subscription = Subscription::create([
+                'store_id' => $store->id,
+                'amount' => $planPrice,
+                'duration' => $planDuration,
+            ]);
 
-        DB::commit();
-        return redirect()->back()->with('success', 'Subscription Added Successfully, Your Store Will Be Published Until ' . $newExpiryDate);
+            $expense = Expense::create([
+                'expensable_type' => get_class($subscription),
+                'expensable_id' => $subscription->id,
+                'user_id' => $seller->user_id,
+                'amount' => $planPrice,
+                'description' => "Subscription of {$planDuration} Bought On " . Carbon::now(),
+                'title' => "Subscription of {$planDuration} Purchased",
+                'category' => "Subscriptions Purchase",
+
+            ]);
+            $revenue = Revenue::create([
+                'revenueable_type' => get_class($subscription),
+                'revenueable_id' => $subscription->id,
+                'user_id' => $admin->id,
+                'amount' => $planPrice,
+                'description' => "Subscription of {$planDuration} Sold On " . Carbon::now(),
+                'title' => "Subscription of {$planDuration} Sold",
+                'category' => "Subscriptions Sale",
+
+            ]);
+            DB::commit();
+            return redirect()->back()->with('success', 'Subscription Added Successfully, Your Store Will Be Published Until ' . $newExpiryDate);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            //throw $th;
+        }
     }
 
     public function adminIndex()

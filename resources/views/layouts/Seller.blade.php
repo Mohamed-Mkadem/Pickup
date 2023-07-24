@@ -229,16 +229,19 @@
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
                         class="nav-link 
+                        {{ request()->is('seller/earnings*') ? 'active' : '' }}
+                        {{ request()->is('seller/expenses*') ? 'active' : '' }}
+                        {{ request()->is('seller/revenues*') ? 'active' : '' }}
                     {{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}
                     collapsed">
                         <i class="fa-light fa-sack-dollar"></i> <span>Treasury</span></a>
                     <ul class="nav-sub-dropdown">
                         <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
-                                href="seller_earnings.html">Earnings</a></li>
+                                href="{{ route('seller.earnings.index') }}">Earnings</a></li>
                         <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
-                                href="seller_revenues.html">Revenues</a></li>
+                                href="{{ route('seller.revenues.index') }}">Revenues</a></li>
                         <li class="nav-item"><a class="{{ Auth::user()->seller->hasStore() ? '' : 'disabled-link' }}"
-                                href="seller_expenses.html">Expenses</a></li>
+                                href="{{ route('seller.expenses.index') }}">Expenses</a></li>
                     </ul>
                 </li>
 
