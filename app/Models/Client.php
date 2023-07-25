@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cart;
 use App\Models\Follow;
+use App\Models\Order;
 use App\Models\OrderNote;
 use App\Models\User;
 use App\Models\Voucher;
@@ -50,7 +51,7 @@ class Client extends Model
     // Orders
     public function orders()
     {
-        return $this->hasMany(order::class);
+        return $this->hasMany(Order::class);
     }
 
     public function ordersCount()

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ClientCancelledOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Revenue;
 use App\Models\State;
 use App\Models\User;
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -136,7 +139,68 @@ class ClientController extends Controller
         $client = User::where('type', '=', 'Client')->findOrFail($id);
         if ($client->status == 'Banned') {
             return redirect()->back()->with('error', 'This Client Is Already Banned');
-            dd($client->status);
+
+        }
+        $orders = $client->client->orders()->whereIn('status', ['pending', 'ready', 'accepted'])->get();
+        if ($orders) {
+            DB::beginTransaction();
+            foreach ($orders as $order) {
+                $refund = [
+                    'percentage' => '0%',
+                    'value' => 0,
+                ];
+                $status = $order->status;
+                $amount = $order->amount;
+
+                if ($status == 'accepted') {
+                    $refund['percentage'] = '10%';
+                    $refund['value'] = ($amount / 100) * 10;
+                }
+                if ($status == 'ready') {
+                    $refund['percentage'] = '20%';
+                    $refund['value'] = ($amount / 100) * 20;
+                }
+                // Change Order's status
+                $order->status = 'cancelled';
+                $order->save();
+
+                // Return Money to the client
+                $client->client->balance = DB::raw('balance +' . ($amount - $refund['value']));
+                $client->client->save();
+
+                // Update products Quantity
+                foreach ($order->products as $product) {
+                    $product->increment('quantity', $product->order_products->quantity);
+
+                }
+                if ($refund['value'] > 0) {
+                    // Add the refund amount to the store balance
+                    $order->store->balance = DB::raw('balance + ' . $refund['value']);
+                    $order->store->save();
+                    $revenue = Revenue::create([
+                        'user_id' => $order->store->owner->user_id,
+                        'title' => "New Order Cancelled",
+                        'category' => 'Client Order Cancellation',
+                        'description' => "<p>Order #{$order->id} Cancelled On " . Carbon::now() . "</p>",
+                        'amount' => $refund['value'],
+                        'revenueable_type' => get_class($order),
+                        'revenueable_id' => $order->id,
+                    ]);
+                }
+                // Add The Event
+                event(new ClientCancelledOrder($order, $status, $refund));
+
+                // Add Status History
+                $order->statusHistories()->create([
+                    'statusable_type' => 'App\Models\Order',
+                    'statusable_id' => $order->id,
+                    'action' => 'Cancelled',
+                ]);
+            }
+            DB::commit();
+            $client->status = 'Banned';
+            $client->save();
+            return redirect()->back()->with('success', 'Client Banned Successfully');
         }
         $client->status = 'Banned';
         $client->save();

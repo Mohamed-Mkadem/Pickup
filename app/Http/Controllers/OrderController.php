@@ -70,7 +70,7 @@ class OrderController extends Controller
     {
         $seller = Seller::where('user_id', Auth::id())->firstOrFail();
         $store = $seller->store;
-        $orders = Order::where('store_id', $store->id)->with('client')->paginate();
+        $orders = Order::where('store_id', $store->id)->with('client')->orderBy('created_at', 'desc')->paginate();
 
         return view('Seller.Orders.seller-orders-index', ['orders' => $orders]);
     }
@@ -503,7 +503,12 @@ class OrderController extends Controller
             // Order Place Event
             event(new OrderPlaced($order));
             // Empty Cart using a listener or here
-            // return redirect()->back()->with('success', 'Order Placed Successfully');
+            foreach ($cartProducts as $cartProduct) {
+                $cartProduct->cart_products->delete();
+            }
+            $cart->amount = 0;
+            $cart->save();
+            return redirect()->back()->with('success', 'Order Placed Successfully');
         } catch (\Throwable $th) {
             DB::rollback();
             throw $th;
@@ -512,7 +517,7 @@ class OrderController extends Controller
     public function clientIndex()
     {
         $client = Client::where('user_id', Auth::id())->firstOrFail();
-        $orders = Order::where('client_id', $client->id)->with('store')->paginate();
+        $orders = Order::where('client_id', $client->id)->with('store')->orderBy('created_at', 'desc')->paginate();
         return view('Client.Orders.client-orders-index', ['orders' => $orders]);
     }
     public function clientShow($id)

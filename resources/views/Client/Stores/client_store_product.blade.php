@@ -6,7 +6,7 @@
 
 @section('content')
     <section class="content" id="store-holder">
-        @if ($store->status == 'unpublished')
+        @if ($store->status == 'unpublished' || $store->status == 'banned')
             <div class="unavailable-wrapper d-flex col a-center ">
                 <img src="{{ asset('dist/Assets/404_error.svg') }}" alt="">
                 <p class="info-message">This store's subscription has expired, and it is no

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SellerCancelledOrder;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartProduct;
@@ -426,10 +427,59 @@ class StoreController extends Controller
         if ($store->status == 'banned') {
             return redirect()->back()->with('error', 'This Store Is Already Banned');
         }
+        $orders = $store->orders()->whereIn('status', ['pending', 'ready', 'accepted'])->get();
+
+        if ($orders) {
+            DB::beginTransaction();
+            foreach ($orders as $order) {
+
+                $refund = [
+                    'percentage' => '0%',
+                    'value' => 0,
+                ];
+                $status = $order->status;
+                $amount = $order->amount;
+
+                if ($status == 'accepted') {
+                    $refund['percentage'] = '10%';
+                    $refund['value'] = ($amount / 100) * 10;
+                }
+                if ($status == 'ready') {
+                    $refund['percentage'] = '20%';
+                    $refund['value'] = ($amount / 100) * 20;
+                }
+
+                // Change Order's status
+                $order->status = 'cancelled';
+                $order->save();
+
+                // Return Money to the client
+                $order->client->balance = DB::raw('balance +' . ($amount + $refund['value']));
+                $order->client->save();
+
+                // Update products Quantity
+                foreach ($order->products as $product) {
+                    $product->increment('quantity', $product->order_products->quantity);
+
+                }
+                // Add The Event
+                event(new SellerCancelledOrder($order, $status, $refund, true));
+
+                // Add Status History
+                $order->statusHistories()->create([
+                    'statusable_type' => 'App\Models\Order',
+                    'statusable_id' => $order->id,
+                    'action' => 'Cancelled',
+                ]);
+            }
+            $store->status = 'banned';
+            $store->save();
+            DB::commit();
+            return redirect()->back()->with('success', 'Store Banned Successfully');
+        }
 
         $store->status = 'banned';
         $store->save();
-        // When you create the orders table, check If store has pending orders ande reject them
         return redirect()->back()->with('success', 'Store Banned Successfully');
 
     }
@@ -462,7 +512,7 @@ class StoreController extends Controller
     {
         $store = Store::where('username', $username)->firstOrFail();
 
-        $orders = Order::where('store_id', $store->id)->paginate();
+        $orders = Order::where('store_id', $store->id)->orderBy('created_at', 'desc')->paginate();
 
         return view('Admin.Stores.show_store_orders', ['store' => $store, 'orders' => $orders]);
     }
@@ -707,7 +757,7 @@ class StoreController extends Controller
     {
         $store = Store::where('username', $username)->firstOrFail();
         $client = Client::where('user_id', Auth::id())->firstOrFail();
-        $orders = $client->orders()->where('store_id', $store->id)->paginate();
+        $orders = $client->orders()->where('store_id', $store->id)->orderBy('created_at', 'desc')->paginate();
         return view('Client.Stores.client_store_orders', ['orders' => $orders, 'store' => $store]);
     }
 

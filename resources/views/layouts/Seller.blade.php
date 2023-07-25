@@ -27,9 +27,9 @@
 
 
 <body>
-    <!-- <div class="preloader" id="preloader">
+    {{-- <div class="preloader" id="preloader">
         <div class="loader-wrapper">
-            <a href="index.html" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
+            <a href="{{ route('seller.home') }}" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
             <div class="circles">
                 <div class="circle circle-1"></div>
@@ -39,7 +39,7 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> -->
+    </div> --}}
     <div id="overlay" class="overlay"></div>
     @stack('light-box')
     <div class="main-wrapper">

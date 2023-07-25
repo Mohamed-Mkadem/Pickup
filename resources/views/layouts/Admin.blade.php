@@ -28,9 +28,9 @@
 
 
 <body>
-    <!-- <div class="preloader" id="preloader">
+    {{-- <div class="preloader" id="preloader">
         <div class="loader-wrapper">
-            <a href="index.html" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
+            <a href="{{ route('admin.home') }}" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
             <div class="circles">
                 <div class="circle circle-1"></div>
@@ -40,21 +40,15 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> -->
-    {{-- <div class="notification-modal " id="notification-modal">
-        <div class="notification-modal-wrapper p-1 d-flex j-start gap-1 a-start">
-            <img class="notification-modal-img" src="../../dist/Assets/avatar-aden.jpg" alt="">
-            <p class="notification-modal-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto
-                deserunt aperiam, recusandae dignissimos est.</p>
-            <a class="notification-modal-link" href="notifications.html"></a>
-        </div>
     </div> --}}
+
     <div id="overlay" class="overlay"></div>
     @yield('loader')
     @stack('light-box')
     <div class="main-wrapper">
         <aside id="aside" class="" aria-current="expanded">
-            <a href="home.html" class="logo d-block light visible"><i class="fa-light fa-bag-shopping"></i>
+            <a href="{{ route('admin.home') }}" class="logo d-block light visible"><i
+                    class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span>
             </a>
             <button id="aside-toggle"><i class="fa-light fa-close"></i></button>
@@ -207,26 +201,7 @@
                         <li class="nav-item"><a href="{{ route('admin.expenses.index') }}">Expenses</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" role="button" aria-controls="#sub-menu" class="nav-link collapsed"> <i
-                            class="fa-light fa-chart-mixed"></i> <span>Statistics</span></a>
-                    <ul class="nav-sub-dropdown">
-                        <li class="nav-item"><a href="statistics_orders.html">Orders</a></li>
-                        <li class="nav-item"><a href="statistics_sales.html">Sales</a></li>
-                        <li class="nav-item"><a href="statistics_brands.html">Brands</a></li>
-                        <li class="nav-item"><a href="statistics_sellers.html">Sellers</a></li>
-                        <li class="nav-item"><a href="statistics_clients.html">Clients</a></li>
-                        <li class="nav-item"><a href="statistics_stores.html">Stores</a></li>
-                        <li class="nav-item"><a href="statistics_tickets.html">Tickets</a></li>
-                        <li class="nav-item"><a href="statistics_subscriptions.html">Subscriptions</a></li>
-                        <li class="nav-item"><a href="statistics_expenses.html">Expenses</a></li>
-                        <li class="nav-item"><a href="statistics_revenues.html">Revenues</a></li>
-                        <li class="nav-item"><a href="statistics_validation_req.html">Validation Requests</a></li>
-                        <li class="nav-item"><a href="statistics_payment_req.html">Payment Requests</a></li>
-                        <li class="nav-item"><a href="statistics_verification_req.html">Verification Requests</a></li>
 
-                    </ul>
-                </li>
 
 
             </ul>

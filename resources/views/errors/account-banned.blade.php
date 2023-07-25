@@ -75,10 +75,9 @@
             <p class="message  ">
                 We regret to inform you that your account has been banned due to violation of our platform's terms and
                 conditions. As a result, your access to the platform has been restricted indefinitely. You will no
-                longer be able to perform any actions or access any features on our platform. <br> If you believe this
-                ban is
-                in error or would like to appeal it, please <a href="{{ route('contactPage') }}">contact</a> our support
-                team. <br> Thank
+                longer be able to perform any actions or access any features on our platform. <br> Please <a
+                    href="{{ route('contactPage') }}">contact</a> our support
+                team for further information about your situation. <br> Thank
                 you for
                 your understanding.
             </p>

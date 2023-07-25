@@ -15,7 +15,7 @@ class SellerCancelledOrderNotification extends Notification
      * Create a new notification instance.
      */
     public $total;
-    public function __construct(public $order, public $status, public $refund)
+    public function __construct(public $order, public $status, public $refund, public $banned)
     {
         $this->order = $order;
         $this->status = $status;
@@ -30,8 +30,11 @@ class SellerCancelledOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'broadcast'];
-        return ['mail'];
+        if ($this->banned) {
+            return ['mail', 'database'];
+        }
+        return ['mail', 'database', 'broadcast'];
+
     }
 
     /**
@@ -42,6 +45,19 @@ class SellerCancelledOrderNotification extends Notification
         $urlGenerator = app(NotificationUrlGenerator::class);
         $url = $urlGenerator->generateUrl($this->id, 'client.order.show', $this->order->id);
 
+        if ($this->banned) {
+            return (new MailMessage)
+                ->subject('Order Update')
+                ->greeting("Dear {$notifiable->full_name}")
+                ->line("We Regret to inform you that {$this->order->store->name} has been banned because they didn't respect our guidelines.")
+                ->line("As a result, all orders placed with this store have been cancelled.")
+                ->line("So Your Order Number #{$this->order->id} has been cancelled")
+                ->action('More Info', $url)
+                ->line("We apologize for any inconvenience caused.")
+                ->line("If you have any questions, please don't hesitate to contact our support team.")
+                ->line('Thank you for using Pickup!');
+
+        }
         return (new MailMessage)
             ->subject('Order Update')
             ->greeting("Dear {$notifiable->full_name}")

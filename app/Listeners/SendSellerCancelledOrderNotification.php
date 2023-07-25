@@ -20,6 +20,6 @@ class SendSellerCancelledOrderNotification
     public function handle(object $event): void
     {
         $client = $event->order->client->user;
-        $client->notify(new SellerCancelledOrderNotification($event->order, $event->status, $event->refund));
+        $client->notify(new SellerCancelledOrderNotification($event->order, $event->status, $event->refund, $event->banned));
     }
 }

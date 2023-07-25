@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SellerCancelledOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Seller;
 use App\Models\State;
@@ -77,7 +78,7 @@ class SellerController extends Controller
 
     public function index()
     {
-        $sellers = Seller::with('user')->paginate(5);
+        $sellers = Seller::with('user')->paginate();
         return view('Admin.Sellers.sellers-index', ['sellers' => $sellers, 'states' => $this->states]);
     }
     public function filter(Request $request)
@@ -147,6 +148,64 @@ class SellerController extends Controller
         $seller = User::where('type', '=', 'Seller')->findOrFail($id);
         if ($seller->status == 'Banned') {
             return redirect()->back()->with('error', 'This Seller Is Already Banned');
+        }
+        $store = $seller->seller->store()->where('status', '!=', 'banned')->first();
+        if (!$store) {
+            $seller->status = 'Banned';
+            $seller->save();
+            return redirect()->back()->with('success', 'Seller Banned Successfully');
+        }
+        $orders = $store->orders()->whereIn('status', ['pending', 'ready', 'accepted'])->get();
+
+        if ($orders) {
+            DB::beginTransaction();
+            foreach ($orders as $order) {
+
+                $refund = [
+                    'percentage' => '0%',
+                    'value' => 0,
+                ];
+                $status = $order->status;
+                $amount = $order->amount;
+
+                if ($status == 'accepted') {
+                    $refund['percentage'] = '10%';
+                    $refund['value'] = ($amount / 100) * 10;
+                }
+                if ($status == 'ready') {
+                    $refund['percentage'] = '20%';
+                    $refund['value'] = ($amount / 100) * 20;
+                }
+
+                // Change Order's status
+                $order->status = 'cancelled';
+                $order->save();
+
+                // Return Money to the client
+                $order->client->balance = DB::raw('balance +' . ($amount + $refund['value']));
+                $order->client->save();
+
+                // Update products Quantity
+                foreach ($order->products as $product) {
+                    $product->increment('quantity', $product->order_products->quantity);
+
+                }
+                // Add The Event
+                event(new SellerCancelledOrder($order, $status, $refund, true));
+
+                // Add Status History
+                $order->statusHistories()->create([
+                    'statusable_type' => 'App\Models\Order',
+                    'statusable_id' => $order->id,
+                    'action' => 'Cancelled',
+                ]);
+            }
+            $store->status = 'banned';
+            $store->save();
+            $seller->status = 'Banned';
+            $seller->save();
+            return redirect()->back()->with('success', 'Seller Banned Successfully');
+            DB::commit();
 
         }
         $seller->status = 'Banned';

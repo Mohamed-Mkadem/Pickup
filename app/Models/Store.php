@@ -196,6 +196,9 @@ class Store extends Model
             $totalStars = $this->reviews()->sum('honesty') + $this->reviews()->sum('commitment') + $this->reviews()->sum('hospitality');
             $this->rate = ($totalStars / ($totalReviews * 15)) * 100;
             $this->save();
+        } else {
+            $this->rate = 0;
+            $this->save();
         }
     }
     public function totalCommitment()

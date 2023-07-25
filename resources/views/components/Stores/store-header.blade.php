@@ -45,7 +45,7 @@
                                             class="{{ request()->is('admin/store/*/owner*') ? 'active' : '' }}"> <i
                                                 class="fa-light fa-user"></i> Owner</a></li>
                                     <li><a href="{{ route('admin.store.orders', $store->username) }}"
-                                            class="{{ request()->is('admin/store/*/orders*') ? 'active' : '' }}"> <i
+                                            class="{{ request()->is('admin/store/*/order*') ? 'active' : '' }}"> <i
                                                 class="fa-light fa-cart-arrow-down"></i>
                                             Orders</a></li>
 

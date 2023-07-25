@@ -15,7 +15,7 @@ class SellerCancelledOrder
     /**
      * Create a new event instance.
      */
-    public function __construct(public $order, public $status, public $refund)
+    public function __construct(public $order, public $status, public $refund, public $banned = false)
     {
         $this->order = $order;
         $this->status = $status;

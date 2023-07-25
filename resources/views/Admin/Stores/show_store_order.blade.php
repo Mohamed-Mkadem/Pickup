@@ -91,12 +91,12 @@
                 <!-- Start Order Cards Info-->
                 <div class="results-holder holder mt-2 order-details">
                     <!-- Start Card Holder -->
-                    <div class="card-holder">
+                    <div class="card-holder blueGray-900">
                         <div class="card-title">
                             <h3>Client :</h3>
                         </div>
                         <!-- Start Card -->
-                        <div class="card simple  client">
+                        <div class="card simple  client shadow-none">
                             <header>
                                 <p class="status">Status : <span>{{ $order->client->user->status }}</span></p>
                             </header>
@@ -115,12 +115,12 @@
                     </div>
                     <!-- Start Card Holder -->
                     <!-- Start Card Holder -->
-                    <div class="card-holder">
+                    <div class="card-holder teal-200">
                         <div class="card-title">
                             <h3>Store :</h3>
                         </div>
                         <!-- Start Card -->
-                        <div class="card simple  store">
+                        <div class="card simple  store shadow-none">
                             <header class="wrap gap-1">
                                 <p>{{ $order->store->state_city }}</p>
                                 <p class="rate "><i class="fa-light fa-star"></i> {{ $order->store->rate }}%</p>
@@ -139,133 +139,137 @@
                         <!-- End Card -->
                     </div>
                     <!-- Start Card Holder -->
-                    <!-- Start Card Holder -->
-                    <div class="card-holder review">
-                        <div class="card-title">
-                            <h3>Review :</h3>
-                        </div>
-                        <!-- Start Card -->
-                        <div class="card simple  review">
-                            <header>
-                                <button class="actions-controller ml-auto"><i
-                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                <ul class="actions-holder">
-                                    <li>
-                                        <button class="showBtn">
-                                            Show
-                                        </button>
-                                        <div class="modal-holder ">
-                                            <div class="review-box modal">
-                                                <header class="d-flex j-start a-center row">
-                                                    <img src="../../dist/Assets/avatar-griffin.jpg" alt="">
-                                                    <div class="review-info">
-                                                        <h3>Mohamed Mkadem</h3>
-                                                        <p>21 - 2 - 2023 15:25</p>
-                                                    </div>
-                                                    <p class="rate ml-auto"><i class="fa-light fa-star"></i> 80%
+                    @if ($order->hasReview())
+                        <!-- Start Card Holder -->
+                        <div class="card-holder review">
+                            <div class="card-title">
+                                <h3>Review :</h3>
+                            </div>
+                            <!-- Start Card -->
+                            <div class="card simple  review">
+                                <header>
+                                    <button class="actions-controller ml-auto"><i
+                                            class="fa-solid fa-ellipsis-vertical"></i></button>
+                                    <ul class="actions-holder">
+                                        <li>
+                                            <button class="showBtn">
+                                                Show
+                                            </button>
+                                            <div class="modal-holder ">
+                                                <div class="review-box modal">
+                                                    <header class="d-flex j-start a-center row">
+                                                        <img loading="lazy"
+                                                            src="{{ asset('storage/' . $order->client->user->photo) }}"
+                                                            alt="">
+                                                        <div class="review-info">
+                                                            <h3>{{ $order->client->user->full_name }}</h3>
+                                                            <p>{{ $order->review->created_at->format('M jS Y H:i') }}</p>
+                                                        </div>
+                                                        <p class="rate ml-auto"><i class="fa-light fa-star"></i>
+                                                            {{ number_format($order->review->total, 1) }}%
+                                                        </p>
+                                                    </header>
+                                                    <p class="review-body">
+                                                        @if ($order->review->feedback)
+                                                            {!! $order->review->feedback !!}
+                                                        @endif
                                                     </p>
-                                                </header>
-                                                <p class="review-body">
-                                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                                                    id vitae veritatis sit aperiam quibusdam recusandae odit
-                                                    assumenda eveniet doloribus animi, quia error corporis
-                                                    reiciendis ab nihil quasi laudantium rerum quod fugit non,
-                                                    est, facere vel voluptatum. Error expedita esse debitis
-                                                    dolor, qui quasi recusandae soluta eligendi ab, atque
-                                                    excepturi?
-                                                </p>
-                                                <div class="review-criteria">
-                                                    <div class="criterion">
-                                                        <p>- Honesty : </p>
-                                                        <div class="points">
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
+                                                    <div class="review-criteria mt-1">
+                                                        <div class="criterion">
+                                                            <p>- Honesty : </p>
+                                                            <div class="points">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <div
+                                                                        class="point @if ($i <= $order->review->honesty) checked @endif    ">
+                                                                    </div>
+                                                                @endfor
+
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="criterion">
-                                                        <p>- Commitment : </p>
-                                                        <div class="points">
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point"></div>
+                                                        <div class="criterion">
+                                                            <p>- Commitment : </p>
+                                                            <div class="points">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <div
+                                                                        class="point @if ($i <= $order->review->commitment) checked @endif    ">
+                                                                    </div>
+                                                                @endfor
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="criterion">
-                                                        <p>- Hospitality : </p>
-                                                        <div class="points">
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point checked"></div>
-                                                            <div class="point"></div>
+                                                        <div class="criterion">
+                                                            <p>- Hospitality : </p>
+                                                            <div class="points">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <div
+                                                                        class="point @if ($i <= $order->review->hospitality) checked @endif    ">
+                                                                    </div>
+                                                                @endfor
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <button class="deleteBtn">Remove</button>
-                                        <div class="modal-holder ">
-                                            <form action="" method="post" class="modal t-center confirm-form">
-                                                <i class=" fa-light fa-info"></i>
-                                                <p>Are You Sure You Want To Delete This Review ?</p>
-                                                <div class="buttons d-flex j-center a-center">
-                                                    <button class="cancelBtn">Cancel</button>
-                                                    <button class="confirmBtn">Yes</button>
+                                        </li>
+                                        <li>
+                                            <button class="deleteBtn">Remove</button>
+                                            <div class="modal-holder ">
+                                                <form
+                                                    action="{{ route('admin.order.review.destroy', $order->review->id) }}"
+                                                    method="post" class="modal t-center confirm-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <i class=" fa-light fa-trash"></i>
+                                                    <p>Are You Sure You Want To Delete This Review ?</p>
+                                                    <div class="buttons d-flex j-center a-center">
+                                                        <button class="cancelBtn">Cancel</button>
+                                                        <button class="confirmBtn">Yes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </header>
+
+                                <p class="rate-value" data-rate="{{ $order->review->total }}%">
+                                    <span>{{ number_format($order->review->total, 1) }}%</span>
+                                </p>
+
+                                <div class="review-criteria">
+                                    <div class="criterion">
+                                        <p>- Honesty : </p>
+                                        <div class="points">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <div class="point @if ($i <= $order->review->honesty) checked @endif    ">
                                                 </div>
-                                            </form>
+                                            @endfor
+
                                         </div>
-                                    </li>
-                                </ul>
-                            </header>
+                                    </div>
+                                    <div class="criterion">
+                                        <p>- Commitment : </p>
+                                        <div class="points">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <div class="point @if ($i <= $order->review->commitment) checked @endif    ">
+                                                </div>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                    <div class="criterion">
+                                        <p>- Hospitality : </p>
+                                        <div class="points">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <div class="point @if ($i <= $order->review->hospitality) checked @endif    ">
+                                                </div>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <p class="rate-value" data-rate="75%">
-                                <span>75%</span>
-                            </p>
-
-                            <div class="review-criteria">
-                                <div class="criterion">
-                                    <p>- Honesty : </p>
-                                    <div class="points">
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                    </div>
-                                </div>
-                                <div class="criterion">
-                                    <p>- Commitment : </p>
-                                    <div class="points">
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point"></div>
-                                    </div>
-                                </div>
-                                <div class="criterion">
-                                    <p>- Hospitality : </p>
-                                    <div class="points">
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point checked"></div>
-                                        <div class="point"></div>
-                                    </div>
-                                </div>
                             </div>
-
+                            <!-- End Card -->
                         </div>
-                        <!-- End Card -->
-                    </div>
-                    <!-- Start Card Holder -->
+                        <!-- Start Card Holder -->
+                    @endif
                 </div>
                 <!-- End Order Cards Info-->
                 <!-- Start order Info Holder -->
