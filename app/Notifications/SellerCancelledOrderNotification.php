@@ -30,9 +30,7 @@ class SellerCancelledOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        if ($this->banned) {
-            return ['mail', 'database'];
-        }
+        
         return ['mail', 'database', 'broadcast'];
 
     }

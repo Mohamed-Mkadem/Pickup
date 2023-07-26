@@ -165,7 +165,8 @@ class TicketController extends Controller
             // Event to inform the admin
         } catch (\Throwable $th) {
             DB::rollback();
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
 
     }
@@ -247,7 +248,8 @@ class TicketController extends Controller
             return redirect()->back()->with('success', 'Response Submitted Successfully');
 
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
 
     }
@@ -273,8 +275,8 @@ class TicketController extends Controller
             event(new TicketClosed($user, $ticket));
             return redirect()->back()->with('success', 'Ticket Closed Successfully');
         } catch (\Throwable $th) {
-            throw $th;
             return redirect()->back()->with('error', 'Something went Wrong');
+            // throw $th;
         }
     }
 

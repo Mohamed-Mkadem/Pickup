@@ -133,9 +133,9 @@
                                         </div>
                                         <div class="form-control">
                                             <label class="d-block required">Phone Number :</label>
-                                            <input type="number" name="phone" value="25412012" id="phone"
-                                                placeholder="eg: 20111222" maxlength="8" inputmode="numeric"
-                                                value="{{ old('phone') }}">
+                                            <input type="number" name="phone" value="{{ old('phone') }}"
+                                                id="phone" placeholder="eg: 20111222" maxlength="8"
+                                                inputmode="numeric" value="{{ old('phone') }}">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>
@@ -346,23 +346,23 @@
 
         function validateStep2() {
             errors = 0;
-            // errors += validateField(stateField)
-            // errors += validateField(cityField)
-            // errors += validateField(addressField)
-            // errors += validateDOB()
-            // errors += validatePhone()
+            errors += validateField(stateField)
+            errors += validateField(cityField)
+            errors += validateField(addressField)
+            errors += validateDOB()
+            errors += validatePhone()
             return errors
         }
 
         function validateStep1() {
 
             let errors = 0;
-            // errors += validateField(firstNameField)
-            // errors += validateField(lastNameField)
-            // errors += validateEmail()
-            // errors += validatePassword()
-            // errors += validateConfirmPassword()
-            // errors += validateGender()
+            errors += validateField(firstNameField)
+            errors += validateField(lastNameField)
+            errors += validateEmail()
+            errors += validatePassword()
+            errors += validateConfirmPassword()
+            errors += validateGender()
             return errors
         }
 
@@ -483,7 +483,7 @@
             xhr.send();
         }
     </script>
-    {{-- <script src="../../dist/js/fe.js"></script> --}}
+
 </body>
 
 </html>

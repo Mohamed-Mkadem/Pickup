@@ -28,7 +28,7 @@
 
 
 <body>
-    {{-- <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader">
         <div class="loader-wrapper">
             <a href="{{ route('admin.home') }}" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
@@ -40,7 +40,7 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <div id="overlay" class="overlay"></div>
     @yield('loader')
@@ -67,7 +67,7 @@
 
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
-                        class="nav-link collapsed {{ request()->is('admin/brands*') ? 'active' : '' }}"> <i
+                        class="nav-link collapsed {{ request()->is('admin/brand*') ? 'active' : '' }}"> <i
                             class="fa-light fa-medal"></i> <span>Brands</span></a>
                     <ul class="nav-sub-dropdown">
                         <li class="nav-item"><a href="{{ route('admin.brands.create') }}">New Brand</a></li>
@@ -103,19 +103,40 @@
                         class="nav-link {{ request()->is('admin/fees*') ? 'active' : '' }}"><i
                             class="fa-solid fa-money-check-dollar-pen"></i> <span>Fees</span></a>
                 </li>
+                @php
+                    use App\Models\VerificationRequest;
+                    
+                    function hasPendingVerificationRequests()
+                    {
+                        return VerificationRequest::where('status', 'pending')->exists();
+                    }
+                @endphp
+                @php
+                    use App\Models\PaymentRequest;
+                    
+                    function hasPendingPaymentRequests()
+                    {
+                        return PaymentRequest::where('status', 'pending')->exists();
+                    }
+                @endphp
                 <li class="nav-item">
                     <a href="#" role="button" aria-controls="#sub-menu"
-                        class="nav-link collapsed notifiable {{ request()->is('admin/requests*') ? 'active' : '' }}">
+                        class="nav-link collapsed 
+                        {{ hasPendingVerificationRequests() ? 'notifiable' : '' }}
+                        {{ hasPendingPaymentRequests() ? 'notifiable' : '' }}
+                        {{ request()->is('admin/requests*') ? 'active' : '' }}">
                         <i class="fa-light fa-memo-circle-info"></i>
                         <span>Requests</span></a>
                     <ul class="nav-sub-dropdown">
 
                         <li class="nav-item"><a href="{{ route('admin.verification-requests.index') }}"
-                                class="notifiable">Verification</a>
+                                class="
+                                {{ hasPendingVerificationRequests() ? 'notifiable' : '' }}
+                                ">Verification</a>
                         </li>
                         <li class="nav-item"><a href="{{ route('admin.payment-requests.index') }}"
                                 class=" 
-                             notifiable
+                                {{ hasPendingPaymentRequests() ? 'notifiable' : '' }}
                              ">Payment</a>
                         </li>
                     </ul>
@@ -124,26 +145,36 @@
                         class="nav-link
                     
                     {{ request()->is('admin/notifications*') ? 'active' : '' }}
-                    notifiable">
+                    @if (Auth::user()->unreadNotifications()->count() > 0) notifiable @endif
+                    ">
                         <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
                 <li class="nav-item"><a href="{{ route('admin.subscriptions.index') }}"
                         class="nav-link
                     {{ request()->is('admin/subscriptions*') ? 'active' : '' }}
-                    notifiable">
+                    ">
                         <i class="fa-light fa-box-dollar"></i>
                         <span>Subscriptions</span></a></li>
+
+                @php
+                    use App\Models\Ticket;
+                    
+                    function hasNewTickets()
+                    {
+                        return Ticket::where('status', 'new')->exists();
+                    }
+                @endphp
                 <li class="nav-item"><a href="{{ route('admin.tickets.index') }}"
                         class="nav-link
                         {{ request()->is('admin/ticket*') ? 'active' : '' }}
-                    
-                    notifiable">
+                        {{ hasNewTickets() ? 'notifiable' : '' }}
+                    ">
                         <i class="fa-light fa-user-headset"></i>
                         <span>Tickets</span></a></li>
                 <li class="nav-item"><a href="{{ route('admin.orders.index') }}"
                         class="nav-link 
                     {{ request()->is('admin/order*') ? 'active' : '' }}
-                    notifiable">
+                    ">
                         <i class="fa-light fa-cart-arrow-down"></i>
                         <span>Orders</span></a></li>
 
@@ -151,19 +182,19 @@
                     <a href="{{ route('admin.sales.index') }}"
                         class="nav-link
                     {{ request()->is('admin/sales*') ? 'active' : '' }}
-                    notifiable">
+                    ">
                         <i class="fa-light fa-hand-holding-dollar"></i>
                         <span>Sales</span>
                     </a>
                 </li>
 
                 <li class="nav-item"><a href="{{ route('admin.clients.index') }}"
-                        class="nav-link notifiable 
+                        class="nav-link  
                     {{ request()->is('admin/clients*') ? 'active' : '' }}">
                         <i class="fa-light fa-users"></i>
                         <span>Clients</span></a></li>
                 <li class="nav-item"><a href="{{ route('admin.sellers.index') }}"
-                        class="nav-link notifiable
+                        class="nav-link 
                     {{ request()->is('admin/sellers*') ? 'active' : '' }}">
                         <i class="fa-light fa-users-viewfinder"></i>
                         <span>Sellers</span></a></li>
@@ -175,11 +206,11 @@
                 <li class="nav-item"><a href="{{ route('admin.transfers.index') }}"
                         class="
                     {{ request()->is('admin/transfers*') ? 'active' : '' }}
-                    nav-link notifiable">
+                    nav-link ">
                         <i class="fa-light fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span></a></li>
                 <li class="nav-item"><a href="{{ route('admin.stores.index') }}"
-                        class="nav-link notifiable {{ request()->is('admin/stores*') ? 'active' : '' }}"> <i
+                        class="nav-link  {{ request()->is('admin/stores*') ? 'active' : '' }}"> <i
                             class="fa-light fa-shop"></i>
                         <span>Stores</span></a></li>
 

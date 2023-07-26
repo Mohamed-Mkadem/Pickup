@@ -7,21 +7,21 @@ use App\Models\Revenue;
 use App\Models\Ticket;
 use App\Models\TicketResponse;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-// class User extends Authenticatable implements MustVerifyEmail
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+/**
+ * The attributes that are mass assignable.
+ *
+ * @var array<int, string>
+ */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -38,21 +38,21 @@ class User extends Authenticatable
         'photo',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+/**
+ * The attributes that should be hidden for serialization.
+ *
+ * @var array<int, string>
+ */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+/**
+ * The attributes that should be cast.
+ *
+ * @var array<string, string>
+ */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
@@ -94,12 +94,12 @@ class User extends Authenticatable
     {
         return $this->type == 'Client';
     }
-    // public function receivesBroadcastNotificationsOn(): string
-    // {
-    //     return 'users.' . $this->id;
-    // }
+// public function receivesBroadcastNotificationsOn(): string
+// {
+//     return 'users.' . $this->id;
+// }
 
-    // Tickets
+// Tickets
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
@@ -112,7 +112,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(TicketResponse::class);
     }
-    // Revenues
+// Revenues
     public function revenues()
     {
         return $this->hasMany(Revenue::class);
@@ -121,7 +121,7 @@ class User extends Authenticatable
     {
         return $this->revenues()->exists();
     }
-    // Expenses
+// Expenses
     public function expenses()
     {
         return $this->hasMany(Expense::class);

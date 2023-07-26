@@ -458,41 +458,41 @@
 
         function validateFields() {
             errors = 0;
-            // errors += validateStep1()
-            // errors += validateStep2()
-            // errors += validateStep3()
+            errors += validateStep1()
+            errors += validateStep2()
+            errors += validateStep3()
             return errors
         }
 
         function validateStep3() {
             errors = 0;
-            // errors += validateField(bankField)
-            // errors += validateField(accountNameField)
-            // errors += validateRIB()
-            // errors += validateNID()
+            errors += validateField(bankField)
+            errors += validateField(accountNameField)
+            errors += validateRIB()
+            errors += validateNID()
 
             return errors
         }
 
         function validateStep2() {
             errors = 0;
-            // errors += validateField(stateField)
-            // errors += validateField(cityField)
-            // errors += validateField(addressField)
-            // errors += validateDOB()
-            // errors += validatePhone()
+            errors += validateField(stateField)
+            errors += validateField(cityField)
+            errors += validateField(addressField)
+            errors += validateDOB()
+            errors += validatePhone()
             return errors
         }
 
         function validateStep1() {
 
             let errors = 0;
-            // errors += validateField(firstNameField)
-            // errors += validateField(lastNameField)
-            // errors += validateEmail()
-            // errors += validatePassword()
-            // errors += validateConfirmPassword()
-            // errors += validateGender()
+            errors += validateField(firstNameField)
+            errors += validateField(lastNameField)
+            errors += validateEmail()
+            errors += validatePassword()
+            errors += validateConfirmPassword()
+            errors += validateGender()
             return errors
         }
 

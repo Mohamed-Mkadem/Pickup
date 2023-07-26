@@ -38,7 +38,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchersCategories = VoucherCategory::all();
-        $vouchers = Voucher::paginate();
+        $vouchers = Voucher::orderBy('created_at', 'desc')->paginate();
 
         return view('Admin.Vouchers.vouchers-index', ['vouchers' => $vouchers, 'vouchersCategories' => $vouchersCategories]);
     }

@@ -303,7 +303,8 @@ class CartController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Cart Updated Successfully');
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 
@@ -320,6 +321,7 @@ class CartController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Cart Emptied Successfully');
         } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Something Went Wrong');
             //throw $th;
         }
     }

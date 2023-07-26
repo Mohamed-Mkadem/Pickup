@@ -26,7 +26,7 @@
 
 
 <body>
-    {{-- <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader">
         <div class="loader-wrapper">
             <a href="" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
@@ -38,7 +38,7 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <div id="overlay" class="overlay"></div>
     <div class="main-wrapper">
         <!-- Start Header -->

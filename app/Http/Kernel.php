@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'active' => \App\Http\Middleware\IsActiveMiddleware::class,
         'banned' => \App\Http\Middleware\IsBannedMiddleware::class,
         'hasStore' => \App\Http\Middleware\hasStoreMiddleware::class,
+        'hasActiveStore' => \App\Http\Middleware\hasActiveStoreMiddleware::class,
         'isVerified' => \App\Http\Middleware\isVerifiedMiddleware::class,
         'isAdmin' => \App\Http\Middleware\isAdminMiddleware::class,
         'isSeller' => \App\Http\Middleware\isSellerMiddleware::class,

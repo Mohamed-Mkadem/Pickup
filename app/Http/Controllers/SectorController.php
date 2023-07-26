@@ -78,7 +78,7 @@ class SectorController extends Controller
 
         $validatedData = Validator::make($request->all(), [
             'name' => ['required', 'string', 'unique:sectors'],
-            'icon' => ['required', 'file', 'image', 'mimes:jpg,jpeg', 'max:1024000'],
+            'icon' => ['required', 'file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'status' => ['required', 'in:active,inactive'],
         ]);
 
@@ -105,7 +105,7 @@ class SectorController extends Controller
     {
         $validatedData = Validator::make($request->all(), [
             'name' => ['required', 'string', Rule::unique('sectors', 'name')->ignore($id)],
-            'icon' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024000'],
+            'icon' => ['required', 'file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'status' => ['required', 'in:active,inactive'],
         ]);
 

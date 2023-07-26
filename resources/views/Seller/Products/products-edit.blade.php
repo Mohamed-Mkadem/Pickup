@@ -14,7 +14,8 @@
         @include('components.session-errors-alert')
         @include('components.success-alert')
 
-        <form action="{{ route('seller.products.update', $product->id) }}" method="post" id="creation-form">
+        <form action="{{ route('seller.products.update', $product->id) }}" method="post" id="creation-form"
+            enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="form-grid has-sticky">
@@ -28,9 +29,10 @@
                                 <p>Drop File Here Or Click To Upload File</p>
                                 <p>Allowed Formats are jpg, jpeg</p>
                             </label>
-                            <input type="file" name="" id="image-input" accept="image/jpeg, image/jpg">
+                            <input type="file" name="image" id="image-input" accept="image/jpeg, image/jpg">
                         </div>
                         <p class="error-message" id="image-error-message">This Field Is Required</p>
+                        <p class="field-instructions">Dimensions : 500px x 500px, Max size : 2 MB </p>
                         <div class="upload-area d-flex j-start a-center">
                             <i class="fa-solid fa-file-image"></i>
                             <div class="file-info">

@@ -1,7 +1,7 @@
 @extends('layouts.Store')
 
 @push('title')
-    <title>{{ $store->name }} | Home</title>
+    <title>{{ $store->name }} | Order Details</title>
 @endpush
 
 @section('content')

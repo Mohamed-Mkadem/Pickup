@@ -31,7 +31,7 @@
     .ticket-holder .attachements-holder .attachements-grid .attachement,
     .form-grid .form-sidebar .filter-column .filter-holder,
     .show-header .info-holder .details .info-grid .info {
-        background-color: var(--clr-black-100);
+        background-color: var(--clr-black-100) !important;
     }
     .sale-wrapper
         .sale-products
@@ -405,7 +405,7 @@
     }
     .product .info-holder h3 a:hover,
     .plan p.plan-duration,
-    .review-box p.review-body span.order-id a:hover,
+    .review-box .review-body span.order-id a:hover,
     .card-holder .card-title a:hover,
     .main-store-header .main-info-holder .basic-info h1.store-name,
     .order-holder .results-holder.order-info > * .info-title,
@@ -511,6 +511,7 @@
     .modal-holder .modal.voucher-details .used-by-holder p {
         color: var(--clr-white-600);
     }
+    .product-details .product-detail .detail-body ul,
     form .field-instructions,
     .product-details .product-detail .detail-body p,
     .product-details .product-detail .detail-body.about-brand .brand-header h4,
@@ -534,6 +535,110 @@
         p {
         color: var(--clr-white-700);
     }
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        h1,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        h2,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        h3,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        h4,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        ul,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        ol,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        q,
+    .ticket-holder
+        .ticket-details-holder
+        .detail
+        .responses-wrapper
+        .response
+        .info-holder
+        .response-body
+        p,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        h1,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        h2,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        h3,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        h4,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        ul,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        ol,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        q,
+    .ticket-holder
+        .ticket-details-holder
+        .detail.description
+        .description-body
+        p,
     #starter-header p.today-stats,
     .product .product-header p.state-city,
     a.editBtn,
@@ -633,7 +738,7 @@
     // Borders
 
     .review-criteria .criterion .points .point {
-        border-color: var(--clr-black-100);
+        border-color: var(--clr-black-500);
     }
     .show-header .info-holder .details .info-grid .info .info-value {
         border-color: var(--clr-black-200);

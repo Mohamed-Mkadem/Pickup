@@ -50,7 +50,7 @@
                                     <label for="icon-image" class="drop-zone-label form-label">
                                         <i class="fa-light fa-cloud-arrow-up d-block"></i>
                                         <p>Drop Files Here Or Click To Upload File</p>
-                                        <p>Allowed Formats are jpg, jpeg</p>
+                                        <p>Dimensions : 256px * 256px, Allowed Formats are jpg, jpeg</p>
                                     </label>
                                     <input type="file" name="icon" id="icon-image" accept="image/jpeg  image/jpg">
                                 </div>
@@ -299,8 +299,8 @@
                             </header>
 
                             <div class="info">
-                                <img loading="lazy" src="{{ asset($sector->icon) }}" alt="">
-                                {{-- <img loading="lazy" src="{{ asset('storage/' . $sector->icon) }}" alt=""> --}}
+                                {{-- <img loading="lazy" src="{{ asset($sector->icon) }}" alt=""> --}}
+                                <img loading="lazy" src="{{ asset('storage/' . $sector->icon) }}" alt="">
                                 <h3>{{ $sector->name }}</h3>
                                 <p>{{ $sector->storesCount() == 1 ? '1 Store' : $sector->storesCount() . ' Stores' }}</p>
                                 <p class="p-span">Added At :

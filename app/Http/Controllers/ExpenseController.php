@@ -176,8 +176,8 @@ class ExpenseController extends Controller
             ]);
             return redirect()->back()->with('success', 'Expense Updated Successfully');
         } catch (\Throwable $th) {
-            throw $th;
             return redirect()->back()->with('error', 'Something Went Wrong, Please Try Later');
+            // throw $th;
         }
     }
 

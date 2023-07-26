@@ -11,7 +11,24 @@
             &:last-of-type {
                 margin-bottom: 0;
             }
-
+            &.description {
+                .description-body {
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    ul,
+                    ol,
+                    q,
+                    p {
+                        color: var(--clr-blueGray-800);
+                    }
+                    ul {
+                        list-style: disc;
+                        padding-left: 1em;
+                    }
+                }
+            }
             p {
                 &:not(.error-message, .form-label > p, .file-name, .file-size) {
                     color: var(--clr-blueGray-800);
@@ -63,6 +80,20 @@
                             }
                         }
                         .response-body {
+                            h1,
+                            h2,
+                            h3,
+                            h4,
+                            ul,
+                            ol,
+                            q,
+                            p {
+                                color: var(--clr-blueGray-800);
+                            }
+                            ul {
+                                list-style: disc;
+                                padding-left: 1em;
+                            }
                             padding: 1em;
                             border-radius: 10px;
                             background-color: var(--clr-blueGray-200);
@@ -71,6 +102,20 @@
                     &.admin {
                         .info-holder {
                             .response-body {
+                                h1,
+                                h2,
+                                h3,
+                                h4,
+                                ul,
+                                ol,
+                                q,
+                                p {
+                                    color: var(--clr-white-1000);
+                                }
+                                ul {
+                                    list-style: disc;
+                                    padding-left: 1em;
+                                }
                                 background-color: var(--clr-blueGray-600);
                                 color: var(--clr-white-1000);
                             }

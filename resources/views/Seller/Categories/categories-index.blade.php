@@ -48,7 +48,7 @@
                                     <label for="icon-image" class="drop-zone-label form-label">
                                         <i class="fa-light fa-cloud-arrow-up d-block"></i>
                                         <p>Drop File Here Or Click To Upload File</p>
-                                        <p>Allowed Formats are png, jpeg, svg</p>
+                                        <p>Dimensions 256px x 256px, Allowed Formats are jpg, jpeg, Max Size : 1 MB</p>
                                     </label>
                                     <input type="file" name="icon" id="icon-image" accept="image/jpeg, image/jpg">
                                 </div>
@@ -233,7 +233,8 @@
                                                                     class="drop-zone-label form-label">
                                                                     <i class="fa-light fa-cloud-arrow-up d-block"></i>
                                                                     <p>Drop File Here Or Click To Upload File</p>
-                                                                    <p>Allowed Formats are jpg, jpeg</p>
+                                                                    <p>Dimensions 256px x 256px, Allowed Formats are jpg,
+                                                                        jpeg, Max Size : 1 MB</p>
                                                                 </label>
                                                                 <input type="file" name="icon" class="file-input"
                                                                     accept="image/jpeg, image/jpg">
@@ -280,8 +281,8 @@
                                 </ul>
                             </header>
                             <div class="info">
-                                <img loading="lazy" src="{{ asset($category->icon) }}" alt="">
-                                {{-- <img loading="lazy" src="{{ asset('storage/' . $category->icon) }}" alt=""> --}}
+                                {{-- <img loading="lazy" src="{{ asset($category->icon) }}" alt=""> --}}
+                                <img loading="lazy" src="{{ asset('storage/' . $category->icon) }}" alt="">
                                 <h3> {{ $category->name }} <small>({{ ucfirst($category->status) }})</small></h3>
                                 <p>{{ $category->productsCount() == 1 ? '1 Product' : $category->productsCount() . ' Products' }}
                                 </p>

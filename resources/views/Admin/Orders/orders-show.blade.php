@@ -164,11 +164,11 @@
                                                         {{ number_format($order->review->total, 1) }}%
                                                     </p>
                                                 </header>
-                                                <p class="review-body">
+                                                <div class="review-body">
                                                     @if ($order->review->feedback)
                                                         {!! $order->review->feedback !!}
                                                     @endif
-                                                </p>
+                                                </div>
                                                 <div class="review-criteria mt-1">
                                                     <div class="criterion">
                                                         <p>- Honesty : </p>
@@ -295,10 +295,10 @@
                                             <p>{{ $note->created_at->format('M jS Y H:i') }}</p>
                                         </div>
                                     </div>
-                                    <p class="note-body">
+                                    <div class="note-body">
 
                                         {!! $note->note !!}
-                                    </p>
+                                    </div>
                                 </div>
                             @endforeach
                         @endif

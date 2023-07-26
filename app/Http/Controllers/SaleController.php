@@ -315,7 +315,8 @@ class SaleController extends Controller
             return redirect()->back()->with('success', 'Sale Added Successfully');
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 

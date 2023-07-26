@@ -41,7 +41,8 @@ class PickRequestController extends Controller
             event(new PickRequestCreated($pickRequest));
             return redirect()->back()->with('success', 'Pick Request Sent Successfully');
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 
@@ -60,6 +61,7 @@ class PickRequestController extends Controller
 
             return redirect()->back()->with('success', 'Pick Request Refused Successfully');
         } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Something Went Wrong');
             //throw $th;
         }
 
@@ -113,7 +115,8 @@ class PickRequestController extends Controller
             return redirect()->back()->with('success', "Pickup Confirmed Successfully, Don't Forget To Review The Order Process");
         } catch (\Throwable $th) {
             DB::rollback();
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 }

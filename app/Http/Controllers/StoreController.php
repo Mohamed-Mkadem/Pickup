@@ -100,7 +100,7 @@ class StoreController extends Controller
             'bio' => ['required', 'string', 'max:400'],
             'username' => ['required', 'unique:stores', 'max:20', 'one_word'],
             'phone' => ['required', 'digits:8'],
-            'photo' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024'],
+            'photo' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'cover' => ['string'],
             'openingHours' => ['required', 'array'],
             'openingHours.*.opening_time' => ['required', 'date_format:H:i'],
@@ -169,9 +169,9 @@ class StoreController extends Controller
      */
     public function edit($username)
     {
-        // $store = Store::where('seller_id', Auth::user()->seller->id)->with(['owner', 'sector', 'openingHours'])->findOrFail($id);
+
         $store = Store::where('username', $username)->with(['owner', 'sector', 'openingHours'])->first();
-        // dd($store);
+
         $this->authorize('update', $store);
         return view('Seller.Stores.stores-edit', ['store' => $store, 'states' => $this->states, 'sectors' => $this->sectors, 'covers' => $this->covers, 'fileNames' => $this->fileNames]);
 
@@ -199,7 +199,7 @@ class StoreController extends Controller
             'bio' => ['required', 'string', 'max:400'],
 
             'phone' => ['required', 'digits:8'],
-            'photo' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024'],
+            'photo' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'cover' => ['string'],
             'openingHours' => ['required', 'array'],
             'openingHours.*.opening_time' => ['required', 'date_format:H:i'],

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Revenue;
 use App\Models\State;
+use App\Models\Store;
 use App\Models\User;
 use App\Models\Voucher;
 use Carbon\Carbon;
@@ -23,7 +24,9 @@ class ClientController extends Controller
     }
     public function home()
     {
-        return view('Client.home');
+        $user = Auth::user();
+        $stores = Store::where('city_id', $user->city_id)->where('status', 'published')->with('sector')->latest()->take(3)->get();
+        return view('Client.home', ['stores' => $stores]);
     }
     public function profile()
     {
@@ -72,7 +75,7 @@ class ClientController extends Controller
     }
     public function index()
     {
-        $clients = Client::with('user')->paginate();
+        $clients = Client::with('user')->orderBy('created_at', 'desc')->paginate();
         // $states = State::with('cities')->get();
         return view('Admin.Clients.clients-index', ['clients' => $clients, 'states' => $this->states]);
     }

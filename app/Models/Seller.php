@@ -95,9 +95,17 @@ class Seller extends Model
     {
         return $this->hasOne(Store::class, 'seller_id');
     }
+    public function hasBannedStore()
+    {
+        return $this->store()->where('status', 'banned')->exists();
+    }
     public function hasStore()
     {
         return $this->store()->exists();
+    }
+    public function hasActiveStore()
+    {
+        return $this->store()->where('status', '!=', 'banned')->exists();
     }
     public function hasPublishedStore()
     {

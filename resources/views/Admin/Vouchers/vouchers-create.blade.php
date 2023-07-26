@@ -12,7 +12,7 @@
             <div class="inner-spinner"></div>
         </div>
         <h2 class="loader-title">Preparing your request...</h2>
-        <p class="loader-message">thank you for your patience</p>
+        <p class="loader-message">Thank you for your patience</p>
     </div>
 @endsection
 @section('content')

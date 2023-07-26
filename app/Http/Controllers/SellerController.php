@@ -8,6 +8,7 @@ use App\Models\Seller;
 use App\Models\State;
 use App\Models\User;
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,12 +22,49 @@ class SellerController extends Controller
     }
     public function home()
     {
-        // dd(Auth::id());
-        // $vouchers = Auth::user()->seller->vouchers;
-        $vouchers = Voucher::where('user_id', Auth::user()->seller->id)->get();
-        // dd($vouchers);
-        return view('Seller.home', ['vouchers' => $vouchers]);
-        // return view('Seller.home');
+        $user = Auth::user();
+        $store = $user->seller->store;
+
+        $orders = [
+            'todayCount' => 0,
+            'yesterdayCount' => 0,
+            'difference' => 0,
+        ];
+        $sales = [
+            'todayCount' => 0,
+            'yesterdayCount' => 0,
+            'difference' => 0,
+        ];
+        $reviews = [
+            'todayCount' => 0,
+            'yesterdayCount' => 0,
+            'difference' => 0,
+        ];
+
+        if ($store) {
+
+            $todayOrders = $store->orders()->whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])->count();
+            $yesterdayOrders = $store->orders()->whereBetween('created_at', [Carbon::yesterday()->startOfDay(), Carbon::yesterday()->endOfDay()])->count();
+            $orders['todayCount'] = $todayOrders;
+            $orders['yesterdayCount'] = $yesterdayOrders;
+            $orders['difference'] = $todayOrders - $yesterdayOrders;
+
+            $todaySales = $store->sales()->whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])->count();
+            $yesterdaySales = $store->sales()->whereBetween('created_at', [Carbon::yesterday()->startOfDay(), Carbon::yesterday()->endOfDay()])->count();
+
+            $sales['todayCount'] = $todaySales;
+            $sales['yesterdayCount'] = $yesterdaySales;
+            $sales['difference'] = $todaySales - $yesterdaySales;
+
+            $todayReviews = $store->reviews()->whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])->count();
+            $yesterdayReviews = $store->reviews()->whereBetween('created_at', [Carbon::yesterday()->startOfDay(), Carbon::yesterday()->endOfDay()])->count();
+            $reviews['todayCount'] = $todayReviews;
+            $reviews['yesterdayCount'] = $yesterdayReviews;
+            $reviews['difference'] = $todayReviews - $yesterdayReviews;
+
+        }
+        return view('Seller.home', ['orders' => $orders, 'sales' => $sales, 'reviews' => $reviews]);
+
     }
     public function profile()
     {
@@ -78,7 +116,7 @@ class SellerController extends Controller
 
     public function index()
     {
-        $sellers = Seller::with('user')->paginate();
+        $sellers = Seller::with('user')->orderBy('created_at', 'desc')->paginate();
         return view('Admin.Sellers.sellers-index', ['sellers' => $sellers, 'states' => $this->states]);
     }
     public function filter(Request $request)

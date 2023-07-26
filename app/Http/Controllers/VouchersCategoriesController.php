@@ -12,7 +12,7 @@ class VouchersCategoriesController extends Controller
 {
     public function index()
     {
-        $vouchersCategories = VoucherCategory::withCount('vouchers')->paginate();
+        $vouchersCategories = VoucherCategory::withCount('vouchers')->orderBy('created_at', 'desc')->paginate();
 
         return view(
             'Admin.Vouchers.vouchers-categories',
@@ -86,7 +86,7 @@ class VouchersCategoriesController extends Controller
     {
         $validated = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255', 'unique:voucher_categories'],
-            'icon' => ['required', 'image', 'mimes:jpeg,jpg', 'max:1024'],
+            'icon' => ['required', 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'value' => ['required', 'numeric', 'min:1'],
         ]);
         // dd($request->icon);
@@ -111,7 +111,7 @@ class VouchersCategoriesController extends Controller
         $voucherCategory = VoucherCategory::findOrFail($id);
         $validated = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255', Rule::unique('voucher_categories', 'name')->ignore($voucherCategory->id)],
-            'icon' => ['image', 'mimes:jpeg,jpg', 'max:1024'],
+            'icon' => ['required', 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
 
         ]);
         // dd($request->icon);

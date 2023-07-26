@@ -95,7 +95,7 @@ class BrandsController extends Controller
             'name' => ['required', 'string', 'unique:brands', 'max:255'],
             'status' => ['required', 'in:Active,Inactive'],
             'description' => ['required', 'string'],
-            'logo' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,svg'],
+            'logo' => ['required', 'file', 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
         ]);
 
         if ($validatedData->fails()) {
@@ -134,7 +134,7 @@ class BrandsController extends Controller
             'name' => ['required', 'string', 'max:255', Rule::unique('brands', 'name')->ignore($id)],
             'status' => ['required', 'in:Active,Inactive'],
             'description' => ['required', 'string'],
-            'logo' => ['file', 'image', 'mimes:jpeg,jpg', 'max: 1024000'],
+            'logo' => ['file', 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
         ]);
 
         if ($validatedData->fails()) {

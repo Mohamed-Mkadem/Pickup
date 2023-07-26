@@ -1,7 +1,7 @@
 @extends('layouts.Admin')
 
 @push('title')
-    <title>Pickup | Brand Brand</title>
+    <title>Pickup | Edit Brand</title>
 @endpush
 
 

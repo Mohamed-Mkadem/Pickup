@@ -146,7 +146,7 @@
 
                                                 </form>
                                                 <a
-                                                    href="{{ route('client.store.product', ['username' => $store->username, 'id' => $product->name]) }}"><i
+                                                    href="{{ route('client.store.product', ['username' => $store->username, 'id' => $product->id]) }}"><i
                                                         class="fa-light fa-eye"></i></a>
                                             </div>
                                         </div>

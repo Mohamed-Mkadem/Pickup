@@ -27,19 +27,7 @@
 
 
 <body>
-    <!-- <div class="preloader" id="preloader">
-        <div class="loader-wrapper">
-            <a href="index.html" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
-                <span>Pickup</span> </a>
-            <div class="circles">
-                <div class="circle circle-1"></div>
-                <div class="circle circle-2"></div>
-                <div class="circle circle-3"></div>
-                <div class="circle circle-4"></div>
-                <div class="circle circle-4"></div>
-            </div>
-        </div>
-    </div> -->
+
     <div id="overlay" class="overlay"></div>
     <div class="main-wrapper">
         <div class="sale-wrapper">
@@ -580,12 +568,7 @@
     <script>
         function setInputsValues() {
             cartInput.value = JSON.stringify(cart)
-            // console.log("file: seller_sale_add.html:940 ~ setInputsValues ~ cartInput:", cartInput)
-            // cartItemsCount.value = cart.length
-            // console.log("file: seller_sale_add.html:941 ~ setInputsValues ~ cartItemsCount:", cartItemsCount)
-            // let cartAmountValue = document.getElementById('total-span').textContent
-            // cartAmount.value = parseFloat(cartAmountValue).toFixed(3)
-            // console.log("file: seller_sale_add.html:943 ~ setInputsValues ~ cartAmount:", cartAmount)
+  
             buttonsChecker()
         }
 

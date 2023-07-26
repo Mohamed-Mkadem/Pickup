@@ -74,7 +74,10 @@
                 <!-- Start Detail -->
                 <div class="detail description">
                     <h2>Description</h2>
-                    {!! $ticket->message !!}
+                    <div class="description-body">
+
+                        {!! $ticket->message !!}
+                    </div>
                 </div>
                 <!-- End Detail -->
                 <!-- End Detail -->
@@ -198,7 +201,7 @@
         if (responseTextarea) {
             ClassicEditor
                 .create(document.querySelector('#response-textarea'), {
-                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {

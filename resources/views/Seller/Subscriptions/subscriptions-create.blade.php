@@ -1,7 +1,7 @@
 @extends('layouts.Seller')
 
 @push('title')
-    <title>Pickup | Home</title>
+    <title>Pickup | New Subscription</title>
 @endpush
 @section('content')
     <section class="content" id="content">
@@ -21,7 +21,7 @@
                     Notice :
                 </h3>
                 <p>
-                    You Didn't Create Any Store Yet! <a href="store_create.html">Create A Store Now</a>
+                    You Didn't Create Any Store Yet! <a href="{{ route('seller.stores.create') }}">Create A Store Now</a>
                 </p>
             </div>
         @else

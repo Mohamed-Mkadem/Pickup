@@ -44,7 +44,7 @@
                                     <label for="icon-image" class="drop-zone-label form-label">
                                         <i class="fa-light fa-cloud-arrow-up d-block"></i>
                                         <p>Drop File Here Or Click To Upload File</p>
-                                        <p>Allowed Formats are jpg, jpeg</p>
+                                        <p>Dimensions 256px x 256px, Allowed Formats are jpg, jpeg</p>
                                         <p>Max file size : 1 MB</p>
                                     </label>
                                     <input type="file" name="icon" id="icon-image"

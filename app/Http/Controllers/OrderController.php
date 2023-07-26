@@ -53,7 +53,7 @@ class OrderController extends Controller
 
     public function adminIndex()
     {
-        $orders = Order::with(['store', 'client', 'client.user'])->paginate();
+        $orders = Order::with(['store', 'client', 'client.user'])->orderBy('created_at', 'desc')->paginate();
         $this->authorize('viewAny', Order::class);
         return view('Admin.Orders.orders-index', ['orders' => $orders]);
     }
@@ -228,7 +228,8 @@ class OrderController extends Controller
             return redirect()->back()->with('success', 'Order Cancelled Successfully');
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 
@@ -511,6 +512,7 @@ class OrderController extends Controller
             return redirect()->back()->with('success', 'Order Placed Successfully');
         } catch (\Throwable $th) {
             DB::rollback();
+            return redirect()->back()->with('error', 'Something Went Wrong');
             throw $th;
         }
     }
@@ -596,6 +598,7 @@ class OrderController extends Controller
             return redirect()->back()->with('success', 'Order Cancelled Successfully');
         } catch (\Throwable $th) {
             DB::rollBack();
+            return redirect()->back()->with('error', 'Something Went Wrong');
             throw $th;
         }
 

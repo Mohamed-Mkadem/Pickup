@@ -61,7 +61,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        dd($request->user());
+        // dd($request->user());
         $request->user()->fill($request->validated());
         // dd($request->all());
         if ($request->user()->isDirty('email')) {
@@ -116,7 +116,7 @@ class ProfileController extends Controller
             'd_o_b' => ['date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'phone' => ['digits:8', Rule::unique('users', 'phone')->ignore($user->id)],
             'state_id' => ['exists:states,id'],
-            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024000'],
+            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024', Rule::dimensions()->height(256)->width(256)],
             'city_id' => [
 
                 Rule::exists('cities', 'id')->where(function ($query) use ($request) {
@@ -184,7 +184,7 @@ class ProfileController extends Controller
 
             'phone' => ['digits:8', Rule::unique('users', 'phone')->ignore($user->id)],
             'state_id' => ['exists:states,id'],
-            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024000'],
+            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024', Rule::dimensions()->height(256)->width(256)],
             'city_id' => [
 
                 Rule::exists('cities', 'id')->where(function ($query) use ($request) {
@@ -244,7 +244,7 @@ class ProfileController extends Controller
             'd_o_b' => ['date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'phone' => ['digits:8', Rule::unique('users', 'phone')->ignore($user->id)],
             'state_id' => ['exists:states,id'],
-            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024000'],
+            'photo' => ['file', 'mimes:jpg,jpeg', 'max: 1024', Rule::dimensions()->height(256)->width(256)],
             'city_id' => [
 
                 Rule::exists('cities', 'id')->where(function ($query) use ($request) {

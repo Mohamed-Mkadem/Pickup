@@ -26,8 +26,7 @@ class OrderReadyNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'broadcast'];
-        return ['mail'];
+        return ['mail','database', 'broadcast'];
     }
 
     /**

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('info')->nullable();
             $table->text('ingredients')->nullable();
-            $table->string('image')->default('products/default.jpg');
+            $table->string('image');
             $table->softDeletes();
             $table->timestamps();
         });

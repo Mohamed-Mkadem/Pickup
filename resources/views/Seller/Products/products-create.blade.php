@@ -42,7 +42,7 @@
                                 <input type="file" name="image" id="image-input" accept="image/jpeg, image/jpg">
                             </div>
                             <p class="error-message" id="image-error-message">This Field Is Required</p>
-                            <p class="field-instructions">Dimenstions 150px x 150px, Max size : 1 Mo </p>
+                            <p class="field-instructions">Dimensions : 500px x 500px, Max size : 2 MB </p>
                             <div class="upload-area d-flex j-start a-center ">
                                 <i class="fa-solid fa-file-image"></i>
                                 <div class="file-info">
@@ -238,7 +238,7 @@
 
                             <div class="buttons d-flex j-end gap-1 wrap mt-1">
                                 <button type="reset" class="resetBtn">Reset</button>
-                                <button type="submit" id="submitBtn" class="submitBtn">Filter</button>
+                                <button type="submit" id="submitBtn" class="submitBtn">Add </button>
 
                             </div>
 
@@ -260,7 +260,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#description'), {
-                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    toolbar: ['|', 'bold', 'italic', 'bulletedList'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {
@@ -274,7 +274,7 @@
                 });
             ClassicEditor
                 .create(document.querySelector('#ingredients'), {
-                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    toolbar: ['|', 'bold', 'italic', 'bulletedList'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {
@@ -288,7 +288,7 @@
                 });
             ClassicEditor
                 .create(document.querySelector('#info'), {
-                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    toolbar: ['|', 'bold', 'italic', 'bulletedList'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {

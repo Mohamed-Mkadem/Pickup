@@ -26,9 +26,7 @@ class PaymentRequestCreatedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        // Add the mail channel later
-        return ['database', 'broadcast'];
-        // return ['mail', 'database', 'broadcast'];
+        return ['mail','database', 'broadcast'];
     }
 
     /**

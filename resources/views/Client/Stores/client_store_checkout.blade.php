@@ -113,7 +113,7 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#note'), {
-                toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
+                toolbar: ['heading', '|', 'bold'],
             })
             // .then(editor => {
             //     editor.model.document.on('change:data', () => {

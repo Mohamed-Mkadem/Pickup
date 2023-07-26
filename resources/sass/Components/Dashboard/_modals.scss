@@ -2,7 +2,7 @@
 
 .modal-holder {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
     inset: 0;
     display: none;
     z-index: 9999;
@@ -71,8 +71,12 @@
         }
         .modal-header {
             margin-bottom: 2em;
+            gap: 0.5em;
             h2 {
                 color: var(--clr-teal-300);
+                // flex-basis: 80%;
+                text-align: left;
+                white-space: normal;
             }
             button {
                 $size: 25px;

@@ -1,7 +1,7 @@
 @extends('layouts.client-store')
 
 @push('title')
-    <title>{{ $store->name }} | Home</title>
+    <title>{{ $store->name }} | Reviews</title>
 @endpush
 
 @section('content')
@@ -181,12 +181,12 @@
                                                         {{ $review->total }}%
                                                     </p>
                                                 </header>
-                                                <p class="review-body">
+                                                <div class="review-body mb-1">
 
                                                     @if ($review->feedback)
                                                         {!! $review->feedback !!}
                                                     @endif
-                                                </p>
+                                                </div>
                                                 <div class="review-criteria mt-1">
                                                     <div class="criterion">
                                                         <p>- Honesty : </p>

@@ -20,7 +20,8 @@ class ReviewController extends Controller
     public function index()
     {
         $store = Store::where('seller_id', Auth::user()->seller->id)->firstOrFail();
-        $reviews = Review::where('store_id', $store->id)->with(['client', 'order', 'client.user'])->paginate();
+        $reviews = Review::where('store_id', $store->id)->with(['client', 'order', 'client.user'])
+            ->orderBy('created_at', 'desc')->paginate();
 
         return view('Seller.reviews', ['reviews' => $reviews, 'store' => $store]);
     }
@@ -112,7 +113,8 @@ class ReviewController extends Controller
             return redirect()->back()->with('success', 'Review Added Successfully');
         } catch (\Throwable $th) {
             DB::rollback();
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
     }
 
@@ -174,7 +176,8 @@ class ReviewController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Review Deleted Successfully Successfully');
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->back()->with('error', 'Something Went Wrong');
+            // throw $th;
         }
 
     }

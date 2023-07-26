@@ -10,9 +10,13 @@ use App\Rules\CategoryBelongsToStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
+    // protected $messages = [
+    //     'image' => 'The Image Must Be a square (aspect ratio of 1:1)',
+    // ];
     protected $attributes = [
         'category_id' => 'Category',
         'brand_id' => 'Brand',
@@ -22,7 +26,7 @@ class ProductController extends Controller
     public function __construct()
     {
 
-        $this->middleware('hasStore')->only(['create', 'edit', 'show', 'store', 'filter']);
+        $this->middleware('hasActiveStore')->only(['index', 'create', 'edit', 'show', 'store', 'filter']);
         $this->brands = Brand::where('status', 'active')->get();
 
     }
@@ -36,7 +40,6 @@ class ProductController extends Controller
 
         $categories = Category::where('store_id', $store->id)->get();
 
-        // dd($products);
         return view('Seller.Products.products-index', ['products' => $products, 'brands' => $this->brands, 'categories' => $categories]);
     }
 
@@ -152,7 +155,7 @@ class ProductController extends Controller
             'status' => ['required', 'in:active,inactive'],
             'unit' => ['required', 'in:weight,piece,liquid'],
             'quantity' => ['required', 'numeric', 'min:1'],
-            'image' => ['image', 'mimes:jpg,jpeg', 'max:1024'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg', 'max:2048', Rule::dimensions()->height(500)->width(500)],
             'info' => ['string', 'nullable'],
             'ingredients' => ['string', 'nullable'],
         ], [], $this->attributes);
@@ -239,7 +242,7 @@ class ProductController extends Controller
             'status' => ['required', 'in:active,inactive'],
             'unit' => ['required', 'in:weight,piece,liquid'],
             'quantity' => ['required', 'numeric', 'min:1'],
-            'image' => ['image', 'mimes:jpg,jpeg', 'max:1024'],
+            'image' => ['image', 'mimes:jpg,jpeg', 'max:2048', Rule::dimensions()->height(500)->width(500)],
             'info' => ['string', 'nullable'],
             'ingredients' => ['string', 'nullable'],
         ], [], $this->attributes);

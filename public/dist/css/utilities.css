@@ -568,6 +568,7 @@ body.no-scroll {
 .overlay {
   position: absolute;
   inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 999;
 }
@@ -1134,7 +1135,7 @@ section#store-holder {
 }
 .table-responsive.orders table tr {
   display: grid;
-  grid-template-columns: 100px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
+  grid-template-columns: 100px repeat(2, minmax(200px, 1fr)) repeat(2, 180px);
 }
 .table-responsive.client-orders table thead {
   background-color: var(--clr-blueGray-600);

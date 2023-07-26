@@ -76,7 +76,7 @@ require __DIR__ . '/auth.php';
 Route::post('/contact', [FrontEndController::class, 'sendEmail'])->name('contact.send');
 Route::get('/api/cities/{stateId}', [CityController::class, 'getCities']);
 // Client
-Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('client.')->group(function () {
+Route::middleware(['auth', 'active', 'isClient', 'verified'])->prefix('client')->name('client.')->group(function () {
     Route::get('home', [ClientController::class, 'home'])->name('home');
     Route::get('profile', [ClientController::class, 'profile'])
         ->name('profile');
@@ -142,7 +142,7 @@ Route::middleware(['auth', 'active', 'isClient'])->prefix('client')->name('clien
 });
 
 // Seller
-Route::middleware(['auth', 'active', 'isSeller'])->prefix('seller')->name('seller.')->group(function () {
+Route::middleware(['auth', 'active', 'isSeller', 'verified'])->prefix('seller')->name('seller.')->group(function () {
     // Profile
     Route::get('home', [SellerController::class, 'home'])->name('home');
     Route::get('profile', [SellerController::class, 'profile'])

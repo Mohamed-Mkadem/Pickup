@@ -27,7 +27,7 @@
 
 
 <body>
-    {{-- <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader">
         <div class="loader-wrapper">
             <a href="{{ route('client.home') }}" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
@@ -39,7 +39,7 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <div id="overlay" class="overlay"></div>
     <div class="main-wrapper">
         <aside id="aside" class="seller-aside" aria-current="expanded">
@@ -66,7 +66,7 @@
                 <li class="nav-item"><a href="{{ route('client.orders.index') }}"
                         class="nav-link 
                     {{ request()->is('client/order*') ? 'active' : '' }}
-                    notifiable">
+                    ">
                         <i class="fa-light fa-cart-arrow-down"></i>
                         <span>Orders</span></a></li>
 
@@ -107,7 +107,8 @@
                 <li class="nav-item"><a href="{{ route('client.notifications.index') }}"
                         class="nav-link 
                     {{ request()->is('client/notifications*') ? 'active' : '' }}
-                    notifiable">
+                    @if (Auth::user()->unreadNotifications()->count() > 0) notifiable @endif
+                    ">
                         <i class="fa-light fa-bell"></i>
                         <span>Notifications</span></a></li>
 

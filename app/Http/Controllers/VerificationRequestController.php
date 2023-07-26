@@ -26,7 +26,7 @@ class VerificationRequestController extends Controller
      */
     public function index()
     {
-        $verificationRequests = VerificationRequest::where('seller_id', Auth::user()->seller->id)->with('statusHistories')->paginate();
+        $verificationRequests = VerificationRequest::where('seller_id', Auth::user()->seller->id)->with('statusHistories')->orderBy('created_at', 'desc')->paginate();
 
         return view('Seller.Verification.verification-index', ['verificationRequests' => $verificationRequests]);
     }

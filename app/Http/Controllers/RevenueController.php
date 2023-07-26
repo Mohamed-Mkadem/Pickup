@@ -176,8 +176,8 @@ class RevenueController extends Controller
             ]);
             return redirect()->back()->with('success', 'Revenue Updated Successfully');
         } catch (\Throwable $th) {
-            throw $th;
             return redirect()->back()->with('error', 'Something Went Wrong, Please Try Later');
+            // throw $th;
         }
     }
 

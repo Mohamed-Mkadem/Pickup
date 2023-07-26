@@ -138,8 +138,8 @@
                             <p class="voucher-number">{{ substr($voucher->code, 0, 4) }}**********</p>
                             <div class="details d-flex  j-sp-between a-center ">
                                 <div class="detail">
-                                    {{-- <p> {{ \Carbon\Carbon::parse($voucher->created_at)->format('M jS Y') }} </p> --}}
-                                    <p> {{ $voucher->created_at }} </p>
+                                    <p> {{ \Carbon\Carbon::parse($voucher->created_at)->format('M jS Y') }} </p>
+
                                 </div>
                                 <div class="detail">
                                     <p>{{ $voucher->status }}</p>
@@ -176,13 +176,9 @@
                                             <div class="info-holder d-flex j-start a-center">
                                                 <img src="{{ asset('storage/' . $voucher->user->user->photo) }}"
                                                     alt="">
-                                                {{-- @foreach ($voucher->user as $user)
-                                                    <p>{{ $user->first_name }}</p>
-                                                @endforeach --}}
-                                                <p>{{ $voucher->user->user->first_name . ' ' . $voucher->user->user->last_name }}
-                                                <p>{{ $voucher->user->id }}
-                                                <p>{{ $voucher->user_id }}
-                                                <p>{{ $voucher->user_type }}
+
+                                                <p>{{ $voucher->user->user->full_name }}
+                                                    ({{ class_basename($voucher->user_type) }})
                                                 </p>
 
                                             </div>

@@ -18,7 +18,14 @@ class Client extends Model
         'user_id',
         'balance',
     ];
-
+    public function suspendedBalance()
+    {
+        $suspendedBalance = 0;
+        if ($this->orders) {
+            $suspendedBalance = $this->orders()->whereIn('status', ['pending', 'accepted', 'ready'])->sum('amount');
+        }
+        return $suspendedBalance;
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

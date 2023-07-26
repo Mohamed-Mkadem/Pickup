@@ -56,7 +56,7 @@
                 <div class="top-info mb-0 d-flex a-start j-sp-between">
                     <div class="title-value-box">
                         <p class="box-title">Available (DT)</p>
-                        <p class="box-value">{{ $user->client->balance }} </p>
+                        <p class="box-value">{{ number_format($user->client->balance, 3, ',') }} </p>
                     </div>
 
                     <div class="icon-holder">
@@ -68,14 +68,14 @@
 
             </div>
             <!-- End Stat -->
-           
+
             <!-- Start Stat -->
             <div class="stat-item">
                 <!-- Start Top Info -->
                 <div class="top-info mb-0 d-flex a-start j-sp-between">
                     <div class="title-value-box">
-                        <p class="box-title">Suspended</p>
-                        <p class="box-value">1 </p>
+                        <p class="box-title">Suspended (DT)</p>
+                        <p class="box-value">{{ number_format($user->client->suspendedBalance(), 3, ',') }} </p>
                     </div>
 
                     <div class="icon-holder">

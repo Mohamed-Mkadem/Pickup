@@ -282,9 +282,9 @@
                                                         {{ number_format($order->review->total, 1) }}%
                                                     </p>
                                                 </header>
-                                                <p class="review-body">
+                                                <div class="review-body">
                                                     {!! $order->review->feedback !!}
-                                                </p>
+                                                </div>
                                                 <div class="review-criteria mt-1">
                                                     <div class="criterion">
                                                         <p>- Honesty : </p>
@@ -397,10 +397,10 @@
                                             <p>{{ $note->created_at->format('M jS Y H:i') }}</p>
                                         </div>
                                     </div>
-                                    <p class="note-body">
+                                    <div class="note-body">
 
                                         {!! $note->note !!}
-                                    </p>
+                                    </div>
                                 </div>
                             @endforeach
                         @endif
@@ -455,7 +455,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#reject-description'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
+                    toolbar: ['heading', '|', 'bold'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {
@@ -473,7 +473,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#accept-description'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
+                    toolbar: ['heading', '|', 'bold'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {

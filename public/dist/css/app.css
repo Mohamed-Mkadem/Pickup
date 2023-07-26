@@ -2328,6 +2328,11 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 .product-details .product-detail .detail-body:hover p:not(.modal p) {
   color: var(--clr-teal-400);
 }
+.product-details .product-detail .detail-body ul {
+  list-style: disc;
+  padding: 1em;
+  color: var(--clr-blueGray-800);
+}
 .product-details .product-detail .detail-body p {
   color: var(--clr-blueGray-800);
   letter-spacing: 1px;
@@ -2412,21 +2417,31 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   border-radius: 50%;
   flex-shrink: 0;
 }
-.review-box p.review-body {
+.review-box .review-body {
   margin-bottom: 1em;
   letter-spacing: 1px;
 }
-.review-box p.review-body span.order-id {
+.review-box .review-body h1,
+.review-box .review-body h2,
+.review-box .review-body h3,
+.review-box .review-body h4,
+.review-box .review-body p {
+  color: inherit !important;
+  font-size: 1em !important;
+  font-weight: normal;
+  margin: 0;
+}
+.review-box .review-body span.order-id {
   font-weight: bold;
   margin-bottom: 5px;
 }
-.review-box p.review-body span.order-id a {
+.review-box .review-body span.order-id a {
   color: inherit;
   text-decoration: underline;
   transition: color 0.3s ease;
   letter-spacing: 1px;
 }
-.review-box p.review-body span.order-id a:hover {
+.review-box .review-body span.order-id a:hover {
   color: var(--clr-blueGray-600);
 }
 
@@ -2939,6 +2954,20 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 .ticket-holder .ticket-details-holder .detail:last-of-type {
   margin-bottom: 0;
 }
+.ticket-holder .ticket-details-holder .detail.description .description-body h1,
+.ticket-holder .ticket-details-holder .detail.description .description-body h2,
+.ticket-holder .ticket-details-holder .detail.description .description-body h3,
+.ticket-holder .ticket-details-holder .detail.description .description-body h4,
+.ticket-holder .ticket-details-holder .detail.description .description-body ul,
+.ticket-holder .ticket-details-holder .detail.description .description-body ol,
+.ticket-holder .ticket-details-holder .detail.description .description-body q,
+.ticket-holder .ticket-details-holder .detail.description .description-body p {
+  color: var(--clr-blueGray-800);
+}
+.ticket-holder .ticket-details-holder .detail.description .description-body ul {
+  list-style: disc;
+  padding-left: 1em;
+}
 .ticket-holder .ticket-details-holder .detail p:not(.error-message, .form-label > p, .file-name, .file-size) {
   color: var(--clr-blueGray-800);
   line-height: 1.7;
@@ -2994,9 +3023,37 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   border-radius: 10px;
   background-color: var(--clr-blueGray-200);
 }
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body h1,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body h2,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body h3,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body h4,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body ul,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body ol,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body q,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body p {
+  color: var(--clr-blueGray-800);
+}
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response .info-holder .response-body ul {
+  list-style: disc;
+  padding-left: 1em;
+}
 .ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body {
   background-color: var(--clr-blueGray-600);
   color: var(--clr-white-1000);
+}
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body h1,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body h2,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body h3,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body h4,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body ul,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body ol,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body q,
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body p {
+  color: var(--clr-white-1000);
+}
+.ticket-holder .ticket-details-holder .detail .responses-wrapper .response.admin .info-holder .response-body ul {
+  list-style: disc;
+  padding-left: 1em;
 }
 .ticket-holder .ticket-details-holder .detail.new-response {
   margin-top: 2rem;
@@ -3319,6 +3376,16 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
   margin-block: 1em;
   letter-spacing: 1px;
   color: var(--clr-blueGray-900);
+}
+.order-holder .results-holder.order-info .notes .notes-holder .note .note-body h1,
+.order-holder .results-holder.order-info .notes .notes-holder .note .note-body h2,
+.order-holder .results-holder.order-info .notes .notes-holder .note .note-body h3,
+.order-holder .results-holder.order-info .notes .notes-holder .note .note-body h4,
+.order-holder .results-holder.order-info .notes .notes-holder .note .note-body p {
+  color: inherit !important;
+  font-size: 1em !important;
+  font-weight: normal;
+  margin: 0;
 }
 .order-holder .results-holder.order-info .notes .notes-holder .note .note-body:last-of-type {
   margin-block: 1em 0;
@@ -4076,7 +4143,7 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 
 .modal-holder {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   inset: 0;
   display: none;
   z-index: 9999;
@@ -4150,9 +4217,12 @@ form .choices-btns-wrapper .choice-btn input[type=checkbox]:focus {
 }
 .modal-holder .modal .modal-header {
   margin-bottom: 2em;
+  gap: 0.5em;
 }
 .modal-holder .modal .modal-header h2 {
   color: var(--clr-teal-300);
+  text-align: left;
+  white-space: normal;
 }
 .modal-holder .modal .modal-header button {
   background-color: var(--clr-red-600);

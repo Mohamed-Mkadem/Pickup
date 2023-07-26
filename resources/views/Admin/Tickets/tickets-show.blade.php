@@ -80,8 +80,12 @@
             <div class="ticket-details-holder holder">
                 <!-- Start Detail -->
                 <div class="detail description">
+
                     <h2>Description</h2>
-                    {!! $ticket->message !!}
+                    <div class="description-body">
+
+                        {!! $ticket->message !!}
+                    </div>
                 </div>
                 <!-- End Detail -->
                 @if ($ticket->hasResponses())
@@ -204,7 +208,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#response-textarea'), {
-                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', ],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {

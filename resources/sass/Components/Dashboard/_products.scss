@@ -276,6 +276,12 @@
                     color: var(--clr-teal-400);
                 }
             }
+            ul {
+                list-style: disc;
+                padding: 1em;
+
+                color: var(--clr-blueGray-800);
+            }
             p {
                 color: var(--clr-blueGray-800);
                 letter-spacing: 1px;

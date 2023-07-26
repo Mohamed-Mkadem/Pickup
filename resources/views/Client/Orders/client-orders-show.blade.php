@@ -250,7 +250,8 @@
                                                                 value="4 Stars">
                                                         </div>
                                                         <div class="editor-holder pop-up-editor">
-                                                            <label for="" class="form-label ">Feedback </label>
+                                                            <label for="" class="form-label ">Feedback (Max 120
+                                                                Characters)</label>
                                                             <textarea name="feedback" id="edit-review-feedback" cols="30" rows="10">{!! $order->review->feedback !!}</textarea>
                                                             <p class="error-message" id="review-feedback-error-message">
                                                                 This Field
@@ -297,12 +298,12 @@
                                                         {{ number_format($order->review->total, 1) }}%
                                                     </p>
                                                 </header>
-                                                <p class="review-body">
+                                                <div class="review-body ">
                                                     @if ($order->review->feedback)
                                                         {!! $order->review->feedback !!}
                                                     @endif
-                                                </p>
-                                                <div class="review-criteria">
+                                                </div>
+                                                <div class="review-criteria mt-1">
                                                     <div class="criterion">
                                                         <p>- Honesty : </p>
                                                         <div class="points">
@@ -450,8 +451,9 @@
                                                     <p class="error-message">This Field Is Required</p>
                                                 </div>
                                                 <div class="editor-holder pop-up-editor">
-                                                    <label for="" class="form-label ">Feedback </label>
-                                                    <textarea name="feedback" id="review-feedback" cols="30" rows="10"></textarea>
+                                                    <label for="" class="form-label ">Feedback (Max 120
+                                                        Characters)</label>
+                                                    <textarea name="feedback" id="review-feedback" cols="30" rows="10">{{ old('feedback') }}</textarea>
                                                     <p class="error-message" id="review-feedback-error-message">
                                                         This Field
                                                         Is Required
@@ -582,7 +584,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#review-feedback'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
+                    toolbar: ['heading', '|', 'bold'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {
@@ -635,7 +637,7 @@
 
             ClassicEditor
                 .create(document.querySelector('#edit-review-feedback'), {
-                    toolbar: ['heading', '|', 'bold', 'link', 'bulletedList'],
+                    toolbar: ['heading', '|', 'bold'],
                 })
                 // .then(editor => {
                 //     editor.model.document.on('change:data', () => {

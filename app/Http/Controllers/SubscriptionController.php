@@ -23,7 +23,7 @@ class SubscriptionController extends Controller
     {
         $storeId = Auth::user()->seller->store->id;
         // dd($storeId);
-        $subscriptions = Subscription::where('store_id', $storeId)->paginate();
+        $subscriptions = Subscription::where('store_id', $storeId)->orderBy('created_at', 'desc')->paginate();
         return view('Seller.Subscriptions.subscriptions-index', ['subscriptions' => $subscriptions]);
 
     }
@@ -109,7 +109,7 @@ class SubscriptionController extends Controller
 
     public function adminIndex()
     {
-        $subscriptions = Subscription::with('store')->paginate();
+        $subscriptions = Subscription::with('store')->orderBy('created_at', 'desc')->paginate();
         return view('Admin.subscriptions', ['subscriptions' => $subscriptions]);
     }
 

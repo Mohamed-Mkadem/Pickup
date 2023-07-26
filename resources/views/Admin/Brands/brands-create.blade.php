@@ -33,7 +33,7 @@
                                 accept="image/jpeg image/png, image/jpg, image/svg">
                         </div>
                         <p class="error-message" id="logo-error-message">This Field Is Required</p>
-                        <p class="field-instructions">Dimenstions 150px x 150px, Max size : 1 Mo </p>
+                        <p class="field-instructions">Dimenstions 256px x 256px, Max size : 1 MB </p>
                         <div class="upload-area d-flex j-start a-center ">
                             <i class="fa-solid fa-file-image"></i>
                             <div class="file-info">

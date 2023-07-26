@@ -20,14 +20,15 @@ class TransferController extends Controller
      */
     public function index()
     {
-        $transfers = Transfer::where('seller_id', Auth::user()->seller->id)->with(['store', 'seller'])->paginate();
+        $transfers = Transfer::where('seller_id', Auth::user()->seller->id)->with(['store', 'seller'])
+            ->orderBy('created_at', 'desc')->paginate();
         $store = Auth::user()->seller->store;
 
         return view('Seller.seller-transfers-index', ['transfers' => $transfers, 'store' => $store]);
     }
     public function adminIndex()
     {
-        $transfers = Transfer::with(['store', 'seller'])->paginate();
+        $transfers = Transfer::with(['store', 'seller'])->orderBy('created_at', 'desc')->paginate();
         return view('Admin.transfers-index', ['transfers' => $transfers]);
     }
 

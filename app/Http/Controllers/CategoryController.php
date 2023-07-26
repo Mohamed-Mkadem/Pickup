@@ -8,6 +8,7 @@ use App\Rules\UniqueCategoryNameForStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -100,7 +101,7 @@ class CategoryController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:80', new UniqueCategoryNameForStore($store->id)],
             'status' => ['required', 'in:active,inactive'],
-            'icon' => ['image', 'mimes:jpeg,jpg', 'max:1024'],
+            'icon' => ['image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
         ], [], $this->messages);
 
         if ($validation->fails()) {
@@ -157,7 +158,7 @@ class CategoryController extends Controller
             'name' => ['required', 'string', 'max:80',
                 new UniqueCategoryNameForStore($category->store_id, $category->id)],
             'status' => ['required', 'in:active,inactive'],
-            'icon' => ['image', 'mimes:jpeg,jpg', 'max:1024'],
+            'icon' => ['image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
         ], [], $this->messages);
 
         if ($validation->fails()) {

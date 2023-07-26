@@ -10,7 +10,7 @@
     <section class="content" id="content">
         <!-- Start Starter Header -->
         <div class="starter-header d-flex a-center j-sp-between col" id="starter-header">
-            <h1>Reviews : 180</h1>
+            <h1>Reviews : {{ $store->reviewsCount() }}</h1>
         </div>
         <!-- End Starter Header -->
 

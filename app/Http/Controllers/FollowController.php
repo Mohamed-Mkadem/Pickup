@@ -11,28 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class FollowController extends Controller
 {
-    // public function follow($id)
-    // {
-
-    //     $client = Auth::user()->client;
-
-    //     $store = Store::find($id);
-    //     if (!$store || !$client) {
-    //         return redirect()->back()->with('error', 'Something Went Wrong!');
-    //     }
-    //     DB::beginTransaction();
-
-    //     Follow::create([
-    //         'store_id' => $store->id,
-    //         'client_id' => $client->id,
-    //     ]);
-    //     $store->followers = DB::raw('followers + 1');
-    //     $store->save();
-    //     // Event to inform the store owner
-    //     DB::commit();
-    //     return redirect()->back()->with('success', "Now You Are Following {$store->name}");
-
-    // }
+ 
     public function follow(Store $store)
     {
         $client = Auth::user()->client;

@@ -1,7 +1,7 @@
 @extends('layouts.Admin')
 
 @push('title')
-    <title>Pickup | Vouchers </title>
+    <title>Pickup | Transfers </title>
 @endpush
 @section('content')
 

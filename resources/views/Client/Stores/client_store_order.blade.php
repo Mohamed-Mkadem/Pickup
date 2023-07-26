@@ -47,7 +47,7 @@
                                     class="modal t-center confirm-form">
                                     @csrf
                                     @method('PATCH')
-                                    <i class=" fa-light fa-trash"></i>
+                                    <i class=" fa-light fa-info"></i>
 
                                     @if ($order->status == 'accepted')
                                         <p class="  fw-bold mb-0-5 mt-1">This Action Will Cost You
@@ -501,11 +501,21 @@
                                     @foreach ($order->notes as $note)
                                         <div class="note">
                                             <div class="note-header d-flex j-start a-center row gap-1">
-                                                <img loading="lazy"
-                                                    src="{{ asset('storage/' . $note->notable->user->photo) }}"
-                                                    alt="">
+                                                @if ($note->notable_type == 'App\Models\Store')
+                                                    <img loading="lazy"
+                                                        src="{{ asset('storage/' . $note->notable->photo) }}"
+                                                        alt="">
+                                                @else
+                                                    <img loading="lazy"
+                                                        src="{{ asset('storage/' . $note->notable->user->photo) }}"
+                                                        alt="">
+                                                @endif
                                                 <div class="note-info">
-                                                    <h3>{{ ucfirst($note->notable->user->full_name) }}</h3>
+                                                    @if ($note->notable_type == 'App\Models\Store')
+                                                        <h3>{{ ucfirst($note->notable->name) }}</h3>
+                                                    @else
+                                                        <h3>{{ ucfirst($note->notable->user->full_name) }}</h3>
+                                                    @endif
                                                     <p>{{ $note->created_at->format('M jS Y H:i') }}</p>
                                                 </div>
                                             </div>

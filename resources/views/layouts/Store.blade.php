@@ -27,9 +27,9 @@
 
 
 <body>
-    <!-- <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader">
         <div class="loader-wrapper">
-            <a href="index.html" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
+            <a href="" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
                 <span>Pickup</span> </a>
             <div class="circles">
                 <div class="circle circle-1"></div>
@@ -39,7 +39,7 @@
                 <div class="circle circle-4"></div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div id="overlay" class="overlay"></div>
     <div class="main-wrapper">
         <!-- Start Header -->
@@ -59,94 +59,6 @@
                             <i class="fa-light fa-sun sun-icon"></i>
                         </button>
 
-                        {{-- <div class="dropdown-holder">
-                            <button id="notifications-handler" data-count="99" class="top-bar-btn dropdown-toggle"
-                                aria-pressed="false">
-                                <i class="fa-light fa-bell"></i>
-                            </button>
-                            <div class="dropdown-menu notifications-dropdown ">
-                                <h4>Notifications</h4>
-                                <ul class="notifications-wrapper">
-                                    <!-- Start Notification -->
-                                    <li class="notification unread">
-                                        <img src="" alt="">
-                                        <div class="details">
-                                            <p class="notification-body">
-                                                <a href="" class="unread"> Lorem ipsum dolor sit amet consectetur
-                                                    adipisicing elit.
-                                                    Ducimus, non!</a>
-                                            </p>
-                                            <p class="notification-time">
-                                                <i class="fa-light fa-timer"></i> 4 Hours ago
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <!-- End Notification -->
-                                    <!-- Start Notification -->
-                                    <li class="notification">
-                                        <img src="" alt="">
-                                        <div class="details">
-                                            <p class="notification-body">
-                                                <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit.
-                                                    Ducimus, non!</a>
-                                            </p>
-                                            <p class="notification-time">
-                                                <i class="fa-light fa-timer"></i> 4 Hours ago
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <!-- End Notification -->
-                                    <!-- Start Notification -->
-                                    <li class="notification">
-                                        <img src="" alt="">
-                                        <div class="details">
-                                            <p class="notification-body">
-                                                <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit.
-                                                    Ducimus, non!</a>
-                                            </p>
-                                            <p class="notification-time">
-                                                <i class="fa-light fa-timer"></i> 4 Hours ago
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <!-- End Notification -->
-                                    <!-- Start Notification -->
-                                    <li class="notification">
-                                        <img src="" alt="">
-                                        <div class="details">
-                                            <p class="notification-body">
-                                                <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit.
-                                                    Ducimus, non!</a>
-                                            </p>
-                                            <p class="notification-time">
-                                                <i class="fa-light fa-timer"></i> 4 Hours ago
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <!-- End Notification -->
-                                    <!-- Start Notification -->
-                                    <li class="notification unread">
-                                        <img src="" alt="">
-                                        <div class="details">
-                                            <p class="notification-body">
-                                                <a href=""> Lorem ipsum dolor sit amet consectetur adipisicing
-                                                    elit.
-                                                    Ducimus, non!</a>
-                                            </p>
-                                            <p class="notification-time">
-                                                <i class="fa-light fa-timer"></i> 4 Hours ago
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <!-- End Notification -->
-
-                                </ul>
-                                <a href="notifications.html" class="see-all d-block t-center">See All</a>
-                            </div>
-                        </div> --}}
 
                         <x-notification-menu />
                         <div class="dropdown-holder">

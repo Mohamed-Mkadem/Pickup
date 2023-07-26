@@ -91,7 +91,7 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#message'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList'],
             })
             // .then(editor => {
             //     editor.model.document.on('change:data', () => {
