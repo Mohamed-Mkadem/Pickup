@@ -253,38 +253,50 @@
                             <label class="form-label">Bank :</label>
                             <div class="select-box">
                                 <select name="bank" required class="form-element" id="bank-select">
-                                    <option value="BEITTNTT" {{ $user->seller->bank == 'BEITTNTT' ? 'selected' : '' }}>Al
-                                        Baraka Bank</option>
-                                    <option value="CFCTTNTT" {{ $user->seller->bank == 'CFCTTNTT' ? 'selected' : '' }}>
+                                    <option value="Al Baraka Bank"
+                                        {{ $user->seller->bank == 'Al Baraka Bank' ? 'selected' : '' }}>Al Baraka Bank
+                                    </option>
+                                    <option value="Amen Bank" {{ $user->seller->bank == 'Amen Bank' ? 'selected' : '' }}>
                                         Amen Bank</option>
-                                    <option value="BSTUTNTT" {{ $user->seller->bank == 'BSTUTNTT' ? 'selected' : '' }}>
-                                        Attijari Bank</option>
-                                    <option value="BNTETNTT" {{ $user->seller->bank == 'BNTETNTT' ? 'selected' : '' }}>
-                                        Banque Nationale Agricole</option>
-                                    <option value="TUSOTNT1" {{ $user->seller->bank == 'TUSOTNT1' ? 'selected' : '' }}>
-                                        Banque Tunisienne de Solidarité</option>
-                                    <option value="BTKOTNTT" {{ $user->seller->bank == 'BTKOTNTT' ? 'selected' : '' }}>
-                                        Banque Tuniso Koweitienne</option>
-                                    <option value="BZITTNTT" {{ $user->seller->bank == 'BZITTNTT' ? 'selected' : '' }}>
-                                        Banque Zitouna</option>
-                                    <option value="BTBKTNTT" {{ $user->seller->bank == 'BTBKTNTT' ? 'selected' : '' }}>
-                                        Banque de Tunisie</option>
-                                    <option value="BTEXTNTT" {{ $user->seller->bank == 'BTEXTNTT' ? 'selected' : '' }}>
-                                        Banque de Tunisie et des Emirats</option>
-                                    <option value="BHBKTNTT" {{ $user->seller->bank == 'BHBKTNTT' ? 'selected' : '' }}>
-                                        Banque de l'Habitat</option>
-                                    <option value="CITITNTX" {{ $user->seller->bank == 'CITITNTX' ? 'selected' : '' }}>
+                                    <option value="Attijari Bank"
+                                        {{ $user->seller->bank == 'Attijari Bank' ? 'selected' : '' }}>Attijari Bank
+                                    </option>
+                                    <option value="BIAT" {{ $user->seller->bank == 'BIAT' ? 'selected' : '' }}>Banque
+                                        Internationale Arabe de Tunisie</option>
+                                    <option value="BNA" {{ $user->seller->bank == 'BNA' ? 'selected' : '' }}>Banque
+                                        Nationale Agricole</option>
+                                    <option value="BTS" {{ $user->seller->bank == 'BTS' ? 'selected' : '' }}>Banque
+                                        Tunisienne de Solidarité</option>
+                                    <option value="Banque Tuniso Koweitienne"
+                                        {{ $user->seller->bank == 'Banque Tuniso Koweitienne' ? 'selected' : '' }}>Banque
+                                        Tuniso Koweitienne</option>
+                                    <option value="Banque Zitouna"
+                                        {{ $user->seller->bank == 'Banque Zitouna' ? 'selected' : '' }}>Banque Zitouna
+                                    </option>
+                                    <option value="Banque de Tunisie"
+                                        {{ $user->seller->bank == 'Banque de Tunisie' ? 'selected' : '' }}>Banque de
+                                        Tunisie</option>
+                                    <option value="Banque de l'Habitat"
+                                        {{ $user->seller->bank == "Banque de l'Habitat" ? 'selected' : '' }}>Banque de
+                                        l'Habitat</option>
+                                    <option value="Citi Bank" {{ $user->seller->bank == 'Citi Bank' ? 'selected' : '' }}>
                                         Citi Bank</option>
-                                    <option value="LPTNTNTT" {{ $user->seller->bank == 'LPTNTNTT' ? 'selected' : '' }}>La
-                                        Poste Tunisienne</option>
-                                    <option value="BTQITNTT" {{ $user->seller->bank == 'BTQITNTT' ? 'selected' : '' }}>
-                                        Qatar National Bank</option>
-                                    <option value="STBKTNTT" {{ $user->seller->bank == 'STBKTNTT' ? 'selected' : '' }}>
+                                    <option value="La Poste Tunisienne"
+                                        {{ $user->seller->bank == 'La Poste Tunisienne' ? 'selected' : '' }}>La Poste
+                                        Tunisienne</option>
+                                    <option value="Qatar National Bank"
+                                        {{ $user->seller->bank == 'Qatar National Bank' ? 'selected' : '' }}>Qatar National
+                                        Bank</option>
+                                    <option value="Société Tunisienne de Banque"
+                                        {{ $user->seller->bank == 'Société Tunisienne de Banque' ? 'selected' : '' }}>
                                         Société Tunisienne de Banque</option>
-                                    <option value="TSIDTNTT" {{ $user->seller->bank == 'TSIDTNTT' ? 'selected' : '' }}>
-                                        Tunisian Saudi Bank</option>
-                                    <option value="UIBKTNTT" {{ $user->seller->bank == 'UIBKTNTT' ? 'selected' : '' }}>
-                                        Union Internationale de Banque</option>
+                                    <option value="Tunisian Saudi Bank"
+                                        {{ $user->seller->bank == 'Tunisian Saudi Bank' ? 'selected' : '' }}>Tunisian Saudi
+                                        Bank</option>
+                                    <option value="UIB" {{ $user->seller->bank == 'UIB' ? 'selected' : '' }}>Union
+                                        Internationale de Banque</option>
+
+
                                 </select>
                             </div>
                             <p class="error-message">This Field Is Required</p>
@@ -320,7 +332,7 @@
 
 
 @push('scripts')
-    {{-- <script>
+    <script>
         const errorMessages = document.querySelectorAll('.error-message')
 
         function hideErrorMessages() {
@@ -537,7 +549,7 @@
         const newPassword = document.getElementById('new-password')
 
         const confirmPassword = document.getElementById('confirm-password')
-    </script> --}}
+    </script>
 
     <script>
         const bankFrom = document.getElementById('bank-form')

@@ -94,10 +94,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->type == 'Client';
     }
-// public function receivesBroadcastNotificationsOn(): string
-// {
-//     return 'users.' . $this->id;
-// }
 
 // Tickets
     public function tickets()

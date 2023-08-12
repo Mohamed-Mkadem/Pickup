@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('phone')->unique();
             $table->text('bio');
-            $table->string('photo')->default('stores/photos/default_photo.jpg');
+            $table->string('photo');
             $table->string('cover_photo')->default('stores/covers/default_cover.jpg');
             $table->timestamps();
         });

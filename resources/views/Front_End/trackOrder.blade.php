@@ -25,7 +25,7 @@
                     <div class="col form-holder">
                         <form action="{{ route('order.get') }}" id="check-form" method="GET">
                             <div class="form-control">
-                                <label for="" class="d-block">Enter Check Code</label>
+                                <label for="" class="d-block">Enter Order ID</label>
                                 <input required type="text" name="order_id" value="{{ request()->order_id }}"
                                     class="form-element">
                                 <p class="error-message ">This Field Is required</p>
@@ -58,7 +58,7 @@
                                     @auth
                                         @if (Auth::user()->client == $order->client)
                                             <p class="client-name"> <span>Client :</span>
-                                                {{ $order->client->user->full_name . ' (Y fffffffffffffffffff fffffou)' }}
+                                                {{ $order->client->user->full_name }}
                                             </p>
                                         @else
                                             <p class="client-name"> <span>Client :</span> Anonymous</p>
@@ -162,14 +162,11 @@
             if (checkCodeInput.value == '') {
                 errorMessage.textContent = 'This Field Is Required'
                 errorMessage.classList.add('show')
-            }
-            // In case that I will make the check code only numbers I'll use this condition to valid
-            // else if (!checkCodeInput.value.match(/^[0-9]*$/)) {
-            //     errorMessage.textContent = 'Enter A valid Check Code'
-            //     errorMessage.classList.add('show')
+            } else if (!checkCodeInput.value.match(/^[0-9]*$/)) {
+                errorMessage.textContent = 'Enter A valid Order ID'
+                errorMessage.classList.add('show')
 
-            // }
-            else {
+            } else {
 
                 errorMessage.textContent = ''
                 errorMessage.classList.remove('show')

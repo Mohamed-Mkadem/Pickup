@@ -28,7 +28,9 @@ class StorePolicy
      */
     public function create(User $user)
     {
-        // return $user->seller->isVerified() && !$user->seller->hasStore();
+
+        return $user->seller->isVerified() && !$user->seller->hasStore();
+       
     }
 
     /**

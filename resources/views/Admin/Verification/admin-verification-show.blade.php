@@ -4,17 +4,7 @@
     <title>Pickup | Verification Request Details </title>
 @endpush
 
-{{-- @push('light-box')
-    <div class="light-box" id="light-box">
-        <div class="main-image">
-            <button id="close-light-box"><i class="fa-light fa-close"></i></button>
-            <button class="arrow-btn" id="prev-btn"><i class="fa-light fa-circle-arrow-left"></i></button>
-            <img src="{{ asset('storage/' . $request->photo) }}" alt="">
-            <button class="arrow-btn" id="next-btn"><i class="fa-light fa-circle-arrow-right"></i></button>
-        </div>
 
-    </div>
-@endpush --}}
 @push('light-box')
     <div class="light-box" id="light-box">
         <div class="main-image">

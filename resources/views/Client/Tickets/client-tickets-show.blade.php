@@ -256,7 +256,7 @@
                 if (fileName.length > 12) {
                     let splitName = fileName.split('.')
                     fileName = splitName[0].substring(0, 12) + '... .' + splitName[1];
-                    console.log(fileName);
+                    
                 }
                 uploadArea.classList.add('show')
                 fileNameHolder.textContent = fileName

@@ -181,11 +181,11 @@
                                                     <!-- Start Grid Item -->
                                                     <div class="grid-item  ">
                                                         <img class="radius-10"
-                                                            src="{{ Storage::url('public/stores/cover_photos/' . $fileName) }}"
+                                                            src="{{ asset('storage/stores/covers/' . $fileName) }}"
                                                             alt="">
                                                         <input type="radio" data-img="{{ $fileName }}"
                                                             name="cover"
-                                                            value=" {{ 'public/stores/cover_photos/' . $fileName }} ) }}">
+                                                            value=" {{ 'public/stores/covers/' . $fileName }} ) }}">
                                                     </div>
                                                     <!-- End Grid Item -->
                                                 @endforeach
@@ -439,7 +439,7 @@
                 errors += validateField(cityInput, cityInput.parentElement.nextElementSibling)
                 errors += validateField(bioInput, bioInput.parentElement.lastElementChild)
 
-                // errors += validateField(avatarInput, avatarInputErrorMessage)
+                errors += validateField(avatarInput, avatarInputErrorMessage)
                 if (!errors) storeForm.submit()
             })
             const resetBtn = document.querySelector('.resetBtn')

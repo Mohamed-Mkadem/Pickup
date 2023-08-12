@@ -21,19 +21,7 @@
 </head>
 
 <body>
-    {{-- <div class="preloader" id="preloader">
-        <div class="loader-wrapper">
-            <a href="index.html" class="logo d-block visible"><i class="fa-light fa-bag-shopping"></i>
-                <span>Pickup</span> </a>
-            <div class="circles">
-                <div class="circle circle-1"></div>
-                <div class="circle circle-2"></div>
-                <div class="circle circle-3"></div>
-                <div class="circle circle-4"></div>
-                <div class="circle circle-4"></div>
-            </div>
-        </div>
-    </div> --}}
+ 
     <main class="client login">
         <div class="login-wrapper">
             <a href="{{ route('homePage') }}" class="logo visible d-block light m-auto"><i

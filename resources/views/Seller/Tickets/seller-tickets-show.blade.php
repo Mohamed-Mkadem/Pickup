@@ -226,21 +226,7 @@
             })
 
             const buttons = document.querySelectorAll('.submit-btn')
-            // buttons.forEach(btn => {
-            //     btn.addEventListener('click', (e) => {
-            //         if (e.target.classList.contains('close-btn')) {
-            //             responseForm.submit()
-            //         } else {
-            //             let errors = 0
-            //             errors += validateField(responseTextarea, responseErrorMessage)
-
-
-            //             if (!errors) {
-            //                 responseForm.submit()
-            //             }
-            //         }
-            //     })
-            // })
+     
 
 
             filesInput.addEventListener('change', () => {

@@ -97,30 +97,31 @@
 
 @push('scripts')
     <script>
-        // const balanceForm = document.getElementById('balance-form')
-        // const voucherInput = document.getElementById('voucher-input')
-        // balanceForm.addEventListener('submit', (e) => {
-        //     e.preventDefault()
-        //     let errors = 0
-        //     errors += validateField(voucherInput, voucherInput.nextElementSibling)
+        const balanceForm = document.getElementById('balance-form')
+        const voucherInput = document.getElementById('voucher-input')
+        balanceForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            let errors = 0
+            errors += validateField(voucherInput, voucherInput.nextElementSibling)
 
-        //     if (!errors) {
-        //         balanceForm.submit()
-        //     }
+            if (!errors) {
+                balanceForm.submit()
+            }
 
-        // })
-        // function validateField(field, errorMessage) {
-        //     let errors = 0
-        //     if (!field.value) {
-        //         errorMessage.textContent = 'This Field Is Required'
-        //         errorMessage.classList.add('show')
-        //         errors = 1
-        //     } else {
-        //         errorMessage.textContent = ''
-        //         errorMessage.classList.remove('show')
-        //         errors = 0
-        //     }
-        //     return errors
-        // }
+        })
+
+        function validateField(field, errorMessage) {
+            let errors = 0
+            if (!field.value) {
+                errorMessage.textContent = 'This Field Is Required'
+                errorMessage.classList.add('show')
+                errors = 1
+            } else {
+                errorMessage.textContent = ''
+                errorMessage.classList.remove('show')
+                errors = 0
+            }
+            return errors
+        }
     </script>
 @endpush

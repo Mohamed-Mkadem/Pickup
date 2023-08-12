@@ -35,8 +35,5 @@ class Sale extends Model
     {
         return $this->morphMany(Revenue::class, 'revenueable');
     }
-    public function expenses()
-    {
-        return $this->morphMany(Expense::class, 'expensable');
-    }
+  
 }

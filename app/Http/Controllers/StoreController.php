@@ -16,6 +16,7 @@ use App\Models\Seller;
 use App\Models\State;
 use App\Models\Store;
 use App\Models\StoreOpeningHour;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -44,6 +45,7 @@ class StoreController extends Controller
     protected $brands;
     public function __construct()
     {
+
         $this->middleware('isVerified')->only(['create', 'index']);
         // $this->brands = Brand::where('status', 'active')->get();
         $this->brands = Brand::get();
@@ -54,6 +56,7 @@ class StoreController extends Controller
         $this->fileNames = array_map(function ($file) {
             return File::basename($file);
         }, $this->covers);
+        // dd($this->fileNames);
     }
 
     /**
@@ -61,6 +64,8 @@ class StoreController extends Controller
      */
     public function index()
     {
+        // $user = User::find(Auth::id());
+        // dd($user->seller->isVerified() && $user->seller->hasStore());
         $stores = Store::where('seller_id', Auth::user()->seller->id)->with(['owner', 'sector'])->get();
         return view(
             'Seller.Stores.stores-index', ['stores' => $stores]
@@ -73,7 +78,7 @@ class StoreController extends Controller
     public function create()
     {
         $seller = Seller::with('user')->find(Auth::user()->seller->id);
-        // $this->authorize('create');
+        // $this->authorize('create', Store::class);
         return view('Seller.Stores.stores-create', ['seller' => $seller, 'states' => $this->states, 'sectors' => $this->sectors, 'covers' => $this->covers, 'fileNames' => $this->fileNames]);
     }
 
@@ -82,13 +87,12 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create');
+
+        $this->authorize('create', Store::class);
         Validator::extend('one_word', function ($attribute, $value, $parameters, $validator) {
             return preg_match('/^\w+$/', $value);
         });
 
-        // dd($request->openingHours);
-        // Set an array of attributes to rename the fields
         $validated = Validator::make($request->all(), [
             'name' => ['required', 'max:60', 'unique:stores', 'string'],
             'sector_id' => ['required', 'exists:sectors,id'],
@@ -100,7 +104,7 @@ class StoreController extends Controller
             'bio' => ['required', 'string', 'max:400'],
             'username' => ['required', 'unique:stores', 'max:20', 'one_word'],
             'phone' => ['required', 'digits:8'],
-            'photo' => ['file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
+            'photo' => ['required', 'file', 'image', 'mimes:jpg,jpeg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
             'cover' => ['string'],
             'openingHours' => ['required', 'array'],
             'openingHours.*.opening_time' => ['required', 'date_format:H:i'],
@@ -111,13 +115,12 @@ class StoreController extends Controller
             return redirect()->back()->withErrors($validated)->withInput();
         } else {
             DB::beginTransaction();
-            $path = null;
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $path = $file->store('/stores/photos', [
-                    'disk' => 'public',
-                ]);
-            }
+
+            $file = $request->file('photo');
+            $path = $file->store('/stores/photos', [
+                'disk' => 'public',
+            ]);
+
             $store = new Store;
             $store->name = $request->name;
             $store->seller_id = Auth::user()->seller->id;

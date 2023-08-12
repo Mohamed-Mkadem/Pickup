@@ -137,7 +137,7 @@
                                         <div class="form-control">
                                             <label class="d-block required">Phone Number :</label>
                                             <input type="number" value="{{ old('phone') }}" name="phone"
-                                                id="phone" value="25412012" maxlength="8" inputmode="numeric"
+                                                id="phone" maxlength="8" inputmode="numeric"
                                                 placeholder="eg: 20111222">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
@@ -237,54 +237,31 @@
                                             <label class="d-block required">Bank :</label>
                                             <div class="select-box">
                                                 <select name="bank" id="bank-select">
-
-                                                    <option value="BEITTNTT">Al Baraka Bank</option>
-
-
-
-                                                    <option value="CFCTTNTT">Amen Bank</option>
-
-
-
-
-                                                    <option value="BSTUTNTT">Attijari Bank</option>
-
-
-
-                                                    <option value="BIATTNTT">Banque Internationale Arabe de Tunisie
+                                                    <option value="Al Baraka Bank">Al Baraka Bank</option>
+                                                    <option value="Amen Bank">Amen Bank</option>
+                                                    <option value="Attijari Bank">Attijari Bank</option>
+                                                    <option value="BIAT">Banque
+                                                        Internationale Arabe de Tunisie</option>
+                                                    <option value="BNA">Banque Nationale Agricole
                                                     </option>
+                                                    <option value="BTS">Banque Tunisienne
+                                                        de Solidarité</option>
+                                                    <option value="Banque Tuniso Koweitienne">Banque Tuniso Koweitienne
+                                                    </option>
+                                                    <option value="Banque Zitouna">Banque Zitouna</option>
+                                                    <option value="Banque de Tunisie">Banque de Tunisie</option>
 
-                                                    <option value="BNTETNTT">Banque Nationale Agricole</option>
-
-                                                    <option value="TUSOTNT1">Banque Tunisienne de Solidarité</option>
-
-                                                    <option value="BTKOTNTT">Banque Tuniso Koweitienne</option>
-
-
-
-                                                    <option value="BZITTNTT">Banque Zitouna</option>
-
-
-
-                                                    <option value="BTBKTNTT">Banque de Tunisie</option>
-
-                                                    <option value="BTEXTNTT">Banque de Tunisie et des Emirats</option>
-
-                                                    <option value="BHBKTNTT">Banque de l'Habitat</option>
-
-                                                    <option value="CITITNTX">Citi Bank</option>
-
-                                                    <option value="LPTNTNTT">La Poste Tunisienne</option>
-
-                                                    <option value="BTQITNTT">Qatar National Bank</option>
-
-                                                    <option value="STBKTNTT">Société Tunisienne de Banque</option>
-
-                                                    <option value="TSIDTNTT">Tunisian Saudi Bank</option>
+                                                    <option value="Banque de l'Habitat">Banque de l'Habitat</option>
+                                                    <option value="Citi Bank">Citi Bank</option>
+                                                    <option value="La Poste Tunisienne">La Poste Tunisienne</option>
+                                                    <option value="Qatar National Bank">Qatar National Bank</option>
+                                                    <option value="Société Tunisienne de Banque">Société Tunisienne de
+                                                        Banque</option>
+                                                    <option value="Tunisian Saudi Bank">Tunisian Saudi Bank</option>
+                                                    <option value="UIB">Union Internationale
+                                                        de Banque</option>
 
 
-
-                                                    <option value="UIBKTNTT">Union Internationale de Banque</option>
                                                 </select>
                                                 <p class="error-message">This Field Is Required</p>
                                             </div>

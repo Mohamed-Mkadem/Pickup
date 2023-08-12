@@ -220,6 +220,6 @@
         })
     </script>
 
-    {{-- <script src=" {{ asset('dist/js/modals.js') }} "></script> --}}
+   
     @include('components.inc_modals-js')
 @endpush

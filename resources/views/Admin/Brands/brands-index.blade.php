@@ -163,8 +163,8 @@
                             </header>
 
                             <div class="info">
-                                <img loading="lazy" src="{{ asset($brand->logo) }}" alt="">
-                                {{-- <img loading="lazy" src="{{ asset('storage/' . $brand->logo) }}" alt=""> --}}
+                                {{-- <img loading="lazy" src="{{ asset($brand->logo) }}" alt=""> --}}
+                                 <img loading="lazy" src="{{ asset('storage/' . $brand->logo) }}" alt=""> 
                                 <h3><a href="{{ route('admin.brands.show', $brand->id) }}">{{ $brand->name }}</a></h3>
                                 <p>{{ $brand->productsCount() == 1 ? '1 Product' : $brand->productsCount() . ' Products' }}
                                 </p>

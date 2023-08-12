@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->references('id')->on('products');
             $table->integer('quantity');
             $table->float('price');
-            $table->integer('sub_total');
+            $table->float('sub_total');
             $table->string('name');
             $table->string('image');
             $table->timestamps();

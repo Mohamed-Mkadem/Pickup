@@ -133,9 +133,9 @@
                                         </div>
                                         <div class="form-control">
                                             <label class="d-block required">Phone Number :</label>
-                                            <input type="number" name="phone" value="{{ old('phone') }}"
-                                                id="phone" placeholder="eg: 20111222" maxlength="8"
-                                                inputmode="numeric" value="{{ old('phone') }}">
+                                            <input type="number" name="phone" id="phone"
+                                                placeholder="eg: 20111222" maxlength="8" inputmode="numeric"
+                                                value="{{ old('phone') }}">
                                             <p class="error-message">This Field Is Required</p>
                                         </div>
                                     </div>

@@ -14,8 +14,8 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'first_name' => 'Mohamed',
-            'last_name' => 'Mkadem',
+            'first_name' => 'Pickup',
+            'last_name' => 'Ltd',
             'd_o_b' => '1997-12-04',
             'type' => 'Admin',
             'address' => 'Awesome Street Name',
