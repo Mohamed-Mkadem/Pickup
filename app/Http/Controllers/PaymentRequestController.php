@@ -125,7 +125,7 @@ class PaymentRequestController extends Controller
             $seller->save();
             event(new PaymentRequestCreated($paymentRequest));
             DB::commit();
-            // return redirect()->back()->with('success', 'Payment Request Placed Successfully');
+            return redirect()->back()->with('success', 'Payment Request Placed Successfully');
 
         }
     }

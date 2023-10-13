@@ -1,490 +1,527 @@
 @use "../Abstracts/" as *;
 
 .dark {
-  background-color: var(--clr-black-50);
-  // Backgrounds
-  footer,
-  header .top-menu {
-    background-color: var(--clr-teal-100);
-  }
-  .track-order .track-wrapper .col.form-holder form .form-control button:hover {
-    background-color: var(--clr-teal-300);
-  }
-  .track-order .track-wrapper .col.form-holder form .form-control button {
-    background-color: var(--clr-teal-400);
-  }
-  .about .team-wrapper .member,
-  .cta-wrapper a:hover {
-    background-color: var(--clr-blueGray-700);
-  }
-  .track-order .order .order-products .table-responsive table thead,
-  .home .vendors-wrapper .vendor .info,
-  section.cta {
-    background-color: var(--clr-blueGray-900);
-  }
-
-  .showcase .showcase-wrapper .text-info a:hover {
-    background-color: var(--clr-turquoise-100);
-  }
-  .tabs-wrapper .tab .accordions-wrapper .question-category .accordion-item h3,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .buttons-wrapper
-    button.back-btn:hover,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .buttons-wrapper
-    button.next-btn:hover,
-  .start-selling .steps .a11y-slider-dots li button.active,
-  .terms-privacy .tp-wrapper header,
-  .home .how-it-works a.btn,
-  header .main-menu .drops-col .switcher-holder button:hover,
-  header nav ul li a:hover,
-  .home .what-is-wrapper .info a {
-    background-color: var(--clr-olive-100);
-  }
-  .about .cta-wrapper .buttons a:first-of-type:hover,
-  .home .how-it-works a.btn:hover,
-  .home .what-is-wrapper .info a:hover,
-  header nav ul li a.active:hover,
-  header nav ul li a.active {
-    background-color: var(--clr-olive-200);
-  }
-
-  .reset-password {
     background-color: var(--clr-black-50);
-  }
-  .reset-password .form-wrapper,
-  .register .register-wrapper .col.form-col,
-  .start-selling .steps .a11y-slider-dots li button:not(.active),
-  .showcase.start-selling,
-  .terms-privacy .tp-wrapper,
-  .track-order
-    .order
-    .order-products
-    .table-responsive
-    table
-    tbody
-    tr:nth-child(odd),
-  .track-order .order header .info-holder .quick-info .info,
-  .track-order {
-    background-color: var(--clr-black-100) !important ;
-  }
-  .tabs-wrapper .tab .accordions-wrapper .question-category .accordion-item,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box
-    select,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .gender-wrapper
-    .choice,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input,
-  .start-selling .fees-wrapper .col,
-  .start-selling .steps .slides-wrapper.slider .slide .info,
-  .track-order
-    .order
-    .order-products
-    .table-responsive
-    table
-    tbody
-    tr:nth-child(even),
-  .track-order .track-wrapper .col.form-holder form .form-control input,
-  .contact .contact-info > div,
-  .contact .contact-wrapper .form-col form .form-row .form-control textarea,
-  .contact .contact-wrapper .form-col form .form-row .form-control input,
-  section.start-selling--sectors,
-  section.team,
-  section.how-it-works,
-  header .main-menu .drops-col .client-links ul.dropdown-menu,
-  header .main-menu .drops-col .client-links button.auth,
-  header .top-menu .wrapper .seller-links ul.dropdown-menu {
-    background-color: var(--clr-black-150);
-  }
-  .reset-password .form-wrapper form .form-control input,
-  header nav,
-  .track-order .track-wrapper .col.form-holder {
-    background-color: var(--clr-black-200);
-  }
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box::before,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input[type="date"]::before,
-  .track-order .order .order-details,
-  .track-order .order header .info-holder .quick-info .info i,
-  .track-order .order header,
-  header .main-menu .drops-col .client-links ul.dropdown-menu li:hover {
-    background-color: var(--clr-black-250);
-  }
-
-  .about .cta-wrapper .buttons a:first-of-type,
-  header .main-menu .drops-col .client-links button:hover {
-    background: none;
-  }
-  // Colors
-  .track-order .track-wrapper .col.form-holder form .form-control label,
-  .contact .contact-info > div,
-  .cta-wrapper h3,
-  .cta-wrapper a,
-  .cta-wrapper p {
-    color: var(--clr-blueGray-0);
-  }
-  .tabs-wrapper .tab .accordions-wrapper .question-category header,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box::before,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input[type="date"]::before,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    label,
-  .track-order .order .order-products .table-responsive table tbody tr td,
-  .track-order .order .order-details .col h3,
-  .track-order .order .order-products h3,
-  .track-order .order header .info-holder .quick-info .info,
-  .track-order,
-  .track-order .order header .info-holder .client-name-date p,
-  .track-order .order header .info-holder h3.store-name,
-  .track-order .track-wrapper .col.form-holder form .form-control input,
-  .contact .contact-wrapper .form-col form .form-row .form-control textarea,
-  .contact .contact-wrapper .form-col form .form-row .form-control input,
-  .contact .contact-wrapper .form-col form .form-row .form-control label,
-  .sectors-wrapper .sector h3,
-  .features-wrapper .feature header {
-    color: var(--clr-blueGray-100);
-  }
-  .showcase .showcase-wrapper .text-info p {
-    color: var(--clr-blueGray-200);
-  }
-  header .top-menu .wrapper .seller-links ul.dropdown-menu li.span-holder,
-  header .top-menu .wrapper .seller-links ul.dropdown-menu li a,
-  header .main-menu .drops-col .switcher-holder button,
-  header .main-menu .drops-col .client-links ul.dropdown-menu li a,
-  header .main-menu .drops-col .client-links button {
-    color: var(--clr-olive-600);
-  }
-  .about .about-wrapper .info h2,
-  .title.main-title {
-    color: var(--clr-olive-500);
-  }
-  .tabs-wrapper
-    .tab
-    .accordions-wrapper
-    .question-category
-    .accordion-item
-    .accordion-item-body,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box
-    select,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .gender-wrapper
-    .choice
-    p,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input,
-  .start-selling .steps .slides-wrapper.slider .slide .info p,
-  .start-selling .fees-wrapper .col ul.features li,
-  .terms-privacy .tp-wrapper .content p,
-  .track-order .order .order-details .col.order-history ul.status li div.info p,
-  .track-order .order .order-details .col.notes .note p,
-  .track-order .track-wrapper .col.info-holder ul li,
-  .track-order .track-wrapper .col.info-holder p,
-  .about .about-wrapper .info p,
-  .home .how-it-works .steps-wrapper .steps-col .step p,
-  .features-wrapper .feature p,
-  .home .what-is-wrapper .info p,
-  .reset-password .form-wrapper form .form-control input,
-  .reset-password .form-wrapper > p {
-    color: var(--clr-white-800);
-  }
-  .track-order
-    .order
-    .order-details
-    .col.order-history
-    ul.status
-    li
-    div.info
-    h4,
-  .track-order .not-found-wrapper p,
-  .track-order .order header .info-holder h3 span {
-    color: var(--clr-white-900);
-  }
-  header nav ul li a.active,
-  .home .what-is-wrapper .info a:hover {
-    color: var(--clr-white-1000);
-  }
-  .terms-privacy .tp-wrapper .content h2 span,
-  .home .how-it-works .steps-wrapper .steps-col .step h3 span {
-    color: var(--clr-mustard-400);
-  }
-  .start-selling .fees-wrapper .col header p.price {
-    color: var(--clr-mustard-500);
-  }
-
-  .register .register-wrapper .col.form-col form .steps-wrapper .step header h2,
-  .start-selling .steps .slides-wrapper.slider .slide .info p span,
-  .start-selling .steps .slides-wrapper.slider .slide .info h3,
-  .terms-privacy .tp-wrapper .content h2,
-  .track-order .order .order-details .col.notes .note h4,
-  .home .how-it-works a.btn:hover,
-  .home .how-it-works .steps-wrapper .steps-col .step h3 {
-    color: var(--clr-mustard-700);
-  }
-  .tabs-wrapper
-    .tab
-    .accordions-wrapper
-    .question-category
-    .accordion-item
-    h3
-    button,
-  .tabs-wrapper
-    .tab
-    .accordions-wrapper
-    .question-category
-    .accordion-item
-    h3::after,
-  .register .register-wrapper .col.form-col form .steps-wrapper .step header p,
-  .start-selling .steps .slides-wrapper.slider .slide .info > span,
-  .start-selling .fees-wrapper .col header h3,
-  .start-selling .guidelines-holder p,
-  .title.page-title,
-  .home .how-it-works .steps-wrapper .steps-col .step.logo-holder .logo {
-    color: var(--clr-mustard-800);
-  }
-  .track-order .track-wrapper .col.info-holder ul li a:hover,
-  .about .numbers-wrapper .number p span {
-    color: var(--clr-yellow-500);
-  }
-  .about .numbers-wrapper .number p {
-    color: var(--clr-yellow-900);
-  }
-  .reset-password .form-wrapper h1,
-  .icon-btn,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .buttons-wrapper
-    button.back-btn,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .buttons-wrapper
-    button.next-btn,
-  .register .register-wrapper .col.form-col a.logo,
-  .contact .contact-info > div h3,
-  .logo,
-  header nav ul li a,
-  .showcase .showcase-wrapper .text-info a,
-  .title.h1-title {
-    color: var(--clr-turquoise-800);
-  }
-  .reset-password .form-wrapper form .form-control p.message.success {
-    color: var(--clr-green-600);
-  }
-  // Border Color
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .gender-wrapper
-    .choice
-    input[type="radio"]:checked,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box
-    select:focus,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input:focus-within,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input:focus,
-  .track-order
-    .track-wrapper
-    .col.form-holder
-    form
-    .form-control
-    input:focus-within,
-  .track-order .track-wrapper .col.form-holder form .form-control input:focus,
-  .reset-password .form-wrapper form .form-control input:focus,
-  .reset-password .form-wrapper form .form-control input:focus-within {
-    border-color: var(--clr-turquoise-800);
-  }
-  .track-order .track-wrapper .col.form-holder form .form-control input {
-    border-color: var(--clr-teal-400);
-  }
-  .home .what-is-wrapper .info a:hover {
-    border-color: var(--clr-olive-300);
-  }
-  header .top-menu .wrapper .seller-links ul.dropdown-menu li {
-    &:hover {
-      border-color: var(--clr-olive-600) !important;
+    // Backgrounds
+    footer,
+    header .top-menu {
+        background-color: var(--clr-teal-100);
     }
-    &:nth-child(2) {
-      border: none !important;
+    .track-order
+        .track-wrapper
+        .col.form-holder
+        form
+        .form-control
+        button:hover {
+        background-color: var(--clr-teal-300);
     }
-  }
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    .select-box
-    select,
-  .register
-    .register-wrapper
-    .col.form-col
-    form
-    .steps-wrapper
-    .step
-    .inputs
-    .row
-    .form-control
-    input,
-  .track-order .track-wrapper .col.form-holder form .form-control button,
-  .contact .contact-wrapper .form-col form .form-row .form-control button:hover,
-  .home .how-it-works a.btn {
-    border-color: transparent;
-  }
+    .track-order .track-wrapper .col.form-holder form .form-control button {
+        background-color: var(--clr-teal-400);
+    }
+    .about .team-wrapper .member,
+    .cta-wrapper a:hover {
+        background-color: var(--clr-blueGray-700);
+    }
+    .track-order .order .order-products .table-responsive table thead,
+    .home .vendors-wrapper .vendor .info,
+    section.cta {
+        background-color: var(--clr-blueGray-900);
+    }
 
-  // Box Shadow
-  .home .vendors-wrapper .vendor {
-    box-shadow: none;
-  }
+    .showcase .showcase-wrapper .text-info a:hover {
+        background-color: var(--clr-turquoise-100);
+    }
+    .tabs-wrapper
+        .tab
+        .accordions-wrapper
+        .question-category
+        .accordion-item
+        h3,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .buttons-wrapper
+        button.back-btn:hover,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .buttons-wrapper
+        button.next-btn:hover,
+    .start-selling .steps .a11y-slider-dots li button.active,
+    .terms-privacy .tp-wrapper header,
+    .home .how-it-works a.btn,
+    header .main-menu .drops-col .switcher-holder button:hover,
+    header nav ul li a:hover,
+    .home .what-is-wrapper .info a {
+        background-color: var(--clr-olive-100);
+    }
+    .about .cta-wrapper .buttons a:first-of-type:hover,
+    .home .how-it-works a.btn:hover,
+    .home .what-is-wrapper .info a:hover,
+    header nav ul li a.active:hover,
+    header nav ul li a.active {
+        background-color: var(--clr-olive-200);
+    }
 
-  @include min-width(medium) {
-    header nav,
+    .reset-password {
+        background-color: var(--clr-black-50);
+    }
+    .reset-password .form-wrapper,
+    .register .register-wrapper .col.form-col,
+    .start-selling .steps .a11y-slider-dots li button:not(.active),
+    .showcase.start-selling,
+    .terms-privacy .tp-wrapper,
+    .track-order
+        .order
+        .order-products
+        .table-responsive
+        table
+        tbody
+        tr:nth-child(odd),
+    .track-order .order header .info-holder .quick-info .info,
+    .track-order {
+        background-color: var(--clr-black-100) !important ;
+    }
+    .tabs-wrapper .tab .accordions-wrapper .question-category .accordion-item,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box
+        select,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .gender-wrapper
+        .choice,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input,
+    .start-selling .fees-wrapper .col,
+    .start-selling .steps .slides-wrapper.slider .slide .info,
+    .track-order
+        .order
+        .order-products
+        .table-responsive
+        table
+        tbody
+        tr:nth-child(even),
+    .track-order .track-wrapper .col.form-holder form .form-control input,
+    .contact .contact-info > div,
+    .contact .contact-wrapper .form-col form .form-row .form-control textarea,
+    .contact .contact-wrapper .form-col form .form-row .form-control input,
+    section.start-selling--sectors,
+    section.team,
+    section.how-it-works,
+    header .main-menu .drops-col .client-links ul.dropdown-menu,
+    header .main-menu .drops-col .client-links button.auth,
     header .top-menu .wrapper .seller-links ul.dropdown-menu {
-      background: none !important;
+        background-color: var(--clr-black-150);
     }
-  }
+    .reset-password .form-wrapper form .form-control input,
+    header nav,
+    .track-order .track-wrapper .col.form-holder {
+        background-color: var(--clr-black-200);
+    }
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box::before,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input[type="date"]::before,
+    .track-order .order .order-details,
+    .track-order .order header .info-holder .quick-info .info i,
+    .track-order .order header,
+    header .main-menu .drops-col .client-links ul.dropdown-menu li:hover {
+        background-color: var(--clr-black-250);
+    }
+
+    .about .cta-wrapper .buttons a:first-of-type,
+    header .main-menu .drops-col .client-links button:hover {
+        background: none;
+    }
+    // Colors
+    .track-order .track-wrapper .col.form-holder form .form-control label,
+    .contact .contact-info > div,
+    .cta-wrapper h3,
+    .cta-wrapper a,
+    .cta-wrapper p {
+        color: var(--clr-blueGray-0);
+    }
+    .tabs-wrapper .tab .accordions-wrapper .question-category header,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box::before,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input[type="date"]::before,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        label,
+    .track-order .order .order-products .table-responsive table tbody tr td,
+    .track-order .order .order-details .col h3,
+    .track-order .order .order-products h3,
+    .track-order .order header .info-holder .quick-info .info,
+    .track-order,
+    .track-order .order header .info-holder .client-name-date p,
+    .track-order .order header .info-holder h3.store-name,
+    .track-order .track-wrapper .col.form-holder form .form-control input,
+    .contact .contact-wrapper .form-col form .form-row .form-control textarea,
+    .contact .contact-wrapper .form-col form .form-row .form-control input,
+    .contact .contact-wrapper .form-col form .form-row .form-control label,
+    .sectors-wrapper .sector h3,
+    .features-wrapper .feature header {
+        color: var(--clr-blueGray-100);
+    }
+    .showcase .showcase-wrapper .text-info p {
+        color: var(--clr-blueGray-200);
+    }
+    header .top-menu .wrapper .seller-links ul.dropdown-menu li.span-holder,
+    header .top-menu .wrapper .seller-links ul.dropdown-menu li a,
+    header .main-menu .drops-col .switcher-holder button,
+    header .main-menu .drops-col .client-links ul.dropdown-menu li a,
+    header .main-menu .drops-col .client-links button {
+        color: var(--clr-olive-600);
+    }
+    .about .about-wrapper .info h2,
+    .title.main-title {
+        color: var(--clr-olive-500);
+    }
+    .tabs-wrapper
+        .tab
+        .accordions-wrapper
+        .question-category
+        .accordion-item
+        .accordion-item-body,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box
+        select,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .gender-wrapper
+        .choice
+        p,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input,
+    .start-selling .steps .slides-wrapper.slider .slide .info p,
+    .start-selling .fees-wrapper .col ul li,
+    .terms-privacy .tp-wrapper .content p,
+    .track-order
+        .order
+        .order-details
+        .col.order-history
+        ul.status
+        li
+        div.info
+        p,
+    .track-order .order .order-details .col.notes .note p,
+    .track-order .track-wrapper .col.info-holder ul li,
+    .track-order .track-wrapper .col.info-holder p,
+    .about .about-wrapper .info p,
+    .home .how-it-works .steps-wrapper .steps-col .step p,
+    .features-wrapper .feature p,
+    .home .what-is-wrapper .info p,
+    .reset-password .form-wrapper form .form-control input,
+    .reset-password .form-wrapper > p {
+        color: var(--clr-white-800);
+    }
+    .track-order
+        .order
+        .order-details
+        .col.order-history
+        ul.status
+        li
+        div.info
+        h4,
+    .track-order .not-found-wrapper p,
+    .track-order .order header .info-holder h3 span {
+        color: var(--clr-white-900);
+    }
+    header nav ul li a.active,
+    .home .what-is-wrapper .info a:hover {
+        color: var(--clr-white-1000);
+    }
+    .terms-privacy .tp-wrapper .content h2 span,
+    .home .how-it-works .steps-wrapper .steps-col .step h3 span {
+        color: var(--clr-mustard-400);
+    }
+    .start-selling .fees-wrapper .col header p.price {
+        color: var(--clr-mustard-500);
+    }
+
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        header
+        h2,
+    .start-selling .steps .slides-wrapper.slider .slide .info p span,
+    .start-selling .steps .slides-wrapper.slider .slide .info h3,
+    .terms-privacy .tp-wrapper .content h2,
+    .track-order .order .order-details .col.notes .note h4,
+    .home .how-it-works a.btn:hover,
+    .home .how-it-works .steps-wrapper .steps-col .step h3 {
+        color: var(--clr-mustard-700);
+    }
+    .tabs-wrapper
+        .tab
+        .accordions-wrapper
+        .question-category
+        .accordion-item
+        h3
+        button,
+    .tabs-wrapper
+        .tab
+        .accordions-wrapper
+        .question-category
+        .accordion-item
+        h3::after,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        header
+        p,
+    .start-selling .steps .slides-wrapper.slider .slide .info > span,
+    .start-selling .fees-wrapper .col header h3,
+    .start-selling .guidelines-holder p,
+    .title.page-title,
+    .home .how-it-works .steps-wrapper .steps-col .step.logo-holder .logo {
+        color: var(--clr-mustard-800);
+    }
+    .track-order .track-wrapper .col.info-holder ul li a:hover,
+    .about .numbers-wrapper .number p span {
+        color: var(--clr-yellow-500);
+    }
+    .about .numbers-wrapper .number p {
+        color: var(--clr-yellow-900);
+    }
+    .reset-password .form-wrapper h1,
+    .icon-btn,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .buttons-wrapper
+        button.back-btn,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .buttons-wrapper
+        button.next-btn,
+    .register .register-wrapper .col.form-col a.logo,
+    .contact .contact-info > div h3,
+    .logo,
+    header nav ul li a,
+    .showcase .showcase-wrapper .text-info a,
+    .title.h1-title {
+        color: var(--clr-turquoise-800);
+    }
+    .reset-password .form-wrapper form .form-control p.message.success {
+        color: var(--clr-green-600);
+    }
+    // Border Color
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .gender-wrapper
+        .choice
+        input[type="radio"]:checked,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box
+        select:focus,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input:focus-within,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input:focus,
+    .track-order
+        .track-wrapper
+        .col.form-holder
+        form
+        .form-control
+        input:focus-within,
+    .track-order .track-wrapper .col.form-holder form .form-control input:focus,
+    .reset-password .form-wrapper form .form-control input:focus,
+    .reset-password .form-wrapper form .form-control input:focus-within {
+        border-color: var(--clr-turquoise-800);
+    }
+    .track-order .track-wrapper .col.form-holder form .form-control input {
+        border-color: var(--clr-teal-400);
+    }
+    .home .what-is-wrapper .info a:hover {
+        border-color: var(--clr-olive-300);
+    }
+    header .top-menu .wrapper .seller-links ul.dropdown-menu li {
+        &:hover {
+            border-color: var(--clr-olive-600) !important;
+        }
+        &:nth-child(2) {
+            border: none !important;
+        }
+    }
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        .select-box
+        select,
+    .register
+        .register-wrapper
+        .col.form-col
+        form
+        .steps-wrapper
+        .step
+        .inputs
+        .row
+        .form-control
+        input,
+    .track-order .track-wrapper .col.form-holder form .form-control button,
+    .contact
+        .contact-wrapper
+        .form-col
+        form
+        .form-row
+        .form-control
+        button:hover,
+    .home .how-it-works a.btn {
+        border-color: transparent;
+    }
+
+    // Box Shadow
+    .home .vendors-wrapper .vendor {
+        box-shadow: none;
+    }
+
+    @include min-width(medium) {
+        header nav,
+        header .top-menu .wrapper .seller-links ul.dropdown-menu {
+            background: none !important;
+        }
+    }
 }

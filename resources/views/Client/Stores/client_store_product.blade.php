@@ -162,8 +162,8 @@
                             </div>
                             <div class="detail-body about-brand">
                                 <div class=" brand-header d-flex j-start gap-0-5 a-center">
-                                    {{-- <img src="{{ asset('storage/' . $product->brand->logo) }}" alt=""> --}}
-                                    <img src="{{ $product->brand->logo }}" alt="">
+                                    <img src="{{ asset('storage/' . $product->brand->logo) }}" alt="">
+                                    {{-- <img src="{{ $product->brand->logo }}" alt=""> --}}
                                     <h4>{{ $product->brand->name }}</h4>
                                 </div>
 
@@ -179,11 +179,11 @@
 
 
 
-                                        <div class="modal-header d-flex j-sp-between a-center mb-0">
+                                        <div class="modal-header d-flex j-sp-between a-start mb-0">
                                             <div class=" brand-header d-flex j-start gap-0-5 a-center">
 
-                                                <img src="{{ $product->brand->logo }}" alt="">
-                                                {{-- <img src="{{ asset('storage/' . $product->brand->logo) }}" alt=""> --}}
+                                                {{-- <img src="{{ $product->brand->logo }}" alt=""> --}}
+                                                <img src="{{ asset('storage/' . $product->brand->logo) }}" alt="">
                                                 <h4>{{ $product->brand->name }}</h4>
                                             </div>
 

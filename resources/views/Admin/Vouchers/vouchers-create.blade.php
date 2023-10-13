@@ -53,13 +53,13 @@
                 <div class="form-row">
                     <div class="form-control">
                         <label for="" class="form-label required">Cost Per One (DT)</label>
-                        <input type="number" name="cost" placeholder="The cost of each voucher" id="cost-input"
+                        <input type="number" name="cost" step="0.1" placeholder="The cost of each voucher" id="cost-input"
                             class="form-element">
                         <p class="error-message">This Field Is Required</p>
                     </div>
                     <div class="form-control">
                         <label for="" class="form-label required">Price Per One (DT)</label>
-                        <input type="number" name="price" id="price-input" class="form-element"
+                        <input type="number" name="price" step="0.1" id="price-input" class="form-element"
                             placeholder="The sale price of each voucher">
                         <p class="error-message">This Field Is Required</p>
                     </div>

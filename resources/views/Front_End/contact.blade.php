@@ -110,24 +110,28 @@
 
         const contactForm = document.getElementById("contact-form");
         const elements = Array.from(document.querySelectorAll('.form-element'))
-
+      
+     
 
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            let errors = 0
             for (let i = 0; i < elements.length; i++) {
                 errorMessage = elements[i].nextElementSibling;
                 if (!elements[i].value) {
                     errorMessage.textContent = 'This Field Is required'
                     errorMessage.classList.add('show')
-                } else if (elements[i].type == "email") {
+                    errors++
+                } 
+                 if (elements[i].type == "email") {
                     if (!elements[i].value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
                         errorMessage.textContent = "Please Enter A valid Email Address"
                         errorMessage.classList.add('show')
+                        errors++
                     }
-                } else {
-                    contactForm.submit()
-                }
+                } 
             }
+            if(!errors) contactForm.submit()
         })
     </script>
 @endpush

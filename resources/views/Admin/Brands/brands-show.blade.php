@@ -55,7 +55,7 @@
                 <div class="details">
                     <p class="p-span">Status : <span>{{ $brand->status }}</span></p>
                     <p class="p-span">Created : <span>{{ $brand->created_at }}</span></p>
-                    <p class="p-span">N° Of Products : <span>18</span></p>
+                    <p class="p-span">N° Of Products : <span>{{ $brand->productsCount() }}</span></p>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <header class="d-flex j-sp-between a-center">
                 <h2>Description</h2>
                 <!-- <button id="description-holder-controller" aria-controls="#description-body"><i
-                                                                class="fa-light fa-circle-caret-down"></i></button> -->
+                                                                    class="fa-light fa-circle-caret-down"></i></button> -->
             </header>
             <div class="description-body" id="description-body">
                 {!! $brand->description !!}

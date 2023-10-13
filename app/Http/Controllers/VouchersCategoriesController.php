@@ -111,7 +111,7 @@ class VouchersCategoriesController extends Controller
         $voucherCategory = VoucherCategory::findOrFail($id);
         $validated = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255', Rule::unique('voucher_categories', 'name')->ignore($voucherCategory->id)],
-            'icon' => ['required', 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
+            'icon' => [ 'image', 'mimes:jpeg,jpg', 'max:1024', Rule::dimensions()->height(256)->width(256)],
 
         ]);
         // dd($request->icon);

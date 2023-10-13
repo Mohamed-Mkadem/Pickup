@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
             'state_id' => '2',
             'city_id' => '28',
             'gender' => 'Male',
-            'email' => 'mkademhamma19@gmail.com',
+            'email' => 'admin@pickup.net',
             'password' => Hash::make('developer'),
             'email_verified_at' => '2023-06-09 16:26:02',
             'phone' => '56927726',

@@ -480,7 +480,7 @@
                                                                             <label for=""
                                                                                 class="form-label required">Amount
                                                                                 (DT)</label>
-                                                                            <input type="number" name="amount"
+                                                                            <input type="number" name="amount" readonly
                                                                                 class="form-element"
                                                                                 placeholder="eg: 100 "
                                                                                 value="{{ $revenue->amount }}">
@@ -609,7 +609,7 @@
                 let descriptionInput = form.elements[5]
                 let descriptionErrorMessage = form.children[2].children[1].children[0].lastElementChild
                 errors += validateField(titleInput, titleInput.nextElementSibling)
-                errors += validateField(valueInput, valueInput.nextElementSibling)
+                // errors += validateField(valueInput, valueInput.nextElementSibling)
                 errors += validateField(descriptionInput, descriptionErrorMessage)
                 errors += validateField(categoryInput, categoryInputErrorMessage)
 

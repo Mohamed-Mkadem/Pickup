@@ -302,6 +302,18 @@
         }
     }
 
+    &.admin-orders {
+        table {
+            thead {
+                background-color: var(--clr-blueGray-600);
+                color: var(--clr-blueGray-0);
+            }
+            tr {
+                $cols: 100px repeat(2, minmax(200px, 1fr)) repeat(3, 180px);
+                @include detailledGrid($cols);
+            }
+        }
+    }
     &.orders {
         table {
             thead {

@@ -132,7 +132,7 @@
                                 </ul>
                             </header>
                             <div class="top-header">
-                                <h3>{{ $fee->name }}</h3>
+                                <h3>{{ ucfirst($fee->name) }}</h3>
                                 <p class="price">{{ $fee->value }} DT<small>/{{ $fee->method }}</small> </p>
                             </div>
                             {!! $fee->features !!}

@@ -43,7 +43,7 @@
                                     Required</p>
                             </div>
                             <div class="form-control">
-                                <label for="" class="d-block  form-label">icon : </label>
+                                <label for="" class="d-block  required form-label">icon : </label>
                                 <div class="drop-zone form-element">
                                     <label for="icon-image" class="drop-zone-label form-label">
                                         <i class="fa-light fa-cloud-arrow-up d-block"></i>
@@ -301,7 +301,7 @@
             <div class="not-found-holder show">
                 <div class="wrapper">
                     <i class="fa-light fa-circle-info"></i>
-                    <p>You Didn't Add Any Category yet</p>
+                    <p>No Results Found</p>
                 </div>
             </div>
         @endif
@@ -324,7 +324,7 @@
             e.preventDefault()
             let errors = 0
             errors += validateField(nameInput, nameInput.nextElementSibling)
-            // errors += validateField(fileInput, fileErrorMessage)
+            errors += validateField(fileInput, fileErrorMessage)
             errors += validateField(statusSelect, statusSelect.parentElement.nextElementSibling)
             if (!errors) {
                 addForm.submit()

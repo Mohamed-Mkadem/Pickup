@@ -197,21 +197,24 @@
                     <!-- Start Number -->
                     <div class="number">
                         <img loading="lazy" class="m-auto" src=" {{ asset('dist/Assets/store.png') }} " alt="">
-                        <p><span class="d-block">1560</span>Stores</p>
+                        <p>
+                            <span class="d-block">{{$storesCount }}</span>
+                            {{ $storesCount == 1 ? 'Store' : 'Stores' }}
+                        </p>
                     </div>
                     <!-- End Number -->
                     <!-- Start Number -->
                     <div class="number">
                         <img loading="lazy" class="m-auto" src=" {{ asset('dist/Assets/customer.png') }} "
                             alt="">
-                        <p><span class="d-block">15060</span>Clients</p>
+                        <p><span class="d-block">{{ $clientsCount }}</span>{{ $clientsCount == 1 ? 'Client' : 'Clients'   }}</p>
                     </div>
                     <!-- End Number -->
                     <!-- Start Number -->
                     <div class="number">
                         <img loading="lazy" class="m-auto" src=" {{ asset('dist/Assets/orders.png') }} "
                             alt="">
-                        <p><span class="d-block">12450</span>Orders</p>
+                        <p><span class="d-block">{{ $ordersCount }}</span>{{ $ordersCount == 1 ? 'Order' : 'Orders' }}</p>
                     </div>
                     <!-- End Number -->
                 </div>

@@ -160,7 +160,7 @@ class ExpenseController extends Controller
             'title' => ['required', 'string', 'max:150'],
             'category' => ['required', 'string'],
             'description' => ['required', 'string', 'max:300'],
-            'amount' => ['required', 'numeric', 'min:0.1'],
+            // 'amount' => ['required', 'numeric', 'min:0.1'],
         ]);
 
         if ($validation->fails()) {
@@ -168,7 +168,7 @@ class ExpenseController extends Controller
         }
         try {
             $expense->update([
-                'amount' => $request->amount,
+                // 'amount' => $request->amount,
                 'description' => $request->description,
                 'title' => $request->title,
                 'category' => $request->category,

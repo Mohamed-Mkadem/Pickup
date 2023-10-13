@@ -4,15 +4,16 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\User;
 use App\Models\Brand;
-use App\Models\Category;
+use App\Models\Store;
 use App\Models\Sector;
 use App\Models\Seller;
+use App\Models\Category;
 use App\Models\StatusHistory;
-use App\Models\Store;
-use App\Models\User;
-use App\Models\VerificationRequest;
+use Database\Seeders\FeeSeeder;
 use Illuminate\Database\Seeder;
+use App\Models\VerificationRequest;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,39 +22,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $this->call(
 
             [
                 AdminSeeder::class,
+                FeeSeeder::class
 
-                // VoucherCategoriesSeeder::class,
-            ]);
-        // Client Factory (check userFactory File)
-        // User::factory(80)
-        //     ->has(Client::factory(1)
+            ]
+        );
 
-        //         , 'client')
-        //     ->create();
-        // Seller Factory (check userFactory File)
-        Sector::factory(10)->create();
-        Brand::factory(20)->create();
-        User::factory(50)
-            ->has(Seller::factory(1)
-                    ->has(VerificationRequest::factory(1)
-                            ->has(StatusHistory::factory(1), 'statusHistories')
-                        , 'verificationRequests')
-                    ->has(Store::factory(1)
-                            ->has(Category::factory(5)
 
-                                , 'categories')
-                        , 'store')
-                , 'seller')
-            ->create();
     }
 }

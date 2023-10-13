@@ -247,7 +247,7 @@ class SaleController extends Controller
         $cartString = $request->input('cart');
         // dd($request->cart);
         $cart = json_decode($cartString, true);
-
+        // dd($cart);
         if (json_last_error() !== JSON_ERROR_NONE) {
             // Invalid JSON, handle the error accordingly
             return redirect()->back()->with('error', 'Invalid cart data');

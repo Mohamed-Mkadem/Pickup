@@ -179,8 +179,8 @@ class VerificationRequestController extends Controller
             ]);
             DB::commit();
             event(new VerificationRequestCreated($verificationRequest, $seller));
-            // event('newV');
-            // return redirect()->back()->with('success', 'Verification Request Added Successfully');
+
+            return redirect()->back()->with('success', 'Verification Request Added Successfully');
         }
     }
 

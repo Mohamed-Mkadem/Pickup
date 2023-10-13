@@ -423,9 +423,9 @@ class OrderController extends Controller
         $store = Store::findOrFail($storeID);
         $client = Client::where('user_id', Auth::id())->firstOrFail();
         $cart = $client->carts()->where('store_id', $storeID)->first();
-        // dd($cart->products()->withTrashed()->get());
+
         $cartProducts = $cart->products()->withTrashed()->get();
-        // dd($cart->products()->count());
+
         if (!$cart || !$cartProducts) {
             return redirect()->back()->with('error', 'You Need To Add At Least One Product To Your Cart To Place An Order');
         }
@@ -440,7 +440,8 @@ class OrderController extends Controller
             if ($cartProduct->deleted_at || $cartProduct->status == 'inactive') {
                 $validation->after(function ($validation) use ($cartProduct) {
                     $validation->errors()->add(
-                        'name', "The Product  '{$cartProduct->cart_products->name}' Has Been Deleted Or Hidden By The Store, You need to remove it from your cart, Or Contact the store owner to inquire about the availability or status of the product"
+                        'name',
+                        "The Product  '{$cartProduct->cart_products->name}' Has Been Deleted Or Hidden By The Store, You need to remove it from your cart, Or Contact the store owner to inquire about the availability or status of the product"
                     );
                 });
 
@@ -448,7 +449,8 @@ class OrderController extends Controller
             if ($cartProduct->cart_products->quantity > $cartProduct->quantity) {
                 $validation->after(function ($validation) use ($cartProduct) {
                     $validation->errors()->add(
-                        'quantity', "The Quantity Of {$cartProduct->cart_products->name} Has Been Changed, It's Now {$cartProduct->quantity}, Please Update Your Cart"
+                        'quantity',
+                        "The Quantity Of {$cartProduct->cart_products->name} Has Been Changed, It's Now {$cartProduct->quantity}, Please Update Your Cart"
                     );
                 });
             }
@@ -512,8 +514,9 @@ class OrderController extends Controller
             return redirect()->back()->with('success', 'Order Placed Successfully');
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Something Went Wrong');
             throw $th;
+            return redirect()->back()->with('error', $th->getMessage());
+
         }
     }
     public function clientIndex()

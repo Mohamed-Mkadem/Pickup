@@ -220,7 +220,7 @@
                                                                     class="drop-zone-label form-label">
                                                                     <i class="fa-light fa-cloud-arrow-up d-block"></i>
                                                                     <p>Drop File Here Or Click To Upload File</p>
-                                                                    <p>Allowed Formats are jpg, jpeg</p>
+                                                                    <p>Dimensions : 256px x 256px, Allowed Formats are jpg, jpeg</p>
                                                                     <p>Max file size : 1 MB</p>
                                                                 </label>
                                                                 <input type="file" name="icon" class="file-input"
@@ -240,7 +240,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-control d-flex j-end">
-                                                            <button type="submit" class="submit-btn">Add</button>
+                                                            <button type="submit" class="submit-btn">Update</button>
                                                         </div>
                                                     </form>
                                                     <!-- End Form -->
@@ -390,14 +390,14 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault()
                 let errors = 0
-                let nameInput = form.elements[0]
+                let nameInput = form.elements[2]
                 let nameInputErrorMessage = nameInput.nextElementSibling
-                let imageInput = form.elements[1]
+                let imageInput = form.elements[3]
 
                 let imageInputErrorMessage = form.children[1].children[2]
 
                 errors += validateField(nameInput, nameInputErrorMessage)
-                errors += validateField(imageInput, imageInputErrorMessage)
+                // errors += validateField(imageInput, imageInputErrorMessage)
                 if (!errors) {
                     form.submit()
                 }

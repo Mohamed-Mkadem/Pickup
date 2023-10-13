@@ -18,7 +18,7 @@
                     <h2 class="t-left">Results</h2>
                     <!-- Start Results Holder -->
                     <div class=" main-holder">
-                        <div class="table-responsive orders">
+                        <div class="table-responsive admin-orders">
                             <table>
 
                                 <thead>

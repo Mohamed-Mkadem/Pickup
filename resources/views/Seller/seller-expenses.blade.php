@@ -479,7 +479,7 @@
                                                                             <label for=""
                                                                                 class="form-label required">Amount
                                                                                 (DT)</label>
-                                                                            <input type="number" name="amount"
+                                                                            <input type="number" name="amount" readonly
                                                                                 class="form-element"
                                                                                 placeholder="eg: 100 "
                                                                                 value="{{ $expense->amount }}">
@@ -633,7 +633,7 @@
             let errors = 0
             errors += validateField(titleInput, titleInput.nextElementSibling)
             errors += validateField(categoryInput, categoryInputErrorMessage)
-            errors += validateField(valueInput, valueInput.nextElementSibling)
+            // errors += validateField(valueInput, valueInput.nextElementSibling)
             errors += validateField(descriptionInput, descriptionErrorMessage)
             if (!errors) {
                 addForm.submit()

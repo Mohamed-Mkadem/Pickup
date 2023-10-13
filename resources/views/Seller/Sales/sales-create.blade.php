@@ -112,8 +112,8 @@
                             @foreach ($categories as $category)
                                 <!-- Start Category -->
                                 <div class="relative sale-category">
-                                    <img src="{{ $category->icon }}">
-                                    {{-- <img src="{{ asset('storage/' . $category->icon) }}"> --}}
+
+                                    <img src="{{ asset('storage/' . $category->icon) }}">
                                     <h4 title="{{ $category->name }}"> {{ $category->name }}</h4>
                                     <input type="radio" class="absolute" name="category"
                                         value="{{ 'cat_' . $category->id }}">
@@ -146,7 +146,7 @@
                                                 <div class="info-holder">
                                                     <h3 class="product-name">{{ $product->name }}</h3>
                                                     <p class="product-price">
-                                                        <span>{{ number_format($product->price, 3, ',') }}</span>
+                                                        <span>{{ number_format($product->price, 3, '.') }}</span>
                                                         <small>DT</small>
                                                     </p>
                                                     <p class="product-brand">{{ $product->brand->name }}</p>
@@ -283,7 +283,7 @@
                 const productImage = btn.parentElement.parentElement.querySelector('.img-holder img').src
                 soundEffect.play();
                 removeAlerts()
-
+               
                 if (cart.length === 0) {
                     // If the cart is empty we add the product directly because it's the first so there is no duplication in this case
                     const Product = {
@@ -568,7 +568,7 @@
     <script>
         function setInputsValues() {
             cartInput.value = JSON.stringify(cart)
-  
+
             buttonsChecker()
         }
 

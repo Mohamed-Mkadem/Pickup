@@ -206,7 +206,7 @@
                                     <div class="info-holder">
                                         <h3 class="product-name">{{ $product->name }}</h3>
                                         <p class="product-brand">{{ ucfirst($product->brand->name) }}</p>
-                                        <p class="product-price">{{ $product->price }} <small>DT</small></p>
+                                        <p class="product-price">{{ number_format($product->price, 3,'.') }} <small>DT</small></p>
                                     </div>
                                     <div class="actions d-flex j-sp-between a-center gap-0-5 wrap">
                                         <form action="{{ route('client.cart.add', $store->id) }}" method="post">

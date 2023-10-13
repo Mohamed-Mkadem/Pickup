@@ -138,7 +138,7 @@
                     <h2 class="form-holder-title mb-1">Media</h2>
                     <div class="form-row">
                         <div class="form-control">
-                            <label for="" class="form-label ">Avatar : </label>
+                            <label for="" class="form-label required">Avatar : </label>
                             <div class="drop-zone form-element">
                                 <label for="avatar-image" class="drop-zone-label form-label">
                                     <i class="fa-light fa-cloud-arrow-up d-block"></i>

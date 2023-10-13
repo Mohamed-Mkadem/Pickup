@@ -93,7 +93,7 @@
                                 <tr>
                                     <td><img src="{{ asset($product->image) }}" alt="">
                                     </td>
-                                    <td><a href="{{ route('seller.products.show', $product->id) }}">{{ $product->name }}</a>
+                                    <td><a href="{{ route('seller.products.show', $product->product_id) }}">{{ $product->name }}</a>
                                     </td>
                                     <td>{{ number_format($product->price, 3, ',') }}</td>
                                     <td>{{ $product->quantity }}</td>

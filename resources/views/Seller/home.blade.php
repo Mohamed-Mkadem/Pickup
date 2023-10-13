@@ -13,12 +13,14 @@
                 <h1>Hello {{ Auth::user()->first_name }}</h1>
                 <p class="today-stats">Here Are Today's Statistics</p>
             </div>
-            <!-- Start Link  -->
-            <a href="{{ route('seller.sales.create') }}" class="header-btn d-block add-btn">
-                <i class="fa-light fa-plus"></i>
-                <span>Add Sale</span>
-            </a>
-            <!-- End Link  -->
+            @if (Auth::user()->seller->hasStore())
+                <!-- Start Link  -->
+                <a href="{{ route('seller.sales.create') }}" class="header-btn d-block add-btn">
+                    <i class="fa-light fa-plus"></i>
+                    <span>Add Sale</span>
+                </a>
+                <!-- End Link  -->
+            @endif
         </div>
         <!-- End Starter Header -->
 
